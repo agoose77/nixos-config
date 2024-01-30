@@ -91,7 +91,7 @@
     angus = {
       isNormalUser = true;
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = [ "networkmanager", "wheel" ];
+      extraGroups = [ "networkmanager" "wheel" ];
       packages = with pkgs; [];
     };
   };
