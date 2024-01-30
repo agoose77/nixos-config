@@ -65,7 +65,7 @@
   # FIXME: Add the rest of your current configuration
 
   # TODO: Set your hostname
-  networking.hostName = "angus";
+  networking.hostName = "nixos";
   networking.networkManager.enable = true;
 
   time.timeZone = "Europe/London";
