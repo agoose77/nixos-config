@@ -116,7 +116,6 @@
   	alacritty
   	firefox
   	kitty
-  	git
   ];
 
   environment.variables.EDITOR = "micro";
