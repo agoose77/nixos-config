@@ -115,26 +115,28 @@
   environment.systemPackages = with pkgs; [
     micro
     alacritty
+    bat
     dolphin
     dunst
     file
     fd
     fzf
     git
-    playerctl
     jetbrains.pycharm-professional
     jetbrains.webstorm
+    jq
+    playerctl
     ripgrep
     slack
     swaylock-effects
     swayidle
     unzip
-    zip
     wget
     wofi
     wl-clipboard
     wlogout
     xdg-desktop-portal-hyprland
+    zip
   ];
   networking.firewall.allowedTCPPorts = [57621]; # Spotify  local track broadcast
   networking.firewall.allowedUDPPorts = [5353]; # Spotify Connect & Google Cast
