@@ -116,6 +116,7 @@
     micro
     alacritty
     bat
+    delta
     dolphin
     dunst
     file
