@@ -72,6 +72,29 @@
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.05";
 
+	programs.atuin = {
+    enable = true;
+    enableNushellIntegration = true;
+  };
+
+	programs.zoxide = {
+    enable = true;
+    enableNushellIntegration = true;
+  };
+
+	programs.nushell = {
+		enable = true;
+		extraConfig = ''
+     $env.config = {
+      show_banner: false
+     }
+     '';
+	};
+
+  programs.starship = { 
+    enable = true;
+  };
+
   wayland.windowManager.hyprland.enable = true;
 
   wayland.windowManager.hyprland.settings = {
@@ -85,7 +108,7 @@
     "exec-once" = [
     	"dunst"
     	"waybar"
-    ]
+    ];
     # Source a file (multi-file configs)
     # source = ~/.config/hypr/myColors.conf
 
