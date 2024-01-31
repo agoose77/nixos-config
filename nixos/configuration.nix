@@ -134,6 +134,7 @@
     wofi
     wl-clipboard
     wlogout
+    xdg-desktop-portal-hyprland
   ];
   networking.firewall.allowedTCPPorts = [57621]; # Spotify  local track broadcast
   networking.firewall.allowedUDPPorts = [5353]; # Spotify Connect & Google Cast
@@ -142,6 +143,7 @@
 
   environment.sessionVariables = rec {
     WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1"; # Enable Wayland support for slack
   };
 
   # Enable the 1Password CLI, this also enables a SGUID wrapper so the CLI can authorize against the GUI app
