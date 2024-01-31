@@ -125,6 +125,7 @@
     jetbrains.pycharm-professional
     jetbrains.webstorm
     ripgrep
+    slack
     swaylock-effects
     swayidle
     unzip
