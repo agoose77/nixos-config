@@ -122,6 +122,8 @@
     fzf
     git
     playerctl
+    jetbrains.pycharm-professional
+    jetbrains.webstorm
     ripgrep
     swaylock-effects
     swayidle
