@@ -75,15 +75,15 @@
   # TODO: i18n for lC_
 
   services.xserver = {
-  	layout = "gb";
-  	xkbVariant = "";
+    layout = "gb";
+    xkbVariant = "";
   };
 
   console.keyMap = "uk";
 
   # TODO: This is just an example, be sure to use whatever bootloader you prefer
   boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;  
+  boot.loader.efi.canTouchEfiVariables = true;
 
   # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
   users.users = {
@@ -91,7 +91,7 @@
     angus = {
       isNormalUser = true;
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = ["networkmanager" "wheel"];
       packages = with pkgs; [];
     };
   };
@@ -111,69 +111,90 @@
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
 
+  programs.direnv.enable = true;
   environment.systemPackages = with pkgs; [
-  	micro
-  	alacritty
-  	dolphin
-  	firefox
-  	file
-	fd
-  	fzf
-  	git
-  	ripgrep
-  	spotify
-  	unzip
-  	zip
-  	wget  	
-  	wofi
+    micro
+    alacritty
+    dolphin
+    dunst
+    file
+    fd
+    fzf
+    git
+    playerctl
+    ripgrep
+    swaylock-effects
+    swayidle
+    unzip
+    zip
+    wget
+    wofi
+    wl-clipboard
+    wlogout
   ];
-  networking.firewall.allowedTCPPorts = [ 57621 ]; # Spotify  local track broadcast
-  networking.firewall.allowedUDPPorts = [ 5353 ]; # Spotify Connect & Google Cast
+  networking.firewall.allowedTCPPorts = [57621]; # Spotify  local track broadcast
+  networking.firewall.allowedUDPPorts = [5353]; # Spotify Connect & Google Cast
 
   environment.variables.EDITOR = "micro";
 
   environment.sessionVariables = rec {
-  	WLR_NO_HARDWARE_CURSORS = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
   };
 
-  
+  # Enable the 1Password CLI, this also enables a SGUID wrapper so the CLI can authorize against the GUI app
+  programs._1password = {
+    enable = true;
+  };
+
+  # Enable the 1Password GUI with myself as an authorized user for polkit
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = ["angus"];
+  };
 
   programs.hyprland = {
-	enable = true;
-	xwayland.enable = true;
-	nvidiaPatches = true;
-	# package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    enable = true;
+    xwayland.enable = true;
+    enableNvidiaPatches = true;
   };
   programs.waybar.enable = true;
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
   hardware.opengl = {
-  	enable = true;
-  	driSupport = true;
-  	driSupport32Bit = true;
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
   };
 
   hardware.nvidia = {
-  	modesetting.enable = true;
-  	open = true;
-  	nvidiaSettings = true;
-  	package = config.boot.kernelPackages.nvidiaPackages.stable;
+    modesetting.enable = true;
+    open = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   sound.enable = true;
   services = {
-  	pipewire = {
-  		enable = true;
-  		audio.enable = true;
-  		pulse.enable = true;
-  		alsa = {
-  			enable = true;
-  			support32Bit = true;
-  		};
-  		jack.enable = true;
-  	};
+    pipewire = {
+      enable = true;
+      audio.enable = true;
+      pulse.enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      jack.enable = true;
+    };
   };
 
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.enable = true;
+
+  services.gnome.gnome-keyring.enable = true;
+  services.mpd.enable = true;
+
+  fonts.packages = with pkgs; [
+    jetbrains-mono
+    nerd-font-patcher
+  ];
 }
