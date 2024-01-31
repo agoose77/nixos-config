@@ -116,7 +116,17 @@
   	alacritty
   	firefox
   	kitty
+	fd
+  	fzf
+  	git
+  	ripgrep
+  	spotify
+  	unzip
+  	zip
+  	wget  	
   ];
+  networking.firewall.allowedTCPPorts = [ 57621 ]; # Spotify  local track broadcast
+  networking.firewall.allowedUDPPorts = [ 5353 ]; # Spotify Connect & Google Cast
 
   environment.variables.EDITOR = "micro";
 
@@ -129,6 +139,7 @@
 	xwayland.enable = true;
 	nvidiaPatches = true;
   };
+  programs.waybar.enable = true;
 
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl = {
