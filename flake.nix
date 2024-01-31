@@ -3,13 +3,20 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
 
     # Home manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";  # keep home-manager nixpkgs consistent with nixpkgs
     };
+
+    # # Hyprland
+    # hyprland = {
+      # url = "github:hyprwm/Hyprland";
+      # # Do not keep pkgs in sync (breaks cachix)
+      # # inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs = {
@@ -23,11 +30,20 @@
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#nixos'
     nixosConfigurations = {
-      # FIXME replace with your hostname
       nixos = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        # > Our main nixos configuration file <
-        modules = [./nixos/configuration.nix];
+        modules = [
+            # # Enable cachix
+            # # https://wiki.hyprland.org/Nix/Cachix/
+        	# {
+        		# nix.settings = {
+        	    	# substituters = ["https://hyprland.cachix.org"];
+        	    	# trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+        	  	# };
+       	  	# }
+        	# > Our main nixos configuration file <
+        	./nixos/configuration.nix
+       	];
       };
     };
 

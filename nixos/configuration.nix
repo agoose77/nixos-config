@@ -109,13 +109,14 @@
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 
   environment.systemPackages = with pkgs; [
   	micro
   	alacritty
+  	dolphin
   	firefox
-  	kitty
+  	file
 	fd
   	fzf
   	git
@@ -124,6 +125,7 @@
   	unzip
   	zip
   	wget  	
+  	wofi
   ];
   networking.firewall.allowedTCPPorts = [ 57621 ]; # Spotify  local track broadcast
   networking.firewall.allowedUDPPorts = [ 5353 ]; # Spotify Connect & Google Cast
@@ -134,10 +136,13 @@
   	WLR_NO_HARDWARE_CURSORS = "1";
   };
 
+  
+
   programs.hyprland = {
 	enable = true;
 	xwayland.enable = true;
 	nvidiaPatches = true;
+	# package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
   programs.waybar.enable = true;
 
