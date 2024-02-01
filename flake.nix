@@ -7,7 +7,7 @@
     
 	  # neovim
 	  nixvim = {
-	    url = "github:nix-community/nixvim";
+	    url = "github:nix-community/nixvim/nixos-23.11";
 	    inputs.nixpkgs.follows = "nixpkgs";
 	  };
 
@@ -47,6 +47,7 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [     
+        	inputs.nixvim.homeManagerModules.nixvim
         	# > Our main home-manager configuration file <
         	./home-manager/home.nix
      		];

@@ -27,7 +27,6 @@
 	  };
   };
  
-  # TODO: Set your username
   home = {
     username = "angus";
     homeDirectory = "/home/angus";
@@ -40,6 +39,9 @@
 	  stateVersion = "23.05";
   };
 
+	# Setup nixvim
+	programs.nixvim.enable = true;
+	
 	# Enable home-manager
   programs.home-manager.enable = true;
  
