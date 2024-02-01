@@ -226,8 +226,8 @@
 				grbm = "git rebase master";
 				grbs = "git rebase --skip";
 				grep = "grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}";
-				grh = "git reset HEAD";
-				grhh = "git reset HEAD --hard";
+				grh = "git reset";
+				grhh = "git reset --hard";
 				grm = "git rm";
 				grmc = "git rm --cached";
 				grmv = "git remote rename";
