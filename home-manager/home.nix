@@ -254,6 +254,8 @@
 				gstp = "git stash pop";
 				gsts = "git stash show --text";
 				gsu = "git submodule update";
+				gsw = "git switch";
+				gswc = "git switch -c";
 				gts = "git tag -s";
 				#gtv = "(git tag | sort -V)";
 				gunignore = "git update-index --no-assume-unchanged";
