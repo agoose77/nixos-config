@@ -172,8 +172,8 @@
 				gmum = "git merge upstream/master";
 				gp = "git push";
 				gpd = "git push --dry-run";
-				gpoat = "(git push origin --all; git push origin --tags)";
-				gpristine = "(git reset --hard; git clean -dfx)";
+				#gpoat = "(git push origin --all; git push origin --tags)";
+				#gpristine = "(git reset --hard; git clean -dfx)";
 				gpsup = "git push --set-upstream origin (git_current_branch)";
 				gpu = "git push upstream";
 				gpv = "git push -v";
@@ -191,7 +191,7 @@
 				grmv = "git remote rename";
 				grrm = "git remote remove";
 				grset = "git remote set-url";
-				grt = "cd (git rev-parse --show-toplevel || echo '.')";
+				#grt = "cd (git rev-parse --show-toplevel || echo '.')";
 				gru = "git reset --";
 				grup = "git remote update";
 				grv = "git remote -v";
@@ -211,7 +211,7 @@
 				gsts = "git stash show --text";
 				gsu = "git submodule update";
 				gts = "git tag -s";
-				gtv = "(git tag | sort -V)";
+				#gtv = "(git tag | sort -V)";
 				gunignore = "git update-index --no-assume-unchanged";
 				gup = "git pull --rebase";
 				gupv = "git pull --rebase -v";
