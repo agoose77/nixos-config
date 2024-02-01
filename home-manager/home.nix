@@ -37,7 +37,9 @@
     homeDirectory = "/home/angus";
 
     packages =  with pkgs; [
-	    spotify
+    	discord
+    	element-desktop-wayland
+    	spotify
 	  ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
