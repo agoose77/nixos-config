@@ -2,6 +2,7 @@
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   inputs,
+  outputs,
   lib,
   config,
   pkgs,
@@ -18,6 +19,10 @@
     # ./nvim.nix
   ];
   nixpkgs = {
+    overlays = [
+      # Add overlays your own flake exports (from overlays and pkgs dir):
+      outputs.overlays.wlrootsNvidia
+    ];
   # Configure your nixpkgs instance
 	  config = {
 	    # Disable if you don't want unfree packages
