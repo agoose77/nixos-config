@@ -202,6 +202,7 @@
 				gmum = "git merge upstream/master";
 				gp = "git push";
 				gpd = "git push --dry-run";
+				gpf = "git push --force-with-lease";
 				#gpoat = "(git push origin --all; git push origin --tags)";
 				#gpristine = "(git reset --hard; git clean -dfx)";
 				gpsup = "git push --set-upstream origin (git_current_branch)";
@@ -218,9 +219,13 @@
 				grep = "grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}";
 				grh = "git reset HEAD";
 				grhh = "git reset HEAD --hard";
+				grm = "git rm";
+				grmc = "git rm --cached";
 				grmv = "git remote rename";
 				grrm = "git remote remove";
 				grset = "git remote set-url";
+				grss = "git restore --source";
+				grst = "git restore --staged";
 				#grt = "cd (git rev-parse --show-toplevel || echo '.')";
 				gru = "git reset --";
 				grup = "git remote update";
