@@ -60,7 +60,7 @@
     experimental-features = "nix-command flakes";
     # Deduplicate and optimize nix store
     auto-optimise-store = true;
-  };
+	};
 
   # FIXME: Add the rest of your current configuration
 
@@ -111,47 +111,63 @@
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
-
-	# atuin, direnv
  
   environment.systemPackages = with pkgs; [
     alacritty
     bat
+    buildah
     delta
     dolphin
     dunst
     file
     fd
+    flameshot
     fzf
     git
+    inputs.home-manager.packages.${pkgs.system}.default
     jetbrains.pycharm-professional
     jetbrains.webstorm
     jq
     micro
+    micromamba
     nodejs
     nushell
+    podman
     playerctl
     ripgrep
     slack
     swaylock-effects
     swayidle
     unzip
+    vulkan-loader
+    vulkan-validation-layers
+    vulkan-tools
     wget
     wofi
     wl-clipboard
     wlogout
     xdg-desktop-portal-hyprland
     zip
+    zoom-us
   ];
   networking.firewall.allowedTCPPorts = [57621]; # Spotify  local track broadcast
   networking.firewall.allowedUDPPorts = [5353]; # Spotify Connect & Google Cast
 
-  environment.variables.EDITOR = "micro";
-
   environment.sessionVariables = rec {
+    GBM_BACKEND = "nvidia-drm";
+    LIBVA_DRIVER_NAME = "nvidia";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1"; # Enable Wayland support for slack
   };
+
+  # Support for loading pre-built binaries
+	# # Enable linking
+	# programs.nix-ld.enable = true;
+	# # Sets up all the libraries to load
+	#   programs.nix-ld.libraries = with pkgs; [
+	#     stdenv.cc.cc
+	#   ];
 
   # Enable the 1Password CLI, this also enables a SGUID wrapper so the CLI can authorize against the GUI app
   programs._1password = {
@@ -167,7 +183,6 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-    enableNvidiaPatches = true;
   };
   programs.waybar.enable = true;
 
@@ -176,6 +191,10 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+
+    # From     extraPackages = with pkgs; [nvidia-vaapi-driver];
+
+    extraPackages = with pkgs; [nvidia-vaapi-driver];
   };
 
   hardware.nvidia = {
