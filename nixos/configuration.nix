@@ -114,7 +114,9 @@
  
   environment.systemPackages = with pkgs; [
     alacritty
+    alejandra
     bat
+    bash
     buildah
     delta
     dolphin
