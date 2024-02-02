@@ -465,7 +465,6 @@
       "$mod SHIFT, SPACE, exec, wofi --show run"
       "$mod, M, exit, "
       "$mod, E, exec, dolphin"
-      "$mod, V, togglefloating, "
       "$mod, P, pseudo, # dwindle"
       "$mod, J, togglesplit, # dwindle"
       # Move focus with mainMod + arrow keys
@@ -511,8 +510,16 @@
       "$mod ALT, 8, movetoworkspace, 8"
       "$mod ALT, 9, movetoworkspace, 9"
       "$mod ALT, 0, movetoworkspace, 10"
+      # Empty workspace
       "$mod SHIFT, grave, movetoworkspacesilent, empty"
       "$mod ALT, grave, movetoworkspace, empty"
+      "$mod, grave, workspace, empty"
+      # Toggle fullscreen / floating
+      "$mod, F, fullscreen"
+      "$mod SHIFT, F, togglefloating"
+      # Special workspaces
+      "$mod CTRL, M, movetoworkspacesilent, special"
+      "$mod CTRL, A, togglespecialworkspace"
     ];
     bindm = [
       "$mod, mouse:272, movewindow"
