@@ -511,6 +511,8 @@
       "$mod ALT, 8, movetoworkspace, 8"
       "$mod ALT, 9, movetoworkspace, 9"
       "$mod ALT, 0, movetoworkspace, 10"
+      "$mod SHIFT, grave, movetoworkspacesilent, empty"
+      "$mod ALT, grave, movetoworkspace, empty"
     ];
     bindm = [
       "$mod, mouse:272, movewindow"
