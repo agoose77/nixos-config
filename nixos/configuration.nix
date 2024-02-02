@@ -34,6 +34,18 @@
     };
   };
 
+	virtualisation = {
+	    podman = {
+	      enable = true;
+	
+	      # Create a `docker` alias for podman, to use it as a drop-in replacement
+	      dockerCompat = true;
+	
+	      # Required for containers under podman-compose to be able to talk to each other.
+	      defaultNetwork.settings.dns_enabled = true;
+	    };
+	  };
+
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
   nix.registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
