@@ -371,7 +371,7 @@
       kb_options = "";
       kb_rules = "";
 
-      follow_mouse = 0;
+      follow_mouse = 2; # Focus follows mouse, but KB requires click
 
       touchpad = {
         natural_scroll = "no";
