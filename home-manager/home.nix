@@ -318,7 +318,7 @@
 	        on-click = "pavucontrol";
 	       };
         "hyprland/submap" = {
-          format = "MODE: {}";
+          format = "✌️ {}";
           max-length = 80;
           tooltip = false;
         };
@@ -490,22 +490,27 @@
       "$mod, 9, workspace, 9"
       "$mod, 0, workspace, 10"
       # Move active window to a workspace with mainMod + SHIFT + [0-9]
-      "$mod SHIFT, 1, movetoworkspace, 1"
-      "$mod SHIFT, 2, movetoworkspace, 2"
-      "$mod SHIFT, 3, movetoworkspace, 3"
-      "$mod SHIFT, 4, movetoworkspace, 4"
-      "$mod SHIFT, 5, movetoworkspace, 5"
-      "$mod SHIFT, 6, movetoworkspace, 6"
-      "$mod SHIFT, 7, movetoworkspace, 7"
-      "$mod SHIFT, 8, movetoworkspace, 8"
-      "$mod SHIFT, 9, movetoworkspace, 9"
-      "$mod SHIFT, 0, movetoworkspace, 10"
-      # Example special workspace (scratchpad)
-      "$mod CTRL, A, togglespecialworkspace, magic"
-      "$mod CTRL, M, movetoworkspace, special:magic"
-      # Scroll through existing workspaces with mainMod + scroll
-      "$mod, mouse_down, workspace, e+1"
-      "$mod, mouse_up, workspace, e-1"
+      "$mod SHIFT, 1, movetoworkspacesilent, 1"
+      "$mod SHIFT, 2, movetoworkspacesilent, 2"
+      "$mod SHIFT, 3, movetoworkspacesilent, 3"
+      "$mod SHIFT, 4, movetoworkspacesilent, 4"
+      "$mod SHIFT, 5, movetoworkspacesilent, 5"
+      "$mod SHIFT, 6, movetoworkspacesilent, 6"
+      "$mod SHIFT, 7, movetoworkspacesilent, 7"
+      "$mod SHIFT, 8, movetoworkspacesilent, 8"
+      "$mod SHIFT, 9, movetoworkspacesilent, 9"
+      "$mod SHIFT, 0, movetoworkspacesilent, 10"
+      # Carry window to a workspace
+      "$mod ALT, 1, movetoworkspace, 1"
+      "$mod ALT, 2, movetoworkspace, 2"
+      "$mod ALT, 3, movetoworkspace, 3"
+      "$mod ALT, 4, movetoworkspace, 4"
+      "$mod ALT, 5, movetoworkspace, 5"
+      "$mod ALT, 6, movetoworkspace, 6"
+      "$mod ALT, 7, movetoworkspace, 7"
+      "$mod ALT, 8, movetoworkspace, 8"
+      "$mod ALT, 9, movetoworkspace, 9"
+      "$mod ALT, 0, movetoworkspace, 10"
     ];
     bindm = [
       "$mod, mouse:272, movewindow"
