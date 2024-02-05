@@ -106,6 +106,11 @@
     userName = "Angus Hollands";
     userEmail = "goosey15@gmail.com";
     lfs.enable = true;
+    extraConfig = {
+      push = {
+	      autoSetupRemote = true;
+	};
+    };
   };
   programs.ssh = {
     enable = true;
