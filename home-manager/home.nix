@@ -74,7 +74,20 @@
   };
 
   # Setup nixvim
-  programs.nixvim.enable = true;
+  programs.nixvim = {
+    enable = true;
+    plugins = {	
+      fugitive.enable = true;
+      gitsigns.enable = true;
+      telescope.enable = true;
+    };
+    options = {
+      number = true;         # Show line numbers
+      relativenumber = true; # Show relative line numbers
+      termguicolors = true;
+    };
+
+  };
 
   # Enable home-manager
   programs.home-manager.enable = true;
