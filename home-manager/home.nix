@@ -76,17 +76,16 @@
   # Setup nixvim
   programs.nixvim = {
     enable = true;
-    plugins = {	
+    plugins = {
       fugitive.enable = true;
       gitsigns.enable = true;
       telescope.enable = true;
     };
     options = {
-      number = true;         # Show line numbers
+      number = true; # Show line numbers
       relativenumber = true; # Show relative line numbers
       termguicolors = true;
     };
-
   };
 
   # Enable home-manager
@@ -108,8 +107,11 @@
     lfs.enable = true;
     extraConfig = {
       push = {
-	      autoSetupRemote = true;
-	};
+        autoSetupRemote = true;
+      };
+      pull = {
+        ff = "only";
+      };
     };
   };
   programs.ssh = {
