@@ -34,17 +34,17 @@
     };
   };
 
-	virtualisation = {
-	    podman = {
-	      enable = true;
-	
-	      # Create a `docker` alias for podman, to use it as a drop-in replacement
-	      dockerCompat = true;
-	
-	      # Required for containers under podman-compose to be able to talk to each other.
-	      defaultNetwork.settings.dns_enabled = true;
-	    };
-	  };
+  virtualisation = {
+    podman = {
+      enable = true;
+
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      dockerCompat = true;
+
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
 
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
@@ -66,7 +66,7 @@
     experimental-features = "nix-command flakes";
     # Deduplicate and optimize nix store
     auto-optimise-store = true;
-	};
+  };
 
   # FIXME: Add the rest of your current configuration
 
@@ -93,13 +93,12 @@
 
   # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
   users.users = {
-    # FIXME: Replace with your username
     angus = {
       isNormalUser = true;
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
       extraGroups = ["networkmanager" "wheel"];
       packages = with pkgs; [];
-      shell = pkgs.nushell;
+      shell = pkgs.oil;
     };
   };
 
@@ -117,7 +116,7 @@
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
- 
+
   environment.systemPackages = with pkgs; [
     alacritty
     alejandra
@@ -141,6 +140,7 @@
     nodejs
     nushell
     podman
+    oil
     playerctl
     ripgrep
     slack
@@ -154,7 +154,6 @@
     wofi
     wl-clipboard
     wlogout
-    xdg-desktop-portal-hyprland
     zip
     zoom-us
   ];
@@ -168,14 +167,6 @@
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1"; # Enable Wayland support for slack
   };
-
-  # Support for loading pre-built binaries
-	# # Enable linking
-	# programs.nix-ld.enable = true;
-	# # Sets up all the libraries to load
-	#   programs.nix-ld.libraries = with pkgs; [
-	#     stdenv.cc.cc
-	#   ];
 
   # Enable the 1Password CLI, this also enables a SGUID wrapper so the CLI can authorize against the GUI app
   programs._1password = {
@@ -199,9 +190,7 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-
-    # From     extraPackages = with pkgs; [nvidia-vaapi-driver];
-
+    # For better video playback
     extraPackages = with pkgs; [nvidia-vaapi-driver];
   };
 
@@ -229,7 +218,8 @@
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.enable = true;
 
-  services.gnome.gnome-keyring.enable = true;
+  # Use kde-wallet (at login)
+  #security.pam.services.sddm.enableKwallet = true;
   services.mpd.enable = true;
 
   fonts.packages = with pkgs; [

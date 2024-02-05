@@ -296,27 +296,27 @@
           format-icons = ["" "" ""];
         };
         disk = {
-        	format = "{percentage_used}% 󰉉";
+          format = "{percentage_used}% 󰉉";
         };
         pulseaudio = {
-	        # "scroll-step": 1, // %, can be a float
-	        format = "{volume}% {icon} {format_source}";
-	        format-bluetooth = "{volume}% {icon} {format_source}";
-	        format-bluetooth-muted = " {icon} {format_source}";
-	        format-muted = " {format_source}";
-	        format-source = "{volume}% ";
-	        format-source-muted = "";
-	        format-icons = {
-	            "headphone" = "";
-	            "hands-free" = "";
-	            "headset" = "";
-	            "phone" = "";
-	            "portable" = "";
-	            "car" = "";
-	            "default" = ["" "" ""];
-	        };
-	        on-click = "pavucontrol";
-	       };
+          # "scroll-step": 1, // %, can be a float
+          format = "{volume}% {icon} {format_source}";
+          format-bluetooth = "{volume}% {icon} {format_source}";
+          format-bluetooth-muted = " {icon} {format_source}";
+          format-muted = " {format_source}";
+          format-source = "{volume}% ";
+          format-source-muted = "";
+          format-icons = {
+            "headphone" = "";
+            "hands-free" = "";
+            "headset" = "";
+            "phone" = "";
+            "portable" = "";
+            "car" = "";
+            "default" = ["" "" ""];
+          };
+          on-click = "pavucontrol";
+        };
         "hyprland/submap" = {
           format = "✌️ {}";
           max-length = 80;
@@ -354,6 +354,10 @@
     # exec-once = waybar & hyprpaper & firefox
     "exec-once" = [
       "dunst"
+      "slack -u"
+      "1password --silent"
+      "discord --start-minimized"
+      "element-desktop --hidden"
       # Waybar appears to start itself
       # "waybar"
     ];
