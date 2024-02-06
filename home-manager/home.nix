@@ -393,6 +393,7 @@
       "1password --silent"
       "discord --start-minimized"
       "element-desktop --hidden"
+      "zulip"
       # Waybar appears to start itself
       # "waybar"
     ];
