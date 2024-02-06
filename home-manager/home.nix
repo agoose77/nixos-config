@@ -41,137 +41,6 @@
       spotify
     ];
 
-    # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-    stateVersion = "23.05";
-  };
-
-  accounts.email = {
-    accounts."goosey15@gmail.com" = {
-      primary = true;
-      address = "goosey15@gmail.com";
-      flavor = "gmail.com";
-      realName = "Angus Hollands";
-      thunderbird.enable = true;
-    };
-    accounts."ahollands@2i2c.org" = {
-      address = "ahollands@2i2c.org";
-      flavor = "gmail.com";
-      realName = "Angus Hollands";
-      thunderbird.enable = true;
-    };
-    accounts."angus.hollands@outlook.com" = {
-      address = "angus.hollands@outlook.com";
-      flavor = "outlook.office365.com";
-      realName = "Angus Hollands";
-      thunderbird.enable = true;
-    };
-  };
-
-  programs.thunderbird = {
-    enable = true;
-    profiles.default = {
-      isDefault = true;
-    };
-  };
-
-  # Setup nixvim
-  programs.nixvim = {
-    enable = true;
-    plugins = {
-      fugitive.enable = true;
-      gitsigns.enable = true;
-      telescope.enable = true;
-    };
-    options = {
-      number = true; # Show line numbers
-      relativenumber = true; # Show relative line numbers
-      termguicolors = true;
-    };
-  };
-
-  # Enable home-manager
-  programs.home-manager.enable = true;
-
-  programs.gh = {
-    enable = true;
-  };
-
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
-
-  programs.firefox.enable = true;
-  programs.git = {
-    enable = true;
-    userName = "Angus Hollands";
-    userEmail = "goosey15@gmail.com";
-    lfs.enable = true;
-    extraConfig = {
-      push = {
-        autoSetupRemote = true;
-      };
-      pull = {
-        ff = "only";
-      };
-    };
-  };
-  # programs.ssh = {
-  #   enable = true;
-  #   extraConfig = "IdentityAgent ~/.1password/agent.sock";
-  # };
-  # Write SHH config with correct permissions
-  home.activation.copySshConfig = let
-    cfgFile = pkgs.writeText "ssh-config" ''
-      Host *
-        ForwardAgent no
-        AddKeysToAgent no
-        Compression no
-        ServerAliveInterval 0
-        ServerAliveCountMax 3
-        HashKnownHosts no
-        UserKnownHostsFile ~/.ssh/known_hosts
-        ControlMaster no
-        ControlPath ~/.ssh/master-%r@%n:%p
-        ControlPersist no
-
-        IdentityAgent ~/.1password/agent.sock
-
-    '';
-  in
-    lib.hm.dag.entryAfter ["writeBoundary"] ''
-      install -m600 -D ${cfgFile} $HOME/.ssh/config
-    '';
-
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
-
-  programs.direnv = {
-    enable = true;
-    enableNushellIntegration = true;
-  };
-
-  programs.atuin = {
-    enable = true;
-    enableNushellIntegration = true;
-  };
-
-  programs.zoxide = {
-    enable = true;
-    enableNushellIntegration = true;
-  };
-
-  programs.bash.enable = true;
-
-  programs.nushell = {
-    enable = true;
-    extraConfig = ''
-      $env.config = {
-       show_banner: false
-      }
-      def git_current_branch () {
-        git branch --show-current | str trim -c "\n"
-      }
-    '';
     shellAliases = {
       s = "git status -sb";
       g = "git";
@@ -301,9 +170,132 @@
       gup = "git pull --rebase";
       gupv = "git pull --rebase -v";
       gwch = "git whatchanged -p --abbrev-commit --pretty=medium";
+
+    };
+
+    # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+    stateVersion = "23.05";
+  };
+
+
+  accounts.email = {
+    accounts."goosey15@gmail.com" = {
+      primary = true;
+      address = "goosey15@gmail.com";
+      flavor = "gmail.com";
+      realName = "Angus Hollands";
+      thunderbird.enable = true;
+    };
+    accounts."ahollands@2i2c.org" = {
+      address = "ahollands@2i2c.org";
+      flavor = "gmail.com";
+      realName = "Angus Hollands";
+      thunderbird.enable = true;
+    };
+    accounts."angus.hollands@outlook.com" = {
+      address = "angus.hollands@outlook.com";
+      flavor = "outlook.office365.com";
+      realName = "Angus Hollands";
+      thunderbird.enable = true;
     };
   };
 
+  programs.thunderbird = {
+    enable = true;
+    profiles.default = {
+      isDefault = true;
+    };
+  };
+
+  # Setup nixvim
+  programs.nixvim = {
+    enable = true;
+    plugins = {
+      fugitive.enable = true;
+      gitsigns.enable = true;
+      telescope.enable = true;
+    };
+    options = {
+      number = true; # Show line numbers
+      relativenumber = true; # Show relative line numbers
+      termguicolors = true;
+    };
+  };
+
+  # Enable home-manager
+  programs.home-manager.enable = true;
+
+  programs.gh = {
+    enable = true;
+  };
+
+  # Add stuff for your user as you see fit:
+  # programs.neovim.enable = true;
+  # home.packages = with pkgs; [ steam ];
+
+  programs.firefox.enable = true;
+  programs.git = {
+    enable = true;
+    userName = "Angus Hollands";
+    userEmail = "goosey15@gmail.com";
+    lfs.enable = true;
+    extraConfig = {
+      push = {
+        autoSetupRemote = true;
+      };
+      pull = {
+        ff = "only";
+      };
+    };
+  };
+  # programs.ssh = {
+  #   enable = true;
+  #   extraConfig = "IdentityAgent ~/.1password/agent.sock";
+  # };
+  # Write SHH config with correct permissions
+  home.activation.copySshConfig = let
+    cfgFile = pkgs.writeText "ssh-config" ''
+      Host *
+        ForwardAgent no
+        AddKeysToAgent no
+        Compression no
+        ServerAliveInterval 0
+        ServerAliveCountMax 3
+        HashKnownHosts no
+        UserKnownHostsFile ~/.ssh/known_hosts
+        ControlMaster no
+        ControlPath ~/.ssh/master-%r@%n:%p
+        ControlPersist no
+
+        IdentityAgent ~/.1password/agent.sock
+
+    '';
+  in
+    lib.hm.dag.entryAfter ["writeBoundary"] ''
+      install -m600 -D ${cfgFile} $HOME/.ssh/config
+    '';
+
+  # Nicely reload system units when changing configs
+  systemd.user.startServices = "sd-switch";
+
+  programs.direnv = {
+    enable = true;
+    enableNushellIntegration = true;
+  };
+
+  programs.atuin = {
+    enable = true;
+    enableNushellIntegration = true;
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableNushellIntegration = true;
+  };
+
+  programs.bash.enable = true;
+
+  
   programs.starship = {
     enable = true;
   };
