@@ -37,6 +37,7 @@
     packages = with pkgs; [
       discord
       element-desktop-wayland
+      openssh
       spotify
     ];
 
@@ -114,10 +115,32 @@
       };
     };
   };
-  programs.ssh = {
-    enable = true;
-    extraConfig = "IdentityAgent ~/.1password/agent.sock";
-  };
+  # programs.ssh = {
+  #   enable = true;
+  #   extraConfig = "IdentityAgent ~/.1password/agent.sock";
+  # };
+  # Write SHH config with correct permissions
+  home.activation.copySshConfig = let
+    cfgFile = pkgs.writeText "ssh-config" ''
+      Host *
+        ForwardAgent no
+        AddKeysToAgent no
+        Compression no
+        ServerAliveInterval 0
+        ServerAliveCountMax 3
+        HashKnownHosts no
+        UserKnownHostsFile ~/.ssh/known_hosts
+        ControlMaster no
+        ControlPath ~/.ssh/master-%r@%n:%p
+        ControlPersist no
+
+        IdentityAgent ~/.1password/agent.sock
+
+    '';
+  in
+    lib.hm.dag.entryAfter ["writeBoundary"] ''
+      install -m600 -D ${cfgFile} $HOME/.ssh/config
+    '';
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
