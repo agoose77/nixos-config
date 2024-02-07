@@ -523,7 +523,7 @@
       "$mod, 3, workspace, 3"
       "$mod, 4, workspace, 4"
       "$mod, 5, workspace, 5"
-      "$mod, 6, workspace, 6"
+      "$mod, 6, workspace, 6" 
       "$mod, 7, workspace, 7"
       "$mod, 8, workspace, 8"
       "$mod, 9, workspace, 9"
@@ -560,6 +560,10 @@
       # Special workspaces
       "$mod CTRL, M, movetoworkspacesilent, special"
       "$mod CTRL, A, togglespecialworkspace"
+      # Group
+      "$mod, G, togglegroup"
+      "$mod ALT, TAB, changegroupactive, b"
+      "$mod, TAB, changegroupactive, f"
     ];
     bindm = [
       "$mod, mouse:272, movewindow"
