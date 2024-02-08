@@ -128,7 +128,6 @@
     dunst
     file
     fd
-    flameshot
     fzf
     git
     inputs.home-manager.packages.${pkgs.system}.default
