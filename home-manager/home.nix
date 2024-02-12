@@ -30,6 +30,8 @@
     };
   };
 
+  services.kdeconnect.enable = true;
+
   home = {
     username = "angus";
     homeDirectory = "/home/angus";
@@ -399,6 +401,7 @@
       "discord --start-minimized"
       "element-desktop --hidden"
       "zulip"
+      "kdeconnect-indicator"
       # Waybar appears to start itself
       # "waybar"
     ];
