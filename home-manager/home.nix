@@ -42,6 +42,10 @@
     ];
 
     shellAliases = {
+      git_current_branch = "git symbolic-ref --quiet HEAD | sed -E \"s@refs/heads/(.*)@\\1@\"";
+      git_main_branch = "git show-ref --quiet refs/heads/main && echo \"main\" || echo \"master\"";
+      ".." = "cd ..";
+      "..." = "cd ../../";
       s = "git status -sb";
       g = "git";
       ga = "git add";
@@ -71,7 +75,7 @@
       gcf = "git config --list";
       gcl = "git clone --recursive";
       gclean = "git clean -fd";
-      gcm = "git checkout master";
+      gcm = "git checkout $(git_main_branch)";
       gcmsg = "git commit -m";
       "gcn!" = "git commit -v --no-edit --amend";
       gco = "git checkout";
@@ -90,9 +94,9 @@
       gfo = "git fetch origin";
       gg = "git gui citool";
       gga = "git gui citool --amend";
-      ggpull = "git pull origin (git_current_branch)";
+      ggpull = "git pull origin $(git_current_branch)";
       ggpur = "ggu";
-      ggpush = "git push origin (git_current_branch)";
+      ggpush = "git push origin $(git_current_branch)";
       ggsup = "git branch --set-upstream-to=origin/(git_current_branch)";
       ghh = "git help";
       gignore = "git update-index --assume-unchanged";
@@ -122,7 +126,7 @@
       gpf = "git push --force-with-lease";
       #gpoat = "(git push origin --all; git push origin --tags)";
       #gpristine = "(git reset --hard; git clean -dfx)";
-      gpsup = "git push --set-upstream origin (git_current_branch)";
+      gpsup = "git push --set-upstream origin $(git_current_branch)";
       gpu = "git push upstream";
       gpv = "git push -v";
       gr = "git remote";
@@ -149,6 +153,7 @@
       grv = "git remote -v";
       gsb = "git status -sb";
       gsd = "git svn dcommit";
+      gsh = "git show";
       gsi = "git submodule init";
       gsps = "git show --pretty=short --show-signature";
       gsr = "git svn rebase";
