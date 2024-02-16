@@ -229,6 +229,9 @@
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.enable = true;
 
+ services.teamviewer.enable = true;
+
+
   # Use kde-wallet (at login)
   #security.pam.services.sddm.enableKwallet = true;
   services.mpd.enable = true;

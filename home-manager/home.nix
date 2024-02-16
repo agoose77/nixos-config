@@ -147,7 +147,7 @@
       grmv = "git remote rename";
       grrm = "git remote remove";
       grset = "git remote set-url";
-      grss = "git restore --source";
+      grs = "git restore";
       grst = "git restore --staged";
       #grt = "cd (git rev-parse --show-toplevel || echo '.')";
       gru = "git reset --";
