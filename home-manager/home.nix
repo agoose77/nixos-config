@@ -88,6 +88,7 @@
       gcs = "git commit -S";
       gcsm = "git commit -s -m";
       gd = "git diff";
+      gds = "git diff --staged";
       gdca = "git diff --cached";
       gdt = "git diff-tree --no-commit-id --name-only -r";
       gdw = "git diff --word-diff";
