@@ -288,17 +288,18 @@
 
   programs.direnv = {
     enable = true;
-    enableNushellIntegration = true;
+    enableBashIntegration = true;
+    nix-direnv.enable = true;
   };
 
   programs.atuin = {
     enable = true;
-    enableNushellIntegration = true;
+    enableBashIntegration = true;
   };
 
   programs.zoxide = {
     enable = true;
-    enableNushellIntegration = true;
+    enableBashIntegration = true;
   };
 
   programs.bash.enable = true;
