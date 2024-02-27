@@ -218,10 +218,19 @@
   # Setup nixvim
   programs.nixvim = {
     enable = true;
+    defaultEditor = true;
     plugins = {
       fugitive.enable = true;
       gitsigns.enable = true;
       telescope.enable = true;
+      lsp = {
+        enable = true;
+        servers = {
+          pylsp.enable = true;
+	  ruff-lsp.enable = true;
+	  tsserver.enable = true;
+	};
+      };
     };
     options = {
       number = true; # Show line numbers
