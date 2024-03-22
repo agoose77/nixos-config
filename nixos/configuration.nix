@@ -165,10 +165,16 @@
     allowedUDPPorts = [5353]; # Spotify Connect & Google Cast
 
     allowedTCPPortRanges = [
-        { from = 1714; to = 1764; } # KDE Connect
+      {
+        from = 1714;
+        to = 1764;
+      } # KDE Connect
     ];
     allowedUDPPortRanges = [
-        { from = 1714; to = 1764; } # KDE Connect
+      {
+        from = 1714;
+        to = 1764;
+      } # KDE Connect
     ];
   };
   environment.sessionVariables = rec {
@@ -229,8 +235,7 @@
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.enable = true;
 
- services.teamviewer.enable = true;
-
+  services.teamviewer.enable = true;
 
   # Use kde-wallet (at login)
   #security.pam.services.sddm.enableKwallet = true;
@@ -240,4 +245,30 @@
     jetbrains-mono
     nerd-font-patcher
   ];
+
+  # Enable polkit
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
+  security = {
+    pam.services = {
+      login.enableGnomeKeyring = true;
+    };
+  };
+
+  services = {
+    gnome.gnome-keyring.enable = true;
+  };
 }
