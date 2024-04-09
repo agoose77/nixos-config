@@ -80,9 +80,9 @@
 
   # TODO: i18n for lC_
 
-  services.xserver = {
+  services.xserver.kxb = {
     layout = "gb";
-    xkbVariant = "";
+    variant = "";
   };
 
   console.keyMap = "uk";
