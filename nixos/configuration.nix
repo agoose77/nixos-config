@@ -81,7 +81,7 @@
 
   # TODO: i18n for lC_
 
-  services.xserver.kxb = {
+  services.xserver.xkb = {
     layout = "gb";
     variant = "";
   };
