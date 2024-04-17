@@ -44,6 +44,7 @@
       # Required for containers under podman-compose to be able to talk to each other.
       defaultNetwork.settings.dns_enabled = true;
     };
+    containers.enable = true;
   };
 
   # This will add each flake input as a registry
