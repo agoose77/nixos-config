@@ -39,6 +39,13 @@
           ./nixos/configuration.nix
         ];
       };
+
+      "home-assistant" = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./hosts/home-assistant
+        ];
+      };
     };
 
     # Standalone home-manager configuration entrypoint
