@@ -158,6 +158,9 @@
     zoom-us
     zulip
   ];
+
+  programs.steam.enable = true;
+
   networking.firewall = {
     enable = true;
 
@@ -271,5 +274,13 @@
 
   services = {
     gnome.gnome-keyring.enable = true;
+  };
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    nssmdns6 = true;
+    publish.enable = true;
+    publish.userServices = true;
   };
 }

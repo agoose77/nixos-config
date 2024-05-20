@@ -30,7 +30,10 @@
     };
   };
 
-  services.kdeconnect.enable = true;
+  services.kdeconnect = {
+    enable = true;
+    indicator = true;
+  };
 
   home = {
     username = "angus";
@@ -605,4 +608,5 @@
       "$mod, mouse:273, resizewindow"
     ];
   };
+
 }
