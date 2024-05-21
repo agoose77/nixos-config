@@ -36,12 +36,14 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-alejandra
+    alejandra
     git
     curl
     podman
-
-
+    neovim
+    pkgs.jellyfin
+    pkgs.jellyfin-web
+    pkgs.jellyfin-ffmpeg
   ];
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
@@ -106,7 +108,6 @@ alejandra
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.budgie.enable = true;
 
-
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.
   services.openssh = {
@@ -124,7 +125,7 @@ alejandra
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
 
-   virtualisation = {
+  virtualisation = {
     podman = {
       enable = true;
 
@@ -150,19 +151,53 @@ alejandra
       };
       # VSCode Server
       containers.code-server = {
-       environment.TZ = "Europe/London";
-       image = "lscr.io/linuxserver/code-server:latest";
-       volumes = [
-         "/etc/home-assistant:/etc/home-assistant"
-	 "/etc/code-server/config:/config"
-       ];
-       ports = [
-        "8443:8443"
-       ];
+        environment.TZ = "Europe/London";
+        image = "lscr.io/linuxserver/code-server:latest";
+        volumes = [
+          "/etc/home-assistant:/etc/home-assistant"
+          "/etc/code-server/config:/config"
+        ];
+        ports = [
+          "8443:8443"
+        ];
       };
     };
 
     containers.enable = true;
+  };
+
+  services.jellyfin.enable = true;
+
+  services.xserver.videoDrivers = ["nvidia"];
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+    # For better video playback
+    extraPackages = with pkgs; [nvidia-vaapi-driver];
+  };
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+  hardware.pulseaudio.enable = false;
+
+  sound.enable = true;
+  services = {
+    pipewire = {
+      enable = true;
+      audio.enable = true;
+      pulse.enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      jack.enable = true;
+    };
   };
 
   networking.firewall.allowedTCPPorts = [80 443 8123];
@@ -193,5 +228,4 @@ alejandra
   boot.kernel.sysctl = {
     "net.ipv4.ip_unprivileged_port_start" = 0;
   };
-
 }
