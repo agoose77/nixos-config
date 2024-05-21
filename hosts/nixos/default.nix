@@ -283,4 +283,6 @@
     publish.enable = true;
     publish.userServices = true;
   };
+
+  services.flatpak.enable = true;
 }
