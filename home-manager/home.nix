@@ -44,7 +44,6 @@
       element-desktop-wayland
       openssh
       spotify
-      jellyfin-web
     ];
 
     shellAliases = {
