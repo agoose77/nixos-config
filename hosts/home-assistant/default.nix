@@ -41,9 +41,10 @@
     curl
     podman
     neovim
-    pkgs.jellyfin
-    pkgs.jellyfin-web
-    pkgs.jellyfin-ffmpeg
+    jellyfin
+    jellyfin-web
+    jellyfin-ffmpeg
+    noip
   ];
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
@@ -165,6 +166,17 @@
         ];
       };
     };
+    
+    # No-IP
+    #containers.no-ip = {
+    #  environment.TZ = "Europe/London";
+    #  image = "docker.io/derogab/no-ip-updater:latest";
+    #  environment = {
+    #    NOIP_USER="agoose77";
+#	NOIP_PASSWORD=
+#	NOIP_HOSTNAME="agoose77.ddns.net";
+#      };
+ #   };
 
     containers.enable = true;
   };
@@ -246,6 +258,20 @@
   boot.kernel.sysctl = {
     "net.ipv4.ip_unprivileged_port_start" = 0;
   };
+
+  systemd.services.noip = {
+      unitConfig = {
+        Description = "No-IP daemon";
+        After = [ "network-online.target" ];
+      };
+      wantedBy = [ "default.target" ];
+      serviceConfig = {
+        ExecStart =
+          "${pkgs.noip}/bin/noip2 -c /etc/noip/no-ip2.conf";
+        Restart = "always";
+	Type = "forking";
+      };
+    }; 
 
   fileSystems."/mnt/data" = {
     device = "/dev/disk/by-uuid/7028A53628A4FC6A";
