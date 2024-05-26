@@ -95,11 +95,14 @@
     angus = {
       isNormalUser = true;
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = ["networkmanager" "wheel" "media"];
       packages = with pkgs; [];
       shell = pkgs.bash;
+      uid = 1000;
     };
   };
+  # Choose group ID for media
+  users.groups.media.gid = 501;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -166,7 +169,11 @@
     containers.enable = true;
   };
 
-  services.jellyfin.enable = true;
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+    group = "media";
+  };
 
   services.xserver.videoDrivers = ["nvidia"];
   hardware.opengl = {
@@ -208,15 +215,26 @@
     # Auto-HTTPS remote routing
     virtualHosts."agoose77.ddns.net".extraConfig = ''
       reverse_proxy localhost:8123
+
+      redir /jellyfin /jellyfin/
+      reverse_proxy /jellyfin/* localhost:8096
+
       # reverse_proxy /vscode/* localhost:8443 -- don't do this!
     '';
 
     # For HTTP-only local routing
     virtualHosts.":80".extraConfig = ''
       reverse_proxy localhost:8123
+
+      redir /jellyfin /jellyfin/
+      reverse_proxy /jellyfin/* 127.0.0.1:8096
+
+      redir /vscode /vscode/
       reverse_proxy /vscode/* localhost:8443
     '';
   };
+
+  services.devmon.enable = true;
 
   services.avahi = {
     enable = true;
@@ -224,8 +242,22 @@
     publish.enable = true;
     publish.userServices = true;
   };
-
+  boot.supportedFilesystems = ["ntfs"];
   boot.kernel.sysctl = {
     "net.ipv4.ip_unprivileged_port_start" = 0;
+  };
+
+  fileSystems."/mnt/data" = {
+    device = "/dev/disk/by-uuid/7028A53628A4FC6A";
+    fsType = "ntfs";
+    options = [
+      # If you don't have this options attribute, it'll default to "defaults"
+      # boot options for fstab. Search up fstab mount options you can use
+      "users" # Allows any user to mount and unmount
+      "nofail" # Prevent system from failing if this drive doesn't mount,
+      "rw" 
+      "uid=1000"
+      "gid=501"
+    ];
   };
 }
