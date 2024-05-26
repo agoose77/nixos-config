@@ -285,4 +285,5 @@
   };
 
   services.flatpak.enable = true;
+  boot.supportedFilesystems = ["ntfs"];
 }
