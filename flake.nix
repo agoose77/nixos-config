@@ -39,7 +39,12 @@
           ./hosts/nixos
         ];
       };
-
+      "latitude" = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./hosts/latitude
+        ];
+      };
       "home-assistant" = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
@@ -51,6 +56,14 @@
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#angus@nixos'
     homeConfigurations = {
+        "angus@latitude" = home-manager.lib.homeManagerConfiguration {
+        pkgs=nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs =  {inherit inputs outputs;};
+        modules = [
+    inputs.nixvim.homeManagerModules.nixvim
+./home-manager/home.nix
+];
+       };
       "angus@nixos" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
