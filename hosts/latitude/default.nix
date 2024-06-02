@@ -295,4 +295,7 @@
 
   services.flatpak.enable = true;
   boot.supportedFilesystems = ["ntfs"];
+
+  services.tlp.enable = true;
+  powerManagement.enable = true;
 }
