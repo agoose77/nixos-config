@@ -187,21 +187,21 @@
     group = "media";
   };
 
-  services.xserver.videoDrivers = ["nvidia"];
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-    # For better video playback
-    extraPackages = with pkgs; [nvidia-vaapi-driver];
-  };
+  #services.xserver.videoDrivers = ["nvidia"];
+  #hardware.opengl = {
+  #  enable = true;
+  #  driSupport = true;
+  #  driSupport32Bit = true;
+  #  # For better video playback
+  #  extraPackages = with pkgs; [nvidia-vaapi-driver];
+  #};#
 
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = true;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
+  #hardware.nvidia = {
+  #  modesetting.enable = true;
+  #  open = false;
+  #  nvidiaSettings = true;
+  #  package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #};
 
   hardware.pulseaudio.enable = false;
 
