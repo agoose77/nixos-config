@@ -155,19 +155,6 @@
     allowedTCPPorts = [57621]; # Spotify  local track broadcast
 
     allowedUDPPorts = [5353]; # Spotify Connect & Google Cast
-
-    allowedTCPPortRanges = [
-      {
-        from = 1714;
-        to = 1764;
-      } # KDE Connect
-    ];
-    allowedUDPPortRanges = [
-      {
-        from = 1714;
-        to = 1764;
-      } # KDE Connect
-    ];
   };
   environment.sessionVariables = rec {
     GBM_BACKEND = "nvidia-drm";
