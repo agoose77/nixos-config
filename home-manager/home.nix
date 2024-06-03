@@ -537,6 +537,9 @@
 
     "$mod" = "SUPER";
     bind = [
+      ", XF86MonBrightnessUp, exec, brightnessctl s +5%"
+      ", XF86MonBrightnessDown, exec, brightnessctl s -5%"
+
       "$mod, return, exec, alacritty"
       "$mod SHIFT, return, exec, firefox"
       "$mod SHIFT, Q, killactive, g"
