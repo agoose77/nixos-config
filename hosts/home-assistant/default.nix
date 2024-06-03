@@ -173,17 +173,17 @@
         ];
       };
     };
-    
+
     # No-IP
     #containers.no-ip = {
     #  environment.TZ = "Europe/London";
     #  image = "docker.io/derogab/no-ip-updater:latest";
     #  environment = {
     #    NOIP_USER="agoose77";
-#	NOIP_PASSWORD=
-#	NOIP_HOSTNAME="agoose77.ddns.net";
-#      };
- #   };
+    #	NOIP_PASSWORD=
+    #	NOIP_HOSTNAME="agoose77.ddns.net";
+    #      };
+    #   };
 
     containers.enable = true;
   };
@@ -267,18 +267,17 @@
   };
 
   systemd.services.noip = {
-      unitConfig = {
-        Description = "No-IP daemon";
-        After = [ "network-online.target" ];
-      };
-      wantedBy = [ "default.target" ];
-      serviceConfig = {
-        ExecStart =
-          "${pkgs.noip}/bin/noip2 -c /etc/noip/no-ip2.conf";
-        Restart = "always";
-	Type = "forking";
-      };
-    }; 
+    unitConfig = {
+      Description = "No-IP daemon";
+      After = ["network-online.target"];
+    };
+    wantedBy = ["default.target"];
+    serviceConfig = {
+      ExecStart = "${pkgs.noip}/bin/noip2 -c /etc/noip/no-ip2.conf";
+      Restart = "always";
+      Type = "forking";
+    };
+  };
 
   fileSystems."/mnt/data" = {
     device = "/dev/disk/by-uuid/7028A53628A4FC6A";
@@ -288,7 +287,7 @@
       # boot options for fstab. Search up fstab mount options you can use
       "users" # Allows any user to mount and unmount
       "nofail" # Prevent system from failing if this drive doesn't mount,
-      "rw" 
+      "rw"
       "uid=1000"
       "gid=501"
     ];

@@ -1,10 +1,7 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-{
-  pkgs,
-  ...
-}: {
-  users.mutableUsers = false;
+{pkgs, ...}: {
+  # users.mutableUsers = false;
   users.users = {
     angus = {
       isNormalUser = true;
@@ -12,7 +9,44 @@
       extraGroups = ["networkmanager" "wheel" "media"];
       shell = pkgs.bash;
       uid = 1000;
+
+      packages = with pkgs; [
+        alacritty
+        alejandra
+        bat
+        bash
+        buildah
+        delta
+        dolphin
+        dunst
+        file
+        fd
+        fzf
+        git
+        jq
+        micro
+        micromamba
+        nodejs
+        nushell
+        podman
+        oil
+        playerctl
+        ripgrep
+        slack
+        swaylock-effects
+        swayidle
+        unzip
+        vulkan-loader
+        vulkan-validation-layers
+        vulkan-tools
+        wget
+        wofi
+        wl-clipboard
+        wlogout
+        zip
+        zoom-us
+        zulip
+      ];
     };
   };
-
 }
