@@ -49,4 +49,8 @@
 
   environment.systemPackages = [ pkgs.nvidia-offload ];
   nixpkgs.config.nvidia.acceptLicense = true;
+
+  # Battery management
+  services.tlp.enable = true;
+  powerManagement.enable = true;
 }

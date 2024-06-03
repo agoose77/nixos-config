@@ -1,8 +1,6 @@
-# This is your system's configuration file.
-# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
+# Basic configuration common to all hosts
 {
   inputs,
-  outputs,
   lib,
   config,
   pkgs,
@@ -57,24 +55,13 @@
 
   i18n.defaultLocale = "en_GB.UTF-8";
 
-  # TODO: i18n for lC_
-
+  console.keyMap = "uk";
   services.xserver.xkb = {
     layout = "gb";
     variant = "";
   };
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.enable = true;
-
-  console.keyMap = "uk";
-
-  environment.sessionVariables = rec {
-    GBM_BACKEND = "nvidia-drm";
-    LIBVA_DRIVER_NAME = "nvidia";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    WLR_NO_HARDWARE_CURSORS = "1";
-    NIXOS_OZONE_WL = "1"; # Enable Wayland support for slack
-  };
 
   # Enable the 1Password CLI, this also enables a SGUID wrapper so the CLI can authorize against the GUI app
   programs._1password = {
@@ -89,9 +76,6 @@
 
   programs.kdeconnect.enable = true;
   programs.hyprland.enable = true;
-
-  # Use kde-wallet (at login)
-  #security.pam.services.sddm.enableKwallet = true;
 
   # Enable polkit
   systemd = {
@@ -130,6 +114,4 @@
   services.flatpak.enable = true;
   boot.supportedFilesystems = ["ntfs"];
 
-  services.tlp.enable = true;
-  powerManagement.enable = true;
 }
