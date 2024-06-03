@@ -1,9 +1,6 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
-  inputs,
-  outputs,
-  lib,
   config,
   pkgs,
   ...
@@ -15,11 +12,10 @@
     ./hardware-configuration.nix
   ];
 
-  # FIXME: Add the rest of your current configuration
 
-  # TODO: Set your hostname
   networking.hostName = "latitude";
-  environment.sessionVariables = rec {
+
+  environment.sessionVariables = {
     GBM_BACKEND = "nvidia-drm";
     LIBVA_DRIVER_NAME = "nvidia";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
