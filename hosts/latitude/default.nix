@@ -50,5 +50,7 @@
       };
     };
   };
+
+  environment.systemPackages = [ pkgs.nvidia-offload ];
   nixpkgs.config.nvidia.acceptLicense = true;
 }
