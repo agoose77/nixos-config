@@ -10,6 +10,7 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ./podman.nix
+    ./openvpn.nix
     ./openssh.nix
     ./spotify-connect.nix
     ./sound.nix
