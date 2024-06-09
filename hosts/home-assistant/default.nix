@@ -73,6 +73,13 @@
   # TODO: Set your hostname
   networking.hostName = "home-assistant";
   networking.networkmanager.enable = true;
+  systemd.network = {
+    enable = true;
+    networks."10-lan" = {
+      matchConfig.name = "enp4s0";
+      linkConfig.MACAddress = "20:47:47:79:c5:7d";
+    };
+  };
 
   time.timeZone = "Europe/London";
 
