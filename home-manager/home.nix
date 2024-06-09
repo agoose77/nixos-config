@@ -65,6 +65,7 @@
       gbr = "git branch --remote";
       gbs = "git bisect";
       gbsb = "git bisect bad";
+      gbsc = "git branch --sort=committerdate";
       gbsg = "git bisect good";
       gbsr = "git bisect reset";
       gbss = "git bisect start";
