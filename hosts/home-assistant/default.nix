@@ -45,6 +45,7 @@
     jellyfin-web
     jellyfin-ffmpeg
     noip
+    transmission
   ];
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
@@ -132,6 +133,10 @@
   };
 
   programs.ssh.startAgent = true;
+
+  services.transmission.settings = {
+    download-dir = "${config.services.transmission.home}/Downloads";
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

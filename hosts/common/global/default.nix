@@ -112,7 +112,7 @@
     publish.userServices = true;
   };
 
+  xdg.portal.enable = true;
   services.flatpak.enable = true;
   boot.supportedFilesystems = ["ntfs"];
-
 }

@@ -12,7 +12,6 @@
     ./hardware-configuration.nix
   ];
 
-
   networking.hostName = "latitude";
 
   environment.sessionVariables = {
@@ -47,7 +46,7 @@
     };
   };
 
-  environment.systemPackages = [ pkgs.nvidia-offload ];
+  environment.systemPackages = [pkgs.nvidia-offload];
   nixpkgs.config.nvidia.acceptLicense = true;
 
   # Battery management

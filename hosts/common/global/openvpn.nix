@@ -1,6 +1,9 @@
-
 {...}: {
   services.openvpn.servers = {
-    londonBiscuits  = { config = '' config /root/nixos/openvpn/londonBiscuits.conf ''; };
+    londonBiscuits = {
+      autoStart = false;
+      config = ''config /root/nixos/openvpn/londonBiscuits.conf '';
+      updateResolvConf = true;
+    };
   };
 }

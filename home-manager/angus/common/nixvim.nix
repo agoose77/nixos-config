@@ -30,7 +30,7 @@
           pylsp.enable = true;
           ruff-lsp.enable = true;
           tsserver.enable = true;
-          nil_ls.enable = true;
+          nil-ls.enable = true;
         };
       };
     };

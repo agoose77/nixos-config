@@ -10,7 +10,7 @@
     ../common/global
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
-  ]; 
+  ];
 
   networking.hostName = "nixos";
 
@@ -36,5 +36,13 @@
     open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+  services.transmission = {
+    enable = true; #Enable transmission daemon
+    openRPCPort = true; #Open firewall for RPC
+    settings = {
+      #Override default settings
+      rpc-bind-address = "0.0.0.0"; #Bind to own IP
+    };
   };
 }
