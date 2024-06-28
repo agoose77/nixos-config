@@ -45,4 +45,8 @@
       rpc-bind-address = "0.0.0.0"; #Bind to own IP
     };
   };
+
+  # Mouse
+  hardware.openrazer.enable = true;
+  hardware.openrazer.users = [ "angus" ];
 }
