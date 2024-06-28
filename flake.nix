@@ -68,7 +68,7 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          ./home-manager/angus
+          ./home/angus/generic.nix
         ];
       };
       "angus@nixos" = home-manager.lib.homeManagerConfiguration {
@@ -76,7 +76,7 @@
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           # > Our main home-manager configuration file <
-          ./home-manager/angus
+          ./home/angus/nixos.nix
         ];
       };
     };
