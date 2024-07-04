@@ -25,7 +25,6 @@
   services.xserver.videoDrivers = ["nvidia"];
   hardware.opengl = {
     enable = true;
-    driSupport = true;
     driSupport32Bit = true;
     # For better video playback
     extraPackages = with pkgs; [nvidia-vaapi-driver];
