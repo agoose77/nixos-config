@@ -71,16 +71,11 @@
   # FIXME: Add the rest of your current configuration
 
   # TODO: Set your hostname
-  networking.hostName = "home-assistant";
-  networking.networkmanager.enable = true;
-  systemd.network = {
-    enable = true;
-    networks."10-lan" = {
-      matchConfig.name = "enp4s0";
-      linkConfig.MACAddress = "20:47:47:79:c5:7d";
-    };
+  networking = {
+    hostName = "home-assistant";
+    networkmanager.enable = true;
+    interfaces."enp4s0".macAddress = "20:47:47:79:c5:7d";
   };
-
   time.timeZone = "Europe/London";
 
   i18n.defaultLocale = "en_GB.UTF-8";
