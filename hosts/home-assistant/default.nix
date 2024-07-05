@@ -44,7 +44,6 @@
     jellyfin
     jellyfin-web
     jellyfin-ffmpeg
-    noip
     transmission
   ];
   # This will add each flake input as a registry
@@ -188,18 +187,6 @@
         image = "lscr.io/linuxserver/speedtest-tracker:latest";
       };
     };
-
-    # No-IP
-    #containers.no-ip = {
-    #  environment.TZ = "Europe/London";
-    #  image = "docker.io/derogab/no-ip-updater:latest";
-    #  environment = {
-    #    NOIP_USER="agoose77";
-    #	NOIP_PASSWORD=
-    #	NOIP_HOSTNAME="agoose77.ddns.net";
-    #      };
-    #   };
-
     containers.enable = true;
   };
 
@@ -279,19 +266,6 @@
   boot.supportedFilesystems = ["ntfs"];
   boot.kernel.sysctl = {
     "net.ipv4.ip_unprivileged_port_start" = 0;
-  };
-
-  systemd.services.noip = {
-    unitConfig = {
-      Description = "No-IP daemon";
-      After = ["network-online.target"];
-    };
-    wantedBy = ["default.target"];
-    serviceConfig = {
-      ExecStart = "${pkgs.noip}/bin/noip2 -c /etc/noip/no-ip2.conf";
-      Restart = "always";
-      Type = "forking";
-    };
   };
 
   fileSystems."/mnt/data" = {
