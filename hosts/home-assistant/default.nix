@@ -180,6 +180,9 @@
           "4898:80" 
 	];
         image = "lscr.io/linuxserver/speedtest-tracker:latest";
+	volumes = [
+          "/etc/speedtest-tracker/data:/config"
+	];
       };
     };
     containers.enable = true;
