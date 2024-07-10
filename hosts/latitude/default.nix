@@ -45,7 +45,11 @@
     };
   };
 
-  environment.systemPackages = [pkgs.nvidia-offload];
+  environment.systemPackages = [
+    pkgs.nvidia-offload
+    pkgs.acpi
+    pkgs.brightnessctl
+  ];
   nixpkgs.config.nvidia.acceptLicense = true;
 
   # Battery management
