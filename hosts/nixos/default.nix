@@ -26,12 +26,13 @@
   };
 
   services.xserver.videoDrivers = ["nvidia"];
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
     # For better video playback
     extraPackages = with pkgs; [nvidia-vaapi-driver];
   };
+
 
   hardware.nvidia = {
     modesetting.enable = true;

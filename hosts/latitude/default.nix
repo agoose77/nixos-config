@@ -6,8 +6,8 @@
   ...
 }: {
   imports = [
-    ../common/users/angus
     ../common/global
+    ../common/users/angus
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
@@ -23,9 +23,9 @@
   };
 
   services.xserver.videoDrivers = ["nvidia"];
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
     # For better video playback
     extraPackages = with pkgs; [nvidia-vaapi-driver];
   };
