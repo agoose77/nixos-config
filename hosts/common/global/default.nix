@@ -1,6 +1,7 @@
 # Basic configuration common to all hosts
 {
   inputs,
+  outputs,
   lib,
   config,
   pkgs,
@@ -19,6 +20,9 @@
   ];
 
   nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+    ];
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages
