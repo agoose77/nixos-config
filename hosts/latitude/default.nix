@@ -34,7 +34,7 @@
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
     prime = {
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:2:0:0";
