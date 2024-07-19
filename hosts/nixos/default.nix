@@ -12,10 +12,11 @@
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "nixos";
-
+  networking = {
+    hostName = "nixos";
   # Enable wake on LAN
-  networking.interfaces.enp4s0.wakeOnLan.enable = true;
+    interfaces.enp4s0.wakeOnLan.enable = true;
+  };
 
   environment.sessionVariables = {
     GBM_BACKEND = "nvidia-drm";
