@@ -22,7 +22,9 @@
         file
         fd
         fzf
+        gimp
         git
+        inkscape
         jq
         micro
         micromamba
