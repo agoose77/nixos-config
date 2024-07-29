@@ -15,6 +15,7 @@
     ./common/git.nix
     ./common/email.nix
     ./common/nixvim.nix
+    ./common/fonts.nix
   ];
   nixpkgs = {
     # Apply all overlays
