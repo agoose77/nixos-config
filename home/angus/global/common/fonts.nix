@@ -2,5 +2,6 @@
   fonts.fontconfig.enable = true;
   home.packages = [
     pkgs.helvetica-neue-lt-std
+    pkgs.roboto-slab
   ];
 }
