@@ -232,7 +232,7 @@
     enable = true;
 
     # Auto-HTTPS remote routing
-    virtualHosts."agoose77.ddns.net".extraConfig = ''
+    virtualHosts."agoose77.myddns.me".extraConfig = ''
       reverse_proxy localhost:8123
 
       redir /jellyfin /jellyfin/
