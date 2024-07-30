@@ -11,6 +11,7 @@
       fugitive.enable = true;
       gitsigns.enable = true;
       telescope.enable = true;
+      cmp.enable = true;
       lsp = {
         enable = true;
         keymaps = {

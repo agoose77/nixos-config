@@ -12,10 +12,11 @@
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "nixos";
-
+  networking = {
+    hostName = "nixos";
   # Enable wake on LAN
-  networking.interfaces.enp4s0.wakeOnLan.enable = true;
+    interfaces.enp4s0.wakeOnLan.enable = true;
+  };
 
   environment.sessionVariables = {
     GBM_BACKEND = "nvidia-drm";
@@ -26,18 +27,19 @@
   };
 
   services.xserver.videoDrivers = ["nvidia"];
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
     # For better video playback
     extraPackages = with pkgs; [nvidia-vaapi-driver];
   };
 
+
   hardware.nvidia = {
     modesetting.enable = true;
-    open = true;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    open = true;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
   services.transmission = {
     enable = true; #Enable transmission daemon

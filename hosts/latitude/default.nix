@@ -6,8 +6,8 @@
   ...
 }: {
   imports = [
-    ../common/users/angus
     ../common/global
+    ../common/users/angus
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
@@ -23,9 +23,9 @@
   };
 
   services.xserver.videoDrivers = ["nvidia"];
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
     # For better video playback
     extraPackages = with pkgs; [nvidia-vaapi-driver];
   };
@@ -34,7 +34,7 @@
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
     prime = {
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:2:0:0";
@@ -45,7 +45,11 @@
     };
   };
 
-  environment.systemPackages = [pkgs.nvidia-offload];
+  environment.systemPackages = [
+    pkgs.nvidia-offload
+    pkgs.acpi
+    pkgs.brightnessctl
+  ];
   nixpkgs.config.nvidia.acceptLicense = true;
 
   # Battery management
