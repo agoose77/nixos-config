@@ -42,6 +42,7 @@
       element-desktop-wayland
       openssh
       spotify
+      sd
     ];
 
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
@@ -49,6 +50,8 @@
   };
 
   programs.firefox.enable = true;
+
+  programs.ripgrep.enable = true;
 
   # Enable home-manager
   programs.home-manager.enable = true;
