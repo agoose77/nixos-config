@@ -43,6 +43,8 @@
       openssh
       spotify
       sd
+      eza
+      rg
     ];
 
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
