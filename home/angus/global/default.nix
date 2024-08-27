@@ -16,6 +16,7 @@
     ./common/email.nix
     ./common/nixvim.nix
     ./common/fonts.nix
+    ./common/wofi.nix
   ];
   nixpkgs = {
     # Apply all overlays
@@ -44,7 +45,7 @@
       spotify
       sd
       eza
-      rg
+      ripgrep
     ];
 
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
