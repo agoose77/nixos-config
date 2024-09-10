@@ -6,7 +6,7 @@
     angus = {
       isNormalUser = true;
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = ["networkmanager" "wheel" "media"];
+      extraGroups = ["networkmanager" "wheel" "media" "docker"];
       shell = pkgs.bash;
       uid = 1000;
 
