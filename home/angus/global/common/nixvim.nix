@@ -50,7 +50,7 @@
         enableLspFormat = true;
         sources.formatting.prettier = {
           enable = true;
-	  disableTsServerFormatter = false; # We've handled this by setting lspServersToEnable
+          disableTsServerFormatter = false; # We've handled this by setting lspServersToEnable
         };
       };
       lsp = {
@@ -74,7 +74,10 @@
           pylsp.enable = true;
           ruff-lsp.enable = true;
           eslint.enable = true;
-          nil-ls.enable = true;
+          nil-ls = {
+            enable = true;
+            settings.formatting.command = ["alejandra"];
+          };
           tsserver.enable = true;
         };
       };
