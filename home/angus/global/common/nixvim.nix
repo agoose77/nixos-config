@@ -2,11 +2,25 @@
   imports = [inputs.nixvim.homeManagerModules.nixvim];
 
   home.sessionVariables.EDITOR = "nvim";
-
   # Setup nixvim
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
+    # Trouble
+    keymaps = [
+      {
+        mode = "n";
+        key = "<leader>d";
+        action = "+diagnostics/debug";
+      }
+
+      {
+        key = "<leader>dt";
+        action = "<CMD>Trouble diagnostics toggle<CR>";
+        options.desc = "Toggle trouble";
+      }
+    ];
+
     plugins = {
       cmp = {
         enable = true;
@@ -35,7 +49,7 @@
       };
       fugitive.enable = true;
       gitsigns.enable = true;
-      telescope.enable = true;
+      trouble.enable = true;
 
       treesitter.enable = true;
       treesitter-context.enable = true;
