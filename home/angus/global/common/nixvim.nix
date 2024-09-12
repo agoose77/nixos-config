@@ -8,14 +8,31 @@
     enable = true;
     defaultEditor = true;
     plugins = {
-      cmp.enable = true;
-      #        cmp.mapping.preset.insert({
-      #    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      #    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      #    ['<C-Space>'] = cmp.mapping.complete(),
-      #    ['<C-e>'] = cmp.mapping.abort(),
-      #    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-      #  })
+      cmp = {
+        enable = true;
+        settings = {
+          sources = [
+            {
+              name = "nvim_lsp";
+            }
+            {
+              name = "path";
+            }
+            {
+              name = "buffer";
+            }
+          ];
+          mapping = {
+            "<C-d>" = "cmp.mapping.scroll_docs(-4)";
+            "<C-f>" = "cmp.mapping.scroll_docs(4)";
+            "<C-Space>" = "cmp.mapping.complete()";
+            "<C-e>" = "cmp.mapping.close()";
+            "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+            "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
+            "<CR>" = "cmp.mapping.confirm({ select = true })";
+          };
+        };
+      };
       fugitive.enable = true;
       gitsigns.enable = true;
       telescope.enable = true;
@@ -24,7 +41,18 @@
       treesitter-context.enable = true;
 
       # treesitter-textobjects.enable = true; TODO: this would be cool
-      lsp-format.enable = true;
+      lsp-format = {
+        enable = true;
+        lspServersToEnable = ["ruff-lsp" "pylsp" "nil-ls"];
+      };
+      none-ls = {
+        enable = true;
+        enableLspFormat = true;
+        sources.formatting.prettier = {
+          enable = true;
+	  disableTsServerFormatter = false; # We've handled this by setting lspServersToEnable
+        };
+      };
       lsp = {
         enable = true;
         keymaps = {
@@ -47,6 +75,7 @@
           ruff-lsp.enable = true;
           eslint.enable = true;
           nil-ls.enable = true;
+          tsserver.enable = true;
         };
       };
       oil = {
