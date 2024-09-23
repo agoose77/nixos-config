@@ -50,6 +50,7 @@
       fugitive.enable = true;
       gitsigns.enable = true;
       trouble.enable = true;
+      web-devicons.enable = true; # For trouble
 
       treesitter.enable = true;
       treesitter-context.enable = true;
@@ -92,7 +93,7 @@
             enable = true;
             settings.formatting.command = ["alejandra"];
           };
-          tsserver.enable = true;
+          ts-ls.enable = true;
         };
       };
       oil = {
