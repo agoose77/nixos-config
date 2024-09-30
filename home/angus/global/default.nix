@@ -109,4 +109,11 @@
   programs.starship = {
     enable = true;
   };
+
+  home.pointerCursor = {
+    package = pkgs.bibata-cursors;
+    gtk.enable = true;
+    x11.enable = true;
+    name = "Bibata-Modern-Classic";
+  };
 }
