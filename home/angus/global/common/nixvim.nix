@@ -23,7 +23,11 @@
 
     plugins = {
       nvim-surround.enable = true;
-      autoclose.enable = true;
+      autoclose = {
+        enable = true;
+        # Don't close when touching a non-whitespace character
+        options.disableWhenTouch = true;
+      };
       cmp = {
         enable = true;
         settings = {
