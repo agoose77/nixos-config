@@ -22,6 +22,8 @@
     ];
 
     plugins = {
+      nvim-surround.enable = true;
+      autoclose.enable = true;
       cmp = {
         enable = true;
         settings = {
@@ -102,7 +104,7 @@
           # Don't perm-delete files first
           delete_to_trash = true;
           use_default_keymaps = true;
-          # Use LSP to aut-change names of files we modify
+          # Use LSP to auto-change names of files we modify
           lsp_file_method.autosave_changes = true;
           buf_options = {
             buflisted = true;
