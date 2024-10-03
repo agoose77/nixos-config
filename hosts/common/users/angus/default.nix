@@ -28,7 +28,6 @@
         jq
         micro
         micromamba
-        nodejs
         nushell
         podman
         oil
