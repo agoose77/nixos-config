@@ -17,6 +17,7 @@
     ./sound.nix
     ./jetbrains.nix
     ./boot.nix
+    ./firewall.nix
   ];
 
   nixpkgs = {
