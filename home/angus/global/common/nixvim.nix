@@ -64,7 +64,7 @@
       # treesitter-textobjects.enable = true; TODO: this would be cool
       lsp-format = {
         enable = true;
-        lspServersToEnable = ["ruff-lsp" "pylsp" "nil-ls"];
+        lspServersToEnable = ["ruff_lsp" "pylsp" "nil_ls"];
       };
       none-ls = {
         enable = true;
@@ -93,13 +93,13 @@
         };
         servers = {
           pylsp.enable = true;
-          ruff-lsp.enable = true;
+          ruff_lsp.enable = true;
           eslint.enable = true;
-          nil-ls = {
+          nil_ls = {
             enable = true;
             settings.formatting.command = ["alejandra"];
           };
-          ts-ls.enable = true;
+          ts_ls.enable = true;
         };
       };
       oil = {
