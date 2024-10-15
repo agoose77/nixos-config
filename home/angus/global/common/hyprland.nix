@@ -24,6 +24,9 @@
       monitor=Unknown-1,disabled
     '';
     settings = {
+      cursor = {
+        no_hardware_cursors = true;
+      };
       # See https://wiki.hyprland.org/Configuring/Monitors/
       monitor = ",preferred,auto,1";
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more

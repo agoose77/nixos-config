@@ -14,7 +14,7 @@
 
   networking = {
     hostName = "nixos";
-  # Enable wake on LAN
+    # Enable wake on LAN
     interfaces.enp4s0.wakeOnLan.enable = true;
   };
 
@@ -34,12 +34,11 @@
     extraPackages = with pkgs; [nvidia-vaapi-driver];
   };
 
-
   hardware.nvidia = {
     modesetting.enable = true;
     nvidiaSettings = true;
-    open = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    open = false;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
   services.transmission = {
     enable = true; #Enable transmission daemon
@@ -52,5 +51,5 @@
 
   # Mouse
   hardware.openrazer.enable = true;
-  hardware.openrazer.users = [ "angus" ];
+  hardware.openrazer.users = ["angus"];
 }
