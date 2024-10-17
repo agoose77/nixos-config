@@ -100,6 +100,7 @@
             settings.formatting.command = ["alejandra"];
           };
           ts_ls.enable = true;
+          jsonls.enable = true;
         };
       };
       oil = {
