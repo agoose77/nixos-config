@@ -174,18 +174,23 @@
       # SpeedTest
       containers.speedtest-tracker = {
         environment.TZ = "Europe/London";
-	environment.SPEEDTEST_SCHEDULE = "0 */1 * * *";
-	environment.APP_KEY = "base64:Xn3dUpdHB0Id07Q2KdLT5Qrf2MvgpSGkS6jL4cWXBWg=";
-	ports = [
-          "4898:80" 
-	];
+        environment.SPEEDTEST_SCHEDULE = "0 */1 * * *";
+        environment.APP_KEY = "base64:Xn3dUpdHB0Id07Q2KdLT5Qrf2MvgpSGkS6jL4cWXBWg=";
+        ports = [
+          "4898:80"
+        ];
         image = "lscr.io/linuxserver/speedtest-tracker:latest";
-	volumes = [
+        volumes = [
           "/etc/speedtest-tracker/data:/config"
-	];
+        ];
       };
     };
     containers.enable = true;
+  };
+
+  services.sonarr = {
+    enable = true;
+    openFirewall = true;
   };
 
   services.jellyfin = {
@@ -212,7 +217,6 @@
 
   hardware.pulseaudio.enable = false;
 
-  sound.enable = true;
   services = {
     pipewire = {
       enable = true;
