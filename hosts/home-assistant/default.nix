@@ -44,7 +44,6 @@
     jellyfin
     jellyfin-web
     jellyfin-ffmpeg
-    transmission
   ];
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
@@ -128,8 +127,16 @@
 
   programs.ssh.startAgent = true;
 
-  services.transmission.settings = {
-    download-dir = "${config.services.transmission.home}/Downloads";
+  services.transmission = {
+    enable = true;
+    settings = {
+      download-dir = "${config.services.transmission.home}/Downloads";
+      rpc-bind-address = "0.0.0.0";
+      rpc-port = 9091;
+      rpc-whitelist-enabled = false;
+    };
+    openPeerPorts = true;
+    openRPCPort = true;
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
@@ -149,7 +156,7 @@
       backend = "podman";
       containers.home-assistant = {
         environment.TZ = "Europe/London";
-        image = "ghcr.io/home-assistant/home-assistant:stable"; # Warning: if the tag does not change, the image will not be updated
+        image = "ghcr.io/home-assistant/home-assistant:2024.11.1"; # Warning: if the tag does not change, the image will not be updated
         extraOptions = [
           "--network=host"
           "--cap-add=NET_RAW"
@@ -252,8 +259,8 @@
       redir /jellyfin /jellyfin/
       reverse_proxy /jellyfin/* 127.0.0.1:8096
 
-      redir /vscode /vscode/
-      reverse_proxy /vscode/* localhost:8443
+      # redir /vscode /vscode/
+      # reverse_proxy /vscode/* localhost:8443
     '';
   };
 
