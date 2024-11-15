@@ -18,6 +18,7 @@
     ./jetbrains.nix
     ./boot.nix
     ./firewall.nix
+    ./tailscale.nix
   ];
 
   nixpkgs = {
