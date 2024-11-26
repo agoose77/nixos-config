@@ -74,6 +74,9 @@
           disableTsServerFormatter = false; # We've handled this by setting lspServersToEnable
         };
       };
+      dap = {
+        enable = true;
+      };
       lsp = {
         enable = true;
         keymaps = {
