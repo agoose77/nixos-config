@@ -44,6 +44,7 @@
     jellyfin
     jellyfin-web
     jellyfin-ffmpeg
+    tailscale
   ];
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
@@ -142,6 +143,25 @@
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
 
+  systemd.services.init-mqtt-network = {
+    description = "Create the network bridge for mqtt.";
+    after = ["network.target"];
+    wantedBy = ["multi-user.target"];
+    serviceConfig.Type = "oneshot";
+    script = ''
+      # Put a true at the end to prevent getting non-zero return code, which will
+          	  # crash the whole service.
+      if ! ${pkgs.podman}/bin/podman network exists mqtt-bridge; then
+        ${pkgs.podman}/bin/podman network create mqtt-bridge
+      else
+      	    echo "mqtt-bridge already exists in docker"
+       fi
+    '';
+  };
+
+  # Support DNS within bridge networks
+  # c.f. https://github.com/NixOS/nixpkgs/issues/226365#issuecomment-2164985192
+  networking.firewall.interfaces."podman+".allowedUDPPorts = [53 5353];
   virtualisation = {
     podman = {
       enable = true;
@@ -156,7 +176,9 @@
       backend = "podman";
       containers.home-assistant = {
         environment.TZ = "Europe/London";
-        image = "ghcr.io/home-assistant/home-assistant:2024.11.1"; # Warning: if the tag does not change, the image will not be updated
+	# This fixes a bug
+        environment.PYTHONPATH = "/usr/local/lib/python3.13:/config/deps";
+        image = "ghcr.io/home-assistant/home-assistant:2024.12.0"; # Warning: if the tag does not change, the image will not be updated
         extraOptions = [
           "--network=host"
           "--cap-add=NET_RAW"
@@ -164,18 +186,6 @@
         ];
         volumes = [
           "/etc/home-assistant:/config"
-        ];
-      };
-      # VSCode Server
-      containers.code-server = {
-        environment.TZ = "Europe/London";
-        image = "lscr.io/linuxserver/code-server:latest";
-        volumes = [
-          "/etc/home-assistant:/etc/home-assistant"
-          "/etc/code-server/config:/config"
-        ];
-        ports = [
-          "8443:8443"
         ];
       };
       # SpeedTest
@@ -191,8 +201,77 @@
           "/etc/speedtest-tracker/data:/config"
         ];
       };
+      # Mosquitto
+      containers.mosquitto = {
+        ports = [
+          "1883:1883"
+          "9001:9001"
+        ];
+        image = "docker.io/eclipse-mosquitto:latest";
+        volumes = [
+          "/etc/mosquitto/config:/mosquitto/config"
+        ];
+        extraOptions = [
+          "--network=mqtt-bridge"
+        ];
+      };
+
+      # Frigate
+      containers.frigate = {
+        environment = {
+          FRIGATE_RTSP_PASSWORD = "password";
+        };
+        ports = [
+          "8971:8971"
+          # RTSP
+          "8554:8554"
+          # Internal unauth
+          "5000:5000"
+          # WebRTC over TCP
+          "8555:8555/tcp"
+          # WebRTC over UDP
+          "8555:8555/udp"
+          # go2rtc interface
+          "1984:1984"
+        ];
+        image = "ghcr.io/blakeblackshear/frigate:0.14.1";
+        extraOptions = [
+          "--device=/dev/bus/usb"
+          "--device=/dev/dri/renderD128"
+          "--tmpfs=/tmp/cache:rw,size=1g,mode=1777"
+          "--shm-size=128mb"
+          "--network=mqtt-bridge"
+        ];
+        volumes = [
+          "/etc/localtime:/etc/localtime:ro"
+          "/etc/frigate/config:/config"
+          "/media/frigate:/media/frigate"
+        ];
+      };
     };
     containers.enable = true;
+  };
+
+  services.tailscale = {
+    enable = true;
+    port = 12345;
+    permitCertUid = "caddy";
+  };
+
+  #tls /etc/certs/home-assistant.tail12edf.ts.net.crt  /etc/certs/home-assistant.tail12edf.ts.net.key
+
+  services.caddy = {
+    enable = true;
+
+    # Auto-HTTPS remote routing
+    virtualHosts."home-assistant.tail12edf.ts.net".extraConfig = ''
+      reverse_proxy localhost:8123
+    '';
+
+    # For HTTP-only local routing
+    virtualHosts."home-assistant.local".extraConfig = ''
+      reverse_proxy localhost:8123
+    '';
   };
 
   services.sonarr = {
@@ -237,32 +316,8 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [80 443 8123];
-  networking.firewall.allowedUDPPorts = [5683];
-  services.caddy = {
-    enable = true;
-
-    # Auto-HTTPS remote routing
-    virtualHosts."agoose77.myddns.me".extraConfig = ''
-      reverse_proxy localhost:8123
-
-      redir /jellyfin /jellyfin/
-      reverse_proxy /jellyfin/* localhost:8096
-
-      # reverse_proxy /vscode/* localhost:8443 -- don't do this!
-    '';
-
-    # For HTTP-only local routing
-    virtualHosts.":80".extraConfig = ''
-      reverse_proxy localhost:8123
-
-      redir /jellyfin /jellyfin/
-      reverse_proxy /jellyfin/* 127.0.0.1:8096
-
-      # redir /vscode /vscode/
-      # reverse_proxy /vscode/* localhost:8443
-    '';
-  };
+  networking.firewall.allowedTCPPorts = [80 443 1883 8123 8555];
+  networking.firewall.allowedUDPPorts = [5683 config.services.tailscale.port 8555];
 
   services.devmon.enable = true;
 
