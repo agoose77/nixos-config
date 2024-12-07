@@ -20,7 +20,6 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
-
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -176,7 +175,7 @@
       backend = "podman";
       containers.home-assistant = {
         environment.TZ = "Europe/London";
-	# This fixes a bug
+        # This fixes a bug
         environment.PYTHONPATH = "/usr/local/lib/python3.13:/config/deps";
         image = "ghcr.io/home-assistant/home-assistant:2024.12.0"; # Warning: if the tag does not change, the image will not be updated
         extraOptions = [
@@ -234,12 +233,12 @@
           # go2rtc interface
           "1984:1984"
         ];
-        image = "ghcr.io/blakeblackshear/frigate:0.14.1";
+        image = "ghcr.io/blakeblackshear/frigate:0.15.0-beta2";
         extraOptions = [
           "--device=/dev/bus/usb"
           "--device=/dev/dri/renderD128"
           "--tmpfs=/tmp/cache:rw,size=1g,mode=1777"
-          "--shm-size=128mb"
+          "--shm-size=256mb"
           "--network=mqtt-bridge"
         ];
         volumes = [
@@ -274,11 +273,6 @@
     '';
   };
 
-  services.sonarr = {
-    enable = true;
-    openFirewall = true;
-  };
-
   services.jellyfin = {
     enable = true;
     openFirewall = true;
@@ -302,6 +296,7 @@
   #};
 
   hardware.pulseaudio.enable = false;
+  hardware.coral.usb.enable = true;
 
   services = {
     pipewire = {
