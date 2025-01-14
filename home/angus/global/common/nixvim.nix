@@ -64,7 +64,7 @@
       # treesitter-textobjects.enable = true; TODO: this would be cool
       lsp-format = {
         enable = true;
-        lspServersToEnable = ["ruff_lsp" "pylsp" "nil_ls"];
+        lspServersToEnable = ["ruff" "pylsp" "nil_ls"];
       };
       none-ls = {
         enable = true;
@@ -96,7 +96,7 @@
         };
         servers = {
           pylsp.enable = true;
-          ruff_lsp.enable = true;
+          ruff.enable = true;
           eslint.enable = true;
           nil_ls = {
             enable = true;
