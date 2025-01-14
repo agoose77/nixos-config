@@ -40,7 +40,7 @@
 
     packages = with pkgs; [
       discord
-      element-desktop-wayland
+      element-desktop
       openssh
       spotify
       sd

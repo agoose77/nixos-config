@@ -55,7 +55,7 @@
         kb_layout = "gb";
         kb_variant = "";
         kb_model = "";
-        kb_options = "";
+        kb_options = "compose:rctrl";
         kb_rules = "";
 
         follow_mouse = 2; # Focus follows mouse, but KB requires click

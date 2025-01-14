@@ -19,6 +19,7 @@
     ./boot.nix
     ./firewall.nix
     ./tailscale.nix
+    ./usb.nix
   ];
 
   nixpkgs = {
