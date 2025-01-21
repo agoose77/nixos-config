@@ -129,6 +129,11 @@
         new_status = "master";
       };
 
+      windowrulev2 = [
+        "workspace 2 silent, class:^Slack$"
+        "workspace 2 silent, class:^discord$"
+      ];
+
       gestures = {
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
         workspace_swipe = "off";
