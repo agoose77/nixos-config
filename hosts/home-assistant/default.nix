@@ -200,6 +200,7 @@
           "/etc/speedtest-tracker/data:/config"
         ];
       };
+
       # Mosquitto
       containers.mosquitto = {
         ports = [
@@ -233,18 +234,35 @@
           # go2rtc interface
           "1984:1984"
         ];
-        image = "ghcr.io/blakeblackshear/frigate:0.15.0-beta2";
+        image = "ghcr.io/blakeblackshear/frigate:0.15.0";
         extraOptions = [
           "--device=/dev/bus/usb"
           "--device=/dev/dri/renderD128"
           "--tmpfs=/tmp/cache:rw,size=1g,mode=1777"
           "--shm-size=256mb"
           "--network=mqtt-bridge"
+	  "--cap-add=PERFMON"
         ];
         volumes = [
           "/etc/localtime:/etc/localtime:ro"
           "/etc/frigate/config:/config"
           "/media/frigate:/media/frigate"
+        ];
+      };
+
+      # Mosquitto
+      containers.sonarr = {
+        environment = {
+          PUID = "1000";
+          PGID = "1000";
+        };
+        ports = [
+          "8989:8989"
+        ];
+        image = "lscr.io/linuxserver/sonarr:4.0.11";
+        volumes = [
+          "/etc/sonarr/data:/config"
+          "/media/tv:/tv"
         ];
       };
     };
@@ -311,7 +329,7 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [80 443 1883 8123 8555];
+  networking.firewall.allowedTCPPorts = [80 443 1883 8123 8555 8989];
   networking.firewall.allowedUDPPorts = [5683 config.services.tailscale.port 8555];
 
   services.devmon.enable = true;
