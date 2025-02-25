@@ -108,6 +108,11 @@
 
   programs.starship = {
     enable = true;
+    settings = {
+      gcloud = {
+        disabled = true;
+      };
+    };
   };
 
   home.pointerCursor = {

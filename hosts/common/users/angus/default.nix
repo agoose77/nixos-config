@@ -17,7 +17,6 @@
         bash
         buildah
         delta
-        dolphin
         dunst
         file
         fd

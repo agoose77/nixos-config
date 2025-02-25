@@ -163,7 +163,6 @@
         "$mod, SPACE, exec, wofi --show drun"
         "$mod SHIFT, SPACE, exec, wofi --show run"
         "$mod, M, exit, "
-        "$mod, E, exec, dolphin"
         "$mod, P, pseudo, # dwindle"
         "$mod, J, togglesplit, # dwindle"
         # Move focus with mainMod + arrow keys
