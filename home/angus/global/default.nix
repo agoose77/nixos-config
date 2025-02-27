@@ -114,6 +114,7 @@
     enable = true;
     enableBashIntegration = true;
   };
+  home.sessionVariables._ZO_DOCTOR = "0";
 
   home.pointerCursor = {
     package = pkgs.bibata-cursors;
