@@ -88,6 +88,8 @@
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
+  programs.bash.enable = true;
+
   programs.direnv = {
     enable = true;
     enableBashIntegration = true;
@@ -99,13 +101,6 @@
     enableBashIntegration = true;
   };
 
-  programs.zoxide = {
-    enable = true;
-    enableBashIntegration = true;
-  };
-
-  programs.bash.enable = true;
-
   programs.starship = {
     enable = true;
     settings = {
@@ -113,6 +108,11 @@
         disabled = true;
       };
     };
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = true;
   };
 
   home.pointerCursor = {

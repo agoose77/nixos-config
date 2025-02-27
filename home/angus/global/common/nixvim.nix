@@ -26,7 +26,7 @@
       autoclose = {
         enable = true;
         # Don't close when touching a non-whitespace character
-        options.disableWhenTouch = true;
+        options.disable_when_touch = true;
       };
       cmp = {
         enable = true;
