@@ -84,6 +84,7 @@
 
   programs.kdeconnect.enable = true;
   programs.hyprland.enable = true;
+  environment.systemPackages = with pkgs; [hypridle];
 
   # Enable polkit
   systemd = {

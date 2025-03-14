@@ -94,6 +94,7 @@
             "<F2>" = "rename";
           };
         };
+        inlayHints = true;
         servers = {
           pylsp.enable = true;
           ruff.enable = true;

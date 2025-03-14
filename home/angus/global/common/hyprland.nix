@@ -41,6 +41,7 @@
         "element-desktop --hidden"
         "zulip"
         "kdeconnect-indicator"
+	"hypridle"
         # Waybar appears to start itself
         # "waybar"
       ];

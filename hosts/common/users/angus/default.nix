@@ -29,7 +29,7 @@
         micromamba
         nushell
         podman
-        oil
+        oils-for-unix
         playerctl
         ripgrep
         slack
