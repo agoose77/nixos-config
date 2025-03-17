@@ -45,7 +45,6 @@
         wlogout
         zip
         zoom-us
-        zulip
       ];
     };
   };

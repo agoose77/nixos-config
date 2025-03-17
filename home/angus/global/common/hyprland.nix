@@ -55,7 +55,6 @@
         "1password --silent"
         "discord --start-minimized"
         "element-desktop --hidden"
-        "zulip"
         "kdeconnect-indicator"
         "hypridle"
         # Waybar appears to start itself
