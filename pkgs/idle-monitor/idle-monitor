@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+import subprocess
+import argparse
+import paho.mqtt.client as mqtt
+import socket
+
+host = socket.gethostname()
+
+parser = argparse.ArgumentParser()
+parser.add_argument("timeout", help="timeout in seconds", type=int)
+parser.add_argument("--host", default="localhost", help="MQTT server hostname")
+parser.add_argument("--port", default=1883, type=int, help="MQTT server port")
+parser.add_argument("--username", help="MQTT server user")
+parser.add_argument("--password", help="MQTT server password")
+parser.add_argument("--tls", type=bool, default=False, help="Use TLS")
+parser.add_argument("--topic", default=f"location/{host}", help="Use TLS")
+
+args = parser.parse_args()
+
+mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+if args.tls:
+    mqttc.tls_set()
+if args.username:
+    mqttc.username_pw_set(username=args.username, password=args.password)
+mqttc.connect(args.host, args.port, 60)
+mqttc.loop_start()
+
+try:
+    while True:
+        try:
+            result = subprocess.run(
+                ["wayidle", "--timeout", str(args.timeout)], timeout=args.timeout * 1.5
+            )
+        except subprocess.TimeoutExpired:
+            mqttc.publish(args.topic, "home")
+        else:
+            mqttc.publish(args.topic, "away")
+finally:
+    mqttc.loop_stop()
