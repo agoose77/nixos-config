@@ -6,4 +6,5 @@ pkgs: {
     export __VK_LAYER_NV_optimus=NVIDIA_only
     exec "$@"
   '';
+  idle-monitor = pkgs.callPackage ./idle-monitor {};
 }
