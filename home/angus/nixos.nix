@@ -1,4 +1,7 @@
 {pkgs, ...}: {
   imports = [./global];
-  home.packages = [pkgs.polychromatic];
+  home.packages = [
+    pkgs.polychromatic
+    pkgs.idle-monitor
+  ];
 }

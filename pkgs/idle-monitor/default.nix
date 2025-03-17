@@ -8,6 +8,6 @@
 in
   pkgs.writeShellApplication {
     name = "idle-monitor";
-    runtimeInputs = [idle-env];
+    runtimeInputs = [idle-env pkgs.wayidle];
     text = ''python3 ${./idle-monitor} "$@"'';
   }
