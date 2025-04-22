@@ -67,6 +67,9 @@
     auto-optimise-store = true;
   };
 
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "i965";
+  };
   # FIXME: Add the rest of your current configuration
 
   # TODO: Set your hostname
@@ -220,6 +223,7 @@
       containers.frigate = {
         environment = {
           FRIGATE_RTSP_PASSWORD = "password";
+	  LIBVA_DRIVER_NAME = "i965";
         };
         ports = [
           "8971:8971"
@@ -298,13 +302,11 @@
   };
 
   #services.xserver.videoDrivers = ["nvidia"];
-  #hardware.opengl = {
-  #  enable = true;
-  #  driSupport = true;
-  #  driSupport32Bit = true;
-  #  # For better video playback
-  #  extraPackages = with pkgs; [nvidia-vaapi-driver];
-  #};#
+  hardware.opengl = {
+    enable = true;
+    # For better video playback
+    extraPackages = with pkgs; [nvidia-vaapi-driver];
+  };#
 
   #hardware.nvidia = {
   #  modesetting.enable = true;
