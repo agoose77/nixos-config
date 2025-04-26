@@ -130,17 +130,12 @@
 
   programs.ssh.startAgent = true;
 
-  services.transmission = {
+  services.qbittorrent = {
     enable = true;
-    settings = {
-      download-dir = "${config.services.transmission.home}/Downloads";
-      rpc-bind-address = "0.0.0.0";
-      rpc-port = 9091;
-      rpc-whitelist-enabled = false;
-    };
-    openPeerPorts = true;
-    openRPCPort = true;
+    openFirewall = true;
+    port = 58080;
   };
+
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
@@ -242,10 +237,14 @@
         extraOptions = [
           "--device=/dev/bus/usb"
           "--device=/dev/dri/renderD128"
+          "--device=/dev/dri/renderD129"
+          "--device=/dev/dri/card2"
+          "--device=/dev/dri/card1"
           "--tmpfs=/tmp/cache:rw,size=1g,mode=1777"
           "--shm-size=256mb"
           "--network=mqtt-bridge"
-	  "--cap-add=PERFMON"
+	  "--cap-add=PERFMON"  
+	  "--group-add=keep-groups"
         ];
         volumes = [
           "/etc/localtime:/etc/localtime:ro"

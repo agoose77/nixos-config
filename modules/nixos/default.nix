@@ -1,0 +1,3 @@
+{
+  qbittorrent = import ./qbittorrent.nix;
+}
