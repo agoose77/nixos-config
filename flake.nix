@@ -38,7 +38,6 @@
 
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#nixos'
     nixosConfigurations = {

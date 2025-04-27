@@ -44,6 +44,7 @@
     jellyfin-web
     jellyfin-ffmpeg
     tailscale
+    vuetorrent
   ];
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
@@ -70,9 +71,6 @@
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "i965";
   };
-  # FIXME: Add the rest of your current configuration
-
-  # TODO: Set your hostname
   networking = {
     hostName = "home-assistant";
     networkmanager.enable = true;
@@ -81,8 +79,6 @@
   time.timeZone = "Europe/London";
 
   i18n.defaultLocale = "en_GB.UTF-8";
-
-  # TODO: i18n for lC_
 
   services.xserver.xkb = {
     layout = "gb";
@@ -130,13 +126,6 @@
 
   programs.ssh.startAgent = true;
 
-  services.qbittorrent = {
-    enable = true;
-    openFirewall = true;
-    port = 58080;
-  };
-
-
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
 
@@ -151,7 +140,7 @@
       if ! ${pkgs.podman}/bin/podman network exists mqtt-bridge; then
         ${pkgs.podman}/bin/podman network create mqtt-bridge
       else
-      	    echo "mqtt-bridge already exists in docker"
+      	    echo "mqtt-bridge already exists"
        fi
     '';
   };
@@ -198,7 +187,6 @@
           "/etc/speedtest-tracker/data:/config"
         ];
       };
-
       # Mosquitto
       containers.mosquitto = {
         ports = [
@@ -213,12 +201,11 @@
           "--network=mqtt-bridge"
         ];
       };
-
       # Frigate
       containers.frigate = {
         environment = {
           FRIGATE_RTSP_PASSWORD = "password";
-	  LIBVA_DRIVER_NAME = "i965";
+          LIBVA_DRIVER_NAME = "i965";
         };
         ports = [
           "8971:8971"
@@ -243,8 +230,8 @@
           "--tmpfs=/tmp/cache:rw,size=1g,mode=1777"
           "--shm-size=256mb"
           "--network=mqtt-bridge"
-	  "--cap-add=PERFMON"  
-	  "--group-add=keep-groups"
+          "--cap-add=PERFMON"
+          "--group-add=keep-groups"
         ];
         volumes = [
           "/etc/localtime:/etc/localtime:ro"
@@ -252,20 +239,80 @@
           "/media/frigate:/media/frigate"
         ];
       };
+      # qbittorrent
+      containers.qbittorrent = {
+        environment = {
+          PUID = "1000";
+          PGID = "1000";
+        };
+        image = "lscr.io/linuxserver/qbittorrent:5.0.4";
+        volumes = [
+          "/etc/qbittorrent/data:/config"
+          "/media/torrent:/downloads"
+        ];
+        extraOptions = [
+          "--network=container:gluetun"
+        ];
+      };
+      # gluetun
+      # Might need to order this before torrents: https://discourse.nixos.org/t/oci-containers-with-systemd-unit-dependencies/26029
+      containers.gluetun = {
+        environment = {
+          VPN_SERVICE_PROVIDER = "windscribe";
+          VPN_TYPE = "openvpn";
+          SERVER_REGIONS = "United Kingdom";
+        };
 
-      # Mosquitto
+        ports = [
+          # Ports for qbittorrent!
+          "8080:8080"
+          "6881:6881"
+          "6881:6881/udp"
+          # Ports for sonarr
+          "8989:8989"
+          # Ports for prowlarr
+          "9696:9696"
+        ];
+        image = "docker.io/qmcgaw/gluetun:latest";
+        volumes = [
+          "/etc/gluetun/secrets:/run/secrets"
+          "/etc/qbittorrent/data:/config"
+          "/media/torrent:/downloads"
+        ];
+        extraOptions = [
+          "--cap-add=NET_ADMIN"
+          "--device=/dev/net/tun"
+        ];
+      };
+      # Prowlarr
+      containers.prowlarr = {
+        environment = {
+          PUID = "1000";
+          PGID = "1000";
+        };
+        image = "lscr.io/linuxserver/prowlarr:1.34.1";
+        volumes = [
+          "/etc/prowlarr/data:/config"
+        ];
+        extraOptions = [
+          "--network=container:gluetun"
+        ];
+      };
+
+      # Sonarr
       containers.sonarr = {
         environment = {
           PUID = "1000";
           PGID = "1000";
         };
-        ports = [
-          "8989:8989"
-        ];
-        image = "lscr.io/linuxserver/sonarr:4.0.11";
+        image = "lscr.io/linuxserver/sonarr:4.0.14";
         volumes = [
           "/etc/sonarr/data:/config"
           "/media/tv:/tv"
+          "/media/torrent:/downloads"
+        ];
+        extraOptions = [
+          "--network=container:gluetun"
         ];
       };
     };
@@ -305,7 +352,7 @@
     enable = true;
     # For better video playback
     extraPackages = with pkgs; [nvidia-vaapi-driver];
-  };#
+  }; #
 
   #hardware.nvidia = {
   #  modesetting.enable = true;
