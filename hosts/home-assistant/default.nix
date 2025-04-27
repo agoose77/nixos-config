@@ -40,11 +40,7 @@
     curl
     podman
     neovim
-    jellyfin
-    jellyfin-web
-    jellyfin-ffmpeg
     tailscale
-    vuetorrent
   ];
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
@@ -276,8 +272,6 @@
         image = "docker.io/qmcgaw/gluetun:latest";
         volumes = [
           "/etc/gluetun/secrets:/run/secrets"
-          "/etc/qbittorrent/data:/config"
-          "/media/torrent:/downloads"
         ];
         extraOptions = [
           "--cap-add=NET_ADMIN"
@@ -298,7 +292,6 @@
           "--network=container:gluetun"
         ];
       };
-
       # Sonarr
       containers.sonarr = {
         environment = {
@@ -313,6 +306,26 @@
         ];
         extraOptions = [
           "--network=container:gluetun"
+        ];
+      };
+      # Sonarr
+      containers.jellyfin = {
+        environment = {
+          PUID = "1000";
+          PGID = "1000";
+        };
+        image = "lscr.io/linuxserver/jellyfin:10.10.7";
+        volumes = [
+          "/etc/jellyfin/data:/config"
+          "/media/tv:/tv"
+        ];
+        ports = [
+          "8096:8096"
+	  "7359:7359/udp"
+	  "1900:1900/udp"
+        ];
+        extraOptions = [
+          "--device=/dev/dri:/dev/dri"
         ];
       };
     };
@@ -341,11 +354,6 @@
     '';
   };
 
-  services.jellyfin = {
-    enable = true;
-    openFirewall = true;
-    group = "media";
-  };
 
   #services.xserver.videoDrivers = ["nvidia"];
   hardware.opengl = {
