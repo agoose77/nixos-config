@@ -337,10 +337,9 @@
   services.tailscale = {
     enable = true;
     port = 12345;
+    # Allow Caddy to user to manage and create certs
     permitCertUid = "caddy";
   };
-
-  #tls /etc/certs/home-assistant.tail12edf.ts.net.crt  /etc/certs/home-assistant.tail12edf.ts.net.key
 
   services.caddy = rec {
     enable = true;
@@ -359,7 +358,9 @@
       reverse_proxy /prowlarr/* localhost:9696
 
       redir /qbittorrent /qbittorrent/
-      reverse_proxy /qbittorrent/* localhost:8080
+      handle_path /qbittorrent/* {
+	      reverse_proxy localhost:8080
+      }
     '';
 
     # For HTTP-only local routing
