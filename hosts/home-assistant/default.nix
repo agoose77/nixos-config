@@ -232,7 +232,7 @@
         volumes = [
           "/etc/localtime:/etc/localtime:ro"
           "/etc/frigate/config:/config"
-          "/media/frigate:/media/frigate"
+          "/mnt/data/media/frigate:/media/frigate"
         ];
       };
       # qbittorrent
@@ -244,7 +244,7 @@
         image = "lscr.io/linuxserver/qbittorrent:5.0.4";
         volumes = [
           "/etc/qbittorrent/data:/config"
-          "/media/torrent:/downloads"
+          "/mnt/data/media/torrent:/downloads"
         ];
         extraOptions = [
           "--network=container:gluetun"
@@ -301,8 +301,8 @@
         image = "lscr.io/linuxserver/sonarr:4.0.14";
         volumes = [
           "/etc/sonarr/data:/config"
-          "/media/tv:/tv"
-          "/media/torrent:/downloads"
+          "/mnt/data/media/tv:/tv"
+          "/mnt/data/media/torrent:/downloads"
         ];
         extraOptions = [
           "--network=container:gluetun"
@@ -319,7 +319,7 @@
         image = "lscr.io/linuxserver/jellyfin:10.10.7";
         volumes = [
           "/etc/jellyfin/data:/config"
-          "/media/tv:/tv"
+          "/mnt/data/media/tv:/tv"
         ];
         ports = [
           "8096:8096"
