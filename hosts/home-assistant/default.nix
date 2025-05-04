@@ -160,7 +160,7 @@
         environment.TZ = "Europe/London";
         # This fixes a bug
         environment.PYTHONPATH = "/usr/local/lib/python3.13:/config/deps";
-        image = "ghcr.io/home-assistant/home-assistant:2025.4.0b1"; # Warning: if the tag does not change, the image will not be updated
+        image = "ghcr.io/home-assistant/home-assistant:2025.4.4"; # Warning: if the tag does not change, the image will not be updated
         extraOptions = [
           "--network=host"
           "--cap-add=NET_RAW"
@@ -221,7 +221,7 @@
           "--device=/dev/bus/usb"
           "--device=/dev/dri/renderD128"
           "--device=/dev/dri/renderD129"
-          "--device=/dev/dri/card2"
+          "--device=/dev/dri/card0"
           "--device=/dev/dri/card1"
           "--tmpfs=/tmp/cache:rw,size=1g,mode=1777"
           "--shm-size=256mb"
@@ -347,6 +347,7 @@
     # Auto-HTTPS remote routing
     virtualHosts."home-assistant.tail12edf.ts.net".extraConfig = ''
       reverse_proxy localhost:8123
+
 
       redir /jellyfin /jellyfin/
       reverse_proxy /jellyfin/* localhost:8096
