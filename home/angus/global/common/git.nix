@@ -137,9 +137,8 @@
     gwch = "git whatchanged -p --abbrev-commit --pretty=medium";
   };
 
-  programs.gh = {
-    enable = true;
-  };
+  programs.gh.enable = true;
+  programs.gh-dash.enable = true;
 
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
