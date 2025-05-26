@@ -6,7 +6,8 @@ pkgs.writeShellApplication {
     set -eu
 
     # needs jq, hyprctl
-    export HYPRLAND_INSTANCE_SIGNATURE=$(hyprctl instances -j | jq .[0].instance -r)
+    HYPRLAND_INSTANCE_SIGNATURE=$(hyprctl instances -j | jq .[0].instance -r)
+    export HYPRLAND_INSTANCE_SIGNATURE
 
     if [[ "$1" == "both" ]]; then
       hyprctl keyword monitor "eDP-2,1920x1200@60,auto-down,1"

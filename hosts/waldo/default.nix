@@ -43,6 +43,7 @@
   environment.systemPackages = [
     pkgs.acpi
     pkgs.brightnessctl
+    pkgs.duo-display
   ];
 
   # Battery management
