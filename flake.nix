@@ -84,7 +84,7 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          ./home/angus/generic.nix
+          ./home/angus/latitude.nix
         ];
       };
       "angus@waldo" = home-manager.lib.homeManagerConfiguration {
