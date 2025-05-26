@@ -117,7 +117,8 @@
         follow_mouse = 2; # Focus follows mouse, but KB requires click
 
         touchpad = {
-          natural_scroll = "no";
+          natural_scroll = false;
+          tap-to-click = false;
         };
 
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
