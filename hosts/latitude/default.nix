@@ -53,6 +53,6 @@
   nixpkgs.config.nvidia.acceptLicense = true;
 
   # Battery management
-  services.tlp.enable = true;
   powerManagement.enable = true;
+  services.tlp.enable = true;
 }
