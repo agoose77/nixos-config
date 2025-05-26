@@ -40,6 +40,7 @@
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
     nixosModules = import ./modules/nixos;
+    homeManagerModules = import ./modules/home-manager;
 
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};
@@ -90,7 +91,7 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          ./home/angus/generic.nix
+          ./home/angus/waldo.nix
         ];
       };
 

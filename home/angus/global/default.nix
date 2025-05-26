@@ -9,15 +9,17 @@
   ...
 }: {
   # You can import other home-manager modules here
-  imports = [
-    ./common/hyprland.nix
-    ./common/waybar.nix
-    ./common/git.nix
-    ./common/email.nix
-    ./common/nixvim.nix
-    ./common/fonts.nix
-    ./common/wofi.nix
-  ];
+  imports =
+    [
+      ./common/hyprland.nix
+      ./common/waybar.nix
+      ./common/git.nix
+      ./common/email.nix
+      ./common/nixvim.nix
+      ./common/fonts.nix
+      ./common/wofi.nix
+    ]
+    ++ (builtins.attrValues outputs.homeManagerModules);
   nixpkgs = {
     # Apply all overlays
     overlays = builtins.attrValues outputs.overlays;

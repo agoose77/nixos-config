@@ -47,5 +47,6 @@
   # Battery management
   services.tlp.enable = true;
   services.hardware.bolt.enable = true;
+  services.blueman.enable = true;
   powerManagement.enable = true;
 }
