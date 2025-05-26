@@ -3,7 +3,8 @@
     enable = true;
     systemd.enable = true;
     settings = {
-      mainBar = {
+      # Primary bar
+      primary = {
         layer = "top";
         position = "top";
         height = 30;
