@@ -221,8 +221,8 @@
           "--device=/dev/bus/usb"
           "--device=/dev/dri/renderD128"
           "--device=/dev/dri/renderD129"
-          "--device=/dev/dri/card0"
           "--device=/dev/dri/card1"
+          "--device=/dev/dri/card2"
           "--tmpfs=/tmp/cache:rw,size=1g,mode=1777"
           "--shm-size=256mb"
           "--network=mqtt-bridge"
@@ -327,7 +327,7 @@
           "1900:1900/udp"
         ];
         extraOptions = [
-          "--device=/dev/dri:/dev/dri"
+          "--device=/dev/dri/renderD129:/dev/dri/renderD129"
         ];
       };
     };
