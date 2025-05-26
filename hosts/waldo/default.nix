@@ -11,6 +11,7 @@
     ../common/optional/secure-boot.nix
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    ./displays.nix
   ];
 
   networking.hostName = "waldo";
