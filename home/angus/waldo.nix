@@ -1,5 +1,8 @@
 {pkgs, ...}: {
   imports = [./global];
+  home.packages = [
+    pkgs.luminance
+  ];
   monitors = [
     {
       name = "eDP-1";
