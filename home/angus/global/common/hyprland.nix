@@ -41,9 +41,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    extraConfig = ''
-      monitor=Unknown-1,disabled
-    '';
+
     settings = {
       cursor = {
         no_hardware_cursors = true;
