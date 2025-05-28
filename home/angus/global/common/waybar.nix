@@ -10,7 +10,26 @@
         height = 30;
         modules-left = ["hyprland/workspaces" "hyprland/submap"];
         modules-center = ["hyprland/window"];
-        modules-right = ["cpu" "memory" "disk" "clock" "pulseaudio" "tray"];
+        modules-right = ["cpu" "memory" "disk" "clock" "pulseaudio" "battery" "tray"];
+        battery = {
+          interval = 10;
+          format-icons = [
+            "󰁺"
+            "󰁻"
+            "󰁼"
+            "󰁽"
+            "󰁾"
+            "󰁿"
+            "󰂀"
+            "󰂁"
+            "󰂂"
+            "󰁹"
+          ];
+          format = "{icon}";
+          format-charging = "󰂄";
+          tooltip-format = "{capacity}% ({time})";
+          onclick = "";
+        };
         clock = {
           timezone = "Europe/London";
           tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
