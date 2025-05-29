@@ -2,6 +2,7 @@
   imports = [./global];
   home.packages = [
     pkgs.luminance
+    pkgs.brightnessctl
   ];
   monitors = [
     {
