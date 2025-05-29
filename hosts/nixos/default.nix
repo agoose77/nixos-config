@@ -8,6 +8,7 @@
   imports = [
     ../common/users/angus
     ../common/global
+    ../common/optional/quiet-boot.nix
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
