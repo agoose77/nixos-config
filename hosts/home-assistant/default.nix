@@ -235,21 +235,6 @@
           "/mnt/data/media/frigate:/media/frigate"
         ];
       };
-      # qbittorrent
-      containers.qbittorrent = {
-        environment = {
-          PUID = "1000";
-          PGID = "1000";
-        };
-        image = "lscr.io/linuxserver/qbittorrent:5.0.4";
-        volumes = [
-          "/etc/qbittorrent/data:/config"
-          "/mnt/data/media/torrent:/downloads"
-        ];
-        extraOptions = [
-          "--network=container:gluetun"
-        ];
-      };
       # gluetun
       # Might need to order this before torrents: https://discourse.nixos.org/t/oci-containers-with-systemd-unit-dependencies/26029
       containers.gluetun = {
@@ -278,6 +263,22 @@
           "--device=/dev/net/tun"
         ];
       };
+      # qbittorrent
+      containers.qbittorrent = {
+        environment = {
+          PUID = "1000";
+          PGID = "1000";
+        };
+        image = "lscr.io/linuxserver/qbittorrent:5.0.4";
+	dependsOn = [ "gluetun" ];
+        volumes = [
+          "/etc/qbittorrent/data:/config"
+          "/mnt/data/media/torrent:/downloads"
+        ];
+        extraOptions = [
+          "--network=container:gluetun"
+        ];
+      };
       # Prowlarr
       containers.prowlarr = {
         environment = {
@@ -285,6 +286,7 @@
           PGID = "1000";
         };
         image = "lscr.io/linuxserver/prowlarr:1.34.1";
+	dependsOn = [ "gluetun" ];
         volumes = [
           "/etc/prowlarr/data:/config"
         ];
@@ -299,6 +301,7 @@
           PGID = "1000";
         };
         image = "lscr.io/linuxserver/sonarr:4.0.14";
+	dependsOn = [ "gluetun" ];
         volumes = [
           "/etc/sonarr/data:/config"
           "/mnt/data/media/tv:/tv"
