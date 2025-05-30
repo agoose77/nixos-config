@@ -1,3 +1,4 @@
+# See https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md for setup instructions
 {
   pkgs,
   inputs,
