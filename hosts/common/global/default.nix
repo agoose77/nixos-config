@@ -68,7 +68,7 @@
     layout = "gb";
     variant = "";
   };
-  services.xserver.displayManager.gdm.enable = true;
+  services.displayManager.gdm.enable = true;
   services.xserver.enable = true;
 
   # Enable the 1Password CLI, this also enables a SGUID wrapper so the CLI can authorize against the GUI app

@@ -106,7 +106,7 @@
   services.xserver.enable = true;
 
   # Enable the Budgie Desktop environment.
-  services.xserver.displayManager.lightdm.enable = true;
+  services.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.budgie.enable = true;
 
   # This setups a SSH server. Very important if you're setting up a headless system.
@@ -132,7 +132,6 @@
     # Allow Caddy to user to manage and create certs
     permitCertUid = "caddy";
   };
-
 
   #services.xserver.videoDrivers = ["nvidia"];
   hardware.opengl = {
@@ -164,7 +163,7 @@
     };
   };
 
-  networking.firewall.allowedUDPPorts = [ config.services.tailscale.port ];
+  networking.firewall.allowedUDPPorts = [config.services.tailscale.port];
 
   services.devmon.enable = true;
 
