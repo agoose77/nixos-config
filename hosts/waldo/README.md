@@ -2,6 +2,10 @@
 
 Waldo is an ASUS Zenbook DUO 14 (2014). It has dual touch screens, with a removable keyboard that magnetically attaches to the lower screen. This keyboard uses BLE when disconnected from the chassis, or a USB-over-magsafe-like connecter.
 
+
+## Dual Boot Default
+Press <kbd>d</kbd> in GRUB menu to select preferred entry
+
 ## Dual-boot Keyboard
 
 To support dual-booting without re-pairing the keyboard, the following steps (adapted from https://gist.github.com/japgolly/e6a08fbac9b1b254b5227dd61ee8c36f) were taken:
