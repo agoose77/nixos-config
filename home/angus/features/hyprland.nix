@@ -42,6 +42,9 @@
   wayland.windowManager.hyprland = {
     enable = true;
 
+    # Use uwsm
+    systemd.enable = false;
+
     settings = {
       cursor = {
         no_hardware_cursors = true;

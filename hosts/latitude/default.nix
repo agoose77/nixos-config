@@ -3,6 +3,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   imports = [
@@ -56,4 +57,5 @@
   # Battery management
   powerManagement.enable = true;
   services.tlp.enable = true;
+  services.xserver.displayManager.lightdm.enable = lib.mkForce false;
 }
