@@ -55,4 +55,6 @@
   services.tlp.enable = true;
   services.hardware.bolt.enable = true;
   services.blueman.enable = true;
+  
+  services.xserver.displayManager.lightdm.enable = lib.mkForce false;
 }
