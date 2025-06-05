@@ -98,5 +98,5 @@
   boot.supportedFilesystems = ["ntfs"];
 
   # Opt out of light-dm by default
-  services.xserver.displayManager.lightdm.enable = lib.mkDefault false;
+  services.xserver.displayManager.lightdm.enable = lib.mkForce false;
 }
