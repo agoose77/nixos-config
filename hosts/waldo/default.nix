@@ -3,6 +3,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   imports = [
@@ -10,6 +11,8 @@
     ../common/users/angus
     ../common/optional/secure-boot.nix
     ../common/optional/quiet-boot.nix
+    ../common/optional/power.nix
+    ../common/optional/bluetooth.nix
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     ./displays.nix
@@ -35,10 +38,7 @@
       libvdpau-va-gl
     ];
   };
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
+
   hardware.sensor.iio.enable = true;
 
   environment.systemPackages = [
@@ -51,10 +51,5 @@
   ];
 
   # Battery management
-  powerManagement.enable = true;
-  services.tlp.enable = true;
   services.hardware.bolt.enable = true;
-  services.blueman.enable = true;
-  
-  services.xserver.displayManager.lightdm.enable = lib.mkForce false;
 }

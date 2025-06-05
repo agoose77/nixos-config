@@ -33,8 +33,6 @@
         playerctl
         ripgrep
         slack
-        swaylock-effects
-        swayidle
         unzip
         vulkan-loader
         vulkan-validation-layers

@@ -10,6 +10,8 @@
     ../common/global
     ../common/users/angus
     ../common/optional/quiet-boot.nix
+    ../common/optional/power.nix
+    ../common/optional/bluetooth.nix
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
@@ -53,9 +55,4 @@
     pkgs.brightnessctl
   ];
   nixpkgs.config.nvidia.acceptLicense = true;
-
-  # Battery management
-  powerManagement.enable = true;
-  services.tlp.enable = true;
-  services.xserver.displayManager.lightdm.enable = lib.mkForce false;
 }
