@@ -1,5 +1,8 @@
 {pkgs, ...}: {
-  imports = [./global];
+  imports = [
+    ./global
+    ./features/autostart-tty1.nix
+  ];
   home.packages = [
     pkgs.luminance
     pkgs.brightnessctl

@@ -11,13 +11,13 @@
   # You can import other home-manager modules here
   imports =
     [
-      ./common/hyprland.nix
-      ./common/waybar.nix
-      ./common/git.nix
-      ./common/email.nix
-      ./common/nixvim.nix
-      ./common/fonts.nix
-      ./common/wofi.nix
+      ../features/hyprland.nix
+      ../features/waybar.nix
+      ../features/git.nix
+      ../features/email.nix
+      ../features/nixvim.nix
+      ../features/fonts.nix
+      ../features/wofi.nix
     ]
     ++ (builtins.attrValues outputs.homeManagerModules);
   nixpkgs = {
