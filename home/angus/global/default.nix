@@ -12,6 +12,7 @@
   imports =
     [
       ../features/hyprland.nix
+      ../features/hyprlock.nix
       ../features/waybar.nix
       ../features/git.nix
       ../features/email.nix

@@ -21,6 +21,7 @@
     ./tailscale.nix
     ./usb.nix
     ./hyprland.nix
+    ./hyprlock.nix
     ./1password.nix
   ];
 
