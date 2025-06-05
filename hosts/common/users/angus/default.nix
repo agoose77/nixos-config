@@ -2,6 +2,9 @@
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {pkgs, ...}: {
   # users.mutableUsers = false;
+  # Login as angus
+  services.displayManager.autoLogin.user = "angus";
+
   users.users = {
     angus = {
       isNormalUser = true;

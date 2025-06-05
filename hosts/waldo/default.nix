@@ -59,6 +59,4 @@
       size = 16 * 1024; # 16GB
     }
   ];
-
-  services.displayManager.autoLogin.user = "angus";
 }
