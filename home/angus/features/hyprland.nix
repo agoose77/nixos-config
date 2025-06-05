@@ -42,9 +42,6 @@
   wayland.windowManager.hyprland = {
     enable = true;
 
-    # Use uwsm
-    systemd.enable = false;
-
     settings = {
       cursor = {
         no_hardware_cursors = true;
@@ -262,4 +259,10 @@
       ];
     };
   };
+  # Use uwsm to launch hyprland
+  wayland.windowManager.hyprland.systemd.enable = false;
+  programs.bash.profileExtra = lib.mkBefore ''
+       if uwsm check may-start; then
+        exec uwsm start hyprland-uwsm.desktop
+    fi  '';
 }
