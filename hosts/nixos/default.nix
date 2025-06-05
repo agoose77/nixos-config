@@ -41,14 +41,6 @@
     open = false;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
-  services.transmission = {
-    enable = true; #Enable transmission daemon
-    openRPCPort = true; #Open firewall for RPC
-    settings = {
-      #Override default settings
-      rpc-bind-address = "0.0.0.0"; #Bind to own IP
-    };
-  };
 
   # Mouse
   hardware.openrazer.enable = true;

@@ -13,9 +13,9 @@
     ../common/optional/quiet-boot.nix
     ../common/optional/power.nix
     ../common/optional/bluetooth.nix
+    ./displays.nix
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
-    ./displays.nix
   ];
 
   networking.hostName = "waldo";
@@ -50,7 +50,6 @@
     pkgs.dislocker
   ];
 
-  # Battery management
   services.hardware.bolt.enable = true;
 
   swapDevices = [
