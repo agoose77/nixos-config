@@ -106,7 +106,7 @@
   services.xserver.enable = true;
 
   # Enable the Budgie Desktop environment.
-  services.displayManager.lightdm.enable = true;
+  services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.budgie.enable = true;
 
   # This setups a SSH server. Very important if you're setting up a headless system.
