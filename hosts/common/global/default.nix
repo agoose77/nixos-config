@@ -28,6 +28,7 @@
   nixpkgs = {
     overlays = [
       outputs.overlays.additions
+      outputs.overlays.modifications
     ];
     # Configure your nixpkgs instance
     config = {
