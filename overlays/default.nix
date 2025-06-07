@@ -1,7 +1,7 @@
 # This file defines overlays
 {...}: {
   # This one brings our custom packages from the 'pkgs' directory
-  additions = final: _prev: import ../pkgs final.pkgs;
+  additions = final: prev: import ../pkgs {pkgs = final;};
 
   modifications = final: prev: {
     # example = prev.example.overrideAttrs (oldAttrs: rec {
@@ -24,8 +24,8 @@
       meta.homepage = "https://media.fontsgeek.com/download/zip/h/e/helvetica-neue-lt-std_vpEc1.zip";
     });
 
-    wlrootsNvidia = final: _prev: {
-      wlroots = _prev.wlroots.overrideAttrs (o: {
+    wlrootsNvidia = final: prev: {
+      wlroots = prev.wlroots.overrideAttrs (o: {
         patches =
           (o.patches or [])
           ++ [
