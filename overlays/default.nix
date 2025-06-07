@@ -4,9 +4,6 @@
   additions = final: prev: import ../pkgs {pkgs = final;};
 
   modifications = final: prev: {
-    # example = prev.example.overrideAttrs (oldAttrs: rec {
-    # ...
-    # });
     "helvetica-neue-lt-std" = prev."helvetica-neue-lt-std".overrideAttrs (oldAttrs: {
       src = prev.fetchzip {
         url = "https://media.fontsgeek.com/download/zip/h/e/helvetica-neue-lt-std_vpEc1.zip";
@@ -23,15 +20,15 @@
       '';
       meta.homepage = "https://media.fontsgeek.com/download/zip/h/e/helvetica-neue-lt-std_vpEc1.zip";
     });
-
-    wlrootsNvidia = final: prev: {
-      wlroots = prev.wlroots.overrideAttrs (o: {
-        patches =
-          (o.patches or [])
-          ++ [
-            ./patches/nvidia.patch
-          ];
-      });
-    };
+  };
+  # Patches for home-assistant
+  home-assistant = final: prev: {
+    wlroots = prev.wlroots.overrideAttrs (o: {
+      patches =
+        (o.patches or [])
+        ++ [
+          ./patches/nvidia.patch
+        ];
+    });
   };
 }
