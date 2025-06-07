@@ -55,7 +55,7 @@
         ports = [
           "4898:80"
         ];
-        image = "lscr.io/linuxserver/speedtest-tracker:latest";
+        image = "lscr.io/linuxserver/speedtest-tracker:1.6.0";
         volumes = [
           "/etc/speedtest-tracker/data:/config"
         ];
@@ -66,7 +66,7 @@
           "1883:1883"
           "9001:9001"
         ];
-        image = "docker.io/eclipse-mosquitto:latest";
+        image = "docker.io/eclipse-mosquitto:2.0.21";
         volumes = [
           "/etc/mosquitto/config:/mosquitto/config"
         ];
@@ -131,7 +131,7 @@
           # Ports for prowlarr
           "9696:9696"
         ];
-        image = "docker.io/qmcgaw/gluetun:latest";
+        image = "docker.io/qmcgaw/gluetun:v3.40";
         volumes = [
           "/etc/gluetun/secrets:/run/secrets"
         ];
