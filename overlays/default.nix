@@ -1,7 +1,7 @@
 # This file defines overlays
-{...}: {
+{inputs, ...}: {
   # This one brings our custom packages from the 'pkgs' directory
-  additions = final: prev: import ../pkgs {pkgs = final;};
+  additions = final: prev: import ../pkgs final.pkgs;
 
   modifications = final: prev: {
     "helvetica-neue-lt-std" = prev."helvetica-neue-lt-std".overrideAttrs (oldAttrs: {

@@ -2,7 +2,7 @@
   # Disable eDP-2 when keyboard plugged in
   systemd.user.services.respond-to-keyboard = {
     description = "Switch displays as keyboard is removed.";
-    wantedBy = ["wayland-session@hyprland\\x2duwsm.desktop.target"];
+    wants = ["wayland-session@hyprland\\x2duwsm.desktop.target"];
     serviceConfig.Type = "simple";
     script = ''
       #!/usr/bin/env bash
