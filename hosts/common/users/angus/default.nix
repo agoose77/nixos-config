@@ -3,7 +3,10 @@
 {pkgs, ...}: {
   # users.mutableUsers = false;
   # Login as angus
-  services.displayManager.autoLogin.user = "angus";
+  services.getty = {
+    autologinUser = "angus";
+    autologinOnce = true;
+  };
 
   users.users = {
     angus = {
