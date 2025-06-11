@@ -4,7 +4,11 @@
     description = "Switch displays as keyboard is removed.";
     wantedBy = ["graphical-session.target"];
     after = ["graphical-session.target"];
-    serviceConfig.Type = "simple";
+    serviceConfig = {
+      Type = "simple";
+      Restart = "on-failure";
+    };
+
     script = ''
       #!/usr/bin/env bash
       set -eu
