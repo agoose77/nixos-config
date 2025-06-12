@@ -48,6 +48,6 @@
     };
   };
   wayland.windowManager.hyprland.settings."exec-once" = lib.mkBefore [
-    "${pkgs.hyprlock}/bin/hyprlock --immediate"
+    "${pkgs.uwsm}/bin/uwsm app -- ${pkgs.hyprlock}/bin/hyprlock --immediate"
   ];
 }

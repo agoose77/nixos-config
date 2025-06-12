@@ -3,7 +3,9 @@
   pkgs,
   config,
   ...
-}: {
+}: let
+  uwsm-app = cmd: "${lib.getExe pkgs.uwsm} app -- ${cmd}";
+in {
   xdg.mimeApps.enable = true;
   home.packages = with pkgs; [
     wf-recorder
@@ -47,17 +49,13 @@
       # Execute your favorite apps at launch
       # exec-once = waybar & hyprpaper & firefox
       "exec-once" = [
-        "dunst"
-        "slack -u"
-        "1password --silent"
-        "discord --start-minimized"
-        "element-desktop --hidden"
-        "kdeconnect-indicator"
-        # Waybar appears to start itself
-        # "waybar"
+        (uwsm-app (lib.getExe pkgs.dunst))
+        (uwsm-app (lib.getExe pkgs.plasma5Packages.kdeconnect-kde))
+        (uwsm-app "${lib.getExe pkgs.slack} -u")
+        (uwsm-app "${lib.getExe pkgs._1password-gui} --silent")
+        (uwsm-app "${lib.getExe pkgs.discord} --start-minimized")
+        (uwsm-app "${lib.getExe pkgs.element-desktop} --hidden")
       ];
-      # Source a file (multi-file configs)
-      # source = ~/.config/hypr/myColors.conf
 
       # Some default env vars.
       env = "XCURSOR_SIZE,24";
@@ -245,7 +243,7 @@
   # Use uwsm to launch hyprland
   wayland.windowManager.hyprland.systemd.enable = false;
   programs.bash.profileExtra = lib.mkBefore ''
-       if [[ "$(tty)" == /dev/tty1 ]] && uwsm check may-start; then
-        exec uwsm start hyprland-uwsm.desktop
+       if [[ "$(tty)" == /dev/tty1 ]] && ${pkgs.uwsm}/bin/uwsm check may-start; then
+        exec ${pkgs.uwsm}/bin/uwsm start hyprland-uwsm.desktop
     fi  '';
 }

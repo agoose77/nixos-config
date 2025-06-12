@@ -38,6 +38,6 @@
   };
 
   wayland.windowManager.hyprland.settings."exec-once" = [
-    "${pkgs.wvkbd}/bin/wvkbd-mobintl -H 200 -L 300 --hidden"
+    "${pkgs.uwsm}/bin/uwsm app -- ${pkgs.wvkbd}/bin/wvkbd-mobintl -H 200 -L 300 --hidden"
   ];
 }
