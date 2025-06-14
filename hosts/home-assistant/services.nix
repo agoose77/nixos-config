@@ -39,7 +39,7 @@ in {
         environment.TZ = "Europe/London";
         # This fixes a bug
         environment.PYTHONPATH = "/usr/local/lib/python3.13:/config/deps";
-        image = "ghcr.io/home-assistant/home-assistant:2025.5.6"; # Warning: if the tag does not change, the image will not be updated
+        image = "ghcr.io/home-assistant/home-assistant:2025.6.0"; # Warning: if the tag does not change, the image will not be updated
         extraOptions = [
           "--network=host"
           "--cap-add=NET_RAW"
