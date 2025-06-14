@@ -41,7 +41,6 @@
         extraOptions = [
           "--network=host"
           "--cap-add=NET_RAW"
-	  "--mount=type=tmpfs,destination=/config/www/snapshots"
           #"--device=/dev/ttyACM0:/dev/ttyACM0"  # Example, change this to match your own hardware
         ];
         volumes = [
@@ -56,9 +55,29 @@
         ports = [
           "4898:80"
         ];
-        image = "lscr.io/linuxserver/speedtest-tracker:1.6.0";
+        image = "lscr.io/linuxserver/speedtest-tracker:latest";
         volumes = [
           "/etc/speedtest-tracker/data:/config"
+        ];
+      };
+      # Pi-Hole
+      containers.pi-hole = {
+        environment = {
+          TZ = "Europe/London";
+          FTLCONF_webserver_api_password = "password";
+          FTLCONF_dns_listeningMode = "all";
+        };
+
+        ports = [
+          # DNS
+          "53:53/tcp"
+          "53:53/udp"
+	  # Web interface
+	  "2060:80/tcp"
+        ];
+        image = "docker.io/pihole/pihole:latest";
+        volumes = [
+          "/etc/pi-hole:/etc/pihole"
         ];
       };
       # Mosquitto
@@ -67,7 +86,7 @@
           "1883:1883"
           "9001:9001"
         ];
-        image = "docker.io/eclipse-mosquitto:2.0.21";
+        image = "docker.io/eclipse-mosquitto:latest";
         volumes = [
           "/etc/mosquitto/config:/mosquitto/config"
         ];
@@ -132,7 +151,7 @@
           # Ports for prowlarr
           "9696:9696"
         ];
-        image = "docker.io/qmcgaw/gluetun:v3.40";
+        image = "docker.io/qmcgaw/gluetun:latest";
         volumes = [
           "/etc/gluetun/secrets:/run/secrets"
         ];
@@ -214,7 +233,26 @@
     };
     containers.enable = true;
   };
-  services.caddy = rec {
+  services.caddy = rec {      # Pi-Hole
+      containers.pi-hole = {
+        environment = {
+          TZ = "Europe/London";
+          FTLCONF_webserver_api_password = "password";
+          FTLCONF_dns_listeningMode = "all";
+        };
+
+        ports = [
+          # DNS
+          "53:53/tcp"
+          "53:53/udp"
+	  # Web interface
+	  "2060:80/tcp"
+        ];
+        image = "docker.io/pihole/pihole:latest";
+        volumes = [
+          "/etc/pi-hole:/etc/pihole"
+        ];
+      };
     enable = true;
 
     # Auto-HTTPS remote routing
