@@ -19,6 +19,7 @@
       ../features/nixvim.nix
       ../features/fonts.nix
       ../features/wofi.nix
+      ../features/notes.nix
     ]
     ++ (builtins.attrValues outputs.homeManagerModules);
   nixpkgs = {
