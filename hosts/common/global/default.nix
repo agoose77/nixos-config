@@ -101,4 +101,6 @@
 
   # Opt out of light-dm by default
   services.xserver.displayManager.lightdm.enable = lib.mkForce false;
+
+  services.automatic-timezoned.enable = true;
 }
