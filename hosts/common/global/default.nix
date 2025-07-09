@@ -15,7 +15,6 @@
     ./openssh.nix
     ./spotify-connect.nix
     ./sound.nix
-    ./jetbrains.nix
     ./boot.nix
     ./firewall.nix
     ./tailscale.nix
