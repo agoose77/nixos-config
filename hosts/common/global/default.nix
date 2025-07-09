@@ -62,8 +62,6 @@
 
   networking.networkmanager.enable = true;
 
-  time.timeZone = "Europe/London";
-
   i18n.defaultLocale = "en_GB.UTF-8";
 
   console.keyMap = "uk";
@@ -100,6 +98,8 @@
 
   # Opt out of light-dm by default
   services.xserver.displayManager.lightdm.enable = lib.mkForce false;
-
+  
+  # Timezone
   services.automatic-timezoned.enable = true;
+  services.geoclue2.geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
 }
