@@ -51,7 +51,7 @@
           format-icons = ["" "" ""];
         };
         disk = {
-          format = "{percentage_used}% 󰉉";
+          format = "{percentage_used}% ";
         };
         pulseaudio = {
           # "scroll-step": 1, // %, can be a float
