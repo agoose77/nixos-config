@@ -36,7 +36,6 @@
         podman
         oils-for-unix
         playerctl
-        rio
         ripgrep
         slack
         unzip

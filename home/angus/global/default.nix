@@ -60,6 +60,16 @@
 
   programs.ripgrep.enable = true;
 
+  programs.rio = {
+    enable = true;
+    settings = {
+      "confirm-before-quit" = false;
+      fonts = {
+        family = "Fira Code";
+      };
+    };
+  };
+
   # Enable home-manager
   programs.home-manager.enable = true;
   # programs.ssh = {
