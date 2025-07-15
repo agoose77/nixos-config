@@ -168,7 +168,7 @@ in {
         ", XF86AudioRaiseVolume, exec, ${uwsm-app (lib.getExe' pkgs.wireplumber "wpctl")} set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, ${uwsm-app (lib.getExe' pkgs.wireplumber "wpctl")} set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"
         ", XF86AudioMute, exec, ${uwsm-app (lib.getExe' pkgs.wireplumber "wpctl")} set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        "$mod, return, exec, ${uwsm-app (lib.getExe pkgs.alacritty)}"
+        "$mod, return, exec, ${uwsm-app (lib.getExe pkgs.rio)}"
         "$mod SHIFT, return, exec, ${uwsm-app (lib.getExe pkgs.firefox)}"
         "$mod SHIFT, Q, killactive, g"
         "$mod, SPACE, exec, ${uwsm-app (lib.getExe pkgs.wofi)} --show drun"

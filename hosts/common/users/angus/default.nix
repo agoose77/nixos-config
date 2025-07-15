@@ -17,7 +17,6 @@
       uid = 1000;
 
       packages = with pkgs; [
-        alacritty
         alejandra
         bat
         bash
@@ -37,6 +36,7 @@
         podman
         oils-for-unix
         playerctl
+        rio
         ripgrep
         slack
         unzip
