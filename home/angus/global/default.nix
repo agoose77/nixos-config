@@ -17,6 +17,7 @@
       ../features/git.nix
       ../features/email.nix
       ../features/nixvim.nix
+      ../features/rio.nix
       ../features/fonts.nix
       ../features/wofi.nix
       ../features/notes.nix
@@ -59,16 +60,6 @@
   programs.firefox.enable = true;
 
   programs.ripgrep.enable = true;
-
-  programs.rio = {
-    enable = true;
-    settings = {
-      "confirm-before-quit" = false;
-      fonts = {
-        family = "Fira Code";
-      };
-    };
-  };
 
   # Enable home-manager
   programs.home-manager.enable = true;
