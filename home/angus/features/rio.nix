@@ -5,7 +5,7 @@
       "confirm-before-quit" = false;
       theme = "dracula";
       fonts = {
-        size = 24;
+        size = 16;
         family = "Fira Code";
       };
     };
