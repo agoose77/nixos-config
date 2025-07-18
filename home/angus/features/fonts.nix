@@ -8,5 +8,6 @@
     fira-code
     fira-code-symbols
     font-awesome
+    material-design-icons
   ];
 }

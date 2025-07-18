@@ -7,7 +7,7 @@
              border: none;
              border-radius: 0;
              /* `otf-font-awesome` is required to be installed for icons */
-             font-family: Noto Sans;
+             font-family: Noto Sans, Material Design Icons;
              min-height: 20px;
       font-size: 10pt;
       font-weight: 500;
@@ -173,7 +173,7 @@
         layer = "top";
         position = "top";
         height = 30;
-        margin = "20 20 0 20";
+        margin = "10 20";
         modules-left = ["hyprland/workspaces" "hyprland/submap"];
         modules-center = ["clock"];
         modules-right = ["cpu" "memory" "disk" "pulseaudio" "battery" "tray"];
@@ -193,6 +193,7 @@
           ];
           format = "{icon}";
           format-charging = "󰂄";
+          format-alt = "{capacity}% ({time})";
           tooltip-format = "{capacity}% ({time})";
           onclick = "";
         };
