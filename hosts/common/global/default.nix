@@ -60,6 +60,13 @@
     auto-optimise-store = true;
   };
 
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    # Keep the last 3 generations
+    options = "--delete-older-than +3";
+  };
+
   networking.networkmanager.enable = true;
 
   i18n.defaultLocale = "en_GB.UTF-8";
@@ -98,7 +105,7 @@
 
   # Opt out of light-dm by default
   services.xserver.displayManager.lightdm.enable = lib.mkForce false;
-  
+
   # Timezone
   services.automatic-timezoned.enable = true;
   services.geoclue2.geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
