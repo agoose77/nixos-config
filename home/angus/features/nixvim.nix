@@ -128,6 +128,7 @@
       number = true; # Show line numbers
       relativenumber = true; # Show relative line numbers
       termguicolors = true;
+      expandtab = true;
     };
   };
 }
