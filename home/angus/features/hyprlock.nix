@@ -33,9 +33,6 @@
 
         # Hide outline and filling
         outline_thickness = 0;
-        inner_color = "rgba(00000000)";
-        check_color = "rgba(00000000)";
-        fail_color = "rgba(00000000)";
       };
       label = {
         text = "$TIME";

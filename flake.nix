@@ -14,13 +14,18 @@
     # Home manager
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs"; # keep home-manager nixpkgs consistent with nixpkgs
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+
     # lanzaboote
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.2";
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-      # Optional but recommended to limit the size of your system closure.
+    # lanzaboote
+    stylix = {
+      url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -30,6 +35,7 @@
     nixpkgs,
     home-manager,
     lanzaboote,
+    stylix,
     ...
   } @ inputs: let
     inherit (self) outputs;

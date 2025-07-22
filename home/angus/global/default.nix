@@ -11,6 +11,7 @@
   # You can import other home-manager modules here
   imports =
     [
+      inputs.stylix.homeModules.stylix
       ../features/hyprland.nix
       ../features/hyprlock.nix
       ../features/waybar.nix
@@ -21,6 +22,7 @@
       ../features/fonts.nix
       ../features/wofi.nix
       ../features/notes.nix
+      ../features/stylix.nix
     ]
     ++ (builtins.attrValues outputs.homeManagerModules);
   nixpkgs = {

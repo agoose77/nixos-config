@@ -20,7 +20,6 @@
         options.desc = "Toggle trouble";
       }
     ];
-    colorschemes.dracula.enable = true;
     plugins = {
       nvim-surround.enable = true;
       autoclose = {

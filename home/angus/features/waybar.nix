@@ -25,18 +25,18 @@
              margin-right: 8px;
              border-radius: 10px;
              transition: none;
-             background: #383c4a;
+             background: @base01; /*#383c4a*/
          }
 
          #workspaces button {
              transition: none;
-             color: #7c818c;
+             color: @base03;/*#7c818c*/
              background: transparent;
              padding: 5px;
          }
 
          #workspaces button.persistent {
-             color: #7c818c;
+             color: @base03; /*#7c818c*/
          }
 
          /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -45,8 +45,8 @@
              box-shadow: inherit;
              text-shadow: inherit;
              border-radius: inherit;
-             color: #383c4a;
-             background: #7c818c;
+             color: @base01; /*#383c4a*/
+             background: @base03; /*#7c818c*/;
          }
 
          #workspaces button.visible {
@@ -57,8 +57,8 @@
              padding-right: 16px;
              border-radius: 10px 10px 10px 10px;
              transition: none;
-             color: #ffffff;
-             background: #383c4a;
+             color: @base07; /*#ffffff*/
+             background: @base01; /*#383c4a*/
          }
 
          #pulseaudio {
@@ -67,13 +67,13 @@
              padding-right: 16px;
              border-radius: 10px;
              transition: none;
-             color: #ffffff;
-             background: #383c4a;
+             color: @base07; /*#ffffff*/
+             background: @base01; /*#383c4a*/
          }
 
          #pulseaudio.muted {
-             background-color: #90b1b1;
-             color: #2a5c45;
+             background-color: @base0C; /*#90b1b1*/;
+             color: @base09; /*#2a5c45*/
          }
 
          #memory {
@@ -82,8 +82,8 @@
              padding-right: 16px;
              border-radius: 10px;
              transition: none;
-             color: #ffffff;
-             background: #383c4a;
+             color: @base07; /*#ffffff*/
+             background: @base01; /*#383c4a*/
          }
 
          #cpu {
@@ -92,8 +92,8 @@
              padding-right: 16px;
              border-radius: 10px;
              transition: none;
-             color: #ffffff;
-             background: #383c4a;
+             color: @base07; /*#ffffff*/
+             background: @base01; /*#383c4a*/
          }
 
          #disk {
@@ -102,8 +102,8 @@
              padding-right: 16px;
              border-radius: 10px;
              transition: none;
-             color: #ffffff;
-             background: #383c4a;
+             color: @base07; /*#ffffff*/
+             background: @base01; /*#383c4a*/
          }
 
          #temperature {
@@ -112,12 +112,12 @@
              padding-right: 16px;
              border-radius: 10px;
              transition: none;
-             color: #ffffff;
-             background: #383c4a;
+             color: @base07; /*#ffffff*/
+             background: @base01; /*#383c4a*/
          }
 
          #temperature.critical {
-             background-color: #eb4d4b;
+             background-color: @base08; /*#eb4d4b*/
          }
 
               #battery {
@@ -126,23 +126,23 @@
              padding-right: 16px;
              border-radius: 10px;
              transition: none;
-             color: #ffffff;
-             background: #383c4a;
+             color: @base07; /*#ffffff*/
+             background: @base01; /*#383c4a*/
          }
 
          #battery.charging {
-             color: #ffffff;
-             background-color: #26A65B;
+             color: @base07; /*#ffffff*/
+             background-color: @base0F; /*#26A65B*/
          }
 
          #battery.warning:not(.charging) {
-             background-color: #ffbe61;
+             background-color: @base0B;/*#ffbe61*/
              color: black;
          }
 
          #battery.critical:not(.charging) {
-             background-color: #f53c3c;
-             color: #ffffff;
+             background-color: @base08; /*#f53c3c*/
+             color: @base07; /*#ffffff*/
              animation-name: blink;
              animation-duration: 0.5s;
              animation-timing-function: linear;
@@ -155,14 +155,14 @@
              padding-right: 16px;
              border-radius: 10px;
              transition: none;
-             color: #ffffff;
-             background: #383c4a;
+             color: @base07; /*#ffffff*/
+             background: @base01; /*#383c4a*/
          }
 
          @keyframes blink {
              to {
-                 background-color: #ffffff;
-                 color: #000000;
+             background-color: @base07; /*#ffffff*/
+                 color: @base00; /*#000000*/
              }
          }
 
