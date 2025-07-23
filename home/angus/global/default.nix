@@ -17,6 +17,7 @@
       ../features/waybar.nix
       ../features/git.nix
       ../features/email.nix
+      ../features/firefox.nix
       ../features/nixvim.nix
       ../features/rio.nix
       ../features/fonts.nix
@@ -58,8 +59,6 @@
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
   };
-
-  programs.firefox.enable = true;
 
   programs.ripgrep.enable = true;
 

@@ -26,10 +26,7 @@
   ];
 
   nixpkgs = {
-    overlays = [
-      outputs.overlays.additions
-      outputs.overlays.modifications
-    ];
+    overlays = builtins.attrValues outputs.overlays;
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages
