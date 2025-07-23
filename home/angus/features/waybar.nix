@@ -9,8 +9,9 @@
              /* `otf-font-awesome` is required to be installed for icons */
              font-family: Noto Sans, Material Design Icons;
              min-height: 20px;
-      font-size: 10pt;
+      font-size: 11pt;
       font-weight: 500;
+      letter-spacing: 0.1rem;
          }
 
          window#waybar {
@@ -172,8 +173,8 @@
       primary = {
         layer = "top";
         position = "top";
-        height = 30;
-        margin = "10 20";
+        height = 25;
+        margin = "15 20 10 20";
         modules-left = ["hyprland/workspaces" "hyprland/submap"];
         modules-center = ["clock"];
         modules-right = ["cpu" "memory" "disk" "pulseaudio" "battery" "tray"];
