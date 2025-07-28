@@ -3,37 +3,45 @@ import subprocess
 import argparse
 import paho.mqtt.client as mqtt
 import socket
+import json
+import time
 
 host = socket.gethostname()
 
 parser = argparse.ArgumentParser()
-parser.add_argument("timeout", help="timeout in seconds", type=int)
-parser.add_argument("--host", default="localhost", help="MQTT server hostname")
-parser.add_argument("--port", default=1883, type=int, help="MQTT server port")
-parser.add_argument("--username", help="MQTT server user")
-parser.add_argument("--password", help="MQTT server password")
-parser.add_argument("--tls", type=bool, default=False, help="Use TLS")
-parser.add_argument("--topic", default=f"location/{host}", help="Use TLS")
+parser.add_argument("config", help="Config in a JSON file")
 
 args = parser.parse_args()
+with open(args.config, "r") as f:
+    config = json.load(f)
 
 mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-if args.tls:
+if config.get('tls'):
     mqttc.tls_set()
-if args.username:
-    mqttc.username_pw_set(username=args.username, password=args.password)
-mqttc.connect(args.host, args.port, 60)
+if config.get('username') and config.get("password"):
+    mqttc.username_pw_set(username=config['username'], password=config["password"])
+mqttc.connect(config['host'], config['port'], 60)
 mqttc.loop_start()
 
+timeout = config['timeout']
+interval = config.get("interval", 60)
+
 try:
+    mqttc.publish(config['topic'], "home")
+    t_first_idle = None
+
     while True:
         try:
             result = subprocess.run(
-                ["wayidle", "--timeout", str(args.timeout)], timeout=args.timeout * 1.5
+                ["wayidle", "--timeout", str(interval)], timeout=interval * 1.5
             )
         except subprocess.TimeoutExpired:
-            mqttc.publish(args.topic, "home")
+            mqttc.publish(config['topic'], "home")
+            t_first_idle = None
         else:
-            mqttc.publish(args.topic, "away")
+            if t_first_idle is None:
+                t_first_idle = time.monotonic()
+            elif time.monotonic() - t_first_idle >= timeout:
+                mqttc.publish(config['topic'], "away")
 finally:
     mqttc.loop_stop()
