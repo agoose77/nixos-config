@@ -16,18 +16,41 @@ with open(args.config, "r") as f:
     config = json.load(f)
 
 mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-if config.get('tls'):
+if config.get("tls"):
     mqttc.tls_set()
-if config.get('username') and config.get("password"):
-    mqttc.username_pw_set(username=config['username'], password=config["password"])
-mqttc.connect(config['host'], config['port'], 60)
+if config.get("username") and config.get("password"):
+    mqttc.username_pw_set(username=config["username"], password=config["password"])
+mqttc.connect(config["host"], config["port"], 60)
 mqttc.loop_start()
 
-timeout = config['timeout']
+
+def announce_discovery(client, config):
+    state = {
+        "name": config["name"],
+        "stat_t": config["stateTopic"],
+        "device_class": "occupancy",
+        "device": {
+            "suggested_area": config["deviceArea"],
+            "ids": config["deviceIds"],
+            "name": config["deviceName"],
+        },
+        "origin": {"name": "idle-monitor"},
+        "unique_id": f"idle-monitor-{config['deviceName']}-occupancy",
+        "payload_on": "active",
+        "payload_off": "idle",
+    }
+    mqttc.publish(config["discoveryTopic"], json.dumps(state))
+
+
+timeout = config["timeout"]
 interval = config.get("interval", 60)
+topic = config["stateTopic"]
 
 try:
-    mqttc.publish(config['topic'], "home")
+    announce_discovery(mqttc, config)
+    time.sleep(10)
+
+    mqttc.publish(topic, "active")
     t_first_idle = None
 
     while True:
@@ -36,12 +59,12 @@ try:
                 ["wayidle", "--timeout", str(interval)], timeout=interval * 1.5
             )
         except subprocess.TimeoutExpired:
-            mqttc.publish(config['topic'], "home")
+            mqttc.publish(topic, "active")
             t_first_idle = None
         else:
             if t_first_idle is None:
                 t_first_idle = time.monotonic()
             elif time.monotonic() - t_first_idle >= timeout:
-                mqttc.publish(config['topic'], "away")
+                mqttc.publish(topic, "idle")
 finally:
     mqttc.loop_stop()
