@@ -156,6 +156,7 @@
       pull = {
         ff = "only";
       };
+      branch.sort = "committerdate";
     };
   };
 }
