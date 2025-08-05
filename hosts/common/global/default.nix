@@ -23,6 +23,8 @@
     ./hyprland.nix
     ./hyprlock.nix
     ./1password.nix
+    ./k3s.nix
+    ./timezone.nix
   ];
 
   nixpkgs = {
@@ -103,8 +105,4 @@
 
   # Opt out of light-dm by default
   services.xserver.displayManager.lightdm.enable = lib.mkForce false;
-
-  # Timezone
-  services.automatic-timezoned.enable = true;
-  services.geoclue2.geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
 }
