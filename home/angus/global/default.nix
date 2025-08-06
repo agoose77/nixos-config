@@ -52,8 +52,7 @@
       openssh
       spotify
       sd
-      eza
-      ripgrep
+      watchexec
     ];
 
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
@@ -95,7 +94,6 @@
   systemd.user.startServices = "sd-switch";
 
   programs.bash.enable = true;
-
   programs.direnv = {
     enable = true;
     enableBashIntegration = true;
@@ -128,4 +126,7 @@
     x11.enable = true;
     name = "Bibata-Modern-Classic";
   };
+
+  programs.btop.enable = true;
+  programs.eza.enable = true;
 }
