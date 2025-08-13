@@ -117,7 +117,11 @@
         contexts = [
           {
             context_pattern = "^arn:aws:eks.*:cluster/(.*)$";
-            context_alias = "$1";
+            context_alias = "aws.$1";
+          }
+          {
+            context_pattern = "^gke.*_([^_]*)$";
+            context_alias = "gcp.$1";
           }
         ];
       };
