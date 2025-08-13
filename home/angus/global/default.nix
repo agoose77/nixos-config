@@ -133,10 +133,10 @@
     enableBashIntegration = true;
   };
   home.sessionVariables = {
-  # Make it hard to accidentally nest kubeconfig contexts in 2i2c's deployer infra
-  DEPLOYER_NO_NESTED_KUBECONFIG = "1";
+    # Make it hard to accidentally nest kubeconfig contexts in 2i2c's deployer infra
+    DEPLOYER_NO_NESTED_KUBECONFIG = "1";
     _ZO_DOCTOR = "0";
-    };
+  };
 
   home.pointerCursor = {
     package = pkgs.bibata-cursors;
