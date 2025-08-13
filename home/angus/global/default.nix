@@ -112,6 +112,15 @@
       gcloud = {
         disabled = true;
       };
+      kubernetes = {
+        disabled = false;
+        contexts = [
+          {
+            context_pattern = "^arn:aws:eks.*:cluster/(.*)$";
+            context_alias = "$1";
+          }
+        ];
+      };
     };
   };
 
@@ -130,4 +139,8 @@
 
   programs.btop.enable = true;
   programs.eza.enable = true;
+
+  # Prevent kubeconfig being used
+  home.file.".kube/config".text = ''
+  '';
 }
