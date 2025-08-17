@@ -120,6 +120,8 @@
       PasswordAuthentication = false;
     };
   };
+  programs.ssh.startAgent = true;
+  services.gnome.gcr-ssh-agent.enable = false;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
@@ -132,7 +134,7 @@
   };
 
   #services.xserver.videoDrivers = ["nvidia"];
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     # For better video playback
     extraPackages = with pkgs; [nvidia-vaapi-driver];
@@ -145,10 +147,10 @@
   #  package = config.boot.kernelPackages.nvidiaPackages.stable;
   #};
 
-  hardware.pulseaudio.enable = false;
   hardware.coral.usb.enable = true;
 
   services = {
+    pulseaudio.enable = false;
     pipewire = {
       enable = true;
       audio.enable = true;
@@ -167,7 +169,7 @@
 
   services.avahi = {
     enable = true;
-    nssmdns = true;
+    nssmdns4 = true;
     publish.enable = true;
     publish.userServices = true;
   };

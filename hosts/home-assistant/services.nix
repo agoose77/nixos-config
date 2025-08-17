@@ -39,7 +39,7 @@ in {
         environment.TZ = "Europe/London";
         # This fixes a bug
         environment.PYTHONPATH = "/usr/local/lib/python3.13:/config/deps";
-        image = "ghcr.io/home-assistant/home-assistant:2025.7.1"; # Warning: if the tag does not change, the image will not be updated
+        image = "ghcr.io/home-assistant/home-assistant:2025.8.2"; # Warning: if the tag does not change, the image will not be updated
         extraOptions = [
           "--network=host"
           "--cap-add=NET_RAW"
@@ -58,7 +58,7 @@ in {
         ports = [
           "4898:80"
         ];
-        image = "lscr.io/linuxserver/speedtest-tracker:1.6.0";
+        image = "lscr.io/linuxserver/speedtest-tracker:1.6.6";
         volumes = [
           "/etc/speedtest-tracker/data:/config"
         ];
@@ -69,7 +69,7 @@ in {
           "1883:1883"
           "9001:9001"
         ];
-        image = "docker.io/eclipse-mosquitto:2.0.21";
+        image = "docker.io/eclipse-mosquitto:2.0.22";
         volumes = [
           "/etc/mosquitto/config:/mosquitto/config"
         ];
@@ -96,13 +96,13 @@ in {
           # go2rtc interface
           "1984:1984"
         ];
-        image = "ghcr.io/blakeblackshear/frigate:0.15.0";
+        image = "ghcr.io/blakeblackshear/frigate:0.16.0";
         extraOptions = [
           "--device=/dev/bus/usb"
           "--device=/dev/dri/renderD128"
           "--device=/dev/dri/renderD129"
+          "--device=/dev/dri/card0"
           "--device=/dev/dri/card1"
-          "--device=/dev/dri/card2"
           "--tmpfs=/tmp/cache:rw,size=1g,mode=1777"
           "--shm-size=256mb"
           "--network=mqtt-bridge"
@@ -149,7 +149,7 @@ in {
           PUID = "1000";
           PGID = "1000";
         };
-        image = "lscr.io/linuxserver/qbittorrent:5.0.4";
+        image = "lscr.io/linuxserver/qbittorrent:5.1.2";
 	dependsOn = [ "gluetun" ];
         volumes = [
           "/etc/qbittorrent/data:/config"
@@ -165,7 +165,7 @@ in {
           PUID = "1000";
           PGID = "1000";
         };
-        image = "lscr.io/linuxserver/prowlarr:1.34.1";
+        image = "lscr.io/linuxserver/prowlarr:1.37.0";
 	dependsOn = [ "gluetun" ];
         volumes = [
           "/etc/prowlarr/data:/config"
@@ -180,7 +180,7 @@ in {
           PUID = "1000";
           PGID = "1000";
         };
-        image = "lscr.io/linuxserver/sonarr:4.0.14";
+        image = "lscr.io/linuxserver/sonarr:4.0.15";
 	dependsOn = [ "gluetun" ];
         volumes = [
           "/etc/sonarr/data:/config"
