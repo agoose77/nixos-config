@@ -1,20 +1,27 @@
 {pkgs}: let
-  pkg = pkgs.stdenv.mkDerivation {
+  node = pkgs.nodejs_22;
+in
+  pkgs.stdenv.mkDerivation {
     name = "myst-src";
+    nativeBuildInputs = [
+      pkgs.makeBinaryWrapper
+    ];
     installPhase = ''
-      mv src/mystmd_py/myst.cjs $out
+      runHook preInstall
+
+      install -D src/mystmd_py/myst.cjs $out/share/mystmd/myst.cjs
+
+      # Create a wrapper around the node binary that sets PATH and prepends the script
+      # This is more nix-like than just creating a wrapper shell script ourselves.
+      makeBinaryWrapper ${pkgs.lib.getExe node} "$out/bin/myst" \
+        --add-flags "$out/share/mystmd/myst.cjs" \
+        --prefix PATH : ${pkgs.lib.makeBinPath [node]}
+
+      runHook postInstall
     '';
     src = pkgs.fetchPypi {
       pname = "mystmd";
       version = "1.6.0";
       hash = "sha256-dSNPdxVlwweZgHXUpn9XqhcyOu/JM/vR/CekN5xXHBo=";
     };
-  };
-in
-  pkgs.writeShellApplication {
-    name = "myst";
-    runtimeInputs = [pkgs.nodejs_22];
-    text = ''
-      ${pkgs.lib.getExe' pkgs.nodejs_22 "node"} "${pkg}" "$@"
-    '';
   }
