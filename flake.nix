@@ -81,6 +81,12 @@
           ./hosts/home-assistant
         ];
       };
+      "hass-l" = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./hosts/hass-l
+        ];
+      };
     };
 
     # Standalone home-manager configuration entrypoint
