@@ -25,10 +25,13 @@
     ../common/features/nix.nix
     ../common/features/locale.nix
     ../common/features/openssh.nix
+    ../common/features/sops.nix
     ../common/features/sound.nix
     ../common/features/avahi.nix
     ../common/features/usb.nix
     ../common/features/gnome-keyring.nix
+    # Home assistant
+    inputs.home-manager.nixosModules.home-manager
   ];
 
   nixpkgs = {
