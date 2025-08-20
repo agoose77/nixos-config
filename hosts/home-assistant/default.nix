@@ -26,10 +26,8 @@
     ../common/features/sound.nix
     ../common/features/avahi.nix
     ../common/features/usb.nix
+    ../common/features/gnome-keyring.nix
   ];
-
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "23.11";
 
   nixpkgs = {
     # You can add overlays here
@@ -43,14 +41,10 @@
       allowUnfree = true;
     };
   };
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    alejandra
-    git
-    curl
-    neovim
-  ];
+
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  system.stateVersion = "23.11";
+
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "i965";
   };
@@ -60,20 +54,6 @@
     interfaces."enp4s0".macAddress = "20:47:47:79:c5:7d";
   };
 
-  # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
-  users.users = {
-    angus = {
-      isNormalUser = true;
-      # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = ["networkmanager" "wheel" "media"];
-      packages = with pkgs; [];
-      shell = pkgs.bash;
-      uid = 1000;
-    };
-  };
-  # Choose group ID for media
-  users.groups.media.gid = 501;
-
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -81,6 +61,7 @@
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.budgie.enable = true;
 
+  # Gnome fix?
   programs.ssh.startAgent = true;
   services.gnome.gcr-ssh-agent.enable = false;
 

@@ -5,6 +5,7 @@
   outputs,
   lib,
   pkgs,
+  config,
   ...
 }: {
   # You can import other home-manager modules here
@@ -26,6 +27,7 @@
       ./features/wofi.nix
       ./features/notes.nix
       ./features/kdeconnect.nix
+      ./features/spotify.nix
       ./features/playerctl.nix
       ./features/notifications.nix
       ./features/videoconf.nix
@@ -44,14 +46,7 @@
 
   home = {
     username = "angus";
-    homeDirectory = "/home/angus";
-
-    packages = with pkgs; [
-      element-desktop
-      openssh
-      spotify
-      hyprshot
-    ];
+    homeDirectory = "/home/${config.home.username}";
 
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
