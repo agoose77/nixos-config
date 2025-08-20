@@ -11,6 +11,7 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.stylix.nixosModules.stylix
+    ./features/docker.nix
     ./features/podman.nix
     ./features/openvpn.nix
     ./features/openssh.nix
@@ -41,15 +42,6 @@
   };
 
   system.stateVersion = "23.11";
-
-  environment.etc =
-    lib.mapAttrs'
-    (name: value: {
-      name = "nix/path/${name}";
-      value.source = value.flake;
-    })
-    config.nix.registry;
-
   networking.networkmanager.enable = true;
 
   xdg.portal.enable = true;

@@ -1,6 +1,4 @@
-{pkgs, ...}: let 
-  
-in {
+{pkgs, ...}: {
   systemd.services.init-mqtt-network = {
     description = "Create the network bridge for mqtt.";
     after = ["network.target"];
@@ -17,22 +15,10 @@ in {
     '';
   };
 
-  # Support DNS within bridge networks
-  # c.f. https://github.com/NixOS/nixpkgs/issues/226365#issuecomment-2164985192
-  networking.firewall.interfaces."podman+".allowedUDPPorts = [53 5353];
-
   networking.firewall.allowedTCPPorts = [80 443 1883 8123 8555 8989];
   networking.firewall.allowedUDPPorts = [5683 8555];
+
   virtualisation = {
-    podman = {
-      enable = true;
-
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = true;
-
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings.dns_enabled = true;
-    };
     oci-containers = {
       backend = "podman";
       containers.home-assistant = {
@@ -43,7 +29,7 @@ in {
         extraOptions = [
           "--network=host"
           "--cap-add=NET_RAW"
-	  "--mount=type=tmpfs,destination=/config/www/snapshots"
+          "--mount=type=tmpfs,destination=/config/www/snapshots"
           #"--device=/dev/ttyACM0:/dev/ttyACM0"  # Example, change this to match your own hardware
         ];
         volumes = [
@@ -150,7 +136,7 @@ in {
           PGID = "1000";
         };
         image = "lscr.io/linuxserver/qbittorrent:5.1.2";
-	dependsOn = [ "gluetun" ];
+        dependsOn = ["gluetun"];
         volumes = [
           "/etc/qbittorrent/data:/config"
           "/mnt/data/media/torrent:/downloads"
@@ -166,7 +152,7 @@ in {
           PGID = "1000";
         };
         image = "lscr.io/linuxserver/prowlarr:1.37.0";
-	dependsOn = [ "gluetun" ];
+        dependsOn = ["gluetun"];
         volumes = [
           "/etc/prowlarr/data:/config"
         ];
@@ -181,7 +167,7 @@ in {
           PGID = "1000";
         };
         image = "lscr.io/linuxserver/sonarr:4.0.15";
-	dependsOn = [ "gluetun" ];
+        dependsOn = ["gluetun"];
         volumes = [
           "/etc/sonarr/data:/config"
           "/mnt/data/media/tv:/tv"
@@ -214,7 +200,6 @@ in {
         ];
       };
     };
-    containers.enable = true;
   };
   services.caddy = rec {
     enable = true;
@@ -235,7 +220,7 @@ in {
 
       redir /qbittorrent /qbittorrent/
       handle_path /qbittorrent/* {
-	      reverse_proxy localhost:8080
+       reverse_proxy localhost:8080
       }
     '';
 

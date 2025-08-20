@@ -13,7 +13,7 @@
     ../common/global.nix
     # User config
     ../common/users/angus
-    # User config
+    # Optional config
     ../common/features/quiet-boot.nix
     ../common/features/power.nix
     ../common/features/bluetooth.nix

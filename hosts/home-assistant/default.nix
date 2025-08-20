@@ -14,7 +14,22 @@
     ./hardware-configuration.nix
     # Host specific config
     ./services.nix
+    # Optional config
+    ../common/features/quiet-boot.nix
+    ../common/features/podman.nix
+    ../common/features/boot.nix
+    ../common/features/tailscale.nix
+    ../common/features/nix.nix
+    ../common/features/locale.nix
+    ../common/features/openssh.nix
+    ../common/features/sound.nix
+    ../common/features/avahi.nix
+    ../common/features/usb.nix
   ];
+
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  system.stateVersion = "23.11";
+
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -33,32 +48,8 @@
     alejandra
     git
     curl
-    podman
     neovim
-    tailscale
   ];
-  # This will add each flake input as a registry
-  # To make nix3 commands consistent with your flake
-  nix.registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
-
-  # This will additionally add your inputs to the system's legacy channels
-  # Making legacy nix commands consistent as well, awesome!
-  nix.nixPath = ["/etc/nix/path"];
-  environment.etc =
-    lib.mapAttrs'
-    (name: value: {
-      name = "nix/path/${name}";
-      value.source = value.flake;
-    })
-    config.nix.registry;
-
-  nix.settings = {
-    # Enable flakes and new 'nix' command
-    experimental-features = "nix-command flakes";
-    # Deduplicate and optimize nix store
-    auto-optimise-store = true;
-  };
-
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "i965";
   };
@@ -67,20 +58,6 @@
     networkmanager.enable = true;
     interfaces."enp4s0".macAddress = "20:47:47:79:c5:7d";
   };
-  time.timeZone = "Europe/London";
-
-  i18n.defaultLocale = "en_GB.UTF-8";
-
-  services.xserver.xkb = {
-    layout = "gb";
-    variant = "";
-  };
-
-  console.keyMap = "uk";
-
-  # TODO: This is just an example, be sure to use whatever bootloader you prefer
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
   users.users = {
@@ -103,71 +80,21 @@
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.budgie.enable = true;
 
-  # This setups a SSH server. Very important if you're setting up a headless system.
-  # Feel free to remove if you don't need it.
-  services.openssh = {
-    enable = true;
-    settings = {
-      # Forbid root login through SSH.
-      PermitRootLogin = "no";
-      # Use keys only. Remove if you want to SSH using password (not recommended)
-      PasswordAuthentication = false;
-    };
-  };
   programs.ssh.startAgent = true;
   services.gnome.gcr-ssh-agent.enable = false;
 
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "23.11";
+  # Allow Caddy to user to manage and create certs
+  services.tailscale.permitCertUid = "caddy";
 
-  services.tailscale = {
-    enable = true;
-    port = 12345;
-    # Allow Caddy to user to manage and create certs
-    permitCertUid = "caddy";
-  };
-
-  #services.xserver.videoDrivers = ["nvidia"];
   hardware.graphics = {
     enable = true;
     # For better video playback
     extraPackages = with pkgs; [nvidia-vaapi-driver];
-  }; #
-
-  #hardware.nvidia = {
-  #  modesetting.enable = true;
-  #  open = false;
-  #  nvidiaSettings = true;
-  #  package = config.boot.kernelPackages.nvidiaPackages.stable;
-  #};
+  }; 
 
   hardware.coral.usb.enable = true;
 
-  services = {
-    pulseaudio.enable = false;
-    pipewire = {
-      enable = true;
-      audio.enable = true;
-      pulse.enable = true;
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
-      jack.enable = true;
-    };
-  };
-
-  networking.firewall.allowedUDPPorts = [config.services.tailscale.port];
-
-  services.devmon.enable = true;
-
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    publish.enable = true;
-    publish.userServices = true;
-  };
-  boot.supportedFilesystems = ["ntfs"];
+  # Allow rootless to bind low numbered ports
   boot.kernel.sysctl = {
     "net.ipv4.ip_unprivileged_port_start" = 0;
   };
