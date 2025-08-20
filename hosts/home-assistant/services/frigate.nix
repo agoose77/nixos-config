@@ -15,8 +15,8 @@ in {
   sops.secrets.anke-password = configFile;
   sops.secrets.reolink-password = configFile;
 
-  environment.etc."frigate/config.yml".source = config.sops.templates."frigate-config.yml".path;
-  sops.templates."frigate-config.yml" = {
+  environment.etc."frigate/config.yaml".source = config.sops.templates."frigate-config.yaml".path;
+  sops.templates."frigate-config.yaml" = {
     content = ''
       mqtt:
         enabled: true
