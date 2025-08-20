@@ -4,7 +4,6 @@
   inputs,
   outputs,
   lib,
-  config,
   pkgs,
   ...
 }: {
@@ -12,18 +11,18 @@
   imports =
     [
       inputs.stylix.homeModules.stylix
-      ../features/hyprland.nix
-      ../features/hyprlock.nix
-      ../features/waybar.nix
-      ../features/git.nix
-      ../features/email.nix
-      ../features/firefox.nix
-      ../features/nixvim.nix
-      ../features/rio.nix
-      ../features/fonts.nix
-      ../features/wofi.nix
-      ../features/notes.nix
-      ../features/stylix.nix
+      ./features/hyprland.nix
+      ./features/hyprlock.nix
+      ./features/waybar.nix
+      ./features/git.nix
+      ./features/email.nix
+      ./features/firefox.nix
+      ./features/nixvim.nix
+      ./features/rio.nix
+      ./features/fonts.nix
+      ./features/wofi.nix
+      ./features/notes.nix
+      ./features/stylix.nix
     ]
     ++ (builtins.attrValues outputs.homeManagerModules);
   nixpkgs = {

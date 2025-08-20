@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ./global
+    ./global.nix
   ];
   home.packages = [
     pkgs.luminance
