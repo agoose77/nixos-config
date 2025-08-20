@@ -4,7 +4,7 @@
   outputs,
   ...
 }: let
-  hosts = ["nixos"]; #lib.attrNames outputs.nixosConfigurations;
+  hosts = ["nixos" "home-assistant"]; #lib.attrNames outputs.nixosConfigurations;
 in {
   # Make other hosts known ahead of time
   programs.ssh = {

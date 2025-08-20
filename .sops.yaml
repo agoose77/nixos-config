@@ -3,11 +3,15 @@
 # Also see https://github.com/Mic92/dotfiles/blob/d6114726d859df36ccaa32891c4963ae5717ef7f/nixos/.sops.yaml
 # for a more complex example.
 keys:
-  - &angus age1rkyxkg4uq7x5gehv4wkcmnyfnhur0l2vnzkj03zn9d2e7588ygaq2383cl
-  - &nixos age1q0vyp3q2dgfzdmy0ex0fwl9ypdjpq7hwlxx29cm0uqdds8gaxejqu062g7
+  - &users:
+    - &angus age1rkyxkg4uq7x5gehv4wkcmnyfnhur0l2vnzkj03zn9d2e7588ygaq2383cl
+  - &hosts:
+    - &nixos age1q0vyp3q2dgfzdmy0ex0fwl9ypdjpq7hwlxx29cm0uqdds8gaxejqu062g7
+    - &home-assistant age1el0tauewgx874ny8qf4jvh5sug7zjuvy2c64fsnsrunv86nqs44sdkvvh2
 creation_rules:
   - path_regex: hosts/common/secrets.ya?ml$
     key_groups:
       - age:
           - *angus
           - *nixos
+          - *home-assistant
