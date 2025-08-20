@@ -24,4 +24,11 @@ in
       version = "1.6.0";
       hash = "sha256-dSNPdxVlwweZgHXUpn9XqhcyOu/JM/vR/CekN5xXHBo=";
     };
+    meta = {
+      description = "The MyST Markdown Command Line interface.";
+      homepage = "https://github.com/Misterio77/minicava";
+      license = licenses.mit;
+      platforms = platforms.all;
+      mainProgram = "myst";
+    };
   }
