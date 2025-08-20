@@ -7,15 +7,19 @@
   ...
 }: {
   imports = [
-    ../common/global
-    ../common/users/angus
-    ../common/optional/secure-boot.nix
-    ../common/optional/quiet-boot.nix
-    ../common/optional/power.nix
-    ../common/optional/bluetooth.nix
-    ./displays.nix
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    # Global config
+    ../common/global
+    # User config
+    ../common/users/angus
+    # Optional config
+    ../common/features/secure-boot.nix
+    ../common/features/quiet-boot.nix
+    ../common/features/power.nix
+    ../common/features/bluetooth.nix
+    # Host-specific config
+    ./displays.nix
   ];
 
   networking.hostName = "waldo";

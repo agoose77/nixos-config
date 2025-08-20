@@ -11,24 +11,24 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.stylix.nixosModules.stylix
-    ./podman.nix
-    ./openvpn.nix
-    ./openssh.nix
-    ./spotify-connect.nix
-    ./sound.nix
-    ./boot.nix
-    ./tailscale.nix
-    ./usb.nix
-    ./hyprland.nix
-    ./hyprlock.nix
-    ./1password.nix
-    ./k3s.nix
-    ./nix.nix
-    ./kdeconnect.nix
-    ./locale.nix
-    ./flatpak.nix
-    ./gnome-keyring.nix
-    ./avahi.nix
+    ./features/podman.nix
+    ./features/openvpn.nix
+    ./features/openssh.nix
+    ./features/spotify-connect.nix
+    ./features/sound.nix
+    ./features/boot.nix
+    ./features/tailscale.nix
+    ./features/usb.nix
+    ./features/hyprland.nix
+    ./features/hyprlock.nix
+    ./features/1password.nix
+    ./features/k3s.nix
+    ./features/nix.nix
+    ./features/kdeconnect.nix
+    ./features/locale.nix
+    ./features/flatpak.nix
+    ./features/gnome-keyring.nix
+    ./features/avahi.nix
   ];
 
   nixpkgs = {

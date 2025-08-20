@@ -7,13 +7,16 @@
   ...
 }: {
   imports = [
-    ../common/global
-    ../common/users/angus
-    ../common/optional/quiet-boot.nix
-    ../common/optional/power.nix
-    ../common/optional/bluetooth.nix
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    # Global config
+    ../common/global.nix
+    # User config
+    ../common/users/angus
+    # User config
+    ../common/features/quiet-boot.nix
+    ../common/features/power.nix
+    ../common/features/bluetooth.nix
   ];
 
   networking.hostName = "latitude";
