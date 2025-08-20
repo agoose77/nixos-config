@@ -13,7 +13,7 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     # Host specific config
-    ./services.nix
+    ./services
     ./disks.nix
     # User config
     ../common/users/angus
