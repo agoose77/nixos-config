@@ -3,7 +3,6 @@
 {
   pkgs,
   config,
-  sops,
   ...
 }: {
   users.users. angus = {
