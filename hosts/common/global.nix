@@ -3,6 +3,7 @@
   inputs,
   outputs,
   lib,
+  sops-nix,
   config,
   pkgs,
   ...
@@ -11,6 +12,7 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.stylix.nixosModules.stylix
+    inputs.sops-nix.nixosModules.sops
     ./features/autologin-angus.nix
     ./features/docker.nix
     ./features/podman.nix
