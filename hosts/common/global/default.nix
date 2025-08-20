@@ -17,7 +17,6 @@
     ./spotify-connect.nix
     ./sound.nix
     ./boot.nix
-    ./firewall.nix
     ./tailscale.nix
     ./usb.nix
     ./hyprland.nix
