@@ -293,7 +293,7 @@ in {
       "--device=/dev/bus/usb"
       "--device=/dev/dri/renderD128"
       "--device=/dev/dri/renderD129"
-      "--device=/dev/dri/card0"
+      "--device=/dev/dri/card2"
       "--device=/dev/dri/card1"
       "--tmpfs=/tmp/cache:rw,size=1g,mode=1777"
       "--shm-size=256mb"
