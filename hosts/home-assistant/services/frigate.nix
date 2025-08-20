@@ -17,7 +17,7 @@ in {
 
   environment.etc."frigate/config.yml".source = config.sops.templates."frigate-config.yml".path;
   sops.templates."frigate-config.yml".content = ''
-      mqtt:
+    mqtt:
       enabled: true
       user: root
       password: "${config.sops.placeholder.mqtt-password}"
