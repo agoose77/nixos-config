@@ -9,8 +9,10 @@
 }: {
   # You can import other home-manager modules here
   imports =
-    [
+    (builtins.attrValues outputs.homeManagerModules)
+    ++ [
       inputs.stylix.homeModules.stylix
+      ./features/stylix.nix
       ./features/hyprland.nix
       ./features/hyprlock.nix
       ./features/waybar.nix
@@ -23,9 +25,8 @@
       ./features/fonts.nix
       ./features/wofi.nix
       ./features/notes.nix
-      ./features/stylix.nix
-    ]
-    ++ (builtins.attrValues outputs.homeManagerModules);
+      ./features/kdeconnect.nix
+    ];
   nixpkgs = {
     # Apply all overlays
     overlays = builtins.attrValues outputs.overlays;
@@ -35,11 +36,6 @@
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
     };
-  };
-
-  services.kdeconnect = {
-    enable = true;
-    indicator = true;
   };
 
   home = {
