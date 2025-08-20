@@ -15,6 +15,8 @@
     # Host specific config
     ./services.nix
     ./disks.nix
+    # User config
+    ../common/users/angus
     # Optional config
     ../common/features/quiet-boot.nix
     ../common/features/podman.nix
