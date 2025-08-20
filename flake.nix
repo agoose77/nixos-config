@@ -58,6 +58,13 @@
 
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+    devShells = forAllSystems (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      default = pkgs.mkShell {
+        packages = with pkgs; [sops ssh-to-age age];
+      };
+    });
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#nixos'
     nixosConfigurations = {
