@@ -2,7 +2,7 @@
   node = pkgs.nodejs_22;
 in
   pkgs.stdenv.mkDerivation {
-    name = "myst-src";
+    name = "myst";
     nativeBuildInputs = [
       pkgs.makeBinaryWrapper
     ];
