@@ -10,6 +10,8 @@ in {
   home.packages = with pkgs; [
     wf-recorder
     wl-clipboard
+    hyprpicker
+    hyprshot
   ];
 
   home.sessionVariables = {
@@ -231,6 +233,9 @@ in {
         "$mod, G, togglegroup"
         "$mod ALT, TAB, changegroupactive, b"
         "$mod, TAB, changegroupactive, f"
+        # Screenshotting
+        ",Print,exec,${uwsm-app (lib.getExe pkgs.hyprshot)} --freeze --clipboard-only -m region"
+        "SHIFT,Print,exec,${uwsm-app (lib.getExe pkgs.hyprshot)} --freeze --clipboard-only -m output"
       ];
       bindm = [
         "$mod, mouse:272, movewindow"
