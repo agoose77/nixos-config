@@ -1,4 +1,4 @@
-{...}: {
+{
   services.openvpn.servers = {
     londonBiscuits = {
       autoStart = false;

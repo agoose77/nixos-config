@@ -1,3 +1,3 @@
-{...}: {
+{
   security.pam.services.hyprlock = {};
 }

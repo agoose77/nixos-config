@@ -1,4 +1,4 @@
-{...}: {
+{
   accounts.email = {
     accounts."goosey15@gmail.com" = {
       primary = true;

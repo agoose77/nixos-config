@@ -1,4 +1,4 @@
-{...}: {
+{
   networking.firewall = {
     allowedTCPPorts = [57621]; # Spotify  local track broadcast
 
