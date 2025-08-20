@@ -14,6 +14,7 @@
     ./hardware-configuration.nix
     # Host specific config
     ./services.nix
+    ./disks.nix
     # Optional config
     ../common/features/quiet-boot.nix
     ../common/features/podman.nix
@@ -90,26 +91,12 @@
     enable = true;
     # For better video playback
     extraPackages = with pkgs; [nvidia-vaapi-driver];
-  }; 
+  };
 
   hardware.coral.usb.enable = true;
 
   # Allow rootless to bind low numbered ports
   boot.kernel.sysctl = {
     "net.ipv4.ip_unprivileged_port_start" = 0;
-  };
-
-  fileSystems."/mnt/data" = {
-    device = "/dev/disk/by-uuid/7028A53628A4FC6A";
-    fsType = "ntfs";
-    options = [
-      # If you don't have this options attribute, it'll default to "defaults"
-      # boot options for fstab. Search up fstab mount options you can use
-      "users" # Allows any user to mount and unmount
-      "nofail" # Prevent system from failing if this drive doesn't mount,
-      "rw"
-      "uid=1000"
-      "gid=501"
-    ];
   };
 }
