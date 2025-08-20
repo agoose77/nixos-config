@@ -26,6 +26,10 @@
       ./features/wofi.nix
       ./features/notes.nix
       ./features/kdeconnect.nix
+      ./features/playerctl.nix
+      ./features/notifications.nix
+      ./features/videoconf.nix
+      ./features/design.nix
     ];
   nixpkgs = {
     # Apply all overlays
@@ -43,7 +47,6 @@
     homeDirectory = "/home/angus";
 
     packages = with pkgs; [
-      discord
       element-desktop
       openssh
       spotify

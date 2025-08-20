@@ -17,37 +17,7 @@
       uid = 1000;
 
       packages = with pkgs; [
-        alejandra
-        bat
-        bash
-        buildah
-        delta
-        dunst
-        file
-        fd
-        fzf
-        gimp
-        git
-        inkscape
-        jq
-        micro
-        micromamba
-        nushell
-        podman
         oils-for-unix
-        playerctl
-        ripgrep
-        slack
-        unzip
-        vulkan-loader
-        vulkan-validation-layers
-        vulkan-tools
-        wget
-        wofi
-        wl-clipboard
-        wlogout
-        zip
-        zoom-us
       ];
     };
   };

@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   dockerEnabled = config.virtualisation.docker.enable;
 in {
   virtualisation = {
@@ -15,4 +19,9 @@ in {
   # Support DNS within bridge networks
   # c.f. https://github.com/NixOS/nixpkgs/issues/226365#issuecomment-2164985192
   networking.firewall.interfaces."podman+".allowedUDPPorts = [53 5353];
+
+  # Enable buildah too
+  environment.systemPackages = [
+    pkgs.buildah
+  ];
 }

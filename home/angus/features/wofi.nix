@@ -10,4 +10,6 @@
   home.packages = [
     pkgs.wofi-emoji
   ];
+
+  programs.wofi.enable = true;
 }
