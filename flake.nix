@@ -115,6 +115,14 @@
           ./home/angus/nixos.nix
         ];
       };
+
+      "angus@home-assistant" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [
+          ./home/angus/home-assistant.nix
+        ];
+      };
     };
   };
 }
