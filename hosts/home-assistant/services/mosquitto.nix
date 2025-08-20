@@ -19,7 +19,7 @@
     ];
     image = "docker.io/eclipse-mosquitto:2.0.22";
     volumes = [
-      "/etc/mosquitto/config:/mosquitto/config"
+      "/etc/mosquitto:/mosquitto/config"
     ];
     extraOptions = [
       "--network=mqtt-bridge"
