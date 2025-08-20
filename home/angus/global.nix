@@ -14,6 +14,7 @@
       ./features/hyprland.nix
       ./features/hyprlock.nix
       ./features/waybar.nix
+      ./features/cli.nix
       ./features/git.nix
       ./features/email.nix
       ./features/firefox.nix
@@ -50,17 +51,12 @@
       element-desktop
       openssh
       spotify
-      sd
-      watchexec
-      comby
       hyprshot
     ];
 
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
   };
-
-  programs.ripgrep.enable = true;
 
   # Enable home-manager
   programs.home-manager.enable = true;
@@ -94,48 +90,9 @@
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
-  programs.bash.enable = true;
-  programs.direnv = {
-    enable = true;
-    enableBashIntegration = true;
-    nix-direnv.enable = true;
-  };
-
-  programs.atuin = {
-    enable = true;
-    enableBashIntegration = true;
-  };
-
-  programs.starship = {
-    enable = true;
-    settings = {
-      gcloud = {
-        disabled = true;
-      };
-      kubernetes = {
-        disabled = false;
-        contexts = [
-          {
-            context_pattern = "^arn:aws:eks.*:cluster/(.*)$";
-            context_alias = "aws.$1";
-          }
-          {
-            context_pattern = "^gke.*_([^_]*)$";
-            context_alias = "gcp.$1";
-          }
-        ];
-      };
-    };
-  };
-
-  programs.zoxide = {
-    enable = true;
-    enableBashIntegration = true;
-  };
   home.sessionVariables = {
     # Make it hard to accidentally nest kubeconfig contexts in 2i2c's deployer infra
     DEPLOYER_NO_NESTED_KUBECONFIG = "1";
-    _ZO_DOCTOR = "0";
   };
 
   home.pointerCursor = {
@@ -144,9 +101,6 @@
     x11.enable = true;
     name = "Bibata-Modern-Classic";
   };
-
-  programs.btop.enable = true;
-  programs.eza.enable = true;
 
   # Prevent kubeconfig being used
   home.file.".kube/config".text = ''
