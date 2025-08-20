@@ -2,11 +2,6 @@
   stylix = {
     enable = true;
 
-    /*
-    We'll take over styling
-    */
-    targets.waybar.addCss = false;
-    targets.firefox.profileNames = [ "default" ];
     base16Scheme =
       pkgs.fetchFromGitHub {
         owner = "dracula";

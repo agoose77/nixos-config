@@ -1,4 +1,8 @@
 {
+  lib,
+  config,
+  ...
+}: {
   programs.waybar = {
     enable = true;
     systemd.enable = true;
@@ -266,4 +270,9 @@
       };
     };
   };
+
+  /*
+  We'll take over styling
+  */
+  stylix.targets.waybar.addCss = lib.mkIf config.stylix.enable false;
 }
