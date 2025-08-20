@@ -18,7 +18,7 @@
     zip
     watchexec
   ];
-  programs.ripgrep.emable = true;
+  programs.ripgrep.enable = true;
   programs.bash.enable = true;
 
   programs.direnv = {
