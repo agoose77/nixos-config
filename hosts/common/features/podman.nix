@@ -1,7 +1,11 @@
-{
+{config, ...}: let
+  dockerEnabled = config.virtualisation.docker.enable;
+in {
   virtualisation = {
     podman = {
       enable = true;
+      dockerCompat = !dockerEnabled;
+      dockerSocket.enable = !dockerEnabled;
 
       # Required for containers under podman-compose to be able to talk to each other.
       defaultNetwork.settings.dns_enabled = true;
