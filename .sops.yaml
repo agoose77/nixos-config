@@ -10,6 +10,7 @@ keys:
     - &home-assistant age1el0tauewgx874ny8qf4jvh5sug7zjuvy2c64fsnsrunv86nqs44sdkvvh2
     - &hass age1pfhl64hjagfsf7sm65vz4qq0vjt3p6udtrdv3qvxw6ufmx0wt9fqfj7ms3
     - &latitude age13r9gfekdtkexk60fqfts7lsttz3drevegdltmj90aalv2zudv3cssnnfet
+    - &waldo age1zcnkd83qc4urwsmzz4erwqjk8nlr7cp3xlm65yg46v3g6v2mzq4qxn7afr
 creation_rules:
   - path_regex: hosts/common/secrets.ya?ml$
     key_groups:
@@ -19,6 +20,7 @@ creation_rules:
           - *home-assistant
           - *hass
           - *latitude
+          - *waldo
   - path_regex: hosts/home-assistant/secrets.ya?ml$
     key_groups:
       - age:
