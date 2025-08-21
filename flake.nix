@@ -93,10 +93,10 @@
           ./hosts/home-assistant
         ];
       };
-      "hass-l" = nixpkgs.lib.nixosSystem {
+      "hass" = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./hosts/hass-l
+          ./hosts/hass
         ];
       };
     };
@@ -135,6 +135,15 @@
           ./home/angus/home-assistant.nix
         ];
       };
+
+      "angus@hass" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [
+          ./home/angus/home-assistant.nix
+        ];
+      };
+
     };
   };
 }
