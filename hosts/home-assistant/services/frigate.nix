@@ -4,14 +4,16 @@
     owner = "root";
     mode = "0755";
   };
+  secret = config.sops.placeholder;
 in {
   networking.firewall.allowedTCPPorts = [8555];
   networking.firewall.allowedUDPPorts = [8555];
 
   sops.secrets.mqtt-password = configFile;
   sops.secrets.tapo-user = configFile;
-  sops.secrets.tapo-password = configFile;
+  sops.secrets.tapo-escaped-user = configFile;
   sops.secrets.tapo-camera-password = configFile;
+  sops.secrets.tapo-account-password = configFile;
   sops.secrets.anke-password = configFile;
   sops.secrets.reolink-password = configFile;
 
@@ -20,7 +22,7 @@ in {
       mqtt:
         enabled: true
         user: root
-        password: "${config.sops.placeholder.mqtt-password}"
+        password: "${secret.mqtt-password}"
         host: mosquitto
         port: 1883
 
@@ -56,34 +58,34 @@ in {
         # These are "high-res"
         streams:
           tapo:
-            - rtsp://${config.sops.placeholder.tapo-user}:${config.sops.placeholder.tapo-password}@192.168.68.61:554/stream1
-            - tapo://admin:${config.sops.placeholder.tapo-camera-password}@192.168.68.61
+            - rtsp://${secret.tapo-escaped-user}:${secret.tapo-camera-password}@192.168.68.61:554/stream1
+            - tapo://admin:${secret.tapo-account-password}@192.168.68.61
             #- ffmpeg:tapo#video=copy#audio=aac
           tapo-sub:
-            - rtsp://${config.sops.placeholder.tapo-user}:${config.sops.placeholder.tapo-password}@192.168.68.61:554/stream2
+            - rtsp://${secret.tapo-escaped-user}:${secret.tapo-camera-password}@192.168.68.61:554/stream2
           back-passage:
-            - rtsp://admin:${config.sops.placeholder.mqtt-password}@192.168.69.228:554/Streaming/Channels/101
+            - rtsp://admin:${secret.mqtt-password}@192.168.69.228:554/Streaming/Channels/101
           back-passage-sub:
-            - rtsp://admin:${config.sops.placeholder.anke-password}@192.168.69.228:554/Streaming/Channels/102
+            - rtsp://admin:${secret.anke-password}@192.168.69.228:554/Streaming/Channels/102
           front-drive:
-            - rtsp://admin:${config.sops.placeholder.anke-password}@192.168.69.228:554/Streaming/Channels/201
+            - rtsp://admin:${secret.anke-password}@192.168.69.228:554/Streaming/Channels/201
           front-drive-sub:
-            - rtsp://admin:${config.sops.placeholder.anke-password}@192.168.69.228:554/Streaming/Channels/202
+            - rtsp://admin:${secret.anke-password}@192.168.69.228:554/Streaming/Channels/202
           street:
-            - rtsp://admin:${config.sops.placeholder.anke-password}@192.168.69.228:554/Streaming/Channels/301
+            - rtsp://admin:${secret.anke-password}@192.168.69.228:554/Streaming/Channels/301
           street-sub:
-            - rtsp://admin:${config.sops.placeholder.anke-password}@192.168.69.228:554/Streaming/Channels/302
+            - rtsp://admin:${secret.anke-password}@192.168.69.228:554/Streaming/Channels/302
           garden:
-            - rtsp://admin:${config.sops.placeholder.anke-password}@192.168.69.228:554/Streaming/Channels/401
+            - rtsp://admin:${secret.anke-password}@192.168.69.228:554/Streaming/Channels/401
           garden-sub:
-            - rtsp://admin:${config.sops.placeholder.anke-password}@192.168.69.228:554/Streaming/Channels/402
+            - rtsp://admin:${secret.anke-password}@192.168.69.228:554/Streaming/Channels/402
           doorbell:
             # This is fragile. This config was taken from https://www.reddit.com/r/homeassistant/comments/1jxl3ay/frigate_reolink_doorbell_integration_2way_voice/
-            - rtsp://admin:${config.sops.placeholder.reolink-password}@192.168.68.56:554/Preview_01_main#backchannel=0    # think this disables return audio for the main stream (∴ only one sender)
-            - rtsp://admin:${config.sops.placeholder.reolink-password}@192.168.68.56:554/Preview_01_sub    # substream for return audio?
+            - rtsp://admin:${secret.reolink-password}@192.168.68.56:554/Preview_01_main#backchannel=0    # think this disables return audio for the main stream (∴ only one sender)
+            - rtsp://admin:${secret.reolink-password}@192.168.68.56:554/Preview_01_sub    # substream for return audio?
             - ffmpeg:doorbell#audio=opus#audio=copy
           doorbell-sub:
-            - rtsp://admin:${config.sops.placeholder.reolink-password}@192.168.68.56:554/Preview_01_sub
+            - rtsp://admin:${secret.reolink-password}@192.168.68.56:554/Preview_01_sub
 
       cameras:
         tapo:
@@ -103,8 +105,8 @@ in {
           onvif:
             host: 192.168.68.61
             port: 2020
-            user: goosey15@gmail.com
-            password: dramallama123
+            user: "${secret.tapo-user}"
+            password: "${secret.tapo-camera-password}"
           motion:
             mask: 0.367,0,0.367,0.077,0,0.082,0,0
 
