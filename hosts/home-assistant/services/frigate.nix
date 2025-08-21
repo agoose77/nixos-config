@@ -2,7 +2,7 @@
   configFile = {
     sopsFile = ../secrets.yaml;
     owner = "root";
-    mode = "0755";
+    mode = "0555";
   };
   secret = config.sops.placeholder;
 in {
