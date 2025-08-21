@@ -269,7 +269,7 @@ in {
       detect:
         enabled: true
     '';
-    mode = "0755";
+    mode = "0555";
   };
 
   virtualisation.oci-containers.containers.frigate = {
