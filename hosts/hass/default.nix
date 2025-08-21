@@ -12,57 +12,26 @@
   imports = [
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
-    # Host specific config
     ./services
-    #./disks.nix TODO hass
+    #./disks
+    # Global config
+    ../common/global.nix
     # User config
     ../common/users/angus
     # Optional config
     ../common/features/quiet-boot.nix
-    ../common/features/podman.nix
-    ../common/features/boot.nix
-    ../common/features/tailscale.nix
-    ../common/features/nix.nix
-    ../common/features/locale.nix
-    ../common/features/openssh.nix
-    ../common/features/sops.nix
-    ../common/features/sound.nix
-    ../common/features/avahi.nix
-    ../common/features/usb.nix
-    ../common/features/gnome-keyring.nix
+    ../common/features/power.nix
     ../common/features/bluetooth.nix
-    # Home assistant
-    inputs.home-manager.nixosModules.home-manager
   ];
-
-  nixpkgs = {
-    # You can add overlays here
-    overlays = with outputs.overlays; [additions modifications];
-
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-    };
-  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
 
   networking = {
     hostName = "home-assistant";
-    networkmanager.enable = true;
     # interfaces."enp4s0".macAddress = "20:47:47:79:c5:7d"; TODO HASS
   };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the Budgie Desktop environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.budgie.enable = true;
-
-  # Gnome fix?
+# Gnome fix?
 #  programs.ssh.startAgent = true;
 #  services.gnome.gcr-ssh-agent.enable = false;
 
@@ -99,15 +68,10 @@
     prime = {
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:2:0:0";
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
     };
   };
 
   environment.systemPackages = [
-    pkgs.nvidia-offload
     pkgs.acpi
     pkgs.brightnessctl
   ];

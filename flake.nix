@@ -140,7 +140,7 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          ./home/angus/home-assistant.nix
+          ./home/angus/hass.nix
         ];
       };
 
