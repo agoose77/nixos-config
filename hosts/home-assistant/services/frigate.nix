@@ -257,7 +257,7 @@
     detect:
       enabled: true
   '';
-  secretsPath = lib.strings.removeSuffix ".yaml" config.sops.secrets.frigate-vars.path + "-escaped.yaml";
+  secretsPath = lib.strings.removeSuffix ".yaml" config.sops.secrets.frigate-vars.path + "-escaped.env";
 
   pythonWithYaml = pkgs.python3.withPackages (python-pkgs:
     with python-pkgs; [
@@ -276,7 +276,7 @@ in {
   };
 
   # Disable eDP-2 when keyboard plugged in
-  systemd.services.url_encode_secrets = let
+  systemd.services.buildFrigateEnv = let
     script = pkgs.writeText "escape-env.py" ''
       from yaml import safe_load, dump
       from urllib.parse import quote
@@ -290,8 +290,9 @@ in {
           env[f"{env_key}_ESCAPED"] = quote(value)
           env[env_key] = value
 
+      lines = ["{0}={1}".format(p) for p in env.items()]
       with open("${secretsPath}", "w") as f:
-          f.write(dump(env))
+          f.write('\n'.join(lines))
 
     '';
   in {
