@@ -299,6 +299,7 @@ in {
     serviceConfig = {
       Type = "oneshot";
       Restart = "on-failure";
+      User = "root";
     };
     enableStrictShellChecks = true;
     script = ''
