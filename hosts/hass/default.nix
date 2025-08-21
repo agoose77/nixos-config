@@ -28,7 +28,7 @@
   system.stateVersion = "23.11";
 
   networking = {
-    hostName = "home-assistant";
+    hostName = "hass";
     # interfaces."enp4s0".macAddress = "20:47:47:79:c5:7d"; TODO HASS
   };
 # Gnome fix?
