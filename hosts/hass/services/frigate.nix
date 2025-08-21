@@ -402,7 +402,7 @@ in {
   virtualisation.oci-containers.containers.frigate = {
     environment = {
       FRIGATE_RTSP_PASSWORD = "password";
-      LIBVA_DRIVER_NAME = "i965";
+      LIBVA_DRIVER_NAME = "iHD";
     };
     environmentFiles = [secretsPath];
     ports = [
