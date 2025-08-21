@@ -12,6 +12,7 @@ in {
   sops.secrets.mqtt-password = configFile;
   sops.secrets.tapo-user = configFile;
   sops.secrets.tapo-escaped-user = configFile;
+  sops.secrets.tapo-camera-escaped-password = configFile;
   sops.secrets.tapo-camera-password = configFile;
   sops.secrets.tapo-account-password = configFile;
   sops.secrets.anke-password = configFile;
@@ -58,11 +59,11 @@ in {
         # These are "high-res"
         streams:
           tapo:
-            - rtsp://${secret.tapo-escaped-user}:${secret.tapo-camera-password}@192.168.68.61:554/stream1
+            - rtsp://${secret.tapo-escaped-user}:${secret.tapo-camera-escaped-password}@192.168.68.61:554/stream1
             - tapo://admin:${secret.tapo-account-password}@192.168.68.61
             #- ffmpeg:tapo#video=copy#audio=aac
           tapo-sub:
-            - rtsp://${secret.tapo-escaped-user}:${secret.tapo-camera-password}@192.168.68.61:554/stream2
+            - rtsp://${secret.tapo-escaped-user}:${secret.tapo-camera-escaped-password}@192.168.68.61:554/stream2
           back-passage:
             - rtsp://admin:${secret.mqtt-password}@192.168.69.228:554/Streaming/Channels/101
           back-passage-sub:
