@@ -290,7 +290,7 @@ in {
           env[env_key] = value
 
       with open("${secretsPath}", "w") as f:
-          f.write(dump(key))
+          f.write(dump(env))
 
     '';
   in {
@@ -299,7 +299,6 @@ in {
     serviceConfig = {
       Type = "oneshot";
       Restart = "on-failure";
-      User = "root";
     };
     enableStrictShellChecks = true;
     script = ''
