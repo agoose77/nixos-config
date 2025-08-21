@@ -9,6 +9,7 @@ keys:
     - &nixos age1q0vyp3q2dgfzdmy0ex0fwl9ypdjpq7hwlxx29cm0uqdds8gaxejqu062g7
     - &home-assistant age1el0tauewgx874ny8qf4jvh5sug7zjuvy2c64fsnsrunv86nqs44sdkvvh2
     - &hass age1pfhl64hjagfsf7sm65vz4qq0vjt3p6udtrdv3qvxw6ufmx0wt9fqfj7ms3
+    - &latitude age13r9gfekdtkexk60fqfts7lsttz3drevegdltmj90aalv2zudv3cssnnfet
 creation_rules:
   - path_regex: hosts/common/secrets.ya?ml$
     key_groups:
@@ -17,6 +18,7 @@ creation_rules:
           - *nixos
           - *home-assistant
           - *hass
+          - *latitude
   - path_regex: hosts/home-assistant/secrets.ya?ml$
     key_groups:
       - age:
