@@ -343,7 +343,7 @@ in {
     volumes = [
       "/etc/localtime:/etc/localtime:ro"
       "/var/lib/frigate:/config"
-      "${configFile}:/config/config.yaml"
+      "${configFile}:/config/config.yaml:ro"
       "/mnt/data/media/frigate:/media/frigate"
     ];
   };
