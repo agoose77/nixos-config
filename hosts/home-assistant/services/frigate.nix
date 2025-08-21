@@ -44,34 +44,34 @@
       # These are "high-res"
       streams:
         tapo:
-          - rtsp://{FRIGATE_TAPO_USER_ESCAPED}:{FRIGATE_TAPO_CAMERA_PASSWORD_ESCAPED}@192.168.68.61:554/STREAM1
+          - rtsp://{FRIGATE_TAPO_USER_ESCAPED}:{FRIGATE_TAPO_CAMERA_PASSWORD_ESCAPED}@192.168.68.61:554/Stream1
           - tapo://admin:{FRIGATE_TAPO_ACCOUNT_PASSWORD_ESCAPED}@192.168.68.61
           #- ffmpeg:tapo#video=copy#audio=aac
         tapo-sub:
-          - rtsp://{FRIGATE_TAPO_USER_ESCAPED}:{FRIGATE_TAPO_CAMERA_PASSWORD_ESCAPED}@192.168.68.61:554/STREAM2
+          - rtsp://{FRIGATE_TAPO_USER_ESCAPED}:{FRIGATE_TAPO_CAMERA_PASSWORD_ESCAPED}@192.168.68.61:554/Stream2
         back-passage:
-          - rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/STREAMING/CHANNELS/101
+          - rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/Streaming/Channels/101
         back-passage-sub:
-          - rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/STREAMING/CHANNELS/102
+          - rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/Streaming/Channels/102
         front-drive:
-          - rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/STREAMING/CHANNELS/201
+          - rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/Streaming/Channels/201
         front-drive-sub:
-          - rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/STREAMING/CHANNELS/202
+          - rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/Streaming/Channels/202
         street:
-          - rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/STREAMING/CHANNELS/301
+          - rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/Streaming/Channels/301
         street-sub:
-          - rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/STREAMING/CHANNELS/302
+          - rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/Streaming/Channels/302
         garden:
-          - rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/STREAMING/CHANNELS/401
+          - rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/Streaming/Channels/401
         garden-sub:
-          - rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/STREAMING/CHANNELS/402
+          - rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/Streaming/Channels/402
         doorbell:
           # This is fragile. This config was taken from https://www.reddit.com/r/homeassistant/comments/1jxl3ay/frigate_reolink_doorbell_integration_2way_voice/
-          - rtsp://admin:{FRIGATE_REOLINK_PASSWORD_ESCAPED}@192.168.68.56:554/PREVIEW_01_MAIN#BACKCHANNEL=0    # THINK THIS DISABLES RETURN AUDIO FOR THE MAIN STREAM (∴ ONLY ONE SENDER)
-          - rtsp://admin:{FRIGATE_REOLINK_PASSWORD_ESCAPED}@192.168.68.56:554/PREVIEW_01_SUB    # SUBSTREAM FOR RETURN AUDIO?
+          - rtsp://admin:{FRIGATE_REOLINK_PASSWORD_ESCAPED}@192.168.68.56:554/Preview_01_main#backchannel=0    # THINK THIS DISABLES RETURN AUDIO FOR THE MAIN STREAM (∴ ONLY ONE SENDER)
+          - rtsp://admin:{FRIGATE_REOLINK_PASSWORD_ESCAPED}@192.168.68.56:554/Preview_01_sub    # SUBSTREAM FOR RETURN AUDIO?
           - ffmpeg:doorbell#audio=opus#audio=copy
         doorbell-sub:
-          - rtsp://admin:{FRIGATE_REOLINK_PASSWORD_ESCAPED}@192.168.68.56:554/PREVIEW_01_SUB
+          - rtsp://admin:{FRIGATE_REOLINK_PASSWORD_ESCAPED}@192.168.68.56:554/Preview_01_sub
 
     cameras:
       tapo:
