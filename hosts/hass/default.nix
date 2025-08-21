@@ -63,8 +63,8 @@
   services.xserver.desktopManager.budgie.enable = true;
 
   # Gnome fix?
-  programs.ssh.startAgent = true;
-  services.gnome.gcr-ssh-agent.enable = false;
+#  programs.ssh.startAgent = true;
+#  services.gnome.gcr-ssh-agent.enable = false;
 
   # Allow Caddy to user to manage and create certs
   services.tailscale.permitCertUid = "caddy";
