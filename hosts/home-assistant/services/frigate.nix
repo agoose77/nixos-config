@@ -44,11 +44,11 @@
       # These are "high-res"
       streams:
         tapo:
-          - rtsp://{FRIGATE_TAPO_USER_ESCAPED}:{FRIGATE_TAPO_CAMERA_PASSWORD_ESCAPED}@192.168.68.61:554/Stream1
+          - rtsp://{FRIGATE_TAPO_USER_ESCAPED}:{FRIGATE_TAPO_CAMERA_PASSWORD_ESCAPED}@192.168.68.61:554/stream1
           - tapo://admin:{FRIGATE_TAPO_ACCOUNT_PASSWORD_ESCAPED}@192.168.68.61
           #- ffmpeg:tapo#video=copy#audio=aac
         tapo-sub:
-          - rtsp://{FRIGATE_TAPO_USER_ESCAPED}:{FRIGATE_TAPO_CAMERA_PASSWORD_ESCAPED}@192.168.68.61:554/Stream2
+          - rtsp://{FRIGATE_TAPO_USER_ESCAPED}:{FRIGATE_TAPO_CAMERA_PASSWORD_ESCAPED}@192.168.68.61:554/stream2
         back-passage:
           - rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/Streaming/Channels/101
         back-passage-sub:
