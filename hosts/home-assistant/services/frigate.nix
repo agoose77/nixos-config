@@ -283,7 +283,7 @@ in {
       with open("${config.sops.secrets.frigate-vars.path}", "r") as f:
           data = safe_load(f)
 
-      for key, value in data.items():
+      for key, value in data.copy().items():
           data[f"{key}_ESCAPED"] = quote(value)
 
       with open("${secretsPath}", "w") as f:
