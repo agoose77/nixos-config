@@ -15,6 +15,7 @@
     ../common/users/angus
     # Optional config
     ../common/features/quiet-boot.nix
+    ../common/features/k3s.nix
   ];
 
   networking = {

@@ -3,9 +3,6 @@
   inputs,
   outputs,
   lib,
-  sops-nix,
-  config,
-  pkgs,
   ...
 }: {
   # You can import other NixOS modules here
@@ -26,7 +23,6 @@
     ./features/hyprland.nix
     ./features/hyprlock.nix
     ./features/1password.nix
-    ./features/k3s.nix
     ./features/nix.nix
     ./features/kdeconnect.nix
     ./features/locale.nix
