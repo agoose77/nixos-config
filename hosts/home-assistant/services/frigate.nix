@@ -283,11 +283,14 @@ in {
       with open("${config.sops.secrets.frigate-vars.path}", "r") as f:
           data = safe_load(f)
 
+      env = {}
       for key, value in data.copy().items():
-          data[f"{key}_ESCAPED"] = quote(value)
+          env_key = key.replace("-", "_").upper()
+          env[f"{env_key}_ESCAPED"] = quote(value)
+          env[env_key] = value
 
       with open("${secretsPath}", "w") as f:
-          f.write(dump(data))
+          f.write(dump(key))
 
     '';
   in {
