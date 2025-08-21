@@ -15,7 +15,6 @@ in {
   sops.secrets.anke-password = configFile;
   sops.secrets.reolink-password = configFile;
 
-  environment.etc."frigate/config.yaml".source = config.sops.templates."frigate-config.yaml".path;
   sops.templates."frigate-config.yaml" = {
     content = ''
       mqtt:
@@ -306,7 +305,8 @@ in {
     ];
     volumes = [
       "/etc/localtime:/etc/localtime:ro"
-      "/etc/frigate:/config"
+      "/var/lib/frigate:/config"
+      "${config.sops.templates."frigate-config.yaml".path}:/config/config.yaml"
       "/mnt/data/media/frigate:/media/frigate"
     ];
   };
