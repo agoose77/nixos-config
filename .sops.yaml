@@ -16,6 +16,7 @@ creation_rules:
           - *angus
           - *nixos
           - *home-assistant
+          - *hass
   - path_regex: hosts/home-assistant/secrets.ya?ml$
     key_groups:
       - age:
