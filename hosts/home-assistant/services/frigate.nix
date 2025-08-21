@@ -279,12 +279,12 @@ in {
   systemd.services.url_encode_secrets = let
     script = pkgs.writeText "escape-env.py" ''
       from yaml import safe_load, dump
-      from urllib.parse import escape
+      from urllib.parse import quote
       with open("${config.sops.secrets.frigate-vars.path}", "r") as f:
           data = safe_load(f)
 
       for key, value in data.items():
-          data[f"{key}_ESCAPED"] = escape(value)
+          data[f"{key}_ESCAPED"] = quote(value)
 
       with open("${secretsPath}", "w") as f:
           f.write(dump(data))
