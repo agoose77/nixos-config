@@ -276,7 +276,7 @@ in {
   };
 
   # Disable eDP-2 when keyboard plugged in
-  systemd.services.buildFrigateEnv = let
+  systemd.services."build-frigate-env" = let
     script = pkgs.writeText "escape-env.py" ''
       from yaml import safe_load, dump
       from urllib.parse import quote
@@ -290,7 +290,7 @@ in {
           env[f"{env_key}_ESCAPED"] = quote(value)
           env[env_key] = value
 
-      lines = ["{0}={1}".format(p) for p in env.items()]
+      lines = ["{0}={1}".format(*p) for p in env.items()]
       with open("${secretsPath}", "w") as f:
           f.write('\n'.join(lines))
 
