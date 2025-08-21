@@ -285,7 +285,8 @@ in {
 
       env = {}
       for key, value in data.copy().items():
-          env_key = key.replace("-", "_").upper()
+          env_key_suffix = key.replace("-", "_").upper()
+          env_key = f"FRIGATE_{env_key_suffix}"
           env[f"{env_key}_ESCAPED"] = quote(value)
           env[env_key] = value
 
