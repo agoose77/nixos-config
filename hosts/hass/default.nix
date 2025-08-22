@@ -13,7 +13,7 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     ./services
-    #./disks
+    ./disks.nix
     # Global config
     ../common/global.nix
     # User config
@@ -31,9 +31,9 @@
     hostName = "hass";
     # interfaces."enp4s0".macAddress = "20:47:47:79:c5:7d"; TODO HASS
   };
-# Gnome fix?
-#  programs.ssh.startAgent = true;
-#  services.gnome.gcr-ssh-agent.enable = false;
+  # Gnome fix?
+  #  programs.ssh.startAgent = true;
+  #  services.gnome.gcr-ssh-agent.enable = false;
 
   # Allow Caddy to user to manage and create certs
   services.tailscale.permitCertUid = "caddy";
