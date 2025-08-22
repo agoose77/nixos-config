@@ -87,10 +87,10 @@
           ./hosts/waldo
         ];
       };
-      "home-assistant" = nixpkgs.lib.nixosSystem {
+      "hass-inspiron" = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./hosts/home-assistant
+          ./hosts/hass-inspiron
         ];
       };
       "hass" = nixpkgs.lib.nixosSystem {
@@ -128,11 +128,11 @@
         ];
       };
 
-      "angus@home-assistant" = home-manager.lib.homeManagerConfiguration {
+      "angus@hass-inspiron" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          ./home/angus/home-assistant.nix
+          ./home/angus/hass-inspiron.nix
         ];
       };
 
