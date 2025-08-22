@@ -421,10 +421,7 @@ in {
     image = "ghcr.io/blakeblackshear/frigate:0.16.0";
     extraOptions = [
       "--device=/dev/bus/usb"
-      "--device=/dev/dri/renderD128"
-      "--device=/dev/dri/renderD129"
-      "--device=/dev/dri/card2"
-      "--device=/dev/dri/card1"
+      "--device=/dev/dri"
       "--tmpfs=/tmp/cache:rw,size=1g,mode=1777"
       "--shm-size=256mb"
       "--network=mqtt-bridge"
