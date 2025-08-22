@@ -438,4 +438,9 @@ in {
       "/mnt/data/media/frigate:/media/frigate"
     ];
   };
+
+  # Ensure that frigate has a var directory
+  config.system.activationScripts.makeVaultWardenDir = lib.stringAfter ["var"] ''
+    mkdir -p /var/lib/frigate
+  '';
 }
