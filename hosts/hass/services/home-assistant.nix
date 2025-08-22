@@ -14,6 +14,7 @@
       #"--device=/dev/ttyACM0:/dev/ttyACM0"  # Example, change this to match your own hardware
     ];
     volumes = [
+      "/run/dbus:/run/dbus:ro"
       "/etc/home-assistant:/config"
     ];
   };
