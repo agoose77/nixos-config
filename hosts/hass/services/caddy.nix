@@ -1,11 +1,11 @@
-{config, ...}: {
+{config, ...}: let domainName = "home-assistant"; in {
   networking.firewall.allowedTCPPorts = [80];
 
   services.caddy = rec {
     enable = true;
 
     # Auto-HTTPS remote routing
-    virtualHosts."${config.networking.hostName}.tail12edf.ts.net".extraConfig = ''
+    virtualHosts."${domainName}.tail12edf.ts.net".extraConfig = ''
       reverse_proxy localhost:8123
 
 
@@ -25,6 +25,6 @@
     '';
 
     # For HTTP-only local routing
-    virtualHosts."${config.networking.hostName}.local".extraConfig = virtualHosts."${config.networking.hostName}.tail12edf.ts.net".extraConfig;
+    virtualHosts."${config.networking.hostName}.local".extraConfig = virtualHosts."${domainName}.tail12edf.ts.net".extraConfig;
   };
 }
