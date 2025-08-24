@@ -10,7 +10,7 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     # Global config
-    ../common/global
+    ../common/global.nix
     # User config
     ../common/users/angus
     # Optional config

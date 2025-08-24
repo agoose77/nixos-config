@@ -62,7 +62,7 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in {
       default = pkgs.mkShell {
-        packages = with pkgs; [sops ssh-to-age age];
+        packages = with pkgs; [nix pkgs.home-manager git sops ssh-to-age age];
       };
     });
     # NixOS configuration entrypoint
