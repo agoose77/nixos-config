@@ -6,6 +6,7 @@
     ./mosquitto.nix
     # ./speedtest.nix TODO hass
     ./caddy.nix
+    ./influx.nix
   ];
   systemd.services.init-mqtt-network = {
     description = "Create the network bridge for mqtt.";
