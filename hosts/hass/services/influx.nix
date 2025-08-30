@@ -1,6 +1,5 @@
 {
-  services.influxdb = {
+  services.influxdb2 = {
     enable = true;
-    user = "influxdb";
   };
 }
