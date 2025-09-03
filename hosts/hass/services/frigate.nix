@@ -27,12 +27,12 @@
     ffmpeg = {
       hwaccel_args = "preset-vaapi";
     };
-#    detectors = {
-#      coral = {
-#        type = "edgetpu";
-#        device = "usb";
-#      };
-#    };
+    detectors = {
+      coral = {
+        type = "edgetpu";
+        device = "usb";
+      };
+    };
     go2rtc = {
       webrtc = {
         candidates = [
@@ -341,7 +341,7 @@
       };
     };
     detect = {
-      enabled = false;
+      enabled = true;
     };
   };
   configFile = pkgs.writeTextFile {
