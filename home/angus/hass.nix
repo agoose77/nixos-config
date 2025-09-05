@@ -9,6 +9,7 @@
       height = 1080;
       workspace = "1";
       primary = true;
+      enabled = false;
     }
   ];
   home.packages = [
