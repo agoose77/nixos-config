@@ -21,6 +21,9 @@
         "dog"
       ];
     };
+    face_recognition = {
+      enabled = true;
+    };
     snapshots = {
       enabled = true;
     };
