@@ -30,6 +30,7 @@
   };
 
   boot.kernelModules = ["intel_vpu"];
+  boot.lanzaboote.configurationLimit = 1;
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
