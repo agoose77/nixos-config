@@ -348,7 +348,7 @@
   };
   configFile = pkgs.writeTextFile {
     name = "config.yaml";
-    text = lib.generators.toYAML {} frigateConfig;
+    text = (pkgs.formats.yaml {}).generate "frigate.yml" frigateConfig;
   };
   secretsPath = lib.strings.removeSuffix ".yaml" config.sops.secrets.frigate-vars.path + "-escaped.env";
 
