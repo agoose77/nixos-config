@@ -31,18 +31,10 @@
       hwaccel_args = "preset-vaapi";
     };
     detectors = {
-      onnx = {
-        type = "onnx";
+      ov = {
+        type = "openvino";
+        device = "GPU";
       };
-    };
-    model = {
-      model_type = "yolox";
-      width = 416;
-      height = 416;
-      input_tensor = "nchw";
-      input_dtype = "float_denorm";
-      path = "/config/yolox_tiny.onnx";
-      labelmap_path = "/labelmap/coco-80.txt";
     };
     go2rtc = {
       webrtc = {
@@ -427,7 +419,7 @@ in {
       # go2rtc interface
       "1984:1984"
     ];
-    image = "ghcr.io/blakeblackshear/frigate:0.16.0-tensorrt";
+    image = "ghcr.io/blakeblackshear/frigate:0.16.0";
     extraOptions = [
       "--device=/dev/bus/usb"
       "--device=/dev/dri/card1"
