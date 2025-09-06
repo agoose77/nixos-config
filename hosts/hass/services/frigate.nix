@@ -346,10 +346,8 @@
       enabled = true;
     };
   };
-  configFile = pkgs.writeTextFile {
-    name = "config.yaml";
-    text = (pkgs.formats.yaml {}).generate "frigate.yml" frigateConfig;
-  };
+  configFile = (pkgs.formats.yaml {}).generate "frigate.yml" frigateConfig;
+
   secretsPath = lib.strings.removeSuffix ".yaml" config.sops.secrets.frigate-vars.path + "-escaped.env";
 
   pythonWithYaml = pkgs.python3.withPackages (python-pkgs:
