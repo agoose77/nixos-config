@@ -35,6 +35,15 @@
         type = "onnx";
       };
     };
+    model = {
+      model_type = "yolox";
+      width = 416;
+      height = 416;
+      input_tensor = "nchw";
+      input_dtype = "float_denorm";
+      path = "/config/yolox_tiny.onnx";
+      labelmap_path = "/labelmap/coco-80.txt";
+    };
     go2rtc = {
       webrtc = {
         candidates = [
