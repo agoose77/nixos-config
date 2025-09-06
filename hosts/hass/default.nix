@@ -57,7 +57,11 @@
     enable = true;
     enable32Bit = true;
     # For better video playback
-    extraPackages = with pkgs; [nvidia-vaapi-driver];
+    extraPackages = with pkgs; [
+      nvidia-vaapi-driver
+      vaapiIntel
+      intel-media-driver
+    ];
   };
 
   hardware.nvidia = {
