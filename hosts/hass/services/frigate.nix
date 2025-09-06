@@ -28,7 +28,7 @@
       enabled = true;
     };
     ffmpeg = {
-      hwaccel_args = "preset-nvidia";
+      hwaccel_args = "preset-vaapi";
     };
     detectors = {
       onnx = {
