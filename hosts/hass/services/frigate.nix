@@ -28,12 +28,11 @@
       enabled = true;
     };
     ffmpeg = {
-      hwaccel_args = "preset-vaapi";
+      hwaccel_args = "preset-nvidia";
     };
     detectors = {
-      coral = {
-        type = "edgetpu";
-        device = "usb";
+      onnx = {
+        type = "onnx";
       };
     };
     go2rtc = {
@@ -421,7 +420,7 @@ in {
       # go2rtc interface
       "1984:1984"
     ];
-    image = "ghcr.io/blakeblackshear/frigate:0.16.0";
+    image = "ghcr.io/blakeblackshear/frigate:0.16.0-tensorrt";
     extraOptions = [
       "--device=/dev/bus/usb"
       "--device=/dev/dri"
@@ -430,6 +429,7 @@ in {
       "--network=mqtt-bridge"
       "--cap-add=PERFMON"
       "--group-add=keep-groups"
+      "--gpus=all"
     ];
     volumes = [
       "/etc/localtime:/etc/localtime:ro"

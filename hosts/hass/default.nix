@@ -37,7 +37,9 @@
 
   # Allow Caddy to user to manage and create certs
   services.tailscale.permitCertUid = "caddy";
-  hardware.coral.usb.enable = true;
+
+  # Enable container toolkit
+  hardware.nvidia-container-toolkit.enable = true;
 
   # Allow rootless to bind low numbered ports
   boot.kernel.sysctl = {
@@ -46,7 +48,7 @@
 
   environment.sessionVariables = {
     GBM_BACKEND = "nvidia-drm";
-    LIBVA_DRIVER_NAME = "nvidia";
+    LIBVA_DRIVER_NAME = "iHD";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1"; # Enable Wayland support for slack
