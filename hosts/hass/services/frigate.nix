@@ -37,12 +37,13 @@
       };
     };
     model = {
-      width = 300;
-      height = 300;
-      input_tensor = "nhwc";
-      input_pixel_format = "bgr";
-      path = "/openvino-model/ssdlite_mobilenet_v2.xml";
-      labelmap_path = "/openvino-model/coco_91cl_bkgr.txt";
+      model_type = "yolo-generic";
+      width = 320;
+      height = 320;
+      input_tensor = "nchw";
+      input_dtype = "float";
+      path = "/models/yolov9-t.onnx";
+      labelmap_path = "/labelmap/coco-80.txt";
     };
     go2rtc = {
       webrtc = {
@@ -438,9 +439,26 @@ in {
       "--cap-add=SYS_ADMIN"
       "--group-add=keep-groups"
     ];
+    # Needs onnx model (t)
+    # podman build . --build-arg MODEL_SIZE=t --output . -f- <<'EOF'
+    #     FROM python:3.11 AS build
+    #     RUN apt-get update && apt-get install --no-install-recommends -y libgl1 && rm -rf /var/lib/apt/lists/*
+    #     WORKDIR /yolov9
+    #     ADD https://github.com/WongKinYiu/yolov9.git .
+    #     RUN pip install -r requirements.txt
+    #     RUN pip install onnx onnxruntime onnx-simplifier>=0.4.1
+    #     ARG MODEL_SIZE
+    #     ADD https://github.com/WongKinYiu/yolov9/releases/download/v0.1/yolov9-${MODEL_SIZE}-converted.pt yolov9-${MODEL_SIZE}.pt
+    #     RUN sed -i "s/ckpt = torch.load(attempt_download(w), map_location='cpu')/ckpt = torch.load(attempt_download(w), map_location='cpu', weights_only=False)/g" models/experimental.py
+    #     RUN python3 export.py --weights ./yolov9-${MODEL_SIZE}.pt --imgsz 320 --simplify --include onnx
+    #     FROM scratch
+    #     ARG MODEL_SIZE
+    #     COPY --from=build /yolov9/yolov9-${MODEL_SIZE}.onnx /
+    #     EOF
     volumes = [
       "/etc/localtime:/etc/localtime:ro"
       "/var/lib/frigate:/config"
+      "/etc/frigate/models:/models"
       "${configFile}:/config/config.yaml:ro"
       "/mnt/data/media/frigate:/media/frigate"
     ];
