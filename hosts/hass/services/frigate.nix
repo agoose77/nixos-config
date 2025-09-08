@@ -161,7 +161,7 @@
           ];
         };
         motion = {
-          threshold = 40;
+          threshold = 45;
           contour_area = 15;
           mask = [
             "0.018,0.053,0.241,0.056,0.242,0.022,0.015,0.022"
