@@ -129,7 +129,7 @@
           password = "{FRIGATE_TAPO_CAMERA_PASSWORD}";
         };
         motion = {
-          mask = "0.367,0,#0.367,0.077,#0,0.082,#0,0";
+          mask = "0.367,0,0.367,0.077,0,0.077,0,0";
         };
         audio = {
           enabled = true;
