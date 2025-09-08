@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./home-assistant.nix
-    # ./arr.nix TODO HASS
+    ./arr.nix
     ./frigate.nix
     ./mosquitto.nix
     # ./speedtest.nix TODO hass
