@@ -162,7 +162,7 @@
         };
         motion = {
           threshold = 40;
-          counter_area = 15;
+          contour_area = 15;
           mask = [
             "0.018,0.053,0.241,0.056,0.242,0.022,0.015,0.022"
             "0.667,0.139,0.86,0.098,1,0.237,1,0,0.666,0"
@@ -343,7 +343,7 @@
         audio = frigateConfig.cameras.tapo.audio;
         motion = {
           threshold = 40;
-          counter_area = 15;
+          contour_area = 15;
           mask = [
             "0.34,0.015,0.339,0.047,0.642,0.047,0.644,0.008"
             "1.0,0.0,1.0,0.29,0.0,0.29,0.0,0.0"
