@@ -125,7 +125,7 @@
           password = "{FRIGATE_TAPO_CAMERA_PASSWORD}";
         };
         motion = {
-          mask = "0.367,0,0.367,0.077,0,0.082,0,0";
+          mask = "0.367,0,#0.367,0.077,#0,0.082,#0,0";
         };
         audio = {
           enabled = true;
@@ -335,7 +335,10 @@
         };
         audio = frigateConfig.cameras.tapo.audio;
         motion = {
-          mask = "0.34,0.015,0.339,0.047,0.642,0.047,0.644,0.008";
+          mask = [
+            "0.34,0.015,0.339,0.047,0.642,0.047,0.644,0.008"
+            "1.0,0.0,1.0,0.29,0.0,0.29,0.0,0.0"
+          ];
         };
         review = {
           alerts = {
