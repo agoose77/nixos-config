@@ -4,6 +4,10 @@
   pkgs,
   ...
 }: let
+  yolo_nas_t =      pkgs.fetchurl {
+        url = "https://www.dropbox.com/scl/fi/vgxf89prg7ypwwknp6wz7/yolov9-t.onnx?rlkey=buejo1uyqeuukmzbdvo68u34y&st=jopp3iqe&dl=0";
+        sha256 = "sha256-75v3QnrVeBJr8Q4rGK2/ZN4lRVdt4GSe2wLq8nI683Q=";
+      };
   frigateConfig = {
     mqtt = {
       enabled = true;
@@ -42,7 +46,7 @@
       height = 320;
       input_tensor = "nchw";
       input_dtype = "float";
-      path = "/models/yolov9-t.onnx";
+      path = "/models/model.onnx";
       labelmap_path = "/labelmap/coco-80.txt";
     };
     go2rtc = {
@@ -461,7 +465,7 @@ in {
     volumes = [
       "/etc/localtime:/etc/localtime:ro"
       "/var/lib/frigate:/config"
-      "/etc/frigate/models:/models"
+      "${yolo_nas_t}:/models/model.onnx"
       "${configFile}:/config/config.yaml:ro"
       "/mnt/data/media/frigate:/media/frigate"
     ];
