@@ -4,7 +4,7 @@
     ./arr.nix
     ./frigate.nix
     ./mosquitto.nix
-    # ./speedtest.nix TODO hass
+    ./speedtest.nix
     ./caddy.nix
     ./influx.nix
   ];
