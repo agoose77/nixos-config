@@ -12,7 +12,7 @@ in {
       TZ = "Europe/London";
       SPEEDTEST_SCHEDULE = "0 */1 * * *";
       FILE__APP_KEY = keyPath;
-      PRUNE_RESULTS_OLDER_THAN = 14;
+      PRUNE_RESULTS_OLDER_THAN = "14";
     };
     ports = [
       "4898:80"
