@@ -119,7 +119,7 @@
     gsr = "git svn rebase";
     gss = "git status -s";
     gst = "git status";
-    gsta = "git stash save";
+    gsta = "git stash push";
     gstaa = "git stash apply";
     gstc = "git stash clear";
     gstd = "git stash drop";
