@@ -31,3 +31,13 @@ creation_rules:
       - age:
           - *angus
           - *hass
+  - path_regex: home/angus/secrets.ya?ml$
+    key_groups:
+      - age:
+          - *angus
+          - *nixos
+          - *home-assistant
+          - *hass
+          - *latitude
+          - *waldo
+

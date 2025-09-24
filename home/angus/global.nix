@@ -32,6 +32,7 @@
       ./features/notifications.nix
       ./features/videoconf.nix
       ./features/design.nix
+      ./features/wlsunset.nix
     ];
   nixpkgs = {
     # Apply all overlays
