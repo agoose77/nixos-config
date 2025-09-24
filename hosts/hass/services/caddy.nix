@@ -1,8 +1,22 @@
-{config, ...}: let domainName = "home-assistant"; in {
-  networking.firewall.allowedTCPPorts = [80];
+{
+  config,
+  pkgs,
+  ...
+}: let
+  domainName = "home-assistant";
+in {
+  networking.firewall.allowedTCPPorts = [80 443];
 
+  environment.systemPackages = [
+    pkgs.nss
+    pkgs.nssTools
+  ];
   services.caddy = rec {
     enable = true;
+
+    globalConfig = ''
+      auto_https disable_redirects
+    '';
 
     # Auto-HTTPS remote routing
     virtualHosts."${domainName}.tail12edf.ts.net".extraConfig = ''
@@ -24,7 +38,10 @@
       }
     '';
 
-    # For HTTP-only local routing
+    # For local routing
     virtualHosts."${config.networking.hostName}.local".extraConfig = virtualHosts."${domainName}.tail12edf.ts.net".extraConfig;
+
+    # For HTTP-only local routing
+    virtualHosts."${config.networking.hostName}.local:80".extraConfig = virtualHosts."${domainName}.tail12edf.ts.net".extraConfig;
   };
 }
