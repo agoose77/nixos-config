@@ -59,6 +59,7 @@ in {
       "${climateComponent}/custom_components/climate_template:/config/custom_components/climate_template"
       "${octopusComponent}/custom_components/octopus_energy:/config/custom_components/octopus_energy"
       "${spookComponent}/custom_components/spook:/config/custom_components/spook"
+      "${spookComponent}/custom_components/spook/integrations/spook_inverse:/config/custom_components/spook_inverse"
       "${tplinkComponent}/custom_components/tplink_router:/config/custom_components/tplink_router"
     ];
   };
