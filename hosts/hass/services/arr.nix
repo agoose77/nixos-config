@@ -1,5 +1,16 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   sops.secrets = {
+    # "prowlarr-token" = {
+    #   format = "yaml";
+    #   # can be also set per secret
+    #   sopsFile = ../secrets.yaml;
+    #   mode = "0555";
+    # };
+
     windscribe-username = {
       sopsFile = ../secrets.yaml;
       owner = "root";
@@ -59,38 +70,78 @@
         "--network=container:gluetun"
       ];
     };
-    #     # Prowlarr
-    #     containers.prowlarr = {
-    #       environment = {
-    #         PUID = "1000";
-    #         PGID = "1000";
-    #       };
-    #       image = "lscr.io/linuxserver/prowlarr:1.37.0";
-    #       dependsOn = ["gluetun"];
-    #       volumes = [
-    #         "/etc/prowlarr/data:/config"
-    #       ];
-    #       extraOptions = [
-    #         "--network=container:gluetun"
-    #       ];
-    #     };
-    #     # Sonarr
-    #     containers.sonarr = {
-    #       environment = {
-    #         PUID = "1000";
-    #         PGID = "1000";
-    #       };
-    #       image = "lscr.io/linuxserver/sonarr:4.0.15";
-    #       dependsOn = ["gluetun"];
-    #       volumes = [
-    #         "/etc/sonarr/data:/config"
-    #         "/mnt/data/media/tv:/tv"
-    #         "/mnt/data/media/torrent:/downloads"
-    #       ];
-    #       extraOptions = [
-    #         "--network=container:gluetun"
-    #       ];
-    #     };
+    # Prowlarr
+    containers.prowlarr = let
+      prowlarrConfig = {
+        Config = {
+          BindAddress = "*";
+          Port = "9696";
+          SslPort = "6969";
+          EnableSsl = "False";
+          LaunchBrowser = "True";
+          AuthenticationMethod = "External";
+          Branch = "master";
+          LogLevel = "debug";
+          SslCertPath = "";
+          SslCertPassword = "";
+          UrlBase = "/prowlarr";
+          InstanceName = "Prowlarr";
+          UpdateMechanism = "Docker";
+        };
+      };
+      prowlarrConfigFile = (pkgs.formats.yaml {}).generate "config.xml" prowlarrConfig;
+    in {
+      environment = {
+        PUID = "1000";
+        PGID = "1000";
+      };
+      image = "lscr.io/linuxserver/prowlarr:2.0.5";
+      dependsOn = ["gluetun"];
+      volumes = [
+        "${prowlarrConfigFile}:/config/config.xml"
+        "/etc/prowlarr/data:/config"
+      ];
+      extraOptions = [
+        "--network=container:gluetun"
+      ];
+    };
+    # Sonarr
+    containers.sonarr = let
+      sonarrConfig = {
+        Config = {
+          BindAddress = "*";
+          Port = "8989";
+          SslPort = "9898";
+          EnableSsl = "False";
+          LaunchBrowser = "True";
+          AuthenticationMethod = "External";
+          Branch = "main";
+          LogLevel = "debug";
+          SslCertPath = "";
+          SslCertPassword = "";
+          UrlBase = "/sonarr";
+          InstanceName = "Sonarr";
+          UpdateMechanism = "Docker";
+        };
+      };
+      sonarrConfigFile = (pkgs.formats.yaml {}).generate "config.xml" sonarrConfig;
+    in {
+      environment = {
+        PUID = "1000";
+        PGID = "1000";
+      };
+      image = "lscr.io/linuxserver/sonarr:4.0.15";
+      dependsOn = ["gluetun"];
+      volumes = [
+        "${sonarrConfigFile}:/config/config.xml"
+        "/etc/sonarr/data:/config"
+        "/mnt/data/media/tv:/tv"
+        "/mnt/data/media/torrent:/downloads"
+      ];
+      extraOptions = [
+        "--network=container:gluetun"
+      ];
+    };
     #     # Jellyfin
     #     containers.jellyfin = {
     #       environment = {
