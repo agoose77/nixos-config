@@ -7,6 +7,7 @@
     ./speedtest.nix
     ./caddy.nix
     ./influx.nix
+    ./jellyfin.nix
   ];
   systemd.services.init-mqtt-network = {
     description = "Create the network bridge for mqtt.";
