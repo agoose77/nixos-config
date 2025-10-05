@@ -89,7 +89,7 @@
           UpdateMechanism = "Docker";
         };
       };
-      prowlarrConfigFile = (pkgs.formats.yaml {}).generate "config.xml" prowlarrConfig;
+      prowlarrConfigFile = (pkgs.formats.xml {}).generate "config.xml" prowlarrConfig;
     in {
       environment = {
         PUID = "1000";
@@ -98,7 +98,7 @@
       image = "lscr.io/linuxserver/prowlarr:2.0.5";
       dependsOn = ["gluetun"];
       volumes = [
-        "${prowlarrConfigFile}:/config/config.xml"
+        "${prowlarrConfigFile}:/config/config.xml:ro"
         "/etc/prowlarr/data:/config"
       ];
       extraOptions = [
@@ -124,7 +124,7 @@
           UpdateMechanism = "Docker";
         };
       };
-      sonarrConfigFile = (pkgs.formats.yaml {}).generate "config.xml" sonarrConfig;
+      sonarrConfigFile = (pkgs.formats.xml {}).generate "config.xml" sonarrConfig;
     in {
       environment = {
         PUID = "1000";
@@ -133,7 +133,7 @@
       image = "lscr.io/linuxserver/sonarr:4.0.15";
       dependsOn = ["gluetun"];
       volumes = [
-        "${sonarrConfigFile}:/config/config.xml"
+        "${sonarrConfigFile}:/config/config.xml:ro"
         "/etc/sonarr/data:/config"
         "/mnt/data/media/tv:/tv"
         "/mnt/data/media/torrent:/downloads"
