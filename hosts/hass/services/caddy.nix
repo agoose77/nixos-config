@@ -32,6 +32,9 @@ in {
       redir /prowlarr /prowlarr/
       reverse_proxy /prowlarr/* localhost:9696
 
+      redir /radarr /radarr/
+      reverse_proxy /radarr/* localhost:7878
+
       redir /qbittorrent /qbittorrent/
       handle_path /qbittorrent/* {
        reverse_proxy localhost:8080

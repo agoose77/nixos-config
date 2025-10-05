@@ -142,6 +142,43 @@
         "--network=container:gluetun"
       ];
     };
+    # Sonarr
+    containers.radarr = let
+      radarrConfig = {
+        Config = {
+          BindAddress = "*";
+          Port = "7878";
+          SslPort = "7878";
+          EnableSsl = "False";
+          LaunchBrowser = "True";
+          AuthenticationMethod = "External";
+          Branch = "main";
+          LogLevel = "debug";
+          SslCertPath = "";
+          SslCertPassword = "";
+          UrlBase = "/radarr";
+          InstanceName = "Radarr";
+          UpdateMechanism = "Docker";
+        };
+      };
+      radarrConfigFile = (pkgs.formats.xml {}).generate "config.xml" radarrConfig;
+    in {
+      environment = {
+        PUID = "1000";
+        PGID = "1000";
+      };
+      image = "lscr.io/linuxserver/radarr:5.27.5";
+      dependsOn = ["gluetun"];
+      volumes = [
+        "${radarrConfigFile}:/config/config.xml:rw"
+        "/etc/radarr/data:/config"
+        "/mnt/data/media/film:/film"
+        "/mnt/data/media/torrent:/downloads"
+      ];
+      extraOptions = [
+        "--network=container:gluetun"
+      ];
+    };
     # Jellyfin
     containers.jellyfin = {
       environment = {
