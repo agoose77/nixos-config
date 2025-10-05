@@ -43,6 +43,8 @@
         "8989:8989"
         # Ports for prowlarr
         "9696:9696"
+        # Ports for radarr
+        "7878:7878"
       ];
       image = "docker.io/qmcgaw/gluetun:v3.40";
       volumes = [
