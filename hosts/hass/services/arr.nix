@@ -4,12 +4,12 @@
   ...
 }: {
   sops.secrets = {
-    # "prowlarr-token" = {
-    #   format = "yaml";
-    #   # can be also set per secret
-    #   sopsFile = ../secrets.yaml;
-    #   mode = "0555";
-    # };
+    sonarr-api-key = {
+      format = "yaml";
+      # can be also set per secret
+      sopsFile = ../secrets.yaml;
+      mode = "0555";
+    };
 
     windscribe-username = {
       sopsFile = ../secrets.yaml;
@@ -108,7 +108,7 @@
       ];
     };
     # Sonarr
-    containers.sonarr = let
+    sops.template."sonar-config.xml".content = let
       sonarrConfig = {
         Config = {
           BindAddress = "*";
@@ -117,6 +117,7 @@
           EnableSsl = "False";
           LaunchBrowser = "True";
           AuthenticationMethod = "External";
+          ApiKey = "${config.sops.placeholder.sonarr-api-key}";
           Branch = "main";
           LogLevel = "debug";
           SslCertPath = "";
@@ -126,8 +127,9 @@
           UpdateMechanism = "Docker";
         };
       };
-      sonarrConfigFile = (pkgs.formats.xml {}).generate "config.xml" sonarrConfig;
-    in {
+    in
+      (pkgs.formats.xml {}).generate "config.xml" sonarrConfig;
+    containers.sonarr = {
       environment = {
         PUID = "1000";
         PGID = "1000";
@@ -135,7 +137,7 @@
       image = "lscr.io/linuxserver/sonarr:4.0.16";
       dependsOn = ["gluetun"];
       volumes = [
-        "${sonarrConfigFile}:/config/config.xml:rw"
+        "${config.sops.template."sonar-config.xml"}:/config/config.xml:rw"
         "/etc/sonarr/data:/config"
         "/mnt/data/media/tv:/tv"
         "/mnt/data/media/torrent:/downloads"
