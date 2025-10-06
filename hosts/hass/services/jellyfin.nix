@@ -1,6 +1,6 @@
 {
   # Jellyfin
-  containers.jellyfin = {
+  virtualisation.oci-containers.containers.jellyfin = {
     environment = {
       PUID = "1000";
       PGID = "1000";
@@ -15,7 +15,7 @@
     ports = [
       "8096:8096"
       "7359:7359/udp"
-      "1900:1900/udp"
+      #"1900:1900/udp"
     ];
     extraOptions = [
       "--device=/dev/dri"
