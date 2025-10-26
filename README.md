@@ -36,5 +36,5 @@ nix develop .
   configuration.
   - If you don't have home-manager installed, try `nix shell nixpkgs#home-manager`.
 
-And that's it, really! You're ready to have fun with your configurations using
-the latest and greatest nix3 flake-enabled command UX.
+## Secret Management
+This setup uses `sops` for secret management. Individual host keys can decrypt host-permitted secrets. To support editing of all secrets, the _user_ credentials (derived from a personal SSH key) must be stored in `~/.config/sops/age/keys.txt`.
