@@ -88,6 +88,8 @@
   home.sessionVariables = {
     # Make it hard to accidentally nest kubeconfig contexts in 2i2c's deployer infra
     DEPLOYER_NO_NESTED_KUBECONFIG = "1";
+    # Enable HTTP cache for MyST
+    MYST_HTTP_CACHE_DB = "${config.home.homeDirectory}/.cache/myst-http-cache.sqlite";
   };
 
   home.pointerCursor = {
