@@ -1,13 +1,13 @@
-{config, ...}: let
-  keyPath = "/run/secrets/app_key";
-in {
+{config, ...}: {
   sops.secrets."speedtest-key" = {
     format = "yaml";
     # can be also set per secret
     sopsFile = ../secrets.yaml;
     mode = "0555";
   };
-  virtualisation.oci-containers.containers.speedtest-tracker = {
+  virtualisation.oci-containers.containers.speedtest-tracker = let
+    keyPath = "/run/secrets/app_key";
+  in {
     environment = {
       TZ = "Europe/London";
       SPEEDTEST_SCHEDULE = "0 */1 * * *";
@@ -17,7 +17,7 @@ in {
     ports = [
       "4898:80"
     ];
-    image = "lscr.io/linuxserver/speedtest-tracker:1.6.6";
+    image = "lscr.io/linuxserver/speedtest-tracker:1.7.2";
     volumes = [
       "/etc/speedtest-tracker/data:/config"
       "${config.sops.secrets."speedtest-key".path}:${keyPath}"

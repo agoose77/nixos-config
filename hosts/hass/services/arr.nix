@@ -97,7 +97,7 @@
         PUID = "1000";
         PGID = "1000";
       };
-      image = "lscr.io/linuxserver/prowlarr:2.0.5";
+      image = "lscr.io/linuxserver/prowlarr:2.1.5";
       dependsOn = ["gluetun"];
       volumes = [
         "${prowlarrConfigFile}:/config/config.xml:rw"
@@ -132,7 +132,7 @@
         PUID = "1000";
         PGID = "1000";
       };
-      image = "lscr.io/linuxserver/sonarr:4.0.15";
+      image = "lscr.io/linuxserver/sonarr:4.0.16";
       dependsOn = ["gluetun"];
       volumes = [
         "${sonarrConfigFile}:/config/config.xml:rw"
@@ -169,7 +169,7 @@
         PUID = "1000";
         PGID = "1000";
       };
-      image = "lscr.io/linuxserver/radarr:5.27.5";
+      image = "lscr.io/linuxserver/radarr:5.28.0";
       dependsOn = ["gluetun"];
       volumes = [
         "${radarrConfigFile}:/config/config.xml:rw"

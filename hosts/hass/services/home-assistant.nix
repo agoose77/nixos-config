@@ -8,7 +8,7 @@
   frigateComponent = pkgs.fetchFromGitHub {
     owner = "blakeblackshear";
     repo = "frigate-hass-integration";
-    tag = "v5.9.4";
+    tag = "v5.11.0";
     hash = "sha256-LzrIvHJMB6mFAEfKoMIs0wL+xbEjoBIx48pSEcCHmg4=";
   };
   climateComponent = pkgs.fetchFromGitHub {
@@ -20,7 +20,7 @@
   octopusComponent = pkgs.fetchFromGitHub {
     owner = "BottlecapDave";
     repo = "HomeAssistant-OctopusEnergy";
-    tag = "v16.3.1";
+    tag = "v17.1.1";
     hash = "sha256-rn8wCGUYisLgr61Cd2qaQGfSiAtjKMo2wG/AotEXknE=";
   };
   spookComponent = pkgs.fetchFromGitHub {
@@ -32,7 +32,7 @@
   tplinkComponent = pkgs.fetchFromGitHub {
     owner = "AlexandrErohin";
     repo = "home-assistant-tplink-router";
-    tag = "v2.9.0";
+    tag = "v2.13.0";
     hash = "sha256-2yhoBIU2NMLhAvezB82/gs+A0ZVVsMenvOR1HyU1PEM=";
   };
 in {
@@ -44,7 +44,7 @@ in {
     environment.TZ = "Europe/London";
     # This fixes a bug
     environment.PYTHONPATH = "/usr/local/lib/python3.13:/config/deps";
-    image = "ghcr.io/home-assistant/home-assistant:2025.9.3"; # Warning: if the tag does not change, the image will not be updated
+    image = "ghcr.io/home-assistant/home-assistant:2025.11.1"; # Warning: if the tag does not change, the image will not be updated
     extraOptions = [
       "--network=host"
       "--cap-add=NET_RAW"
