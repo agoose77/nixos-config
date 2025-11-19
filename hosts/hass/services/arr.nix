@@ -26,7 +26,7 @@
   };
 
   # Sonarr
-  sops.templates."sonar-config.xml".content = let
+  sops.templates."sonar-config.xml".file = let
     sonarrConfig = {
       Config = {
         BindAddress = "*";
@@ -35,7 +35,7 @@
         EnableSsl = "False";
         LaunchBrowser = "True";
         AuthenticationMethod = "External";
-        ApiKey = "${config.sops.placeholder.sonarr-api-key}";
+        ApiKey = "@api-key@";
         Branch = "main";
         LogLevel = "debug";
         SslCertPath = "";
@@ -45,8 +45,13 @@
         UpdateMechanism = "Docker";
       };
     };
+    sonarXMLConfig = (pkgs.formats.xml {
+      }).generate "config.xml"
+    sonarrConfig;
   in
-    (pkgs.formats.xml {}).generate "config.xml" sonarrConfig;
+    (pkgs.replaceVars sonarXMLConfig.outPath {
+      api-key = config.sops.placeholder.sonarr-api-key;
+    }).outPath;
 
   virtualisation.oci-containers.containers = {
     # gluetun
@@ -139,7 +144,7 @@
       image = "lscr.io/linuxserver/sonarr:4.0.16";
       dependsOn = ["gluetun"];
       volumes = [
-        "${config.sops.template."sonar-config.xml"}:/config/config.xml:rw"
+        "${config.sops.templates."sonar-config.xml".path}:/config/config.xml:rw"
         "/etc/sonarr/data:/config"
         "/mnt/data/media/tv:/tv"
         "/mnt/data/media/torrent:/downloads"
