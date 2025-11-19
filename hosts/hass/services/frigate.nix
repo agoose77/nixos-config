@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  yolo_nas_t =      pkgs.fetchurl {
-        url = "https://www.dropbox.com/scl/fi/vgxf89prg7ypwwknp6wz7/yolov9-t.onnx?rlkey=buejo1uyqeuukmzbdvo68u34y&st=jopp3iqe&dl=0";
-        sha256 = "sha256-75v3QnrVeBJr8Q4rGK2/ZN4lRVdt4GSe2wLq8nI683Q=";
-      };
+  yolo_nas_t = pkgs.fetchurl {
+    url = "https://www.dropbox.com/scl/fi/vgxf89prg7ypwwknp6wz7/yolov9-t.onnx?rlkey=buejo1uyqeuukmzbdvo68u34y&st=jopp3iqe&dl=0";
+    sha256 = "sha256-75v3QnrVeBJr8Q4rGK2/ZN4lRVdt4GSe2wLq8nI683Q=";
+  };
   frigateConfig = {
     mqtt = {
       enabled = true;
@@ -58,35 +58,42 @@
       };
       streams = {
         tapo = [
-          "rtsp://{FRIGATE_TAPO_USER_ESCAPED}:{FRIGATE_TAPO_CAMERA_PASSWORD_ESCAPED}@192.168.68.61:554/stream1"
-          "tapo://admin:{FRIGATE_TAPO_ACCOUNT_PASSWORD_ESCAPED}@192.168.68.61"
+          "rtsp://{FRIGATE_TAPO_CAMERA_USER_ESCAPED}:{FRIGATE_TAPO_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_TAPO_IP}:554/stream1"
+          "tapo://admin:{FRIGATE_TAPO_ACCOUNT_PASSWORD_ESCAPED}@{FRIGATE_TAPO_IP}"
         ];
         tapo-sub = [
-          "rtsp://{FRIGATE_TAPO_USER_ESCAPED}:{FRIGATE_TAPO_CAMERA_PASSWORD_ESCAPED}@192.168.68.61:554/stream2"
+          "rtsp://{FRIGATE_TAPO_CAMERA_USER_ESCAPED}:{FRIGATE_TAPO_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_TAPO_IP}:554/stream2"
+        ];
+        hallway = [
+          "rtsp://{FRIGATE_HALLWAY_CAMERA_USER_ESCAPED}:{FRIGATE_HALLWAY_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_HALLWAY_IP}:554/stream1"
+          "tapo://admin:{FRIGATE_TAPO_ACCOUNT_PASSWORD_ESCAPED}@{FRIGATE_HALLWAY_IP}"
+        ];
+        hallway-sub = [
+          "rtsp://{FRIGATE_HALLWAY_CAMERA_USER_ESCAPED}:{FRIGATE_HALLWAY_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_HALLWAY_IP}:554/stream2"
         ];
         back-passage = [
-          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/Streaming/Channels/101"
+          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/101"
         ];
         back-passage-sub = [
-          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/Streaming/Channels/102"
+          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/102"
         ];
         front-drive = [
-          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/Streaming/Channels/201"
+          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/201"
         ];
         front-drive-sub = [
-          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/Streaming/Channels/202"
+          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/202"
         ];
         street = [
-          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/Streaming/Channels/301"
+          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/301"
         ];
         street-sub = [
-          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/Streaming/Channels/302"
+          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/302"
         ];
         garden = [
-          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/Streaming/Channels/401"
+          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/401"
         ];
         garden-sub = [
-          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@192.168.69.228:554/Streaming/Channels/402"
+          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/402"
         ];
         doorbell = [
           "rtsp://admin:{FRIGATE_REOLINK_PASSWORD_ESCAPED}@192.168.68.56:554/Preview_01_main#backchannel=0"
@@ -123,15 +130,58 @@
           ];
         };
         onvif = {
-          host = "192.168.68.61";
+          host = "{FRIGATE_TAPO_IP}";
           port = 2020;
-          user = "{FRIGATE_TAPO_USER}";
+          user = "{FRIGATE_TAPO_CAMERA_USER}";
           password = "{FRIGATE_TAPO_CAMERA_PASSWORD}";
         };
         motion = {
           mask = [
             "0.367,0,0.367,0.077,0,0.077,0,0"
             "0.375,0,0.375,0.375,0.625,0.375,0.625,0"
+          ];
+        };
+        audio = {
+          enabled = true;
+          max_not_heard = 10;
+          min_volume = 500;
+          listen = [
+            "bark"
+            "fire_alarm"
+          ];
+        };
+      };
+      hallway = {
+        ffmpeg = {
+          output_args = {
+            record = "preset-record-generic-audio-copy";
+          };
+          inputs = [
+            {
+              path = "rtsp://127.0.0.1:8554/hallway";
+              input_args = "preset-rtsp-restream";
+              roles = [
+                "record"
+                "audio"
+              ];
+            }
+            {
+              path = "rtsp://127.0.0.1:8554/hallway-sub";
+              input_args = "preset-rtsp-restream";
+              roles = [
+                "detect"
+              ];
+            }
+          ];
+        };
+        onvif = {
+          host = "{FRIGATE_HALLWAY_IP}";
+          port = 2020;
+          user = "{FRIGATE_HALLWAY_CAMERA_USER}";
+          password = "{FRIGATE_HALLWAY_CAMERA_PASSWORD}";
+        };
+        motion = {
+          mask = [
           ];
         };
         audio = {
@@ -429,6 +479,9 @@ in {
     environment = {
       FRIGATE_RTSP_PASSWORD = "password";
       LIBVA_DRIVER_NAME = "iHD";
+      FRIGATE_TAPO_IP = "192.168.68.61";
+      FRIGATE_HALLWAY_IP = "192.168.68.93";
+      FRIGATE_ANNKE_IP = "192.168.69.228";
     };
     environmentFiles = [secretsPath];
     ports = [
