@@ -57,19 +57,19 @@
         ];
       };
       streams = {
-        tapo = [
-          "rtsp://{FRIGATE_TAPO_CAMERA_USER_ESCAPED}:{FRIGATE_TAPO_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_TAPO_IP}:554/stream1"
+        hallway = [
+          "rtsp://{FRIGATE_HALLWAY_CAMERA_USER_ESCAPED}:{FRIGATE_HALLWAY_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_TAPO_IP}:554/stream1"
           "tapo://admin:{FRIGATE_TAPO_ACCOUNT_PASSWORD_ESCAPED}@{FRIGATE_TAPO_IP}"
         ];
-        tapo-sub = [
-          "rtsp://{FRIGATE_TAPO_CAMERA_USER_ESCAPED}:{FRIGATE_TAPO_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_TAPO_IP}:554/stream2"
-        ];
-        hallway = [
-          "rtsp://{FRIGATE_HALLWAY_CAMERA_USER_ESCAPED}:{FRIGATE_HALLWAY_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_HALLWAY_IP}:554/stream1"
-          "tapo://admin:{FRIGATE_TAPO_ACCOUNT_PASSWORD_ESCAPED}@{FRIGATE_HALLWAY_IP}"
-        ];
         hallway-sub = [
-          "rtsp://{FRIGATE_HALLWAY_CAMERA_USER_ESCAPED}:{FRIGATE_HALLWAY_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_HALLWAY_IP}:554/stream2"
+          "rtsp://{FRIGATE_HALLWAY_CAMERA_USER_ESCAPED}:{FRIGATE_HALLWAY_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_TAPO_IP}:554/stream2"
+        ];
+        kitchen = [
+          "rtsp://{FRIGATE_KITCHEN_CAMERA_USER_ESCAPED}:{FRIGATE_KITCHEN_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_KITCHEN_IP}:554/stream1"
+          "tapo://admin:{FRIGATE_TAPO_ACCOUNT_PASSWORD_ESCAPED}@{FRIGATE_KITCHEN_IP}"
+        ];
+        kitchen-sub = [
+          "rtsp://{FRIGATE_KITCHEN_CAMERA_USER_ESCAPED}:{FRIGATE_KITCHEN_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_KITCHEN_IP}:554/stream2"
         ];
         back-passage = [
           "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/101"
@@ -132,8 +132,8 @@
         onvif = {
           host = "{FRIGATE_TAPO_IP}";
           port = 2020;
-          user = "{FRIGATE_TAPO_CAMERA_USER}";
-          password = "{FRIGATE_TAPO_CAMERA_PASSWORD}";
+          user = "{FRIGATE_HALLWAY_CAMERA_USER}";
+          password = "{FRIGATE_HALLWAY_CAMERA_PASSWORD}";
         };
         motion = {
           mask = [
@@ -175,10 +175,10 @@
           ];
         };
         onvif = {
-          host = "{FRIGATE_HALLWAY_IP}";
+          host = "{FRIGATE_KITCHEN_IP}";
           port = 2020;
-          user = "{FRIGATE_HALLWAY_CAMERA_USER}";
-          password = "{FRIGATE_HALLWAY_CAMERA_PASSWORD}";
+          user = "{FRIGATE_KITCHEN_CAMERA_USER}";
+          password = "{FRIGATE_KITCHEN_CAMERA_PASSWORD}";
         };
         motion = {
           mask = [
@@ -480,7 +480,7 @@ in {
       FRIGATE_RTSP_PASSWORD = "password";
       LIBVA_DRIVER_NAME = "iHD";
       FRIGATE_TAPO_IP = "192.168.68.61";
-      FRIGATE_HALLWAY_IP = "192.168.68.93";
+      FRIGATE_KITCHEN_IP = "192.168.68.93";
       FRIGATE_ANNKE_IP = "192.168.69.228";
     };
     environmentFiles = [secretsPath];
