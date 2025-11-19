@@ -27,7 +27,7 @@
   # gluetun
   # Might need to order this before torrents: https://discourse.nixos.org/t/oci-containers-with-systemd-unit-dependencies/26029
   virtualisation.oci-containers = {
-    containers.gluetun = {
+    gluetun = {
       environment = {
         VPN_SERVICE_PROVIDER = "windscribe";
         VPN_TYPE = "openvpn";
@@ -57,7 +57,7 @@
       ];
     };
     # qbittorrent
-    containers.qbittorrent = {
+    qbittorrent = {
       environment = {
         PUID = "1000";
         PGID = "1000";
@@ -73,7 +73,7 @@
       ];
     };
     # Prowlarr
-    containers.prowlarr = let
+    prowlarr = let
       prowlarrConfig = {
         Config = {
           BindAddress = "*";
@@ -129,7 +129,7 @@
       };
     in
       (pkgs.formats.xml {}).generate "config.xml" sonarrConfig;
-    containers.sonarr = {
+    sonarr = {
       environment = {
         PUID = "1000";
         PGID = "1000";
@@ -147,7 +147,7 @@
       ];
     };
     # Sonarr
-    containers.radarr = let
+    radarr = let
       radarrConfig = {
         Config = {
           BindAddress = "*";
