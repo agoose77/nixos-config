@@ -26,7 +26,7 @@
   };
 
   # Sonarr
-  sops.template."sonar-config.xml".content = let
+  sops.templates."sonar-config.xml".content = let
     sonarrConfig = {
       Config = {
         BindAddress = "*";
@@ -48,7 +48,7 @@
   in
     (pkgs.formats.xml {}).generate "config.xml" sonarrConfig;
 
-  virtualisation.oci-containers = {
+  virtualisation.oci-containers.containers = {
     # gluetun
     gluetun = {
       environment = {
