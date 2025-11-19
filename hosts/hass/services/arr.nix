@@ -24,9 +24,32 @@
       key = "windscribe-password";
     };
   };
-  # gluetun
-  # Might need to order this before torrents: https://discourse.nixos.org/t/oci-containers-with-systemd-unit-dependencies/26029
+
+  # Sonarr
+  sops.template."sonar-config.xml".content = let
+    sonarrConfig = {
+      Config = {
+        BindAddress = "*";
+        Port = "8989";
+        SslPort = "9898";
+        EnableSsl = "False";
+        LaunchBrowser = "True";
+        AuthenticationMethod = "External";
+        ApiKey = "${config.sops.placeholder.sonarr-api-key}";
+        Branch = "main";
+        LogLevel = "debug";
+        SslCertPath = "";
+        SslCertPassword = "";
+        UrlBase = "/sonarr";
+        InstanceName = "Sonarr";
+        UpdateMechanism = "Docker";
+      };
+    };
+  in
+    (pkgs.formats.xml {}).generate "config.xml" sonarrConfig;
+
   virtualisation.oci-containers = {
+    # gluetun
     gluetun = {
       environment = {
         VPN_SERVICE_PROVIDER = "windscribe";
@@ -108,27 +131,6 @@
       ];
     };
     # Sonarr
-    sops.template."sonar-config.xml".content = let
-      sonarrConfig = {
-        Config = {
-          BindAddress = "*";
-          Port = "8989";
-          SslPort = "9898";
-          EnableSsl = "False";
-          LaunchBrowser = "True";
-          AuthenticationMethod = "External";
-          ApiKey = "${config.sops.placeholder.sonarr-api-key}";
-          Branch = "main";
-          LogLevel = "debug";
-          SslCertPath = "";
-          SslCertPassword = "";
-          UrlBase = "/sonarr";
-          InstanceName = "Sonarr";
-          UpdateMechanism = "Docker";
-        };
-      };
-    in
-      (pkgs.formats.xml {}).generate "config.xml" sonarrConfig;
     sonarr = {
       environment = {
         PUID = "1000";
@@ -146,7 +148,7 @@
         "--network=container:gluetun"
       ];
     };
-    # Sonarr
+    # Radarr
     radarr = let
       radarrConfig = {
         Config = {
