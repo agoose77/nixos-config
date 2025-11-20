@@ -1,39 +1,51 @@
-{pkgs, ...}: let
-  myenergiComponent = pkgs.fetchFromGitHub {
-    owner = "CJNE";
-    repo = "ha-myenergi";
-    tag = "0.0.30";
-    hash = "sha256-vy3I0MLNErz6Y/hoH7Jv/Mpqtg4E2i8cQkGGWpTyfhs=";
-  };
-  frigateComponent = pkgs.fetchFromGitHub {
-    owner = "blakeblackshear";
-    repo = "frigate-hass-integration";
-    tag = "v5.11.0";
-    hash = "sha256-LzrIvHJMB6mFAEfKoMIs0wL+xbEjoBIx48pSEcCHmg4=";
-  };
-  climateComponent = pkgs.fetchFromGitHub {
-    owner = "jcwillox";
-    repo = "hass-template-climate";
-    tag = "v1.3.0";
-    hash = "sha256-hWYYY0kt/RfdCyNR3skiYOyyQ7KF35Xbh8NczIDzr58=";
-  };
-  octopusComponent = pkgs.fetchFromGitHub {
-    owner = "BottlecapDave";
-    repo = "HomeAssistant-OctopusEnergy";
-    tag = "v17.1.1";
-    hash = "sha256-rn8wCGUYisLgr61Cd2qaQGfSiAtjKMo2wG/AotEXknE=";
-  };
-  spookComponent = pkgs.fetchFromGitHub {
-    owner = "frenck";
-    repo = "spook";
-    tag = "v4.0.1";
-    hash = "sha256-0IihrhATgraGmuMRnrbGTUrtlXAR+CooENSIKSWIknY=";
-  };
-  tplinkComponent = pkgs.fetchFromGitHub {
-    owner = "AlexandrErohin";
-    repo = "home-assistant-tplink-router";
-    tag = "v2.13.0";
-    hash = "sha256-2yhoBIU2NMLhAvezB82/gs+A0ZVVsMenvOR1HyU1PEM=";
+{
+  pkgs,
+  lib,
+  ...
+}: let
+  components = {
+    myenergi = pkgs.fetchFromGitHub {
+      owner = "CJNE";
+      repo = "ha-myenergi";
+      tag = "0.0.30";
+      hash = "sha256-vy3I0MLNErz6Y/hoH7Jv/Mpqtg4E2i8cQkGGWpTyfhs=";
+    };
+    frigate = pkgs.fetchFromGitHub {
+      owner = "blakeblackshear";
+      repo = "frigate-hass-integration";
+      tag = "v5.11.0";
+      hash = "sha256-LzrIvHJMB6mFAEfKoMIs0wL+xbEjoBIx48pSEcCHmg4=";
+    };
+    homeconnect_ws = pkgs.fetchFromGitHub {
+      owner = "chris-mc1";
+      repo = "homeconnect_local_hass";
+      rev = "2da91a43678098d9267eea1d740658fe35d7b0ad";
+      hash = "sha256-Xq7dXKPhSQTirMUixQ8eGqNZ+0drlZOXlTUXRZqXv5w=";
+    };
+    climate_template = pkgs.fetchFromGitHub {
+      owner = "jcwillox";
+      repo = "hass-template-climate";
+      tag = "v1.3.0";
+      hash = "sha256-hWYYY0kt/RfdCyNR3skiYOyyQ7KF35Xbh8NczIDzr58=";
+    };
+    octopus_energy = pkgs.fetchFromGitHub {
+      owner = "BottlecapDave";
+      repo = "HomeAssistant-OctopusEnergy";
+      tag = "v17.1.1";
+      hash = "sha256-rn8wCGUYisLgr61Cd2qaQGfSiAtjKMo2wG/AotEXknE=";
+    };
+    spook = pkgs.fetchFromGitHub {
+      owner = "frenck";
+      repo = "spook";
+      tag = "v4.0.1";
+      hash = "sha256-0IihrhATgraGmuMRnrbGTUrtlXAR+CooENSIKSWIknY=";
+    };
+    tplink_router = pkgs.fetchFromGitHub {
+      owner = "AlexandrErohin";
+      repo = "home-assistant-tplink-router";
+      tag = "v2.13.0";
+      hash = "sha256-2yhoBIU2NMLhAvezB82/gs+A0ZVVsMenvOR1HyU1PEM=";
+    };
   };
 in {
   # Open shelly port
@@ -51,16 +63,12 @@ in {
       "--mount=type=tmpfs,destination=/config/www/snapshots"
       #"--device=/dev/ttyACM0:/dev/ttyACM0"  # Example, change this to match your own hardware
     ];
-    volumes = [
-      "/run/dbus:/run/dbus:ro"
-      "/etc/home-assistant:/config"
-      "${myenergiComponent}/custom_components/myenergi:/config/custom_components/myenergi"
-      "${frigateComponent}/custom_components/frigate:/config/custom_components/frigate"
-      "${climateComponent}/custom_components/climate_template:/config/custom_components/climate_template"
-      "${octopusComponent}/custom_components/octopus_energy:/config/custom_components/octopus_energy"
-      "${spookComponent}/custom_components/spook:/config/custom_components/spook"
-      "${spookComponent}/custom_components/spook/integrations/spook_inverse:/config/custom_components/spook_inverse"
-      "${tplinkComponent}/custom_components/tplink_router:/config/custom_components/tplink_router"
-    ];
+    volumes =
+      [
+        "/run/dbus:/run/dbus:ro"
+        "/etc/home-assistant:/config"
+        "${components.spook}/custom_components/spook/integrations/spook_inverse:/config/custom_components/spook_inverse"
+      ]
+      ++ lib.attrsets.mapAttrsToList (name: drv: "${drv}/custom_components/${name}:/config/custom_components/${name}") components;
   };
 }
