@@ -4,7 +4,8 @@
     bat
     bash
     curl
-    comby
+    # Broken:
+    # comby
     httpie
     delta
     file

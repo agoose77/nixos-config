@@ -146,10 +146,10 @@
 
   programs.git = {
     enable = true;
-    userName = "Angus Hollands";
-    userEmail = "goosey15@gmail.com";
     lfs.enable = true;
-    extraConfig = {
+    settings = {
+      name = "Angus Hollands";
+      email = "goosey15@gmail.com";
       push = {
         autoSetupRemote = true;
       };

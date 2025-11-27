@@ -4,7 +4,7 @@
     helvetica-neue-lt-std
     roboto-slab
     noto-fonts
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     fira-code
     fira-code-symbols
     font-awesome
