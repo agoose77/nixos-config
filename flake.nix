@@ -1,5 +1,5 @@
 {
-  description = "Your new nix config";
+  description = "Angus' NixOS configuration";
 
   inputs = {
     # Nixpkgs
@@ -67,83 +67,63 @@
     });
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#nixos'
-    nixosConfigurations = {
-      "nixos" = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          # > Our main nixos configuration file <
-          ./hosts/nixos
-        ];
-      };
-      "latitude" = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/latitude
-        ];
-      };
-      "waldo" = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/waldo
-        ];
-      };
-      "hass-inspiron" = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/hass-inspiron
-        ];
-      };
-      "hass" = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/hass
-        ];
-      };
+    nixosConfigurations = let
+      mkSystem = modules:
+        nixpkgs.lib.nixosSystem {
+          specialArgs = {inherit inputs outputs;};
+          modules = modules;
+        };
+    in {
+      "nixos" = mkSystem [
+        ./hosts/nixos
+      ];
+
+      "latitude" = mkSystem [
+        ./hosts/latitude
+      ];
+
+      "waldo" = mkSystem [
+        ./hosts/waldo
+      ];
+
+      "hass-inspiron" = mkSystem [
+        ./hosts/hass-inspiron
+      ];
+
+      "hass" = mkSystem [
+        ./hosts/hass
+      ];
     };
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#angus@nixos'
-    homeConfigurations = {
-      "angus@latitude" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home/angus/latitude.nix
-        ];
-      };
-      "angus@waldo" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home/angus/waldo.nix
-        ];
-      };
+    homeConfigurations = let
+      mkHome = modules:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = {inherit inputs outputs;};
+          modules = modules;
+        };
+    in {
+      "angus@latitude" = mkHome [
+        ./home/angus/latitude.nix
+      ];
 
-      "angus@nixos" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          # > Our main home-manager configuration file <
-          ./home/angus/nixos.nix
-        ];
-      };
+      "angus@waldo" = mkHome [
+        ./home/angus/waldo.nix
+      ];
 
-      "angus@hass-inspiron" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home/angus/hass-inspiron.nix
-        ];
-      };
+      "angus@nixos" = mkHome [
+        ./home/angus/nixos.nix
+      ];
 
-      "angus@hass" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home/angus/hass.nix
-        ];
-      };
+      "angus@hass-inspiron" = mkHome [
+        ./home/angus/hass-inspiron.nix
+      ];
 
+      "angus@hass" = mkHome [
+        ./home/angus/hass.nix
+      ];
     };
   };
 }
