@@ -52,7 +52,6 @@ in {
       # exec-once = waybar & hyprpaper & firefox
       "exec-once" = [
         (uwsm-app (lib.getExe pkgs.dunst))
-        (uwsm-app (lib.getExe' pkgs.kdePackages.kdeconnect-kde "kdeconnect-kde"))
         (uwsm-app "${lib.getExe pkgs.slack} -u")
         (uwsm-app "${lib.getExe pkgs._1password-gui} --silent")
         (uwsm-app "${lib.getExe pkgs.discord} --start-minimized")
