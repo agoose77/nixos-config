@@ -38,7 +38,7 @@
     extraPackages = with pkgs; [
       vpl-gpu-rt
       intel-media-driver
-      vaapiIntel
+      intel-vaapi-driver
       vaapiVdpau
       libvdpau-va-gl
     ];

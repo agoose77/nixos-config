@@ -62,7 +62,7 @@
     # For better video playback
     extraPackages = with pkgs; [
       nvidia-vaapi-driver
-      vaapiIntel
+      intel-vaapi-driver
       intel-media-driver
     ];
   };
