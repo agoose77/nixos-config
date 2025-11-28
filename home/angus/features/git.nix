@@ -148,8 +148,10 @@
     enable = true;
     lfs.enable = true;
     settings = {
-      name = "Angus Hollands";
-      email = "goosey15@gmail.com";
+      user = {
+        name = "Angus Hollands";
+        email = "goosey15@gmail.com";
+      };
       push = {
         autoSetupRemote = true;
       };
