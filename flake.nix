@@ -51,7 +51,7 @@
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
     nixosModules = import ./modules/nixos;
-    homeManagerModules = import ./modules/home-manager;
+    homeModules = import ./modules/home-manager;
 
     # Your custom packages and modifications, exported as overlays
     overlays = import ./overlays {inherit inputs;};

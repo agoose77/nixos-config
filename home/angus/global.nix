@@ -10,7 +10,7 @@
 }: {
   # You can import other home-manager modules here
   imports =
-    (builtins.attrValues outputs.homeManagerModules)
+    (builtins.attrValues outputs.homeModules)
     ++ [
       inputs.stylix.homeModules.stylix
       ./features/stylix.nix
