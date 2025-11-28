@@ -143,9 +143,8 @@ in {
         "workspace 2 silent, class:^Slack$"
         "workspace 2 silent, class:^discord$"
       ];
-
+      gesture = "3, horizontal, workspace";
       gestures = {
-        workspace_swipe = true;
         workspace_swipe_min_speed_to_force = 10;
         workspace_swipe_forever = true;
       };
