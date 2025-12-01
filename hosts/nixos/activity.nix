@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }: {
   sops.templates."nixos-activity.json".file = let
@@ -37,7 +38,7 @@
     script = ''
       #!/usr/bin/env bash
       set -eu
-      ${lib.getExe pkgs.idle-monitor} /etc/nixos-activity/config.json
+      ${lib.getExe pkgs.idle-monitor} ${config.sops.templates."nixos-activity.json".path}
     '';
   };
 }
