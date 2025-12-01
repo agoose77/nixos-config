@@ -20,6 +20,8 @@
     ../common/features/quiet-boot.nix
     ../common/features/power.nix
     ../common/features/bluetooth.nix
+    ../common/features/hyprland.nix
+    ../common/features/hyprlock.nix
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

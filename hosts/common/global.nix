@@ -20,8 +20,6 @@
     ./features/boot.nix
     ./features/tailscale.nix
     ./features/usb.nix
-    ./features/hyprland.nix
-    ./features/hyprlock.nix
     ./features/1password.nix
     ./features/nix.nix
     ./features/kdeconnect.nix

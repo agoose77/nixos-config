@@ -17,6 +17,8 @@
     ../common/features/quiet-boot.nix
     ../common/features/power.nix
     ../common/features/bluetooth.nix
+    ../common/features/hyprland.nix
+    ../common/features/hyprlock.nix
   ];
 
   networking.hostName = "latitude";
