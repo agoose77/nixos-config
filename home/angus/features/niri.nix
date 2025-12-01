@@ -323,8 +323,8 @@
 
     // Open Chat apps on the "chat" workspace, if it runs at niri startup.
     window-rule {
-        match at-startup=true app-id=r#"^discord$"#
-        match at-startup=true app-id=r#"^Slack$"#
+        match app-id=r#"^discord$"#
+        match app-id=r#"^Slack$"#
         open-on-workspace "chat"
     }
 
@@ -631,5 +631,9 @@
     MOZ_ENABLE_WAYLAND = 1;
     QT_QPA_PLATFORM = "wayland";
   };
-  home.packages = [pkgs.alacritty];
+  # Autostart into uwsm
+  programs.bash.profileExtra = lib.mkBefore ''
+       if [[ "$(tty)" == /dev/tty1 ]] && ${pkgs.uwsm}/bin/uwsm check may-start; then
+        exec ${pkgs.uwsm}/bin/uwsm start niri-uwsm.desktop
+    fi  '';
 }
