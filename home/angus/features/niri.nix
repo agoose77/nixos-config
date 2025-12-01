@@ -273,9 +273,6 @@
     // which may be more convenient to use.
     // See the binds section below for more spawn examples.
 
-    // This line starts waybar, a commonly used bar for Wayland compositors.
-    spawn-at-startup "waybar"
-
     // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
     // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
@@ -368,7 +365,7 @@
         Mod+Shift+Slash { show-hotkey-overlay; }
 
         // Suggested binds for running programs: terminal, app launcher, screen locker.
-        Mod+T hotkey-overlay-title="Open a Terminal: Rio" { spawn "rio"; }
+        Mod+T hotkey-overlay-title="Open a Terminal: Rio" { spawn "${lib.getExe pkgs.alacritty}"; }
         // Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
         // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
@@ -633,4 +630,5 @@
     MOZ_ENABLE_WAYLAND = 1;
     QT_QPA_PLATFORM = "wayland";
   };
+  home.packages = [pkgs.alacritty];
 }
