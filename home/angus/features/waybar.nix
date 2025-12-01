@@ -179,7 +179,9 @@
         position = "top";
         height = 25;
         margin = "15 20 10 20";
-        modules-left = ["hyprland/workspaces" "hyprland/submap"];
+        modules-left =
+          lib.optionals config.wayland.windowManager.hyprland.enable ["hyprland/workspaces" "hyprland/submap"]
+          ++ lib.optionals (!config.wayland.windowManager.hyprland.enable) ["niri/workspaces"];
         modules-center = ["clock"];
         modules-right = ["cpu" "memory" "disk" "pulseaudio" "battery" "tray"];
         battery = {

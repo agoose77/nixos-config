@@ -9,6 +9,8 @@
     // Check the wiki for a full description of the configuration:
     // https://yalter.github.io/niri/Configuration:-Introduction
 
+    prefer-no-csd
+
     // Input device configuration.
     // Find the full list of options on the wiki:
     // https://yalter.github.io/niri/Configuration:-Input
@@ -366,6 +368,7 @@
 
         // Suggested binds for running programs: terminal, app launcher, screen locker.
         Mod+Return hotkey-overlay-title="Open a Terminal: Kitty" { spawn "${lib.getExe pkgs.kitty}"; }
+        Mod+Shift+Return hotkey-overlay-title="Open a Browser: Firefox" { spawn "${lib.getExe pkgs.firefox}"; }
         Mod+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn "${lib.getExe pkgs.fuzzel}"; }
         // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
@@ -558,12 +561,12 @@
         // Mod+R { switch-preset-column-width-back; }
         Mod+Shift+R { switch-preset-window-height; }
         Mod+Ctrl+R { reset-window-height; }
-        Mod+F { maximize-column; }
         Mod+Shift+F { fullscreen-window; }
 
         // Expand the focused column to space not taken up by other fully visible columns.
         // Makes the column "fill the rest of the space".
-        Mod+Ctrl+F { expand-column-to-available-width; }
+        Mod+F { expand-column-to-available-width; }
+        Mod+Ctrl+F { maximize-column; }
 
         Mod+C { center-column; }
 
