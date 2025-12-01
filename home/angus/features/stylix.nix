@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   stylix = {
     enable = true;
+    polarity = "dark";
 
     base16Scheme =
       pkgs.fetchFromGitHub {
