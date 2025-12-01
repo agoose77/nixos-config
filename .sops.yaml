@@ -31,3 +31,8 @@ creation_rules:
       - age:
           - *angus
           - *hass
+  - path_regex: hosts/nixos/secrets.ya?ml$
+    key_groups:
+      - age:
+          - *angus
+          - *nixos
