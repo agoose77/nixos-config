@@ -14,8 +14,6 @@
     ++ [
       inputs.stylix.homeModules.stylix
       ./features/stylix.nix
-      ./features/hyprland.nix
-      ./features/hyprlock.nix
       ./features/waybar.nix
       ./features/cli.nix
       ./features/git.nix

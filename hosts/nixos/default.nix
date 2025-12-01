@@ -16,8 +16,7 @@
     # Optional config
     ../common/features/quiet-boot.nix
     ../common/features/k3s.nix
-    ../common/features/hyprland.nix
-    ../common/features/hyprlock.nix
+    ../common/features/niri.nix
     # Host-specific config
     ./activity.nix
   ];

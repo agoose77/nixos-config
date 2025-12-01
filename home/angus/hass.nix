@@ -1,5 +1,7 @@
 {pkgs, ...}: {
   imports = [
+    ./features/hyprland.nix
+    ./features/hyprlock.nix
     ./global.nix
   ];
   monitors = [
@@ -16,4 +18,4 @@
     pkgs.luminance
     pkgs.brightnessctl
   ];
- }
+}

@@ -1,5 +1,7 @@
 {pkgs, ...}: {
   imports = [
+    ./features/hyprland.nix
+    ./features/hyprlock.nix
     ./global.nix
   ];
   home.packages = [
