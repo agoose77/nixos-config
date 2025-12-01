@@ -11,6 +11,11 @@
 
     prefer-no-csd
 
+    spawn-at-startup "${lib.getExe pkgs.slack}" "-u"
+    spawn-at-startup "${lib.getExe pkgs._1password-gui}" "--silent"
+    spawn-at-startup "${lib.getExe pkgs.discord}" "--start-minimized"
+    spawn-at-startup "${lib.getExe pkgs.element-desktop}" "--hidden"
+
     // Input device configuration.
     // Find the full list of options on the wiki:
     // https://yalter.github.io/niri/Configuration:-Input
@@ -312,16 +317,17 @@
     // Window rules let you adjust behavior for individual windows.
     // Find more information on the wiki:
     // https://yalter.github.io/niri/Configuration:-Window-Rules
-
-    // Work around WezTerm's initial configure bug
-    // by setting an empty default-column-width.
-    window-rule {
-        // This regular expression is intentionally made as specific as possible,
-        // since this is the default config, and we want no false positives.
-        // You can get away with just app-id="wezterm" if you want.
-        match app-id=r#"^org\.wezfurlong\.wezterm$"#
-        default-column-width {}
+    // Declare a workspace named "chat" that opens on the "DP-2" output.
+    workspace "chat" {
     }
+
+    // Open Chat apps on the "chat" workspace, if it runs at niri startup.
+    window-rule {
+        match at-startup=true app-id=r#"^discord$"#
+        match at-startup=true app-id=r#"^Slack$"#
+        open-on-workspace "chat"
+    }
+
 
     // Open the Firefox picture-in-picture player as floating by default.
     window-rule {
@@ -334,21 +340,13 @@
 
     // Example: block out two password managers from screen capture.
     // (This example rule is commented out with a "/-" in front.)
-    /-window-rule {
-        match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-        match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    window-rule {
+        match app-id=r#"^1password$"#
 
         block-out-from "screen-capture"
 
         // Use this instead if you want them visible on third-party screenshot tools.
         // block-out-from "screencast"
-    }
-
-    // Example: enable rounded corners for all windows.
-    // (This example rule is commented out with a "/-" in front.)
-    /-window-rule {
-        geometry-corner-radius 12
-        clip-to-geometry true
     }
 
     binds {
