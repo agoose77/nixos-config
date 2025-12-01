@@ -20,9 +20,9 @@
       ./features/email.nix
       ./features/firefox.nix
       ./features/nixvim.nix
-      ./features/rio.nix
+      ./features/kitty.nix
       ./features/fonts.nix
-      ./features/wofi.nix
+      ./features/fuzzel.nix
       ./features/notes.nix
       ./features/kdeconnect.nix
       ./features/spotify.nix

@@ -365,8 +365,8 @@
         Mod+Shift+Slash { show-hotkey-overlay; }
 
         // Suggested binds for running programs: terminal, app launcher, screen locker.
-        Mod+T hotkey-overlay-title="Open a Terminal: Rio" { spawn "${lib.getExe pkgs.alacritty}"; }
-        // Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+        Mod+Return hotkey-overlay-title="Open a Terminal: Kitty" { spawn "${lib.getExe pkgs.kitty}"; }
+        Mod+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn "${lib.getExe pkgs.fuzzel}"; }
         // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
         // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
@@ -401,7 +401,7 @@
         // or do a four-finger swipe up on a touchpad.
         Mod+O repeat=false { toggle-overview; }
 
-        Mod+Q repeat=false { close-window; }
+        Mod+Shift+Q repeat=false { close-window; }
 
         Mod+Left  { focus-column-left; }
         Mod+Down  { focus-window-down; }
