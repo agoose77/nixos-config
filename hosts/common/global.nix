@@ -27,6 +27,7 @@
     ./features/flatpak.nix
     ./features/gnome-keyring.nix
     ./features/avahi.nix
+    ./features/nix-ld.nix
   ];
 
   nixpkgs = {
