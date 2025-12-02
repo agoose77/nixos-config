@@ -7,7 +7,7 @@
     ./features/cli.nix
     ./features/git.nix
     ./features/nixvim.nix
-    ./features/rio.nix
+    ./features/kitty.nix
   ];
   nixpkgs = {
     # Apply all overlays
