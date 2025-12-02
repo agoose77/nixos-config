@@ -67,63 +67,61 @@
     });
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#nixos'
-    nixosConfigurations = let
-      mkSystem = modules:
-        nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs outputs;};
-          modules = modules;
-        };
-    in {
-      "nixos" = mkSystem [
+    nixosConfigurations = nixpkgs.lib.mapAttrs (host: modules:
+      nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = modules;
+      }) {
+      "nixos" = [
         ./hosts/nixos
       ];
 
-      "latitude" = mkSystem [
+      "latitude" = [
         ./hosts/latitude
       ];
 
-      "waldo" = mkSystem [
+      "waldo" = [
         ./hosts/waldo
       ];
 
-      "hass-inspiron" = mkSystem [
+      "hass-inspiron" = [
         ./hosts/hass-inspiron
       ];
 
-      "hass" = mkSystem [
+      "hass" = [
         ./hosts/hass
       ];
     };
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#angus@nixos'
-    homeConfigurations = let
-      mkHome = modules:
+    homeConfigurations =
+      nixpkgs.lib.mapAttrs (ident: modules:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {inherit inputs outputs;};
           modules = modules;
-        };
-    in {
-      "angus@latitude" = mkHome [
-        ./home/angus/latitude.nix
-      ];
+        })
+      {
+        "angus@latitude" = [
+          ./home/angus/latitude.nix
+        ];
 
-      "angus@waldo" = mkHome [
-        ./home/angus/waldo.nix
-      ];
+        "angus@waldo" = [
+          ./home/angus/waldo.nix
+        ];
 
-      "angus@nixos" = mkHome [
-        ./home/angus/nixos.nix
-      ];
+        "angus@nixos" = [
+          ./home/angus/nixos.nix
+        ];
 
-      "angus@hass-inspiron" = mkHome [
-        ./home/angus/hass-inspiron.nix
-      ];
+        "angus@hass-inspiron" = [
+          ./home/angus/hass-inspiron.nix
+        ];
 
-      "angus@hass" = mkHome [
-        ./home/angus/hass.nix
-      ];
-    };
+        "angus@hass" = [
+          ./home/angus/hass.nix
+        ];
+      };
   };
 }
