@@ -9,6 +9,8 @@
   imports = [
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    # Custom hardware config
+    ./custom-hardware-configuration.nix
     # Global config
     ../common/global.nix
     # User config
@@ -36,21 +38,4 @@
   };
 
   services.xserver.videoDrivers = ["nvidia"];
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    # For better video playback
-    extraPackages = with pkgs; [nvidia-vaapi-driver];
-  };
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    nvidiaSettings = true;
-    open = false;
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
-  };
-
-  # Mouse
-  hardware.openrazer.enable = true;
-  hardware.openrazer.users = ["angus"];
 }
