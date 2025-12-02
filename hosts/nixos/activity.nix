@@ -4,8 +4,20 @@
   config,
   ...
 }: {
+  sops.secrets = {
+    activityPassword = {
+      sopsFile = ./secrets.yaml;
+      mode = "0555";
+    };
+
+    activityUser = {
+      sopsFile = ./secrets.yaml;
+      mode = "0555";
+    };
+  };
+
   sops.templates."nixos-activity.json".file = let
-    config = {
+    cfg = {
       password = "${config.sops.placeholder.activityPassword}";
       username = "${config.sops.placeholder.activityUser}";
       port = 1883;
@@ -23,7 +35,7 @@
       ];
     };
   in
-    ((pkgs.formats.json {}).generate "nixos-activity.json" config).path;
+    ((pkgs.formats.json {}).generate "nixos-activity.json" cfg).outPath;
 
   # Track activity
   systemd.user.services.report-activity = {
