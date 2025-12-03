@@ -22,6 +22,8 @@
     input {
         keyboard {
             xkb {
+                layout "gb"
+                options "compose:rctrl"
                 // You can set rules, model, layout, variant and options.
                 // For more information, see xkeyboard-config(7).
 
