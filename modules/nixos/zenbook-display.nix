@@ -34,9 +34,9 @@ in {
       script = ''
         function update_displays() {
             if ${lib.getExe' pkgs.usbutils "lsusb"} -d 0b05:1b2c; then
-                ${lib.getExe cfg.package} top
+                ${lib.getExe cfg.package} off
             else
-                ${lib.getExe cfg.package} both
+                ${lib.getExe cfg.package} on
             fi
         }
 
