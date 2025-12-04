@@ -1,27 +1,32 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
-    ./features/hyprland.nix
-    ./features/hyprlock.nix
+    ./features/niri.nix
     ./global.nix
   ];
   home.packages = [
     pkgs.luminance
     pkgs.brightnessctl
   ];
+
   monitors = [
     {
       name = "eDP-1";
       width = 1920;
       height = 1200;
-      workspace = "1";
       primary = true;
     }
     {
       name = "eDP-2";
       width = 1920;
       height = 1200;
-      position = "auto-down";
-      workspace = "2";
+      position = {
+        x = 0;
+        y = 1200;
+      };
     }
   ];
 
@@ -38,8 +43,4 @@
       '';
     };
   };
-
-  wayland.windowManager.hyprland.settings."exec-once" = [
-    "${pkgs.uwsm}/bin/uwsm app -- ${pkgs.wvkbd}/bin/wvkbd-mobintl -H 200 -L 300 --hidden"
-  ];
 }

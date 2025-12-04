@@ -19,8 +19,8 @@
     ../common/features/quiet-boot.nix
     ../common/features/power.nix
     ../common/features/bluetooth.nix
-    ../common/features/hyprland.nix
-    ../common/features/hyprlock.nix
+    ../common/features/niri.nix
+    ../common/features/wvkbd.nix
     # Host-specific config
     ./displays.nix
   ];
@@ -34,7 +34,6 @@
 
   environment.systemPackages = [
     pkgs.acpi
-    pkgs.duo-display
     # For pulling Bluetooth keys from Windows
     pkgs.chntpw
     pkgs.dislocker

@@ -30,8 +30,18 @@ in {
             default = 60;
           };
           position = mkOption {
-            type = types.str;
-            default = "auto";
+            type = with types;
+              nullOr (submodule {
+                options = {
+                  x = mkOption {
+                    type = int;
+                  };
+                  y = mkOption {
+                    type = int;
+                  };
+                };
+              });
+            default = null;
           };
           scale = mkOption {
             type = types.str;
@@ -40,10 +50,6 @@ in {
           enabled = mkOption {
             type = types.bool;
             default = true;
-          };
-          workspace = mkOption {
-            type = types.nullOr types.str;
-            default = null;
           };
         };
       }

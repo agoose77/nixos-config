@@ -1,9 +1,24 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }: {
-  xdg.configFile."niri/config.kdl".text = ''
+  xdg.configFile."niri/config.kdl".text = let
+    monitors = lib.lists.foldl (
+      acc: m:
+        acc
+        + ''
+            output "${m.name}" {
+                ${lib.strings.optionalString (!m.enabled) "off"}
+                mode "${toString m.width}x${toString m.height}@${toString m.refreshRate}"
+                scale ${m.scale}
+                ${lib.strings.optionalString (m.position != null) "position x=${toString m.position.x} y=${toString m.position.y}"}
+                ${lib.strings.optionalString m.primary "focus-at-startup"}
+          }
+        ''
+    ) "" (config.monitors);
+  in ''
     // This config is in the KDL format: https://kdl.dev
     // "/-" comments out the following node.
     // Check the wiki for a full description of the configuration:
@@ -15,6 +30,8 @@
     spawn-at-startup "${lib.getExe pkgs._1password-gui}" "--silent"
     spawn-at-startup "${lib.getExe pkgs.discord}" "--start-minimized"
     spawn-at-startup "${lib.getExe pkgs.element-desktop}" "--hidden"
+
+    ${monitors}
 
     // Input device configuration.
     // Find the full list of options on the wiki:

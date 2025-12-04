@@ -36,16 +36,18 @@ in {
       };
       # See https://wiki.hyprland.org/Configuring/Monitors/
       monitor = map (
-        m: "${m.name},${
+        m: let
+          position =
+            if m.position == null
+            then "auto"
+            else "${toString m.position.y}x${toString m.position.y}";
+        in "${m.name},${
           if m.enabled
-          then "${toString m.width}x${toString m.height}@${toString m.refreshRate},${m.position},${m.scale}"
+          then "${toString m.width}x${toString m.height}@${toString m.refreshRate},${position},${m.scale}"
           else "disable"
         }"
       ) (config.monitors);
 
-      workspace = map (m: "${m.workspace},monitor:${m.name}") (
-        lib.filter (m: m.enabled && m.workspace != null) config.monitors
-      );
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 
       # Execute your favorite apps at launch
