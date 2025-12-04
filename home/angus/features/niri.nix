@@ -37,6 +37,7 @@
     // Find the full list of options on the wiki:
     // https://yalter.github.io/niri/Configuration:-Input
     input {
+        focus-follows-mouse
         keyboard {
             xkb {
                 layout "gb"
@@ -63,7 +64,7 @@
         touchpad {
             // off
             tap
-            // dwt
+            dwt
             // dwtp
             // drag false
             // drag-lock
