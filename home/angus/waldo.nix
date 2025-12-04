@@ -18,6 +18,10 @@
       width = 1920;
       height = 1200;
       primary = true;
+      position = {
+        x = 0;
+        y = 0;
+      };
     }
     {
       name = "eDP-2";
