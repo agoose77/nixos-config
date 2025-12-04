@@ -9,6 +9,7 @@
   imports = [
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    ./custom-hardware-configuration.nix
     # Global config
     ../common/global.nix
     # User config
@@ -31,38 +32,11 @@
     NIXOS_OZONE_WL = "1"; # Enable Wayland support for slack
   };
 
-  boot.kernelModules = ["intel_vpu"];
-  boot.lanzaboote.configurationLimit = 1;
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    # For better video playback
-    extraPackages = with pkgs; [
-      vpl-gpu-rt
-      intel-media-driver
-      intel-vaapi-driver
-      libva-vdpau-driver
-      libvdpau-va-gl
-    ];
-  };
-
-  hardware.sensor.iio.enable = true;
-
   environment.systemPackages = [
     pkgs.acpi
-    pkgs.brightnessctl
     pkgs.duo-display
     # For pulling Bluetooth keys from Windows
     pkgs.chntpw
     pkgs.dislocker
-  ];
-
-  services.hardware.bolt.enable = true;
-
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 16 * 1024; # 16GB
-    }
   ];
 }
