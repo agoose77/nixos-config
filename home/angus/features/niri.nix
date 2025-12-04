@@ -63,7 +63,7 @@
         // All commented-out settings here are examples, not defaults.
         touchpad {
             // off
-            tap
+            // tap
             dwt
             // dwtp
             // drag false
