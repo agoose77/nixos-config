@@ -12,7 +12,6 @@
   imports =
     (builtins.attrValues outputs.homeModules)
     ++ [
-      inputs.stylix.homeModules.stylix
       ./features/stylix.nix
       ./features/waybar.nix
       ./features/cli.nix
