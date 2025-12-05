@@ -9,7 +9,6 @@
   imports =
     [
       inputs.home-manager.nixosModules.home-manager
-      inputs.stylix.nixosModules.stylix
       ./features/autologin-angus.nix
       ./features/docker.nix
       ./features/sops.nix
@@ -29,6 +28,7 @@
       ./features/gnome-keyring.nix
       ./features/avahi.nix
       ./features/nix-ld.nix
+      ./features/stylix.nix
     ]
     ++ (builtins.attrValues outputs.nixosModules);
 
