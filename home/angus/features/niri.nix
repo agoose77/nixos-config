@@ -68,7 +68,6 @@
             // dwtp
             // drag false
             // drag-lock
-            natural-scroll
             // accel-speed 0.2
             // accel-profile "flat"
             // scroll-method "two-finger"
