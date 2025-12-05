@@ -5,7 +5,8 @@
   config,
   ...
 }: {
-  imports = [inputs.niri-flake.homeModules.niri];
+  imports = [inputs.niri-flake.homeModules.config];
+  programs.niri.package = pkgs.niri;
   programs.niri.settings = {
     prefer-no-csd = true;
     spawn-at-startup = [
@@ -18,7 +19,7 @@
       }
       {argv = [(lib.getExe pkgs._1password-gui) "--silent"];}
     ];
-    outputs = lib.builtins.listToAttrs (map
+    outputs = builtins.listToAttrs (map
       (
         m: {
           name = m.name;
@@ -50,9 +51,9 @@
       center-focused-column = "never";
 
       preset-column-widths = [
-        {proportion = 1./3.;}
-        {proportion = 1./2.;}
-        {proportion = 2./3.;}
+        {proportion = 1. / 3.;}
+        {proportion = 1. / 2.;}
+        {proportion = 2. / 3.;}
       ];
       default-column-width = {proportion = 0.5;};
       focus-ring = {
@@ -103,7 +104,7 @@
       # "Mod" is a special modifier equal to Super when running on a TTY, and to Alt
       # when running as a winit window.
       #
-      # Most actions that you can bind here can also be invoked programmatically with
+      # Most action.that you can bind here can also be invoked programmatically with
       # `niri msg action do-something`.
 
       # Mod-Shift-/, which is usually the same as Mod-?,
@@ -112,15 +113,15 @@
 
       # Suggested binds for running programs: terminal, app launcher, screen locker.
       "Mod+Return" = {
-        hotkey-overlay-title = "Open a Terminal: Kitty";
+        hotkey-overlay = {title = "Open a Terminal: Kitty";};
         action.spawn = [(lib.getExe pkgs.kitty)];
       };
       "Mod+Shift+Return" = {
-        hotkey-overlay-title = "Open a Browser: Firefox";
+        hotkey-overlay = {title = "Open a Browser: Firefox";};
         action.spawn = [(lib.getExe pkgs.firefox)];
       };
       "Mod+Space" = {
-        hotkey-overlay-title = "Run an Application: fuzzel";
+        hotkey-overlay = {title = "Run an Application: fuzzel";};
         action.spawn = [(lib.getExe pkgs.fuzzel)];
       };
 
@@ -278,7 +279,7 @@
       # You can set a cooldown on any bind, but it's most useful for the wheel.
       "Mod+WheelScrollDown" = {
         cooldown-ms = 150;
-        action. focus-workspace-down = 1;
+        action.focus-workspace-down = 1;
       };
       "Mod+WheelScrollUp" = {
         cooldown-ms = 150;
@@ -286,11 +287,11 @@
       };
       "Mod+Ctrl+WheelScrollDown" = {
         cooldown-ms = 150;
-        action. move-column-to-workspace-down = 1;
+        action.move-column-to-workspace-down = 1;
       };
       "Mod+Ctrl+WheelScrollUp" = {
         cooldown-ms = 150;
-        action. move-column-to-workspace-up = 1;
+        action.move-column-to-workspace-up = 1;
       };
 
       "Mod+WheelScrollRight".action.focus-column-right = 1;
@@ -331,15 +332,15 @@
       "Mod+7".action.focus-workspace = 7;
       "Mod+8".action.focus-workspace = 8;
       "Mod+9".action.focus-workspace = 9;
-      "Mod+Ctrl+1".action. move-column-to-workspace = 1;
-      "Mod+Ctrl+2".action. move-column-to-workspace = 2;
-      "Mod+Ctrl+3".action. move-column-to-workspace = 3;
-      "Mod+Ctrl+4".action. move-column-to-workspace = 4;
-      "Mod+Ctrl+5".action. move-column-to-workspace = 5;
-      "Mod+Ctrl+6".action. move-column-to-workspace = 6;
-      "Mod+Ctrl+7".action. move-column-to-workspace = 7;
-      "Mod+Ctrl+8".action. move-column-to-workspace = 8;
-      "Mod+Ctrl+9".action. move-column-to-workspace = 9;
+      "Mod+Ctrl+1".action.move-column-to-workspace = 1;
+      "Mod+Ctrl+2".action.move-column-to-workspace = 2;
+      "Mod+Ctrl+3".action.move-column-to-workspace = 3;
+      "Mod+Ctrl+4".action.move-column-to-workspace = 4;
+      "Mod+Ctrl+5".action.move-column-to-workspace = 5;
+      "Mod+Ctrl+6".action.move-column-to-workspace = 6;
+      "Mod+Ctrl+7".action.move-column-to-workspace = 7;
+      "Mod+Ctrl+8".action.move-column-to-workspace = 8;
+      "Mod+Ctrl+9".action.move-column-to-workspace = 9;
 
       # Alternatively, there are commands to move just a single window:
       # Mod+Ctrl+1 { move-window-to-workspace 1; };
@@ -388,7 +389,7 @@
 
       # Finer height adjustments when in column with other windows.
       "Mod+Shift+Minus".action.set-window-height = ["-10%"];
-      "Mod+Shift+Equal".action. set-window-height = ["+10%"];
+      "Mod+Shift+Equal".action.set-window-height = ["+10%"];
 
       # Move the focused window between the floating and the tiling layout.
       "Mod+V".action.toggle-window-floating = 1;
@@ -433,15 +434,7 @@
       "Mod+Shift+P".action.power-off-monitors = 1;
     };
   };
-  xdg.configFile."niri/config.kdl".text = let
-  in ''
-       // Settings that influence how windows are positioned and sized.
-    // Find more information on the wiki:
-    // https://yalter.github.io/niri/Configuration:-Layout
 
-
-
-  '';
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
     QT_QPA_PLATFORM = "wayland";
