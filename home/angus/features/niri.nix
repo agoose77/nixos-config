@@ -24,11 +24,11 @@
         m: {
           name = m.name;
           value = {
-            enabled = m.enabled;
+            enable = m.enabled;
             mode = {
               width = m.width;
               height = m.height;
-              refresh = m.refreshRate;
+              refresh = m.refreshRate / 1.;
             };
             scale = m.scale;
             position = m.position;

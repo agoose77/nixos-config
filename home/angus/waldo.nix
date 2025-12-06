@@ -1,11 +1,7 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
-    ./features/niri.nix
     ./global.nix
+    ./features/niri.nix
   ];
   home.packages = [
     pkgs.luminance
