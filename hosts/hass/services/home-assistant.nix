@@ -34,11 +34,20 @@
       tag = "v17.1.1";
       hash = "sha256-rn8wCGUYisLgr61Cd2qaQGfSiAtjKMo2wG/AotEXknE=";
     };
-    spook = pkgs.fetchFromGitHub {
-      owner = "frenck";
-      repo = "spook";
-      tag = "v4.0.1";
-      hash = "sha256-0IihrhATgraGmuMRnrbGTUrtlXAR+CooENSIKSWIknY=";
+    spook = pkgs.applyPatches {
+      name = "spook-patched";
+      src = pkgs.fetchFromGitHub {
+        owner = "frenck";
+        repo = "spook";
+        tag = "v4.0.1";
+        hash = "sha256-0IihrhATgraGmuMRnrbGTUrtlXAR+CooENSIKSWIknY=";
+      };
+      postPatch = ''
+        substituteInPlace \
+          custom_components/spook/manifest.json --replace-fail \
+          0.0.0 \
+          4.0.1
+      '';
     };
     tplink_router = pkgs.fetchFromGitHub {
       owner = "AlexandrErohin";
