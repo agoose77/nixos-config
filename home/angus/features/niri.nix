@@ -52,12 +52,15 @@
     };
     layout = {
       gaps = 16;
-      center-focused-column = "never";
+      center-focused-column = "on-overflow";
+      always-center-single-column = true;
+      empty-workspace-above-first = true;
 
       preset-column-widths = [
         {proportion = 1. / 3.;}
         {proportion = 1. / 2.;}
         {proportion = 2. / 3.;}
+        {proportion = 1. / 1.;}
       ];
       default-column-width = {proportion = 0.5;};
       focus-ring = {
