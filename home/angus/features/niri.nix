@@ -37,6 +37,7 @@
         }
       ) (config.monitors));
     input = {
+      power-key-handling.enable = false;
       keyboard = {
         xkb = {
           layout = "gb";
