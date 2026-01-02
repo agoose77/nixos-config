@@ -1,4 +1,8 @@
 {
+  lib,
+  pkgs,
+  ...
+}: {
   home.shellAliases = {
     git_current_branch = "git symbolic-ref --quiet HEAD | sed -E \"s@refs/heads/(.*)@\\1@\"";
     git_main_branch = "git show-ref --quiet refs/heads/main && echo \"main\" || echo \"master\"";
@@ -159,6 +163,7 @@
         ff = "only";
       };
       branch.sort = "committerdate";
+      diff.external = lib.getExe pkgs.difftastic;
     };
   };
 }
