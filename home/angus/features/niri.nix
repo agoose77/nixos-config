@@ -63,6 +63,12 @@
         {proportion = 2. / 3.;}
         {proportion = 1. / 1.;}
       ];
+      preset-window-heights = [
+        {proportion = 1. / 3.;}
+        {proportion = 1. / 2.;}
+        {proportion = 2. / 3.;}
+        {proportion = 1. / 1.;}
+      ];
       default-column-width = {proportion = 0.5;};
       focus-ring = {
         width = 4;
