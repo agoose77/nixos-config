@@ -16,6 +16,7 @@
       tag = "v5.11.0";
       hash = "sha256-LzrIvHJMB6mFAEfKoMIs0wL+xbEjoBIx48pSEcCHmg4=";
     };
+    # Requires profile from another GitHub repo
     homeconnect_ws = pkgs.fetchFromGitHub {
       owner = "chris-mc1";
       repo = "homeconnect_local_hass";
