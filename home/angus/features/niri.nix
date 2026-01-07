@@ -81,6 +81,18 @@
 
     # Open Chat apps on the "chat" workspace, if it runs at niri startup.
     window-rules = [
+      # Zoom menus float
+      {
+        matches = [
+          {
+            app-id = "Zoom Workplace";
+            title = ".*menu.*";
+          }
+        ];
+        open-floating = true;
+        min-width = 250;
+        open-focused = true;
+      }
       {
         matches = [
           {app-id = "^discord$";}
