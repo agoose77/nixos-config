@@ -151,6 +151,9 @@
           listen = [
             "bark"
             "fire_alarm"
+            "scream"
+            "speech"
+            "yell"
           ];
         };
       };
@@ -197,6 +200,9 @@
           listen = [
             "bark"
             "fire_alarm"
+            "scream"
+            "speech"
+            "yell"
           ];
         };
       };
