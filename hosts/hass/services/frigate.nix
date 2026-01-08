@@ -147,7 +147,7 @@
         audio = {
           enabled = true;
           max_not_heard = 10;
-          min_volume = 500;
+          min_volume = 200;
           listen = [
             "bark"
             "fire_alarm"
@@ -196,7 +196,7 @@
         audio = {
           enabled = true;
           max_not_heard = 10;
-          min_volume = 500;
+          min_volume = 200;
           listen = [
             "bark"
             "fire_alarm"
