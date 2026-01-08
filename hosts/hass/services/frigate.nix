@@ -8,6 +8,8 @@
     url = "https://www.dropbox.com/scl/fi/vgxf89prg7ypwwknp6wz7/yolov9-t.onnx?rlkey=buejo1uyqeuukmzbdvo68u34y&st=jopp3iqe&dl=0";
     sha256 = "sha256-75v3QnrVeBJr8Q4rGK2/ZN4lRVdt4GSe2wLq8nI683Q=";
   };
+  hallwayCameraIP = "192.168.68.61";
+  kitchenCameraIP = "192.168.68.93";
   frigateConfig = {
     mqtt = {
       enabled = true;
@@ -130,15 +132,16 @@
           ];
         };
         onvif = {
-          host = "{FRIGATE_HALLWAY_CAMERA_IP}";
+          host = "${hallwayCameraIP}";
           port = 2020;
           user = "{FRIGATE_HALLWAY_CAMERA_USER}";
           password = "{FRIGATE_HALLWAY_CAMERA_PASSWORD}";
         };
         motion = {
+          threshold = 45;
           mask = [
+            # Timestamp
             "0.367,0,0.367,0.077,0,0.077,0,0"
-            "0.375,0,0.375,0.375,0.625,0.375,0.625,0"
           ];
         };
         audio = {
@@ -175,13 +178,16 @@
           ];
         };
         onvif = {
-          host = "{FRIGATE_KITCHEN_CAMERA_IP}";
+          host = "${kitchenCameraIP}";
           port = 2020;
           user = "{FRIGATE_KITCHEN_CAMERA_USER}";
           password = "{FRIGATE_KITCHEN_CAMERA_PASSWORD}";
         };
         motion = {
+          threshold = 45;
           mask = [
+            # Timestamp
+            "0.367,0,0.367,0.077,0,0.077,0,0"
           ];
         };
         audio = {
@@ -479,8 +485,8 @@ in {
     environment = {
       FRIGATE_RTSP_PASSWORD = "password";
       LIBVA_DRIVER_NAME = "iHD";
-      FRIGATE_HALLWAY_CAMERA_IP = "192.168.68.61";
-      FRIGATE_KITCHEN_CAMERA_IP = "192.168.68.93";
+      FRIGATE_HALLWAY_CAMERA_IP = "${hallwayCameraIP}";
+      FRIGATE_KITCHEN_CAMERA_IP = "${kitchenCameraIP}";
       FRIGATE_ANNKE_IP = "192.168.69.228";
     };
     environmentFiles = [secretsPath];
@@ -497,7 +503,7 @@ in {
       # go2rtc interface
       "1984:1984"
     ];
-    image = "ghcr.io/blakeblackshear/frigate:0.16.0";
+    image = "ghcr.io/blakeblackshear/frigate:0.16.3";
     extraOptions = [
       "--device=/dev/bus/usb"
       "--device=/dev/dri"
