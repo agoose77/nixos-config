@@ -15,6 +15,7 @@
       ./features/waybar.nix
       ./features/cli.nix
       ./features/git.nix
+      ./features/jj.nix
       ./features/email.nix
       ./features/firefox.nix
       ./features/nixvim.nix
