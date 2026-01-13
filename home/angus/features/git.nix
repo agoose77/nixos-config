@@ -144,10 +144,11 @@
   programs.gh.enable = true;
   programs.gh-dash.enable = true;
 
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
-
+  xdg.configFile."git/ignore".text = ''
+    # Ignore my workflow things
+    .direnv/
+    .envrc
+  '';
   programs.git = {
     enable = true;
     lfs.enable = true;
