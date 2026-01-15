@@ -29,6 +29,12 @@
       tag = "v1.3.0";
       hash = "sha256-hWYYY0kt/RfdCyNR3skiYOyyQ7KF35Xbh8NczIDzr58=";
     };
+    bermuda = pkgs.fetchFromGitHub {
+      owner = "agittins";
+      repo = "bermuda";
+      rev = "f8768d8918abaf09e6b9bb55512830b551787580";
+      hash = "sha256-BCIb/MnI5EzK7ZS7qCsZB0l9LUTUgLO2Z0ZK7TnYnLM=";
+    };
     octopus_energy = pkgs.fetchFromGitHub {
       owner = "BottlecapDave";
       repo = "HomeAssistant-OctopusEnergy";
