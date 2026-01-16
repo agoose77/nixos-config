@@ -77,6 +77,7 @@ in {
       extraOptions = [
         "--network=host"
         "--cap-add=NET_RAW"
+        "--cap-add=NET_ADMIN"
         "--mount=type=tmpfs,destination=/config/www/snapshots"
         #"--device=/dev/ttyACM0:/dev/ttyACM0"  # Example, change this to match your own hardware
       ];
