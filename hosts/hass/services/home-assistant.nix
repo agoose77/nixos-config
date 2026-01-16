@@ -68,26 +68,33 @@ in {
   networking.firewall.allowedUDPPorts = [5683];
   networking.firewall.allowedTCPPorts = [8123];
 
-  virtualisation.oci-containers.containers = {
+  virtualisation.oci-containers.containers = let
+    isBackup = true;
+  in {
     home-assistant = {
       environment.TZ = "Europe/London";
       # This fixes a bug
       environment.PYTHONPATH = "/usr/local/lib/python3.13:/config/deps";
       image = "ghcr.io/home-assistant/home-assistant:2025.12.5"; # Warning: if the tag does not change, the image will not be updated
-      extraOptions = [
-        "--network=host"
-        "--cap-add=NET_RAW"
-        "--cap-add=NET_ADMIN"
-        "--mount=type=tmpfs,destination=/config/www/snapshots"
-        #"--device=/dev/ttyACM0:/dev/ttyACM0"  # Example, change this to match your own hardware
-      ];
+      extraOptions =
+        [
+          "--network=host"
+          "--cap-add=NET_RAW"
+          "--cap-add=NET_ADMIN"
+          "--mount=type=tmpfs,destination=/config/www/snapshots"
+          #"--device=/dev/ttyACM0:/dev/ttyACM0"  # Example, change this to match your own hardware
+        ]
+        ++ lib.optionals isBackup
+        ["--mount=type=tmpfs,destination=/config/custom_components"];
       volumes =
         [
           "/run/dbus:/run/dbus:ro"
           "/etc/home-assistant:/config"
-          "${components.spook}/custom_components/spook/integrations/spook_inverse:/config/custom_components/spook_inverse"
         ]
-        ++ lib.attrsets.mapAttrsToList (name: drv: "${drv}/custom_components/${name}:/config/custom_components/${name}") components;
+        ++ lib.optionals (! isBackup) [
+          (["${components.spook}/custom_components/spook/integrations/spook_inverse:/config/custom_components/spook_inverse"]
+            ++ lib.attrsets.mapAttrsToList (name: drv: "${drv}/custom_components/${name}:/config/custom_components/${name}") components)
+        ];
     };
     matter-server = {
       image = "ghcr.io/matter-js/python-matter-server:stable"; # Warning: if the tag does not change, the image will not be updated
