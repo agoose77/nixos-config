@@ -63,13 +63,21 @@
       hash = "sha256-2yhoBIU2NMLhAvezB82/gs+A0ZVVsMenvOR1HyU1PEM=";
     };
   };
+  webResources = {
+    advancedCameraCard = pkgs.fetchzip {
+      url = "https://github.com/dermotduffy/advanced-camera-card/releases/download/v7.26.0/advanced-camera-card.zip";
+      stripRoot = false;
+      hash = "sha256-GpBe/Cszdxc9YAhdf4G7alWaRxP7R0NQjjn0Sd1D9Yg=";
+    };
+  };
 in {
   # Open shelly port
   networking.firewall.allowedUDPPorts = [5683];
   networking.firewall.allowedTCPPorts = [8123];
 
   virtualisation.oci-containers.containers = let
-    isBackup = true;
+    # For backups, we need to avoid mounting anything
+    isBackup = false;
   in {
     home-assistant = {
       environment.TZ = "Europe/London";
@@ -81,19 +89,21 @@ in {
           "--network=host"
           "--cap-add=NET_RAW"
           "--cap-add=NET_ADMIN"
-          "--mount=type=tmpfs,destination=/config/www/snapshots"
-          #"--device=/dev/ttyACM0:/dev/ttyACM0"  # Example, change this to match your own hardware
         ]
-        ++ lib.optionals isBackup
-        ["--mount=type=tmpfs,destination=/config/custom_components"];
+        #"--device=/dev/ttyACM0:/dev/ttyACM0"  # Example, change this to match your own hardware
+        ++ lib.optionals (!isBackup) [
+          "--mount=type=tmpfs,destination=/config/www/snapshots"
+        ];
+
       volumes =
         [
           "/run/dbus:/run/dbus:ro"
           "/etc/home-assistant:/config"
         ]
-        ++ lib.optionals (! isBackup) [
-          (["${components.spook}/custom_components/spook/integrations/spook_inverse:/config/custom_components/spook_inverse"]
-            ++ lib.attrsets.mapAttrsToList (name: drv: "${drv}/custom_components/${name}:/config/custom_components/${name}") components)
+        ++ lib.optionals (!isBackup) (["${components.spook}/custom_components/spook/integrations/spook_inverse:/config/custom_components/spook_inverse"]
+          ++ lib.attrsets.mapAttrsToList (name: drv: "${drv}/custom_components/${name}:/config/custom_components/${name}") components)
+        ++ lib.optionals (!isBackup) [
+          "${webResources.advancedCameraCard}/dist:/config/www/advancedCameraCard/"
         ];
     };
     matter-server = {
