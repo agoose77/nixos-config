@@ -69,6 +69,10 @@
       stripRoot = false;
       hash = "sha256-GpBe/Cszdxc9YAhdf4G7alWaRxP7R0NQjjn0Sd1D9Yg=";
     };
+    miniGraphCard = pkgs.fetchurl {
+      url = "https://github.com/kalkih/mini-graph-card/releases/download/v0.13.0/mini-graph-card-bundle.js";
+      hash = "sha256-TYuYbzzWk8D3dx0vVXQAi8OcRey0UK7AZ5BhUL4t+r0=";
+    };
   };
 in {
   # Open shelly port
@@ -104,6 +108,7 @@ in {
           ++ lib.attrsets.mapAttrsToList (name: drv: "${drv}/custom_components/${name}:/config/custom_components/${name}") components)
         ++ lib.optionals (!isBackup) [
           "${webResources.advancedCameraCard}/dist:/config/www/advancedCameraCard/"
+          "${webResources.miniGraphCard}:/config/www/miniGraphCard/mini-graph-card-bundle.js"
         ];
     };
     matter-server = {
