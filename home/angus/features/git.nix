@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }: {
   home.shellAliases = {
@@ -144,15 +145,20 @@
   programs.gh.enable = true;
   programs.gh-dash.enable = true;
 
-  xdg.configFile."git/ignore".text = ''
-    # Ignore my workflow things
-    .direnv/
-    .envrc
-  '';
+  home.file.gitignore = {
+    text = ''
+      # Ignore my workflow things
+      /.direnv/
+      /.nix/
+      /.envrc
+    '';
+    target = ".gitignore-global";
+  };
   programs.git = {
     enable = true;
     lfs.enable = true;
     settings = {
+      core.excludesFile = "${config.home.homeDirectory}/${config.home.file.gitignore.target}";
       user = {
         name = "Angus Hollands";
         email = "goosey15@gmail.com";
