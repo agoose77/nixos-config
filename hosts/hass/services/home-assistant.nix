@@ -65,9 +65,9 @@
   };
   webResources = {
     advancedCameraCard = pkgs.fetchzip {
-      url = "https://github.com/dermotduffy/advanced-camera-card/releases/download/v7.26.0/advanced-camera-card.zip";
+      url = "https://github.com/dermotduffy/advanced-camera-card/releases/download/v7.27.1/advanced-camera-card.zip";
       stripRoot = false;
-      hash = "sha256-GpBe/Cszdxc9YAhdf4G7alWaRxP7R0NQjjn0Sd1D9Yg=";
+      hash = "sha256-B5l/eDLopH+0waOIvsWDzZXPKQk1mVqainAxXjh3bHI=";
     };
     miniGraphCard = pkgs.fetchurl {
       url = "https://github.com/kalkih/mini-graph-card/releases/download/v0.13.0/mini-graph-card-bundle.js";
