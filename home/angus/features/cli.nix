@@ -13,6 +13,7 @@
     fd
     fzf
     jq
+    yq-go
     oils-for-unix
     unzip
     wl-clipboard
