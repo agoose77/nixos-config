@@ -27,7 +27,6 @@
       ./features/flatpak.nix
       ./features/gnome-keyring.nix
       ./features/avahi.nix
-      ./features/nix-ld.nix
       ./features/stylix.nix
     ]
     ++ (builtins.attrValues outputs.nixosModules);
