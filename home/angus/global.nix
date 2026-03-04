@@ -29,6 +29,7 @@
       ./features/notifications.nix
       ./features/videoconf.nix
       ./features/design.nix
+      ./features/no-global-kubeconfig.nix
     ];
   nixpkgs = {
     # Apply all overlays
@@ -82,8 +83,6 @@
   systemd.user.startServices = "sd-switch";
 
   home.sessionVariables = {
-    # Make it hard to accidentally nest kubeconfig contexts in 2i2c's deployer infra
-    DEPLOYER_NO_NESTED_KUBECONFIG = "1";
     # Enable HTTP cache for MyST
     MYST_HTTP_CACHE_DB = "${config.home.homeDirectory}/.cache/myst-http-cache.sqlite";
   };
@@ -94,8 +93,4 @@
     x11.enable = true;
     name = "Bibata-Modern-Classic";
   };
-
-  # Prevent kubeconfig being used
-  home.file.".kube/config".text = ''
-  '';
 }
