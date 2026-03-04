@@ -7,23 +7,31 @@
 in {
   programs.bash.initExtra = ''
     n() {
-      local days_back=0
+    (
+      set -eu
+
+      local arg="''${1:-0}"
 
       # Parse argument: supports n 3 or n '~3'
-      if [[ "$1" =~ ^~([0-9]+)$ ]]; then
+      local days_back=0
+      if [[ "$arg" =~ ^~([0-9]+)$ ]]; then
         days_back="''${BASH_REMATCH[1]}"
-      elif [[ "$1" =~ ^[0-9]+$ ]]; then
-        days_back="$1"
+      elif [[ "$arg" =~ ^[0-9]+$ ]]; then
+        days_back="$arg"
       fi
 
       # Date calculation
       local target_date=$(date -d "$days_back day ago" +%F)
 
       local file="${notesDir}/$target_date.md"
-      mkdir -p "$logdir"
-      touch "$file"
+      mkdir -p "${notesDir}"
+
+      if [[ ! -e "$file" ]]; then
+          echo "# $(date -d $target_date '+%a, %-d %b %Y')" >> "$file"
+      fi
 
       ''${EDITOR:-nvim} "$file"
+    )
     }
   '';
   home.file."${notesDir}/myst.yml".text = ''
