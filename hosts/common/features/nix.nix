@@ -28,8 +28,8 @@
     gc = {
       automatic = true;
       dates = "weekly";
-      # Keep the last 3 generations
-      options = "--delete-older-than +3";
+      # Keep 14d worth of generations
+      options = "--delete-older-than 14d";
     };
   };
 }
