@@ -33,6 +33,9 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
   };
 
   outputs = {
@@ -43,6 +46,8 @@
     stylix,
     sops-nix,
     niri-flake,
+    flake-parts,
+    import-tree,
     ...
   } @ inputs: let
     inherit (self) outputs;
