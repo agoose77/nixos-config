@@ -2,14 +2,6 @@
   # default settings needed for all nixosConfigurations
 
   flake.modules.nixos.system-minimal = {pkgs, ...}: {
-    nixpkgs.overlays = [
-      (final: _prev: {
-        unstable = import inputs.nixpkgs-unstable {
-          inherit (final) config;
-          system = pkgs.stdenv.hostPlatform.system;
-        };
-      })
-    ];
     nixpkgs.config.allowUnfree = true;
     system.stateVersion = "23.11";
 
