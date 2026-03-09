@@ -9,7 +9,7 @@
       wvkbd
     ];
     boot.kernelModules = ["intel_vpu"];
-    boot.lanzaboote.configurationLimit = 1;
+    boot.lanzaboote.configurationLimit = 2;
 
     hardware.graphics = {
       enable = true;
