@@ -25,7 +25,6 @@
         system-minimal
         niri
         stylix
-        kdeconnect
         waybar
         jj
         firefox
@@ -34,11 +33,11 @@
         fonts
         fuzzel
         notes
-        kdeconnect
         playerctl
         notifications
         videoconf
         design
+        kdeconnect
         no-global-kubeconfig
       ]
       ++ (with inputs.self.modules.generic; [

@@ -38,13 +38,13 @@
         tailscale
         quiet-boot
         openssh
-        usb
       ];
     };
     homeManager.system-minimal = {
       imports = with inputs.self.modules.homeManager; [
         git
         cli
+        usb
       ];
     };
   };

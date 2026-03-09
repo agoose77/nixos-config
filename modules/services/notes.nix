@@ -65,7 +65,7 @@
       Service = {
         Type = "simple";
         Restart = "on-failure";
-        ExecStart = "${pkgs.lib.getExe pkgs.myst} start --port 9999 --server-port 9998";
+        ExecStart = "${pkgs.lib.getExe pkgs.local.myst} start --port 9999 --server-port 9998";
         WorkingDirectory = notesDir;
       };
     };
