@@ -21,6 +21,10 @@
       ];
     };
     services.hardware.bolt.enable = true;
+    services.zenbook-display = {
+      enable = true;
+      package = pkgs.local.duo-display-niri;
+    };
 
     swapDevices = [
       {
