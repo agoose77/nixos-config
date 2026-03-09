@@ -1,4 +1,5 @@
-{flake.modules.nixos.usb = {
-  services.udisks2.enable = true;
-  services.devmon.enable = true;
-};}
+{
+  flake.modules.homeManager.usb = {pkgs, ...}: {
+    services.udiskie.enable = true;
+  };
+}

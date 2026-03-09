@@ -4,6 +4,7 @@
       system-default
       secure-boot
       bluetooth
+      zenbook-display
     ];
     boot.kernelModules = ["intel_vpu"];
     boot.lanzaboote.configurationLimit = 1;

@@ -1,9 +1,10 @@
 {inputs, ...}: {
   flake.modules = {
-    nixos.stylix = {
-      imports = [inputs.stylix.nixosModules.stylix];
-    };
-    homeManager.stylix = {pkgs, ...}: {
+    homeManager.stylix = {
+      inputs,
+      pkgs,
+      ...
+    }: {
       imports = [
         inputs.stylix.homeModules.stylix
       ];
@@ -41,6 +42,9 @@
           };
         };
       };
+    };
+    nixos.stylix = {
+      imports = [inputs.stylix.nixosModules.stylix];
     };
   };
 }
