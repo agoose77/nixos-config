@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
   # default settings needed for all nixosConfigurations
 
   flake.modules = {
@@ -39,6 +43,13 @@
         quiet-boot
         openssh
       ];
+
+      # TODO: sort this out
+      networking.networkmanager.enable = true;
+      xdg.portal.enable = true;
+      # Opt out of light-dm by default
+      services.xserver.displayManager.lightdm.enable = lib.mkForce false;
+      services.xserver.enable = true;
     };
     homeManager.system-minimal = {
       imports = with inputs.self.modules.homeManager; [

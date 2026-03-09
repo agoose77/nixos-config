@@ -7,6 +7,7 @@
       zenbook-display
       power
       wvkbd
+      autologin-angus
     ];
     boot.kernelModules = ["intel_vpu"];
     boot.lanzaboote.configurationLimit = 2;
