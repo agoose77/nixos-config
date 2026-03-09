@@ -20,28 +20,24 @@
   };
 
   flake.modules.homeManager.system-default = {
-    imports = with inputs.self.modules.homeManager;
-      [
-        system-minimal
-        niri
-        stylix
-        waybar
-        jj
-        firefox
-        nixvim
-        kitty
-        fonts
-        fuzzel
-        notes
-        playerctl
-        notifications
-        videoconf
-        design
-        kdeconnect
-        no-global-kubeconfig
-      ]
-      ++ (with inputs.self.modules.generic; [
-        pkgs-by-name
-      ]);
+    imports = with inputs.self.modules.homeManager; [
+      system-minimal
+      niri
+      stylix
+      waybar
+      jj
+      firefox
+      nixvim
+      kitty
+      fonts
+      fuzzel
+      notes
+      playerctl
+      notifications
+      videoconf
+      design
+      kdeconnect
+      no-global-kubeconfig
+    ];
   };
 }
