@@ -31,7 +31,7 @@
       package = pkgs.local.duo-display-niri;
     };
   };
-  flake.modules.homeManager.niri = {pkgs, ...}: {
+  flake.modules.homeManager.waldo = {pkgs, ...}: {
     home.packages = [
       pkgs.luminance
       pkgs.brightnessctl
