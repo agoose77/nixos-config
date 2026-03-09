@@ -37,6 +37,10 @@
     ];
   };
   flake.modules.homeManager.niri = {pkgs, ...}: {
+    home.packages = [
+      pkgs.luminance
+      pkgs.brightnessctl
+    ];
     programs.niri.settings = {
       outputs."eDP-1" = {
         mode = {
