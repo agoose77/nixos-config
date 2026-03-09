@@ -9,21 +9,8 @@
       wvkbd
       autologin-angus
     ];
-    boot.kernelModules = ["intel_vpu"];
     boot.lanzaboote.configurationLimit = 2;
 
-    hardware.graphics = {
-      enable = true;
-      enable32Bit = true;
-      # For better video playback
-      extraPackages = with pkgs; [
-        vpl-gpu-rt
-        intel-media-driver
-        intel-vaapi-driver
-        libva-vdpau-driver
-        libvdpau-va-gl
-      ];
-    };
     services.hardware.bolt.enable = true;
     services.zenbook-display = {
       enable = true;
