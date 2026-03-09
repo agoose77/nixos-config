@@ -5,6 +5,8 @@
       secure-boot
       bluetooth
       zenbook-display
+      power
+      wvkbd
     ];
     boot.kernelModules = ["intel_vpu"];
     boot.lanzaboote.configurationLimit = 1;
@@ -34,7 +36,7 @@
       }
     ];
   };
-  flake.modules.homeManager.niri = {
+  flake.modules.homeManager.niri = {pkgs, ...}: {
     programs.niri.settings = {
       outputs."eDP-1" = {
         mode = {
@@ -56,6 +58,20 @@
           x = 0;
           y = 1200;
         };
+      };
+    };
+
+    # Touch keyboard
+    programs.waybar.settings.primary = {
+      modules-right = ["custom/kbd"];
+      "custom/kbd" = {
+        interval = "once";
+        exec = "${pkgs.coreutils}/bin/echo a";
+        exec-if = "${pkgs.coreutils}/bin/true";
+        format = " <U+F030C>   ";
+        on-click = pkgs.writeShellScript "toggle-keyboard.sh" ''
+          ${pkgs.procps}/bin/pkill -SIGRTMIN -x wvkbd-mobintl
+        '';
       };
     };
   };
