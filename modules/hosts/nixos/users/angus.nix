@@ -6,8 +6,11 @@
 
     # ...
 
-    home-manager.users.angus = {
-      ###
+    home-manager.users.angus = {pkgs, ...}: {
+      home.packages = [
+        pkgs.polychromatic
+        pkgs.idle-monitor
+      ];
     };
   };
 }
