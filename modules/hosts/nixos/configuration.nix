@@ -5,7 +5,6 @@
       autologin-angus
       k3s
     ];
-    boot.lanzaboote.configurationLimit = 2;
 
     networking.hostName = "nixos";
 

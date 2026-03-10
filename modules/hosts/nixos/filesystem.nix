@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.waldo = {
+  flake.modules.nixos.nixos = {
     fileSystems."/" = {
       device = "/dev/disk/by-uuid/916b121a-17e1-4c77-835e-3c60c43ac84b";
       fsType = "ext4";
