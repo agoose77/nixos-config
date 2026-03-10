@@ -5,6 +5,7 @@
       systemd-boot
       autologin-angus
       k3s
+      nixos-activity
     ];
 
     networking.hostName = "nixos";
