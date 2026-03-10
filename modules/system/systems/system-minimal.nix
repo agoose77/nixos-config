@@ -33,16 +33,21 @@
         keep-outputs = true
       '';
 
-      imports = with inputs.self.modules.nixos; [
-        avahi
-        docker
-        podman
-        flatpak
-        locale
-        tailscale
-        quiet-boot
-        openssh
-      ];
+      imports = with inputs.self.modules.nixos;
+        [
+          avahi
+          docker
+          podman
+          flatpak
+          locale
+          tailscale
+          quiet-boot
+          openssh
+          sops
+        ]
+        ++ (with inputs.self.modules.generic; [
+          pkgs-by-name
+        ]);
 
       # TODO: sort this out
       networking.networkmanager.enable = true;
