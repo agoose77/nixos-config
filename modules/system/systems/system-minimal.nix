@@ -51,7 +51,6 @@
 
       # TODO: sort this out
       networking.networkmanager.enable = true;
-      xdg.portal.enable = true;
       # Opt out of light-dm by default
       services.xserver.displayManager.lightdm.enable = lib.mkForce false;
       services.xserver.enable = true;

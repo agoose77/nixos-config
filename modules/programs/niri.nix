@@ -15,6 +15,7 @@
           binPath = "/run/current-system/sw/bin/niri-session";
         };
       };
+      xdg.portal.enable = true;
     };
     homeManager.niri = {
       lib,
