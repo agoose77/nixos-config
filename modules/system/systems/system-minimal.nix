@@ -62,6 +62,7 @@
         cli
         usb
       ];
+      programs.home-manager.enable = true;
     };
   };
 }
