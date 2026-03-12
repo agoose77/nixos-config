@@ -2,13 +2,15 @@
   inputs,
   lib,
   ...
-}: {
+}: let
+  stateVersion = "23.11";
+in {
   # default settings needed for all nixosConfigurations
 
   flake.modules = {
     nixos.system-minimal = {pkgs, ...}: {
       nixpkgs.config.allowUnfree = true;
-      system.stateVersion = "23.11";
+      system = {inherit stateVersion;};
 
       nix.settings = {
         experimental-features = [
@@ -55,13 +57,15 @@
       services.xserver.displayManager.lightdm.enable = lib.mkForce false;
       services.xserver.enable = true;
     };
-    homeManager.system-minimal = {
+    homeManager.system-minimal = {config, ...}: {
       imports = with inputs.self.modules.homeManager; [
         git
         cli
         usb
       ];
       programs.home-manager.enable = true;
+      home.homeDirectory = "/home/${config.home.username}";
+      home = {inherit stateVersion;};
     };
   };
 }
