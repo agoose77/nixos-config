@@ -8,6 +8,10 @@
 in {
   networking.firewall.allowedTCPPorts = [80 443];
 
+  # Allow Caddy to user to manage and create certs
+  # TODO: move this to mkif
+  services.tailscale.permitCertUid = "caddy";
+
   environment.systemPackages = [
     pkgs.nss
     pkgs.nssTools
