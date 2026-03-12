@@ -38,7 +38,6 @@
           avahi
           docker
           podman
-          flatpak
           locale
           tailscale
           quiet-boot
