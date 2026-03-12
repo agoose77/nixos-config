@@ -27,10 +27,6 @@ in {
     };
     homeManager."${username}" = {pkgs, ...}: {
       home.username = "${username}";
-      imports = with self.modules.homeManager; [
-        system-default
-        # passwordManager
-      ];
       home.packages = with pkgs; [
         #mediainfo
       ];

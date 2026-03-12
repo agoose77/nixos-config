@@ -43,6 +43,7 @@
           quiet-boot
           openssh
           sops
+          home-manager
         ]
         ++ (with inputs.self.modules.generic; [
           pkgs-by-name

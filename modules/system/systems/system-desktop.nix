@@ -5,7 +5,6 @@
     imports = with inputs.self.modules.nixos; [
       system-minimal
       niri
-      home-manager
       _1password
       spotify-connect
       sound
