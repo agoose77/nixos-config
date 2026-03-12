@@ -33,97 +33,15 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    lanzaboote,
-    stylix,
-    sops-nix,
-    niri-flake,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-
-    systems = [
-      "x86_64-linux"
-    ];
-    forAllSystems = nixpkgs.lib.genAttrs systems;
-  in {
-    nixosModules = import ./modules/nixos;
-    homeModules = import ./modules/home-manager;
-
-    # Your custom packages and modifications, exported as overlays
-    overlays = import ./overlays {inherit inputs;};
-
-    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-    devShells = forAllSystems (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      default = pkgs.mkShell {
-        packages = with pkgs; [nix pkgs.home-manager git sops ssh-to-age age];
-      };
-    });
-    # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#nixos'
-    nixosConfigurations = nixpkgs.lib.mapAttrs (host: modules:
-      nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = modules;
-      }) {
-      "nixos" = [
-        ./hosts/nixos
-      ];
-
-      "latitude" = [
-        ./hosts/latitude
-      ];
-
-      "waldo" = [
-        ./hosts/waldo
-      ];
-
-      "hass-inspiron" = [
-        ./hosts/hass-inspiron
-      ];
-
-      "hass" = [
-        ./hosts/hass
-      ];
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
+    packages = {
+      flake = false;
+      url = "path:./pkgs";
     };
-
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#angus@nixos'
-    homeConfigurations =
-      nixpkgs.lib.mapAttrs (ident: modules:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = {inherit inputs outputs;};
-          modules = modules;
-        })
-      {
-        "angus@latitude" = [
-          ./home/angus/latitude.nix
-        ];
-
-        "angus@waldo" = [
-          ./home/angus/waldo.nix
-        ];
-
-        "angus@nixos" = [
-          ./home/angus/nixos.nix
-        ];
-
-        "angus@hass-inspiron" = [
-          ./home/angus/hass-inspiron.nix
-        ];
-
-        "angus@hass" = [
-          ./home/angus/hass.nix
-        ];
-      };
+    pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
   };
+
+  outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
 }
