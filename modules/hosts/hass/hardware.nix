@@ -12,8 +12,6 @@
     boot.kernelModules = ["kvm-intel"];
     boot.extraModulePackages = [];
 
-    boot.initrd.luks.devices."luks-e9d523c6-75c0-4a2c-88f9-981e552b7519".device = "/dev/disk/by-uuid/e9d523c6-75c0-4a2c-88f9-981e552b7519";
-
     networking = {
       hostName = "hass";
       useDHCP = lib.mkDefault true;
