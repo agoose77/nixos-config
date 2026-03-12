@@ -22,7 +22,6 @@
       jj
       firefox
       nixvim
-      flatpak
       kitty
       fonts
       fuzzel
