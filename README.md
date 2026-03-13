@@ -24,6 +24,7 @@ export NIX_CONFIG="experimental-features = nix-command flakes"
 nix develop .
 ```
 - (New hosts) Generate `id_ed25519` key and store in `/etc/ssh/ssh_host_ed25519.*` paths.
+- Commit the public key to the repo.
 - Run `sudo nixos-rebuild switch --flake .#$(hostname)`
 
 ## Usage
@@ -32,9 +33,6 @@ nix develop .
   configuration.
     - If you're still on a live installation medium, run `nixos-install --flake
       .#hostname` instead, and reboot.
-- Run `home-manager switch --flake .#$(id -un)@$(hostname)` to apply your home
-  configuration.
-  - If you don't have home-manager installed, try `nix shell nixpkgs#home-manager`.
 
 ## Secret Management
 This setup uses `sops` for secret management. Individual host keys can decrypt host-permitted secrets. To support editing of all secrets, the _user_ credentials (derived from a personal SSH key) must be stored in `~/.config/sops/age/keys.txt`.
