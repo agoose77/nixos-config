@@ -1,5 +1,4 @@
-{ flake.modules.nixos.hass-home-assistant = 
-{
+{flake.modules.nixos.hass-home-assistant = {
   pkgs,
   lib,
   ...
@@ -8,20 +7,20 @@
     myenergi = pkgs.fetchFromGitHub {
       owner = "CJNE";
       repo = "ha-myenergi";
-      tag = "0.0.30";
+      tag = "0.2.0";
       hash = "sha256-vy3I0MLNErz6Y/hoH7Jv/Mpqtg4E2i8cQkGGWpTyfhs=";
     };
     frigate = pkgs.fetchFromGitHub {
       owner = "blakeblackshear";
       repo = "frigate-hass-integration";
-      tag = "v5.11.0";
+      tag = "v5.14.2";
       hash = "sha256-LzrIvHJMB6mFAEfKoMIs0wL+xbEjoBIx48pSEcCHmg4=";
     };
     # Requires profile from another GitHub repo
     homeconnect_ws = pkgs.fetchFromGitHub {
       owner = "chris-mc1";
       repo = "homeconnect_local_hass";
-      rev = "2da91a43678098d9267eea1d740658fe35d7b0ad";
+      rev = "0be697ea315f87031bdf6f53cc18625352492416";
       hash = "sha256-Xq7dXKPhSQTirMUixQ8eGqNZ+0drlZOXlTUXRZqXv5w=";
     };
     climate_template = pkgs.fetchFromGitHub {
@@ -39,34 +38,37 @@
     octopus_energy = pkgs.fetchFromGitHub {
       owner = "BottlecapDave";
       repo = "HomeAssistant-OctopusEnergy";
-      tag = "v17.1.1";
+      tag = "v18.1.1";
       hash = "sha256-rn8wCGUYisLgr61Cd2qaQGfSiAtjKMo2wG/AotEXknE=";
     };
-    spook = pkgs.applyPatches {
-      name = "spook-patched";
-      src = pkgs.fetchFromGitHub {
-        owner = "frenck";
-        repo = "spook";
-        tag = "v4.0.1";
-        hash = "sha256-0IihrhATgraGmuMRnrbGTUrtlXAR+CooENSIKSWIknY=";
+    spook = let
+      version = "4.0.1";
+    in
+      pkgs.applyPatches {
+        name = "spook-patched";
+        src = pkgs.fetchFromGitHub {
+          owner = "frenck";
+          repo = "spook";
+          tag = "v${version}";
+          hash = "sha256-0IihrhATgraGmuMRnrbGTUrtlXAR+CooENSIKSWIknY=";
+        };
+        postPatch = ''
+          substituteInPlace \
+            custom_components/spook/manifest.json --replace-fail \
+            0.0.0 \
+            ${version}
+        '';
       };
-      postPatch = ''
-        substituteInPlace \
-          custom_components/spook/manifest.json --replace-fail \
-          0.0.0 \
-          4.0.1
-      '';
-    };
     tplink_router = pkgs.fetchFromGitHub {
       owner = "AlexandrErohin";
       repo = "home-assistant-tplink-router";
-      tag = "v2.13.0";
+      tag = "v2.19.0";
       hash = "sha256-2yhoBIU2NMLhAvezB82/gs+A0ZVVsMenvOR1HyU1PEM=";
     };
   };
   webResources = {
     advancedCameraCard = pkgs.fetchzip {
-      url = "https://github.com/dermotduffy/advanced-camera-card/releases/download/v7.27.1/advanced-camera-card.zip";
+      url = "https://github.com/dermotduffy/advanced-camera-card/releases/download/v7.27.4/advanced-camera-card.zip";
       stripRoot = false;
       hash = "sha256-B5l/eDLopH+0waOIvsWDzZXPKQk1mVqainAxXjh3bHI=";
     };
@@ -124,5 +126,4 @@ in {
       ];
     };
   };
-}
-;}
+};}
