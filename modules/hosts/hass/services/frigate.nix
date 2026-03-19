@@ -13,6 +13,14 @@
     kitchenCameraIP = "192.168.68.93";
     frigateConfig = {
       tls.enabled = false;
+      classification.custom.gates = {
+        threshold = 0.8;
+        state_config = {
+          motion = true;
+          interval = 10;
+          cameras.front-drive.crop = [0.6183151779119724 0.0911280510563907 0.856919032258362 0.5683357597491696];
+        };
+      };
       mqtt = {
         enabled = true;
         user = "root";
@@ -456,7 +464,7 @@
         # go2rtc interface
         "1984:1984"
       ];
-      image = "ghcr.io/blakeblackshear/frigate:0.16.3";
+      image = "ghcr.io/blakeblackshear/frigate:0.17.0";
       extraOptions = [
         "--device=/dev/bus/usb"
         "--device=/dev/dri"
