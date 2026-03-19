@@ -40,6 +40,9 @@ in {
       redir /radarr /radarr/
       reverse_proxy /radarr/* localhost:7878
 
+      redir /frigate /frigate/
+      reverse_proxy /frigate/* localhost:8971
+
       redir /qbittorrent /qbittorrent/
       handle_path /qbittorrent/* {
        reverse_proxy localhost:8080
