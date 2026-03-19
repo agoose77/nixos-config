@@ -1,59 +1,62 @@
-{ flake.modules.nixos.hass-caddy = 
 {
-  config,
-  pkgs,
-  ...
-}: let
-  domainName = "home-assistant";
-in {
-  networking.firewall.allowedTCPPorts = [80 443];
+  flake.modules.nixos.hass-caddy = {
+    config,
+    pkgs,
+    ...
+  }: let
+    domainName = "home-assistant";
+  in {
+    networking.firewall.allowedTCPPorts = [80 443];
 
-  # Allow Caddy to user to manage and create certs
-  # TODO: move this to mkif
-  services.tailscale.permitCertUid = "caddy";
+    # Allow Caddy to user to manage and create certs
+    # TODO: move this to mkif
+    services.tailscale.permitCertUid = "caddy";
 
-  environment.systemPackages = [
-    pkgs.nss
-    pkgs.nssTools
-  ];
-  services.caddy = rec {
-    enable = true;
+    environment.systemPackages = [
+      pkgs.nss
+      pkgs.nssTools
+    ];
+    services.caddy = rec {
+      enable = true;
 
-    globalConfig = ''
-      auto_https disable_redirects
-    '';
+      globalConfig = ''
+        auto_https disable_redirects
+      '';
 
-    # Auto-HTTPS remote routing
-    virtualHosts."${domainName}.tail12edf.ts.net".extraConfig = ''
-      reverse_proxy localhost:8123
+      # Auto-HTTPS remote routing
+      virtualHosts."${domainName}.tail12edf.ts.net".extraConfig = ''
+        reverse_proxy localhost:8123
 
+        redir /jellyfin /jellyfin/
+        reverse_proxy /jellyfin/* localhost:8096
 
-      redir /jellyfin /jellyfin/
-      reverse_proxy /jellyfin/* localhost:8096
+        redir /sonarr /sonarr/
+        reverse_proxy /sonarr/* localhost:8989
 
-      redir /sonarr /sonarr/
-      reverse_proxy /sonarr/* localhost:8989
+        redir /prowlarr /prowlarr/
+        reverse_proxy /prowlarr/* localhost:9696
 
-      redir /prowlarr /prowlarr/
-      reverse_proxy /prowlarr/* localhost:9696
+        redir /radarr /radarr/
+        reverse_proxy /radarr/* localhost:7878
 
-      redir /radarr /radarr/
-      reverse_proxy /radarr/* localhost:7878
+        redir /frigate /frigate/
+        handle_path /frigate/* {
+          reverse_proxy localhost:8971 {
+            header_up X-Ingress-Path "/frigate"
+          }
+        }
 
-      redir /frigate /frigate/
-      reverse_proxy /frigate/* localhost:8971
+        redir /qbittorrent /qbittorrent/
+        handle_path /qbittorrent/* {
+         reverse_proxy localhost:8080
+        }
+      '';
 
-      redir /qbittorrent /qbittorrent/
-      handle_path /qbittorrent/* {
-       reverse_proxy localhost:8080
-      }
-    '';
+      # For local routing
+      virtualHosts."${config.networking.hostName}.local".extraConfig = virtualHosts."${domainName}.tail12edf.ts.net".extraConfig;
 
-    # For local routing
-    virtualHosts."${config.networking.hostName}.local".extraConfig = virtualHosts."${domainName}.tail12edf.ts.net".extraConfig;
-
-    # For HTTP-only local routing
-    virtualHosts."${config.networking.hostName}.local:80".extraConfig = virtualHosts."${domainName}.tail12edf.ts.net".extraConfig;
+      # For HTTP-only local routing
+      virtualHosts."${config.networking.hostName}.local:80".extraConfig = virtualHosts."${domainName}.tail12edf.ts.net".extraConfig;
+    };
   };
 }
-;}
