@@ -21,7 +21,6 @@
       waybar
       jj
       firefox
-      nixvim
       kitty
       fonts
       fuzzel

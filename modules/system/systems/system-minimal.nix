@@ -62,6 +62,7 @@ in {
         git
         cli
         usb
+        nixvim
       ];
       programs.home-manager.enable = true;
       home.homeDirectory = "/home/${config.home.username}";
