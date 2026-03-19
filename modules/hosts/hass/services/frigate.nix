@@ -12,6 +12,7 @@
     hallwayCameraIP = "192.168.68.61";
     kitchenCameraIP = "192.168.68.93";
     frigateConfig = {
+      version = "0.18.0";
       tls.enabled = false;
       classification.custom.gates = {
         threshold = 0.8;
@@ -386,7 +387,6 @@
           };
         };
       };
-      version = "0.16-0";
       detect.enabled = true;
     };
     configFile = (pkgs.formats.yaml {}).generate "frigate.yml" frigateConfig;
