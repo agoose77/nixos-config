@@ -1,518 +1,500 @@
-{ flake.modules.nixos.hass-frigate = 
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
-  yolo_nas_t = pkgs.fetchurl {
-    url = "https://www.dropbox.com/scl/fi/vgxf89prg7ypwwknp6wz7/yolov9-t.onnx?rlkey=buejo1uyqeuukmzbdvo68u34y&st=jopp3iqe&dl=0";
-    sha256 = "sha256-75v3QnrVeBJr8Q4rGK2/ZN4lRVdt4GSe2wLq8nI683Q=";
-  };
-  hallwayCameraIP = "192.168.68.61";
-  kitchenCameraIP = "192.168.68.93";
-  frigateConfig = {
-    mqtt = {
-      enabled = true;
-      user = "root";
-      password = "{FRIGATE_MQTT_PASSWORD}";
-      host = "mosquitto";
-      port = 1883;
+  flake.modules.nixos.hass-frigate = {
+    config,
+    lib,
+    pkgs,
+    ...
+  }: let
+    yolo_nas_t = pkgs.fetchurl {
+      url = "https://www.dropbox.com/scl/fi/vgxf89prg7ypwwknp6wz7/yolov9-t.onnx?rlkey=buejo1uyqeuukmzbdvo68u34y&st=jopp3iqe&dl=0";
+      sha256 = "sha256-75v3QnrVeBJr8Q4rGK2/ZN4lRVdt4GSe2wLq8nI683Q=";
     };
-    record = {
-      enabled = false;
-    };
-    objects = {
-      track = [
-        "person"
-        "dog"
-      ];
-    };
-    face_recognition = {
-      enabled = true;
-    };
-    snapshots = {
-      enabled = true;
-    };
-    ffmpeg = {
-      hwaccel_args = "preset-vaapi";
-    };
-    detectors = {
-      ov = {
+    hallwayCameraIP = "192.168.68.61";
+    kitchenCameraIP = "192.168.68.93";
+    frigateConfig = {
+      tls.enabled = false;
+      mqtt = {
+        enabled = true;
+        user = "root";
+        password = "{FRIGATE_MQTT_PASSWORD}";
+        host = "mosquitto";
+        port = 1883;
+      };
+      record.enabled = false;
+      objects = {
+        track = [
+          "person"
+          "dog"
+        ];
+      };
+      face_recognition. enabled = true;
+      snapshots . enabled = true;
+      ffmpeg .hwaccel_args = "preset-vaapi";
+      detectors .ov = {
         type = "openvino";
         device = "GPU";
       };
-    };
-    model = {
-      model_type = "yolo-generic";
-      width = 320;
-      height = 320;
-      input_tensor = "nchw";
-      input_dtype = "float";
-      path = "/models/model.onnx";
-      labelmap_path = "/labelmap/coco-80.txt";
-    };
-    go2rtc = {
-      webrtc = {
-        candidates = [
+      model = {
+        model_type = "yolo-generic";
+        width = 320;
+        height = 320;
+        input_tensor = "nchw";
+        input_dtype = "float";
+        path = "/models/model.onnx";
+        labelmap_path = "/labelmap/coco-80.txt";
+      };
+      go2rtc = {
+        webrtc.candidates = [
           "192.168.68.63:8555"
           "100.77.82.8:8555"
         ];
+        streams = {
+          hallway = [
+            "rtsp://{FRIGATE_HALLWAY_CAMERA_USER_ESCAPED}:{FRIGATE_HALLWAY_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_HALLWAY_CAMERA_IP}:554/stream1"
+            "tapo://admin:{FRIGATE_TAPO_ACCOUNT_PASSWORD_ESCAPED}@{FRIGATE_HALLWAY_CAMERA_IP}"
+          ];
+          hallway-sub = [
+            "rtsp://{FRIGATE_HALLWAY_CAMERA_USER_ESCAPED}:{FRIGATE_HALLWAY_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_HALLWAY_CAMERA_IP}:554/stream2"
+          ];
+          kitchen = [
+            "rtsp://{FRIGATE_KITCHEN_CAMERA_USER_ESCAPED}:{FRIGATE_KITCHEN_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_KITCHEN_CAMERA_IP}:554/stream1"
+            "tapo://admin:{FRIGATE_TAPO_ACCOUNT_PASSWORD_ESCAPED}@{FRIGATE_KITCHEN_CAMERA_IP}"
+          ];
+          kitchen-sub = [
+            "rtsp://{FRIGATE_KITCHEN_CAMERA_USER_ESCAPED}:{FRIGATE_KITCHEN_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_KITCHEN_CAMERA_IP}:554/stream2"
+          ];
+          back-passage = [
+            "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/101"
+          ];
+          back-passage-sub = [
+            "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/102"
+          ];
+          front-drive = [
+            "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/201"
+          ];
+          front-drive-sub = [
+            "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/202"
+          ];
+          street = [
+            "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/301"
+          ];
+          street-sub = [
+            "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/302"
+          ];
+          garden = [
+            "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/401"
+          ];
+          garden-sub = [
+            "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/402"
+          ];
+          doorbell = [
+            "rtsp://admin:{FRIGATE_REOLINK_PASSWORD_ESCAPED}@192.168.68.56:554/Preview_01_main#backchannel=0"
+            "rtsp://admin:{FRIGATE_REOLINK_PASSWORD_ESCAPED}@192.168.68.56:554/Preview_01_sub"
+            "ffmpeg:doorbell#audio=opus#audio=copy"
+          ];
+          doorbell-sub = [
+            "rtsp://admin:{FRIGATE_REOLINK_PASSWORD_ESCAPED}@192.168.68.56:554/Preview_01_sub"
+          ];
+        };
       };
-      streams = {
-        hallway = [
-          "rtsp://{FRIGATE_HALLWAY_CAMERA_USER_ESCAPED}:{FRIGATE_HALLWAY_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_HALLWAY_CAMERA_IP}:554/stream1"
-          "tapo://admin:{FRIGATE_TAPO_ACCOUNT_PASSWORD_ESCAPED}@{FRIGATE_HALLWAY_CAMERA_IP}"
-        ];
-        hallway-sub = [
-          "rtsp://{FRIGATE_HALLWAY_CAMERA_USER_ESCAPED}:{FRIGATE_HALLWAY_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_HALLWAY_CAMERA_IP}:554/stream2"
-        ];
-        kitchen = [
-          "rtsp://{FRIGATE_KITCHEN_CAMERA_USER_ESCAPED}:{FRIGATE_KITCHEN_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_KITCHEN_CAMERA_IP}:554/stream1"
-          "tapo://admin:{FRIGATE_TAPO_ACCOUNT_PASSWORD_ESCAPED}@{FRIGATE_KITCHEN_CAMERA_IP}"
-        ];
-        kitchen-sub = [
-          "rtsp://{FRIGATE_KITCHEN_CAMERA_USER_ESCAPED}:{FRIGATE_KITCHEN_CAMERA_PASSWORD_ESCAPED}@{FRIGATE_KITCHEN_CAMERA_IP}:554/stream2"
-        ];
-        back-passage = [
-          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/101"
-        ];
-        back-passage-sub = [
-          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/102"
-        ];
-        front-drive = [
-          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/201"
-        ];
-        front-drive-sub = [
-          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/202"
-        ];
-        street = [
-          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/301"
-        ];
-        street-sub = [
-          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/302"
-        ];
-        garden = [
-          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/401"
-        ];
-        garden-sub = [
-          "rtsp://admin:{FRIGATE_ANKE_PASSWORD_ESCAPED}@{FRIGATE_ANNKE_IP}:554/Streaming/Channels/402"
-        ];
-        doorbell = [
-          "rtsp://admin:{FRIGATE_REOLINK_PASSWORD_ESCAPED}@192.168.68.56:554/Preview_01_main#backchannel=0"
-          "rtsp://admin:{FRIGATE_REOLINK_PASSWORD_ESCAPED}@192.168.68.56:554/Preview_01_sub"
-          "ffmpeg:doorbell#audio=opus#audio=copy"
-        ];
-        doorbell-sub = [
-          "rtsp://admin:{FRIGATE_REOLINK_PASSWORD_ESCAPED}@192.168.68.56:554/Preview_01_sub"
-        ];
-      };
-    };
-    cameras = {
-      hallway = {
-        ffmpeg = {
-          output_args = {
-            record = "preset-record-generic-audio-copy";
+      cameras = {
+        hallway = {
+          ffmpeg = {
+            output_args = {
+              record = "preset-record-generic-audio-copy";
+            };
+            inputs = [
+              {
+                path = "rtsp://127.0.0.1:8554/hallway";
+                input_args = "preset-rtsp-restream";
+                roles = [
+                  "record"
+                  "audio"
+                ];
+              }
+              {
+                path = "rtsp://127.0.0.1:8554/hallway-sub";
+                input_args = "preset-rtsp-restream";
+                roles = [
+                  "detect"
+                ];
+              }
+            ];
           };
-          inputs = [
-            {
-              path = "rtsp://127.0.0.1:8554/hallway";
-              input_args = "preset-rtsp-restream";
-              roles = [
-                "record"
-                "audio"
-              ];
-            }
-            {
-              path = "rtsp://127.0.0.1:8554/hallway-sub";
-              input_args = "preset-rtsp-restream";
-              roles = [
-                "detect"
-              ];
-            }
-          ];
-        };
-        onvif = {
-          host = "${hallwayCameraIP}";
-          port = 2020;
-          user = "{FRIGATE_HALLWAY_CAMERA_USER}";
-          password = "{FRIGATE_HALLWAY_CAMERA_PASSWORD}";
-        };
-        motion = {
-          threshold = 45;
-        };
-        audio = {
-          enabled = true;
-          max_not_heard = 10;
-          min_volume = 200;
-          listen = [
-            "bark"
-            "fire_alarm"
-            "scream"
-            "speech"
-            "yell"
-          ];
-        };
-      };
-      kitchen = {
-        ffmpeg = {
-          output_args = {
-            record = "preset-record-generic-audio-copy";
+          onvif = {
+            host = "${hallwayCameraIP}";
+            port = 2020;
+            user = "{FRIGATE_HALLWAY_CAMERA_USER}";
+            password = "{FRIGATE_HALLWAY_CAMERA_PASSWORD}";
           };
-          inputs = [
-            {
-              path = "rtsp://127.0.0.1:8554/kitchen";
-              input_args = "preset-rtsp-restream";
-              roles = [
-                "record"
-                "audio"
-              ];
-            }
-            {
-              path = "rtsp://127.0.0.1:8554/kitchen-sub";
-              input_args = "preset-rtsp-restream";
-              roles = [
-                "detect"
-              ];
-            }
-          ];
-        };
-        motion = {
-          threshold = 45;
-        };
-        audio = {
-          enabled = true;
-          max_not_heard = 10;
-          min_volume = 200;
-          listen = [
-            "bark"
-            "fire_alarm"
-            "scream"
-            "speech"
-            "yell"
-          ];
-        };
-      };
-      back-passage = {
-        ffmpeg = {
-          inputs = [
-            {
-              path = "rtsp://127.0.0.1:8554/back-passage";
-              input_args = "preset-rtsp-restream";
-              roles = [
-                "record"
-              ];
-            }
-            {
-              path = "rtsp://127.0.0.1:8554/back-passage-sub";
-              input_args = "preset-rtsp-restream";
-              roles = [
-                "detect"
-              ];
-            }
-          ];
-        };
-        motion = {
-          threshold = 45;
-          contour_area = 15;
-          mask = [
-            "0.667,0.139,0.86,0.098,1,0.237,1,0,0.666,0"
-          ];
-        };
-        zones = {
-          Side_Boundary = {
-            coordinates = "0.187,0.169,0.249,0.141,0.291,0.2,0.405,0.516,0.594,1,0.214,1,0.186,0.495";
-            inertia = 3;
-            loitering_time = 0;
+          motion = {
+            threshold = 45;
+          };
+          audio = {
+            enabled = true;
+            max_not_heard = 10;
+            min_volume = 200;
+            listen = [
+              "bark"
+              "fire_alarm"
+              "scream"
+              "speech"
+              "yell"
+            ];
           };
         };
-      };
-      front-drive = {
-        ffmpeg = {
-          inputs = [
-            {
-              path = "rtsp://127.0.0.1:8554/front-drive";
-              input_args = "preset-rtsp-restream";
-              roles = [
-                "record"
-              ];
-            }
-            {
-              path = "rtsp://127.0.0.1:8554/front-drive-sub";
-              input_args = "preset-rtsp-restream";
-              roles = [
-                "detect"
-              ];
-            }
-          ];
+        kitchen = {
+          ffmpeg = {
+            output_args = {
+              record = "preset-record-generic-audio-copy";
+            };
+            inputs = [
+              {
+                path = "rtsp://127.0.0.1:8554/kitchen";
+                input_args = "preset-rtsp-restream";
+                roles = [
+                  "record"
+                  "audio"
+                ];
+              }
+              {
+                path = "rtsp://127.0.0.1:8554/kitchen-sub";
+                input_args = "preset-rtsp-restream";
+                roles = [
+                  "detect"
+                ];
+              }
+            ];
+          };
+          motion = {
+            threshold = 45;
+          };
+          audio = {
+            enabled = true;
+            max_not_heard = 10;
+            min_volume = 200;
+            listen = [
+              "bark"
+              "fire_alarm"
+              "scream"
+              "speech"
+              "yell"
+            ];
+          };
         };
-        motion = {
-          mask = [
-            "0.152,0,0.05,0.226,0,0.344,0.001,0"
-            "0.187,0,0.187,0.446,0.268,0.446,0.268,0"
-          ];
-        };
-        objects = {
-          filters = {
-            person = {
+        back-passage = {
+          ffmpeg = {
+            inputs = [
+              {
+                path = "rtsp://127.0.0.1:8554/back-passage";
+                input_args = "preset-rtsp-restream";
+                roles = [
+                  "record"
+                ];
+              }
+              {
+                path = "rtsp://127.0.0.1:8554/back-passage-sub";
+                input_args = "preset-rtsp-restream";
+                roles = [
+                  "detect"
+                ];
+              }
+            ];
+          };
+          motion = {
+            threshold = 45;
+            contour_area = 15;
+            mask = [
+              "0.667,0.139,0.86,0.098,1,0.237,1,0,0.666,0"
+            ];
+          };
+          zones = {
+            Side_Boundary = {
+              coordinates = "0.187,0.169,0.249,0.141,0.291,0.2,0.405,0.516,0.594,1,0.214,1,0.186,0.495";
+              inertia = 3;
+              loitering_time = 0;
             };
           };
         };
-        zones = {
-          Front_House = {
-            coordinates = "0.657,0.154,0.625,0.375,0.301,0.636,0.057,0.887,0,1,0.79,1,0.938,0.429,0.948,0.363";
-            inertia = 3;
-            loitering_time = 0;
+        front-drive = {
+          ffmpeg = {
+            inputs = [
+              {
+                path = "rtsp://127.0.0.1:8554/front-drive";
+                input_args = "preset-rtsp-restream";
+                roles = [
+                  "record"
+                ];
+              }
+              {
+                path = "rtsp://127.0.0.1:8554/front-drive-sub";
+                input_args = "preset-rtsp-restream";
+                roles = [
+                  "detect"
+                ];
+              }
+            ];
           };
-        };
-      };
-      street = {
-        ffmpeg = {
-          inputs = [
-            {
-              path = "rtsp://127.0.0.1:8554/street";
-              input_args = "preset-rtsp-restream";
-              roles = [
-                "record"
-              ];
-            }
-            {
-              path = "rtsp://127.0.0.1:8554/street-sub";
-              input_args = "preset-rtsp-restream";
-              roles = [
-                "detect"
-              ];
-            }
-          ];
-        };
-        motion = {
-          threshold = 40;
-          contour_area = 15;
-        };
-        zones = {
-          Road = {
-            coordinates = "0.14,0.998,0.534,0.478,0.742,0.255,0.929,0.104,0.924,0,0,0,0,1";
-            loitering_time = 0;
+          motion = {
+            mask = [
+              "0.152,0,0.05,0.226,0,0.344,0.001,0"
+              "0.187,0,0.187,0.446,0.268,0.446,0.268,0"
+            ];
           };
-          Boundary = {
-            coordinates = "0.139,1,0.546,0.463,1,0.035,1,1";
-            loitering_time = 0;
-          };
-        };
-      };
-      garden = {
-        ffmpeg = {
-          inputs = [
-            {
-              path = "rtsp://127.0.0.1:8554/garden";
-              input_args = "preset-rtsp-restream";
-              roles = [
-                "record"
-              ];
-            }
-            {
-              path = "rtsp://127.0.0.1:8554/garden-sub";
-              input_args = "preset-rtsp-restream";
-              roles = [
-                "detect"
-              ];
-            }
-          ];
-        };
-        motion = {
-          threshold = 40;
-          contour_area = 15;
-        };
-        objects = {
-          mask = "0,0.432,0.078,0.355,0.039,0,0.001,0.003";
-          track = [
-            "person"
-            "car"
-            "dog"
-          ];
-        };
-        zones = {
-          Private_Driveway = {
-            coordinates = "0.227,0.543,0.559,0.314,0.572,0.075,0.393,0.01,0.383,0.035,0.011,0.211,0.033,0.402,0.13,0.338";
-            loitering_time = 0;
-          };
-          Raised_Garden = {
-            coordinates = "0.488,0.377,0.791,0.176,0.998,0.332,1,0.869";
-            loitering_time = 0;
-          };
-          Patio = {
-            coordinates = "0.483,0.376,0.225,0.549,0.425,0.953,0.38,1,0.999,0.996,0.997,0.871";
-            loitering_time = 0;
-          };
-        };
-      };
-      doorbell = {
-        ffmpeg = {
-          output_args = {
-            record = "preset-record-generic-audio-aac";
-          };
-          inputs = [
-            {
-              path = "rtsp://127.0.0.1:8554/doorbell";
-              input_args = "preset-rtsp-restream";
-              roles = [
-                "record"
-              ];
-            }
-            {
-              path = "rtsp://127.0.0.1:8554/doorbell-sub";
-              input_args = "preset-rtsp-restream";
-              roles = [
-                "detect"
-                "audio"
-              ];
-            }
-          ];
-        };
-        zones = {
-          Doorstep = {
-            coordinates = "0.408,1,0.995,0.998,1,0.068,0.371,0.105";
-            inertia = 3;
-            loitering_time = 0;
-            objects = "person";
+          objects = {
             filters = {
               person = {
-                min_area = 5000;
               };
             };
           };
+          zones = {
+            Front_House = {
+              coordinates = "0.657,0.154,0.625,0.375,0.301,0.636,0.057,0.887,0,1,0.79,1,0.938,0.429,0.948,0.363";
+              inertia = 3;
+              loitering_time = 0;
+            };
+          };
         };
-        audio = frigateConfig.cameras.hallway.audio;
-        motion = {
-          threshold = 40;
-          contour_area = 15;
+        street = {
+          ffmpeg = {
+            inputs = [
+              {
+                path = "rtsp://127.0.0.1:8554/street";
+                input_args = "preset-rtsp-restream";
+                roles = [
+                  "record"
+                ];
+              }
+              {
+                path = "rtsp://127.0.0.1:8554/street-sub";
+                input_args = "preset-rtsp-restream";
+                roles = [
+                  "detect"
+                ];
+              }
+            ];
+          };
+          motion = {
+            threshold = 40;
+            contour_area = 15;
+          };
+          zones = {
+            Road = {
+              coordinates = "0.14,0.998,0.534,0.478,0.742,0.255,0.929,0.104,0.924,0,0,0,0,1";
+              loitering_time = 0;
+            };
+            Boundary = {
+              coordinates = "0.139,1,0.546,0.463,1,0.035,1,1";
+              loitering_time = 0;
+            };
+          };
         };
-        review = {
-          alerts = {
-            required_zones = "Doorstep";
+        garden = {
+          ffmpeg = {
+            inputs = [
+              {
+                path = "rtsp://127.0.0.1:8554/garden";
+                input_args = "preset-rtsp-restream";
+                roles = [
+                  "record"
+                ];
+              }
+              {
+                path = "rtsp://127.0.0.1:8554/garden-sub";
+                input_args = "preset-rtsp-restream";
+                roles = [
+                  "detect"
+                ];
+              }
+            ];
+          };
+          motion = {
+            threshold = 40;
+            contour_area = 15;
+          };
+          objects = {
+            mask = "0,0.432,0.078,0.355,0.039,0,0.001,0.003";
+            track = [
+              "person"
+              "car"
+              "dog"
+            ];
+          };
+          zones = {
+            Private_Driveway = {
+              coordinates = "0.227,0.543,0.559,0.314,0.572,0.075,0.393,0.01,0.383,0.035,0.011,0.211,0.033,0.402,0.13,0.338";
+              loitering_time = 0;
+            };
+            Raised_Garden = {
+              coordinates = "0.488,0.377,0.791,0.176,0.998,0.332,1,0.869";
+              loitering_time = 0;
+            };
+            Patio = {
+              coordinates = "0.483,0.376,0.225,0.549,0.425,0.953,0.38,1,0.999,0.996,0.997,0.871";
+              loitering_time = 0;
+            };
+          };
+        };
+        doorbell = {
+          ffmpeg = {
+            output_args = {
+              record = "preset-record-generic-audio-aac";
+            };
+            inputs = [
+              {
+                path = "rtsp://127.0.0.1:8554/doorbell";
+                input_args = "preset-rtsp-restream";
+                roles = [
+                  "record"
+                ];
+              }
+              {
+                path = "rtsp://127.0.0.1:8554/doorbell-sub";
+                input_args = "preset-rtsp-restream";
+                roles = [
+                  "detect"
+                  "audio"
+                ];
+              }
+            ];
+          };
+          zones = {
+            Doorstep = {
+              coordinates = "0.408,1,0.995,0.998,1,0.068,0.371,0.105";
+              inertia = 3;
+              loitering_time = 0;
+              objects = "person";
+              filters = {
+                person = {
+                  min_area = 5000;
+                };
+              };
+            };
+          };
+          audio = frigateConfig.cameras.hallway.audio;
+          motion = {
+            threshold = 40;
+            contour_area = 15;
           };
         };
       };
+      version = "0.16-0";
+      detect.enabled = true;
     };
-    version = "0.16-0";
-    detect = {
-      enabled = true;
-    };
-  };
-  configFile = (pkgs.formats.yaml {}).generate "frigate.yml" frigateConfig;
+    configFile = (pkgs.formats.yaml {}).generate "frigate.yml" frigateConfig;
 
-  secretsPath = lib.strings.removeSuffix ".yaml" config.sops.secrets.frigate-vars.path + "-escaped.env";
+    secretsPath = lib.strings.removeSuffix ".yaml" config.sops.secrets.frigate-vars.path + "-escaped.env";
 
-  pythonWithYaml = pkgs.python3.withPackages (python-pkgs:
-    with python-pkgs; [
-      # select Python packages here
-      pyyaml
-    ]);
-in {
-  networking.firewall.allowedTCPPorts = [8555];
-  networking.firewall.allowedUDPPorts = [8555];
-
-  sops.secrets.frigate-vars = {
-    sopsFile = ../secrets.yaml;
-    owner = "root";
-    mode = "0555";
-    key = "";
-  };
-
-  # Disable eDP-2 when keyboard plugged in
-  systemd.services."build-frigate-env" = let
-    script = pkgs.writeText "escape-env.py" ''
-      from yaml import safe_load, dump
-      from urllib.parse import quote
-      with open("${config.sops.secrets.frigate-vars.path}", "r") as f:
-          data = safe_load(f)
-
-      env = {}
-      for key, value in data.copy().items():
-          env_key_suffix = key.replace("-", "_").upper()
-          env_key = f"FRIGATE_{env_key_suffix}"
-          env[f"{env_key}_ESCAPED"] = quote(value)
-          env[env_key] = value
-
-      lines = ["{0}={1}".format(*p) for p in env.items()]
-      with open("${secretsPath}", "w") as f:
-          f.write('\n'.join(lines))
-
-    '';
+    pythonWithYaml = pkgs.python3.withPackages (python-pkgs:
+      with python-pkgs; [
+        # select Python packages here
+        pyyaml
+      ]);
   in {
-    description = "URL encode secrets for frigate.";
-    wantedBy = [(config.virtualisation.oci-containers.containers.frigate.serviceName + ".service")];
-    serviceConfig = {
-      Type = "oneshot";
-      Restart = "on-failure";
+    networking.firewall.allowedTCPPorts = [8555];
+    networking.firewall.allowedUDPPorts = [8555];
+
+    sops.secrets.frigate-vars = {
+      sopsFile = ../secrets.yaml;
+      owner = "root";
+      mode = "0555";
+      key = "";
     };
-    enableStrictShellChecks = true;
-    script = ''
-      ${pythonWithYaml.interpreter} ${script}
+
+    # Disable eDP-2 when keyboard plugged in
+    systemd.services."build-frigate-env" = let
+      script = pkgs.writeText "escape-env.py" ''
+        from yaml import safe_load, dump
+        from urllib.parse import quote
+        with open("${config.sops.secrets.frigate-vars.path}", "r") as f:
+            data = safe_load(f)
+
+        env = {}
+        for key, value in data.copy().items():
+            env_key_suffix = key.replace("-", "_").upper()
+            env_key = f"FRIGATE_{env_key_suffix}"
+            env[f"{env_key}_ESCAPED"] = quote(value)
+            env[env_key] = value
+
+        lines = ["{0}={1}".format(*p) for p in env.items()]
+        with open("${secretsPath}", "w") as f:
+            f.write('\n'.join(lines))
+
+      '';
+    in {
+      description = "URL encode secrets for frigate.";
+      wantedBy = [(config.virtualisation.oci-containers.containers.frigate.serviceName + ".service")];
+      serviceConfig = {
+        Type = "oneshot";
+        Restart = "on-failure";
+      };
+      enableStrictShellChecks = true;
+      script = ''
+        ${pythonWithYaml.interpreter} ${script}
+      '';
+    };
+
+    virtualisation.oci-containers.containers.frigate = {
+      environment = {
+        FRIGATE_RTSP_PASSWORD = "password";
+        LIBVA_DRIVER_NAME = "iHD";
+        FRIGATE_HALLWAY_CAMERA_IP = "${hallwayCameraIP}";
+        FRIGATE_KITCHEN_CAMERA_IP = "${kitchenCameraIP}";
+        FRIGATE_ANNKE_IP = "192.168.69.228";
+      };
+      environmentFiles = [secretsPath];
+      ports = [
+        "8971:8971"
+        # RTSP
+        "8554:8554"
+        # Internal unauth
+        "5000:5000"
+        # WebRTC over TCP
+        "8555:8555/tcp"
+        # WebRTC over UDP
+        "8555:8555/udp"
+        # go2rtc interface
+        "1984:1984"
+      ];
+      image = "ghcr.io/blakeblackshear/frigate:0.16.3";
+      extraOptions = [
+        "--device=/dev/bus/usb"
+        "--device=/dev/dri"
+        "--tmpfs=/tmp/cache:rw,size=1g,mode=1777"
+        "--shm-size=256mb"
+        "--network=mqtt-bridge"
+        "--cap-add=PERFMON"
+        "--cap-add=SYS_ADMIN"
+        "--group-add=keep-groups"
+      ];
+      # Needs onnx model (t)
+      # podman build . --build-arg MODEL_SIZE=t --output . -f- <<'EOF'
+      #     FROM python:3.11 AS build
+      #     RUN apt-get update && apt-get install --no-install-recommends -y libgl1 && rm -rf /var/lib/apt/lists/*
+      #     WORKDIR /yolov9
+      #     ADD https://github.com/WongKinYiu/yolov9.git .
+      #     RUN pip install -r requirements.txt
+      #     RUN pip install onnx onnxruntime onnx-simplifier>=0.4.1
+      #     ARG MODEL_SIZE
+      #     ADD https://github.com/WongKinYiu/yolov9/releases/download/v0.1/yolov9-${MODEL_SIZE}-converted.pt yolov9-${MODEL_SIZE}.pt
+      #     RUN sed -i "s/ckpt = torch.load(attempt_download(w), map_location='cpu')/ckpt = torch.load(attempt_download(w), map_location='cpu', weights_only=False)/g" models/experimental.py
+      #     RUN python3 export.py --weights ./yolov9-${MODEL_SIZE}.pt --imgsz 320 --simplify --include onnx
+      #     FROM scratch
+      #     ARG MODEL_SIZE
+      #     COPY --from=build /yolov9/yolov9-${MODEL_SIZE}.onnx /
+      #     EOF
+      volumes = [
+        "/etc/localtime:/etc/localtime:ro"
+        "/var/lib/frigate:/config"
+        "${yolo_nas_t}:/models/model.onnx"
+        "${configFile}:/config/config.yaml:ro"
+        "/mnt/data/media/frigate:/media/frigate"
+      ];
+    };
+
+    # Ensure that frigate has a var directory
+    system.activationScripts.makeVaultWardenDir = lib.stringAfter ["var"] ''
+      mkdir -p /var/lib/frigate
     '';
   };
-
-  virtualisation.oci-containers.containers.frigate = {
-    environment = {
-      FRIGATE_RTSP_PASSWORD = "password";
-      LIBVA_DRIVER_NAME = "iHD";
-      FRIGATE_HALLWAY_CAMERA_IP = "${hallwayCameraIP}";
-      FRIGATE_KITCHEN_CAMERA_IP = "${kitchenCameraIP}";
-      FRIGATE_ANNKE_IP = "192.168.69.228";
-    };
-    environmentFiles = [secretsPath];
-    ports = [
-      "8971:8971"
-      # RTSP
-      "8554:8554"
-      # Internal unauth
-      "5000:5000"
-      # WebRTC over TCP
-      "8555:8555/tcp"
-      # WebRTC over UDP
-      "8555:8555/udp"
-      # go2rtc interface
-      "1984:1984"
-    ];
-    image = "ghcr.io/blakeblackshear/frigate:0.16.3";
-    extraOptions = [
-      "--device=/dev/bus/usb"
-      "--device=/dev/dri"
-      "--tmpfs=/tmp/cache:rw,size=1g,mode=1777"
-      "--shm-size=256mb"
-      "--network=mqtt-bridge"
-      "--cap-add=PERFMON"
-      "--cap-add=SYS_ADMIN"
-      "--group-add=keep-groups"
-    ];
-    # Needs onnx model (t)
-    # podman build . --build-arg MODEL_SIZE=t --output . -f- <<'EOF'
-    #     FROM python:3.11 AS build
-    #     RUN apt-get update && apt-get install --no-install-recommends -y libgl1 && rm -rf /var/lib/apt/lists/*
-    #     WORKDIR /yolov9
-    #     ADD https://github.com/WongKinYiu/yolov9.git .
-    #     RUN pip install -r requirements.txt
-    #     RUN pip install onnx onnxruntime onnx-simplifier>=0.4.1
-    #     ARG MODEL_SIZE
-    #     ADD https://github.com/WongKinYiu/yolov9/releases/download/v0.1/yolov9-${MODEL_SIZE}-converted.pt yolov9-${MODEL_SIZE}.pt
-    #     RUN sed -i "s/ckpt = torch.load(attempt_download(w), map_location='cpu')/ckpt = torch.load(attempt_download(w), map_location='cpu', weights_only=False)/g" models/experimental.py
-    #     RUN python3 export.py --weights ./yolov9-${MODEL_SIZE}.pt --imgsz 320 --simplify --include onnx
-    #     FROM scratch
-    #     ARG MODEL_SIZE
-    #     COPY --from=build /yolov9/yolov9-${MODEL_SIZE}.onnx /
-    #     EOF
-    volumes = [
-      "/etc/localtime:/etc/localtime:ro"
-      "/var/lib/frigate:/config"
-      "${yolo_nas_t}:/models/model.onnx"
-      "${configFile}:/config/config.yaml:ro"
-      "/mnt/data/media/frigate:/media/frigate"
-    ];
-  };
-
-  # Ensure that frigate has a var directory
-  system.activationScripts.makeVaultWardenDir = lib.stringAfter ["var"] ''
-    mkdir -p /var/lib/frigate
-  '';
 }
-;}
