@@ -204,6 +204,10 @@
             format-alt = "{capacity}% ({time})";
             tooltip-format = "{capacity}% ({time})";
             onclick = "";
+            states = {
+              warning = 30;
+              critical = 15;
+            };
           };
           clock = {
             timezone = "";
