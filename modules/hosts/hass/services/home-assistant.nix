@@ -77,6 +77,16 @@
         url = "https://github.com/kalkih/mini-graph-card/releases/download/v0.13.0/mini-graph-card-bundle.js";
         hash = "sha256-TYuYbzzWk8D3dx0vVXQAi8OcRey0UK7AZ5BhUL4t+r0=";
       };
+      materialYouTheme = pkgs.fetchFromGitHub {
+        owner = "Nerwyn";
+        repo = "material-you-theme";
+        hash = "";
+      };
+      materialYouUtilities = pkgs.fetchFromGitHub {
+        owner = "Nerwyn";
+        repo = "material-you-utilities";
+        hash = "";
+      };
     };
   in {
     # Open shelly port
@@ -113,6 +123,8 @@
           ++ lib.optionals (!isBackup) [
             "${webResources.advancedCameraCard}/dist:/config/www/advancedCameraCard/"
             "${webResources.miniGraphCard}:/config/www/miniGraphCard/mini-graph-card-bundle.js"
+            "${webResources.materialYouTheme}:/config/www/materialYouTheme/"
+            "${webResources.materialYouUtilities}:/config/www/materialYouUtilities/"
           ];
       };
       matter-server = {
