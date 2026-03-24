@@ -14,12 +14,22 @@
     frigateConfig = {
       version = "0.18.0";
       tls.enabled = false;
-      classification.custom.gates = {
-        threshold = 0.8;
-        state_config = {
-          motion = true;
-          interval = 10;
-          cameras.front-drive.crop = [0.6183151779119724 0.0911280510563907 0.856919032258362 0.5683357597491696];
+      classification.custom = {
+        gates = {
+          threshold = 0.8;
+          state_config = {
+            motion = true;
+            interval = 10;
+            cameras.front-drive.crop = [0.6183151779119724 0.0911280510563907 0.856919032258362 0.5683357597491696];
+          };
+        };
+        kitchen-door = {
+          threshold = 0.8;
+          state_config = {
+            motion = true;
+            interval = 10;
+            cameras.kitchen.crop = [0 0.10428218841377417 0.14475346744963283 0.36162168610201034];
+          };
         };
       };
       mqtt = {
