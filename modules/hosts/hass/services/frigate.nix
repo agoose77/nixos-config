@@ -156,10 +156,15 @@
             listen = [
               "bark"
               "fire_alarm"
+              "smoke_detector"
               "scream"
               "speech"
               "yell"
             ];
+            filters = {
+              smoke_detector.threshold = 0.7;
+              fire_alarm.threshold = 0.7;
+            };
           };
         };
         kitchen = {
@@ -195,10 +200,15 @@
             listen = [
               "bark"
               "fire_alarm"
+              "smoke_detector"
               "scream"
               "speech"
               "yell"
             ];
+            filters = {
+              smoke_detector.threshold = 0.7;
+              fire_alarm.threshold = 0.7;
+            };
           };
         };
         back-passage = {
