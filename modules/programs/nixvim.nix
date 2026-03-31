@@ -23,11 +23,13 @@
       ];
       plugins = {
         nvim-surround.enable = true;
+        blink-pairs.enable = true;
         autoclose = {
-          enable = true;
+          enable = false;
           # Don't close when touching a non-whitespace character
           settings.options.disable_when_touch = true;
         };
+        comment.enable = true;
         cmp = {
           enable = true;
           settings = {
