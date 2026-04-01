@@ -127,6 +127,7 @@
             "${webResources.miniGraphCard}:/config/www/miniGraphCard/mini-graph-card-bundle.js"
             "${webResources.materialYouTheme}:/config/www/materialYouTheme/"
             "${webResources.materialYouUtilities}:/config/www/materialYouUtilities/"
+            "${webResources.materialYouTheme}/themes/material_you.yaml:/config/themes/"
           ];
       };
       matter-server = {
