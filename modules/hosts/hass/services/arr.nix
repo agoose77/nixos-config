@@ -1,5 +1,4 @@
-{ flake.modules.nixos.hass-arr = 
-{
+{flake.modules.nixos.hass-arr = {
   config,
   pkgs,
   ...
@@ -142,7 +141,7 @@
         PUID = "1000";
         PGID = "1000";
       };
-      image = "lscr.io/linuxserver/sonarr:4.0.16";
+      image = "lscr.io/linuxserver/sonarr:4.0.17";
       dependsOn = ["gluetun"];
       volumes = [
         "${config.sops.templates."sonar-config.xml".path}:/config/config.xml:rw"
@@ -179,7 +178,7 @@
         PUID = "1000";
         PGID = "1000";
       };
-      image = "lscr.io/linuxserver/radarr:6.0.4";
+      image = "lscr.io/linuxserver/radarr:6.1.1";
       dependsOn = ["gluetun"];
       volumes = [
         "${radarrConfigFile}:/config/config.xml:rw"
@@ -192,5 +191,4 @@
       ];
     };
   };
-}
-;}
+};}
