@@ -1,6 +1,6 @@
 {pkgs}: let
-  idle-env = pkgs.python312.buildEnv.override {
-    extraLibs = with pkgs.python312Packages; [
+  idle-env = pkgs.python314.buildEnv.override {
+    extraLibs = with pkgs.python314Packages; [
       paho-mqtt
     ];
     ignoreCollisions = false;
