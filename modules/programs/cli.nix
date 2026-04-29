@@ -1,5 +1,10 @@
 {
-  flake.modules.homeManager.cli = {pkgs, ...}: {
+  flake.modules.homeManager.cli = {
+    config,
+    lib,
+    pkgs,
+    ...
+  }: {
     home.packages = with pkgs; [
       alejandra
       bat
@@ -26,9 +31,13 @@
 
     programs.direnv = {
       enable = true;
-      enableBashIntegration = true;
+      enableBashIntegration = false;
       nix-direnv.enable = true;
     };
+    # Enable direnv first. It needs to init before atuin, so let's just run it first as it's a simpler init script than atuins (easier to vendor here).
+    programs.bash.initExtra = lib.mkBefore ''
+      eval "$(${lib.getExe config.programs.direnv.package} hook bash)"
+    '';
 
     programs.atuin = {
       enable = true;
