@@ -9,9 +9,11 @@
       hostname = config.networking.hostname;
     in {
       enable = true;
-      allowReboot = false;
+      allowReboot = true;
       dates = "*-*-* 04:00:00";
       randomizedDelaySec = "1h";
+      runGarbageCollection = true;
+      upgrade = false; # Use existing lockfile
       flake = "github:agoose77/nixos-config#${hostname}";
     };
   };
