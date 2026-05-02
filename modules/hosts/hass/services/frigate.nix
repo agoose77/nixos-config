@@ -334,7 +334,7 @@
           };
           zones = {
             Private_Driveway = {
-              coordinates = "0.356,0.267,0.091,0.513,0.324,0.899,0.25,1,0.999,0.996,1,0.773";
+              coordinates = "0.086,0.506,0.005,0.33,0,0,0.439,0.006,0.432,0.213";
               loitering_time = 0;
             };
             Raised_Garden = {
