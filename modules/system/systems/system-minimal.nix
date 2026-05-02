@@ -46,6 +46,7 @@ in {
           openssh
           sops
           home-manager
+          auto-upgrade
         ]
         ++ (with inputs.self.modules.generic; [
           pkgs-by-name
