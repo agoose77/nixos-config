@@ -40,6 +40,7 @@
     '';
 
     programs.atuin = {
+      forceOverwriteSettings = true;
       enable = true;
       enableBashIntegration = true;
       daemon.enable = true;
