@@ -7,6 +7,7 @@
       bluetooth
       power
       autologin-angus
+      auto-upgrade
       # services
       hass-mqtt
       hass-mosquitto
