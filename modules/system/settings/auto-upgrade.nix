@@ -6,7 +6,7 @@
     ...
   }: {
     system.autoUpgrade = let
-      hostname = config.networking.hostname;
+      hostname = config.networking.hostName;
     in {
       enable = true;
       allowReboot = true;
