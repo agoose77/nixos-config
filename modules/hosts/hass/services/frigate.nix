@@ -332,14 +332,6 @@
             threshold = 40;
             contour_area = 15;
           };
-          objects = {
-            mask = "0,0.432,0.078,0.355,0.039,0,0.001,0.003";
-            track = [
-              "person"
-              "car"
-              "dog"
-            ];
-          };
           zones = {
             Private_Driveway = {
               coordinates = "0.356,0.267,0.091,0.513,0.324,0.899,0.25,1,0.999,0.996,1,0.773";
