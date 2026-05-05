@@ -152,6 +152,7 @@
         /.direnv/
         /.nix/
         /.envrc
+        /.scratch/
       '';
       target = ".gitignore-global";
     };
