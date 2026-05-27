@@ -19,6 +19,7 @@
       fd
       fzf
       jq
+      python3Packages.ipython
       yq-go
       oils-for-unix
       unzip
