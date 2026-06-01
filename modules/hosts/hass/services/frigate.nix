@@ -470,7 +470,7 @@
         # go2rtc interface
         "1984:1984"
       ];
-      image = "ghcr.io/blakeblackshear/frigate:0.17.0";
+      image = "ghcr.io/blakeblackshear/frigate:0.17.1";
       extraOptions = [
         "--device=/dev/bus/usb"
         "--device=/dev/dri"
