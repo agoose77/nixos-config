@@ -69,6 +69,9 @@
       ports = [
         "6052:6052"
       ];
+      extraOptions = [
+        "--network=host"
+      ];
       image = "ghcr.io/esphome/esphome:2026.5.2";
       volumes = (lib.mapAttrsToList (name: value: "${config.sops.templates."${name}.yaml".path}:/config/${name}.yaml") deviceNames) ++ ["esphome-config:/config"];
     };
