@@ -48,15 +48,18 @@
     };
     sops.templates =
       lib.mapAttrs (
-        name: display: ((pkgs.formats.yaml {}).generate "${name}.yaml" baseESPConfig
-          // {
-            esphome = {
-              name = "esphome-web-fa8368";
-              friendly_name = "${display} ESP";
-              min_version = "2025.11.0";
-              name_add_mac_suffix = false;
+        name: display: {
+          file =
+            (pkgs.formats.yaml {}).generate "${name}.yaml" baseESPConfig
+            // {
+              esphome = {
+                name = "esphome-web-fa8368";
+                friendly_name = "${display} ESP";
+                min_version = "2025.11.0";
+                name_add_mac_suffix = false;
+              };
             };
-          })
+        }
       )
       deviceNames;
 
