@@ -19,7 +19,7 @@
         key = "wifi-password";
       };
     };
-    sops.templates."living-room.yml".file = let
+    sops.templates."living-room.yaml".file = let
       livingRoomConfig = {
         esphome = {
           name = "esphome-web-fa8368";
@@ -48,7 +48,7 @@
           active = true;
         };
       };
-    in ((pkgs.formats.yaml {}).generate "living-room.yml" livingRoomConfig);
+    in ((pkgs.formats.yaml {}).generate "living-room.yaml" livingRoomConfig);
 
     virtualisation.oci-containers.containers.esphome = {
       ports = [
