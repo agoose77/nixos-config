@@ -47,17 +47,20 @@
       };
     };
     sops.templates =
-      lib.mapAttrs (
+      lib.mapAttrs' (
         name: display: {
-          file = (pkgs.formats.yaml {}).generate "${name}.yaml" (baseESPConfig
-            // {
-              esphome = {
-                name = "esphome-web-fa8368";
-                friendly_name = "${display} ESP";
-                min_version = "2025.11.0";
-                name_add_mac_suffix = false;
-              };
-            });
+          name = "${name}.yaml";
+          value = {
+            file = (pkgs.formats.yaml {}).generate "${name}.yaml" (baseESPConfig
+              // {
+                esphome = {
+                  name = "esphome-web-fa8368";
+                  friendly_name = "${display} ESP";
+                  min_version = "2025.11.0";
+                  name_add_mac_suffix = false;
+                };
+              });
+          };
         }
       )
       deviceNames;
@@ -67,7 +70,7 @@
         "6052:6052"
       ];
       image = "ghcr.io/esphome/esphome:2026.5.2";
-      volumes = lib.mapAttrsToList (name: value: "${config.sops.templates."${name}".path}:/config/${name}.yaml") deviceNames;
+      volumes = lib.mapAttrsToList (name: value: "${config.sops.templates."${name}.yaml".path}:/config/${name}.yaml") deviceNames;
     };
   };
 }
