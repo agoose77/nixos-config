@@ -18,6 +18,7 @@
       hass-home-assistant
       hass-speedtest
       hass-influx
+      hass-esphome
     ];
 
     networking.hostName = "hass";
