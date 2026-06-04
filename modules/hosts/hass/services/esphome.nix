@@ -49,8 +49,7 @@
     sops.templates =
       lib.mapAttrs (
         name: display: {
-          file =
-            (pkgs.formats.yaml {}).generate "${name}.yaml" baseESPConfig
+          file = (pkgs.formats.yaml {}).generate "${name}.yaml" (baseESPConfig
             // {
               esphome = {
                 name = "esphome-web-fa8368";
@@ -58,7 +57,7 @@
                 min_version = "2025.11.0";
                 name_add_mac_suffix = false;
               };
-            };
+            });
         }
       )
       deviceNames;
