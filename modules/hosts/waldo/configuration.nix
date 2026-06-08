@@ -8,12 +8,10 @@
       system-default
       secure-boot
       bluetooth
-      zenbook-display
       power
       wvkbd
       autologin-angus
-
-      inputs.zenbook-duo-daemon.nixosModules.default
+      zenbook-duo-daemon
     ];
     boot.lanzaboote.configurationLimit = 2;
 
@@ -34,7 +32,6 @@
     # In your NixOS configuration module
     services.zenbook-duo-daemon = {
       enable = true;
-      package = inputs.zenbook-duo-daemon.packages.x86_64-linux.default;
       touchpad.enable = false;
 
       # Key mappings examples:
