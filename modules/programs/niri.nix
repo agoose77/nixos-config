@@ -123,7 +123,15 @@
           }
         ];
 
-        binds = {
+        binds = let
+          stepBrightness = name: delta: (pkgs.writeShellApplication {
+            name = "brightness-${name}";
+            runtimeInputs = [pkgs.brightnessctl pkgs.coreutils pkgs.findutils];
+            text = ''
+              brightnessctl -c backlight -l -m | cut -d ',' -f1 | xargs -L1 brightnessctl s '${delta}' -d
+            '';
+          });
+        in {
           # Keys consist of modifiers separated by + signs, followed by an XKB key name
           # in the end. To find an XKB name for a particular key, you may use a program
           # like wev.
@@ -202,13 +210,13 @@
           # Example brightness key mappings for brightnessctl.
           # You can use regular spawn with multiple arguments too (to avoid going through "sh"),
           # but you need to manually put each argument in separate "" quotes.
-          "XF86MonBrightnessUp" = {
+          "Ctrl+Shift+Up" = {
             allow-when-locked = true;
-            action.spawn = ["brightnessctl" "--class=backlight" "set" "+10%"];
+            action.spawn = [lib.getExe (stepBrightness "up" "5%+")];
           };
-          "XF86MonBrightnessDown" = {
+          "Ctrl+Shift+Down" = {
             allow-when-locked = true;
-            action.spawn = ["brightnessctl" "--class=backlight" "set" "10%-"];
+            action.spawn = [lib.getExe (stepBrightness "down" "5%-")];
           };
 
           # Open/close the Overview: a zoomed-out view of workspaces and windows.
