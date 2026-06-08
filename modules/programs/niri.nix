@@ -212,11 +212,11 @@
           # but you need to manually put each argument in separate "" quotes.
           "Ctrl+Shift+Up" = {
             allow-when-locked = true;
-            action.spawn = [lib.getExe (stepBrightness "up" "5%+")];
+            action.spawn = [(lib.getExe (stepBrightness "up" "5%+"))];
           };
           "Ctrl+Shift+Down" = {
             allow-when-locked = true;
-            action.spawn = [lib.getExe (stepBrightness "down" "5%-")];
+            action.spawn = [(lib.getExe (stepBrightness "down" "5%-"))];
           };
 
           # Open/close the Overview: a zoomed-out view of workspaces and windows.
