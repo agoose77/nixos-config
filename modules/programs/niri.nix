@@ -218,6 +218,10 @@
             allow-when-locked = true;
             action.spawn = [(lib.getExe (stepBrightness "down" "5%-"))];
           };
+          "Ctrl+Shift+Period" = {
+            allow-when-locked = true;
+            action.spawn = [(lib.getExe pkgs.wofi-emoji)];
+          };
 
           # Open/close the Overview: a zoomed-out view of workspaces and windows.
           # You can also move the mouse into the top-left hot corner,

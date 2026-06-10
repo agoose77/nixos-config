@@ -36,17 +36,17 @@
 
       # Key mappings examples:
       keyMappings = {
-        # Example 3: Remap a key to different keybinds
-        # This makes brightness up send Super+Up instead
         brightnessUp = {
           type = "KeyBind";
           keys = ["KEY_LEFTCTRL" "KEY_LEFTSHIFT" "KEY_UP"];
         };
-        # Example 3: Remap a key to different keybinds
-        # This makes brightness up send Super+Up instead
         brightnessDown = {
           type = "KeyBind";
           keys = ["KEY_LEFTCTRL" "KEY_LEFTSHIFT" "KEY_DOWN"];
+        };
+        emojiPicker = {
+          type = "KeyBind";
+          keys = ["KEY_LEFTCTRL" "KEY_LEFTSHIFT" "KEY_DOT"];
         };
       };
 
