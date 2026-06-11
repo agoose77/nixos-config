@@ -13,6 +13,10 @@
         pkgs.brightnessctl
       ];
       programs.niri.settings = {
+        input = {
+          touch.map-to-output = "eDP-1";
+          tablet.map-to-output = "eDP-2";
+        };
         outputs."eDP-1" = {
           scale = 1;
           mode = {
