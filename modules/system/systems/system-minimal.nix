@@ -56,6 +56,12 @@ in {
       # Opt out of light-dm by default
       services.xserver.displayManager.lightdm.enable = lib.mkForce false;
       services.xserver.enable = true;
+
+      # Increase the limits to avoid running out of inotify watches
+      boot.kernel.sysctl = {
+        "fs.inotify.max_user_watches" = 524288;
+        "fs.inotify.max_user_instances" = 1024;
+      };
     };
     homeManager.system-minimal = {config, ...}: {
       imports = with inputs.self.modules.homeManager; [
