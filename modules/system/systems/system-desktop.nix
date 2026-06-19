@@ -31,6 +31,7 @@
       design
       kdeconnect
       no-global-kubeconfig
+      obs-studio
     ];
   };
 }
