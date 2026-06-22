@@ -42,6 +42,12 @@
         tag = "v18.1.1";
         hash = "sha256-wqhll0K5WKZDGWftaYLVd6uDS4w8mKU4yO4a4FLqseA=";
       };
+      tuya_local = pkgs.fetchFromGitHub {
+        owner = "make-all";
+        repo = "tuya-local";
+        tag = "2026.6.2";
+        hash = "sha256-4897QCslPQ/5Rt1U6EcapUav7XMa65i+5aXbMyv9mxE=";
+      };
       spook = let
         version = "4.0.1";
       in
