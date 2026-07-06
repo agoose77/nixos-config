@@ -21,8 +21,8 @@
       homeconnect_ws = pkgs.fetchFromGitHub {
         owner = "chris-mc1";
         repo = "homeconnect_local_hass";
-        rev = "0be697ea315f87031bdf6f53cc18625352492416";
-        hash = "sha256-xZOYCACGuZCtKyp4e2K0EusBMjz0FjnzTjSQek1MIfI=";
+        tag = "1.0.5b11";
+        hash = "sha256-Bu3HSSgby3fmE4o6kfiAH35BPuYi6anrMDl8NFDqlwQ=";
       };
       climate_template = pkgs.fetchFromGitHub {
         owner = "jcwillox";
