@@ -39,8 +39,8 @@
       octopus_energy = pkgs.fetchFromGitHub {
         owner = "BottlecapDave";
         repo = "HomeAssistant-OctopusEnergy";
-        tag = "v18.3.1";
-        hash = "sha256-5Cjaq4DIe11hx/goKxGDSj6zyOb3H16s8KqlFRzhOYs=";
+        tag = "v18.3.2";
+        hash = "sha256-KSnpebEUzp25PsBMFqCajdnTINk51hdswmV9rGtG+3Q=";
       };
       tuya_local = pkgs.fetchFromGitHub {
         owner = "make-all";
