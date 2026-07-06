@@ -86,8 +86,8 @@
       materialYouTheme = pkgs.fetchFromGitHub {
         owner = "Nerwyn";
         repo = "material-you-theme";
-        rev = "19a0d08d160e72ec5ccb7e14ce463bb88520af14";
-        hash = "sha256-MJJsoXqdaUABnZyfcVMJ0y+IiFuV4L6sbdqYvsqs4Lk=";
+        rev = "076931b584edf70a1536999d890aeecb395b1296";
+        hash = "sha256-BN/EZYZTgxAqdm2wTt4witxpwcpFewuetMrb6bio/LY=";
       };
       materialYouUtilities = pkgs.fetchFromGitHub {
         owner = "Nerwyn";
