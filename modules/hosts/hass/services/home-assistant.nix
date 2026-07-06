@@ -92,8 +92,8 @@
       materialYouUtilities = pkgs.fetchFromGitHub {
         owner = "Nerwyn";
         repo = "material-you-utilities";
-        rev = "4c3376948da56944332e21aa35fec9ac1fd3b975";
-        hash = "sha256-/GsZjH6BQUlPjVzvdbAF1OMygA0m67FkQoKcmVOngow=";
+        rev = "3147d9c5859a92afa991a1b6a5d6ca9573e7138f";
+        hash = "sha256-9eOn5E4lYzhfZSl7dmb3UNEkgU+hv7UFfmh6r6IX13M=";
       };
     };
   in {
