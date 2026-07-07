@@ -45,8 +45,8 @@
       tuya_local = pkgs.fetchFromGitHub {
         owner = "make-all";
         repo = "tuya-local";
-        tag = "2026.6.4";
-        hash = "sha256-VJ2c8wegviirCT+hygg9LKPN5ZLqxfkQl6zayaXZRU0=";
+        tag = "2026.7.0";
+        hash = "sha256-XShC71yQ6l0fYmlx0nR1WHE4ku95ghZ2RWCfzDDJKfc=";
       };
       spook = let
         version = "4.0.1";
