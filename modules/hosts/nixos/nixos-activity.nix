@@ -42,7 +42,7 @@
     };
 
     # Track activity
-    systemd.user.services.report-activity = {
+    systemd.user.services.occupancy-sensor = {
       description = "Report activity to MQTT server.";
       wantedBy = ["graphical-session.target"];
       after = ["graphical-session.target"];
