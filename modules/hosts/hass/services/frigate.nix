@@ -11,7 +11,17 @@
     };
     hallwayCameraIP = "192.168.68.61";
     kitchenCameraIP = "192.168.68.93";
-    frigateConfig = {
+    frigateConfig = let
+      internalObjects = [
+        "person"
+        "dog"
+      ];
+      externalObjects = [
+        "person"
+        "dog"
+        "car"
+      ];
+    in {
       version = "0.18.0";
       tls.enabled = false;
       classification.custom = {
@@ -40,12 +50,6 @@
         port = 1883;
       };
       record.enabled = false;
-      objects = {
-        track = [
-          "person"
-          "dog"
-        ];
-      };
       face_recognition. enabled = true;
       snapshots . enabled = true;
       ffmpeg .hwaccel_args = "preset-vaapi";
@@ -118,6 +122,7 @@
       };
       cameras = {
         hallway = {
+          objects.track = internalObjects;
           ffmpeg = {
             output_args = {
               record = "preset-record-generic-audio-copy";
@@ -164,6 +169,7 @@
           };
         };
         kitchen = {
+          objects.track = internalObjects;
           ffmpeg = {
             output_args = {
               record = "preset-record-generic-audio-copy";
@@ -204,6 +210,7 @@
           };
         };
         back-passage = {
+          objects.track = internalObjects;
           ffmpeg = {
             inputs = [
               {
@@ -238,6 +245,7 @@
           };
         };
         front-drive = {
+          objects.track = internalObjects;
           ffmpeg = {
             inputs = [
               {
@@ -261,12 +269,6 @@
             "0.187,0,0.187,0.446,0.268,0.446,0.268,0"
           ];
 
-          objects = {
-            filters = {
-              person = {
-              };
-            };
-          };
           zones = {
             Front_House = {
               coordinates = "0.657,0.154,0.625,0.375,0.301,0.636,0.057,0.887,0,1,0.79,1,0.938,0.429,0.948,0.363";
@@ -276,6 +278,7 @@
           };
         };
         street = {
+          objects.track = internalObjects;
           ffmpeg = {
             inputs = [
               {
@@ -310,6 +313,7 @@
           };
         };
         garden = {
+          objects.track = internalObjects;
           ffmpeg = {
             inputs = [
               {
@@ -348,6 +352,7 @@
           };
         };
         doorbell = {
+          objects.track = internalObjects;
           ffmpeg = {
             output_args = {
               record = "preset-record-generic-audio-aac";
