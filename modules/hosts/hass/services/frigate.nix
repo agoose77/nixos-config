@@ -245,7 +245,7 @@
           };
         };
         front-drive = {
-          objects.track = internalObjects;
+          objects.track = externalObjects;
           ffmpeg = {
             inputs = [
               {
@@ -278,7 +278,7 @@
           };
         };
         street = {
-          objects.track = internalObjects;
+          objects.track = externalObjects;
           ffmpeg = {
             inputs = [
               {
@@ -313,7 +313,7 @@
           };
         };
         garden = {
-          objects.track = internalObjects;
+          objects.track = externalObjects;
           ffmpeg = {
             inputs = [
               {
@@ -352,7 +352,7 @@
           };
         };
         doorbell = {
-          objects.track = internalObjects;
+          objects.track = externalObjects;
           ffmpeg = {
             output_args = {
               record = "preset-record-generic-audio-aac";
