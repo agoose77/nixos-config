@@ -19,10 +19,10 @@
       };
       # Requires profile from another GitHub repo
       homeconnect_ws = pkgs.fetchFromGitHub {
-        owner = "chris-mc1";
+        owner = "agoose77";
         repo = "homeconnect_local_hass";
-        tag = "1.0.5b11";
-        hash = "sha256-Bu3HSSgby3fmE4o6kfiAH35BPuYi6anrMDl8NFDqlwQ=";
+        rev = "4f6a3d27243d387ffea0efb2444da833fd4f8296";
+        hash = "";
       };
       climate_template = pkgs.fetchFromGitHub {
         owner = "jcwillox";
