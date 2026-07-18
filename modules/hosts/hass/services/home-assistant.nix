@@ -22,7 +22,7 @@
         owner = "agoose77";
         repo = "homeconnect_local_hass";
         rev = "4f6a3d27243d387ffea0efb2444da833fd4f8296";
-        hash = "";
+        hash = "sha256-+KBoQLItNmhVH8wWqJMEFEzfVjggp4fbvQza5Eeo/+s=";
       };
       climate_template = pkgs.fetchFromGitHub {
         owner = "jcwillox";
