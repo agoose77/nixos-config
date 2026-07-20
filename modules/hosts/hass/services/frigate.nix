@@ -41,6 +41,19 @@
             cameras.kitchen.crop = [0 0.10428218841377417 0.14475346744963283 0.36162168610201034];
           };
         };
+        bins = {
+          threshold = 0.8;
+          state_config = {
+            motion = true;
+            interval = 120;
+            cameras.doorbell.crop = [
+              0.0013232544510004324
+              0.46201909506558625
+              0.16473632548573702
+              0.6799031897785683
+            ];
+          };
+        };
       };
       mqtt = {
         enabled = true;
