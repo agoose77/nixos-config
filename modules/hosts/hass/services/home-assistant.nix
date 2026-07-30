@@ -5,6 +5,12 @@
     ...
   }: let
     components = {
+      openwrt = pkgs.fetchFromGitHub {
+        owner = "FaserF";
+        repo = "ha-openwrt";
+        tag = "v2.4.2";
+        hash = "sha256-OMVTsdYIZ0tCMOkZ7FpdA+TmyyMD0SmkQbVQoahJZXY=";
+      };
       myenergi = pkgs.fetchFromGitHub {
         owner = "CJNE";
         repo = "ha-myenergi";
