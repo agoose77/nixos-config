@@ -472,7 +472,7 @@
         LIBVA_DRIVER_NAME = "iHD";
         FRIGATE_HALLWAY_CAMERA_IP = "${hallwayCameraIP}";
         FRIGATE_KITCHEN_CAMERA_IP = "${kitchenCameraIP}";
-        FRIGATE_ANNKE_IP = "192.168.69.228";
+        FRIGATE_ANNKE_IP = "192.168.68.176";
       };
       environmentFiles = [secretsPath];
       ports = [
