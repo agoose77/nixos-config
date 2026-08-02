@@ -39,7 +39,7 @@
       bermuda = pkgs.fetchFromGitHub {
         owner = "agittins";
         repo = "bermuda";
-        rev = "f8768d8918abaf09e6b9bb55512830b551787580";
+        tag = "v0.8.7";
         hash = "sha256-BCIb/MnI5EzK7ZS7qCsZB0l9LUTUgLO2Z0ZK7TnYnLM=";
       };
       octopus_energy = pkgs.fetchFromGitHub {
