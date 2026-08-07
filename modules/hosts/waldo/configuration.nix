@@ -10,7 +10,6 @@
       bluetooth
       power
       wvkbd
-      (self.factory.autologin "angus")
       zenbook-duo-daemon
     ];
     boot.lanzaboote.configurationLimit = 2;

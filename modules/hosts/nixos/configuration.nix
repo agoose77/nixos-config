@@ -7,7 +7,6 @@
     imports = with inputs.self.modules.nixos; [
       system-default
       systemd-boot
-      (self.factory.autologin "angus")
       k3s
       nixos-activity
     ];

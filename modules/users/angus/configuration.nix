@@ -7,6 +7,9 @@ in {
       pkgs,
       ...
     }: {
+      imports = with self.modules.nixos; [
+        (self.factory.autologin "angus")
+      ];
       users.users."${username}" = {
         isNormalUser = true;
         home = "/home/${username}";
