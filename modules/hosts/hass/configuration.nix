@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   flake.modules.nixos.hass = {pkgs, ...}: {
     imports = with inputs.self.modules.nixos; [
       system-minimal
@@ -6,7 +10,7 @@
       throttlestop
       bluetooth
       power
-      autologin-angus
+      (self.factory.autologin "angus")
       auto-upgrade
       # services
       hass-mqtt

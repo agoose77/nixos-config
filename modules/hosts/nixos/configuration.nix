@@ -1,9 +1,13 @@
-{inputs, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   flake.modules.nixos.nixos = {pkgs, ...}: {
     imports = with inputs.self.modules.nixos; [
       system-default
       systemd-boot
-      autologin-angus
+      (self.factory.autologin "angus")
       k3s
       nixos-activity
     ];

@@ -1,6 +1,6 @@
 {
+  self,
   inputs,
-  lib,
   ...
 }: {
   flake.modules.nixos.waldo = {pkgs, ...}: {
@@ -10,7 +10,7 @@
       bluetooth
       power
       wvkbd
-      autologin-angus
+      (self.factory.autologin "angus")
       zenbook-duo-daemon
     ];
     boot.lanzaboote.configurationLimit = 2;

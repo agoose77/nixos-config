@@ -1,9 +1,9 @@
 {
-  flake.modules.nixos.autologin-angus = {
+  config.flake.factory.autologin = username: {
     # users.mutableUsers = false;
     # Login as angus
     services.getty = {
-      autologinUser = "angus";
+      autologinUser = username;
       autologinOnce = true;
     };
   };
