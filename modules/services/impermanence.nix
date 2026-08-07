@@ -4,6 +4,7 @@
   config,
   ...
 }: {
+# TODO: look at https://github.com/HarrisonCentner/nixconfig/blob/a85492d7d24abb91d4a1b76af63f177c36994d77/modules/services/security/impermanence.nix#L3
   flake.modules.nixos.impermanence = {
     imports = [inputs.impermanence.nixosModules.impermanence];
 
