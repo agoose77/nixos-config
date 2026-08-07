@@ -65,7 +65,9 @@
       )
       deviceNames;
 
-    virtualisation.oci-containers.containers.esphome = {
+    virtualisation.oci-containers.containers.esphome = let
+      configFiles = lib.mapAttrsToList (name: value: "${config.sops.templates."${name}.yaml".path}:/config/${name}.yaml") deviceNames;
+    in {
       ports = [
         "6052:6052"
       ];
@@ -73,7 +75,7 @@
         "--network=host"
       ];
       image = "ghcr.io/esphome/esphome:2026.5.2";
-      volumes = (lib.mapAttrsToList (name: value: "${config.sops.templates."${name}.yaml".path}:/config/${name}.yaml") deviceNames) ++ ["esphome-config:/config"];
+      volumes = configFiles ++ ["esphome-config:/config"];
     };
   };
 }
