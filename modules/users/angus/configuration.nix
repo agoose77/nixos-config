@@ -7,9 +7,10 @@ in {
       pkgs,
       ...
     }: {
-      imports = with self.modules.nixos; [
-        (self.factory.autologin username)
-        (self.factory.virtualbox username)
+      imports = with self.modules.nixos;
+      with self.factory; [
+        (autologin username)
+        (virtualbox username)
       ];
       users.users."${username}" = {
         isNormalUser = true;
