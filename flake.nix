@@ -4,6 +4,12 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    impermanence = {
+      url = "github:nix-community/impermanence";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     zenbook-duo-daemon = {
       url = "github:0Tick/zenbook-duo-daemon";
       inputs.nixpkgs.follows = "nixpkgs";
