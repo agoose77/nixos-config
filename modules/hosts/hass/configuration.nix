@@ -10,7 +10,6 @@
       throttlestop
       bluetooth
       power
-      (self.factory.autologin "angus")
       auto-upgrade
       # services
       hass-mosquitto
