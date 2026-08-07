@@ -7,9 +7,6 @@ in {
       pkgs,
       ...
     }: {
-      imports = with self.modules.nixos; [
-        # developmentEnvironment
-      ];
       users.users."${username}" = {
         isNormalUser = true;
         home = "/home/${username}";
@@ -27,9 +24,6 @@ in {
     };
     homeManager."${username}" = {pkgs, ...}: {
       home.username = "${username}";
-      home.packages = with pkgs; [
-        #mediainfo
-      ];
     };
   };
 }

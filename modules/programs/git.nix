@@ -145,6 +145,7 @@
 
     programs.gh.enable = true;
     programs.gh-dash.enable = true;
+    programs.gh.extensions = [pkgs.gh-stack];
 
     home.file.gitignore = {
       text = ''
