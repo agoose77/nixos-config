@@ -8,7 +8,8 @@ in {
       ...
     }: {
       imports = with self.modules.nixos; [
-        (self.factory.autologin "angus")
+        (self.factory.autologin username)
+        (self.factory.virtualbox username)
       ];
       users.users."${username}" = {
         isNormalUser = true;
