@@ -10,6 +10,7 @@
       sound
       stylix
       kdeconnect
+      noctalia
     ];
   };
 
@@ -18,7 +19,6 @@
       system-minimal
       niri
       stylix
-      waybar
       jj
       firefox
       kitty
@@ -32,6 +32,7 @@
       kdeconnect
       no-global-kubeconfig
       obs-studio
+      noctalia
     ];
   };
 }

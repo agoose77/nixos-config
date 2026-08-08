@@ -1,16 +1,27 @@
 {inputs, ...}: {
   flake.modules = {
     nixos.noctalia = {pkgs, ...}: {
-      stylix.targets.noctalia-shell.enable = true;
+      imports = [
+        inputs.noctalia.nixosModules.default
+      ];
+
+      programs.noctalia = {
+        enable = true;
+
+        # Enables NetworkManager, Bluetooth, UPower, and a power profile service.
+        recommendedServices.enable = true;
+      };
       environment.systemPackages = [
         inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
       ];
+      programs.noctalia.systemd.enable = true;
     };
-    home-manager.noctalia = {
+    homeManager.noctalia = {
       imports = [
         inputs.noctalia.homeModules.default
       ];
 
+      stylix.targets.noctalia.enable = true;
       programs.noctalia = {
         enable = true;
 

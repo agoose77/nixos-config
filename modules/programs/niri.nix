@@ -36,6 +36,7 @@
             ];
           }
           {argv = [(lib.getExe pkgs._1password-gui) "--silent"];}
+          {argv = [(lib.getExe inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default)];}
         ];
         input = {
           power-key-handling.enable = false;
