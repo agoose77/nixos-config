@@ -42,17 +42,20 @@
         };
       };
 
-      # Touch keyboard
-      programs.waybar.settings.primary = {
-        modules-right = ["custom/kbd"];
-        "custom/kbd" = {
-          interval = "once";
-          exec = "${pkgs.coreutils}/bin/echo a";
-          exec-if = "${pkgs.coreutils}/bin/true";
-          format = " <U+F030C>   ";
-          on-click = pkgs.writeShellScript "toggle-keyboard.sh" ''
-            ${pkgs.procps}/bin/pkill -SIGRTMIN -x wvkbd-mobintl
-          '';
+      programs.noctalia.settings = {
+        bar.default.start = ["custom/kbd"];
+        widget.quick-action = {
+          type = "custom_button";
+          glyph = "keyboard-show";
+          label = "Action";
+          actions = let
+            cmd = pkgs.writeShellScript "toggle-keyboard.sh" ''
+              ${pkgs.procps}/bin/pkill -SIGRTMIN -x wvkbd-mobintl
+            '';
+          in {
+            left = "exec ${cmd}";
+            right = "exec notify-send 'Other action'";
+          };
         };
       };
     };
