@@ -168,7 +168,7 @@
           };
           "Mod+NumberSign" = {
             hotkey-overlay = {title = "Run an Application: Noctalia Settings";};
-            action.spawn = [(lib.getExe pkgs.noctalia) "msg" "panel-toggle" "settings-toggle"];
+            action.spawn = [(lib.getExe pkgs.noctalia) "msg" "settings-toggle"];
           };
 
           # Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; };
