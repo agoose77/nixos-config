@@ -24,6 +24,10 @@
       stylix.targets.noctalia.enable = true;
       programs.noctalia = {
         enable = true;
+        settings = {
+          shell.polkit_agent = true;
+          battery.warning_threshold = 10;
+        };
       };
     };
   };
