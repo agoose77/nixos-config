@@ -23,10 +23,8 @@
       firefox
       kitty
       fonts
-      fuzzel
       notes
       playerctl
-      notifications
       videoconf
       design
       kdeconnect

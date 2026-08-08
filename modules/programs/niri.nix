@@ -25,7 +25,9 @@
     }: {
       imports = [inputs.niri-flake.homeModules.config];
       programs.niri.package = pkgs.niri;
-      programs.niri.settings = {
+      programs.niri.settings = let
+        noctalia = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      in {
         prefer-no-csd = true;
         spawn-at-startup = [
           {argv = [(lib.getExe pkgs.slack) "-u"];}
@@ -36,7 +38,7 @@
             ];
           }
           {argv = [(lib.getExe pkgs._1password-gui) "--silent"];}
-          {argv = [(lib.getExe inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default)];}
+          {argv = [(lib.getExe noctalia)];}
         ];
         input = {
           power-key-handling.enable = false;
@@ -157,8 +159,16 @@
             action.spawn = [(lib.getExe pkgs.firefox)];
           };
           "Mod+Space" = {
-            hotkey-overlay = {title = "Run an Application: fuzzel";};
-            action.spawn = [(lib.getExe pkgs.fuzzel)];
+            hotkey-overlay = {title = "Run an Application: Noctalia Launcher";};
+            action.spawn = [(lib.getExe pkgs.noctalia) "msg" "panel-toggle" "launcher"];
+          };
+          "Mod+S" = {
+            hotkey-overlay = {title = "Run an Application: Noctalia Control Center";};
+            action.spawn = [(lib.getExe pkgs.noctalia) "msg" "panel-toggle" "control-center"];
+          };
+          "Mod+NumberSign" = {
+            hotkey-overlay = {title = "Run an Application: Noctalia Settings";};
+            action.spawn = [(lib.getExe pkgs.noctalia) "msg" "panel-toggle" "settings-toggle"];
           };
 
           # Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; };
