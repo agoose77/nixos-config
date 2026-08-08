@@ -4,6 +4,11 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    noctalia = {
+      url = "github:noctalia-dev/noctalia";
+      inputs.nixpkgs.follows = "nixpkgs"; # this line is optional, prevents downloading two versions of nixpkgs but disables cache
+    };
+
     zenbook-duo-daemon = {
       url = "github:0Tick/zenbook-duo-daemon";
       inputs.nixpkgs.follows = "nixpkgs";
