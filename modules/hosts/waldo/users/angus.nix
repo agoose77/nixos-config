@@ -43,18 +43,16 @@
       };
 
       programs.noctalia.settings = {
-        bar.default.start = ["custom/kbd"];
-        widget.quick-action = {
+        bar.default.start = ["launcher" "wallpaper" "workspaces" "custom/kbd"];
+        widget."custom/kbd" = {
           type = "custom_button";
           glyph = "keyboard-show";
-          label = "Action";
           actions = let
             cmd = pkgs.writeShellScript "toggle-keyboard.sh" ''
               ${pkgs.procps}/bin/pkill -SIGRTMIN -x wvkbd-mobintl
             '';
           in {
             left = "exec ${cmd}";
-            right = "exec notify-send 'Other action'";
           };
         };
       };
