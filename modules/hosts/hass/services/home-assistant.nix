@@ -40,7 +40,7 @@
         owner = "agittins";
         repo = "bermuda";
         tag = "v0.8.7";
-        hash = "sha256-BCIb/MnI5EzK7ZS7qCsZB0l9LUTUgLO2Z0ZK7TnYnLM=";
+        hash = "sha256-UY4Cd0yt7yAbsYHr+KsLUan3dJSv80hhEPRmoy+8nO4=";
       };
       octopus_energy = pkgs.fetchFromGitHub {
         owner = "BottlecapDave";
