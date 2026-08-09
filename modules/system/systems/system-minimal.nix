@@ -19,6 +19,11 @@ in {
           # "allow-import-from-derivation"
         ];
 
+        # Allow root and wheel-group users to access store
+        trusted-users = [
+          "root"
+          "@wheel"
+        ];
         # Deduplicate and optimize nix store
         auto-optimise-store = true;
       };
