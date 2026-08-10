@@ -6,11 +6,11 @@
       system-minimal
       niri
       _1password
-      spotify-connect
       sound
       stylix
       kdeconnect
       noctalia
+      qbz
     ];
   };
 
