@@ -89,13 +89,17 @@
           {
             matches = [
               {
-                app-id = "Zoom Workplace";
-                title = ".*menu.*";
+                app-id = "^(zoom|us.zoom.Zoom)$";
+              }
+            ];
+            excludes = [
+              {
+                title = "^.*Zoom Workplace";
               }
             ];
             open-floating = true;
-            min-width = 250;
             open-focused = true;
+            open-on-workspace = "chat";
           }
           {
             matches = [
