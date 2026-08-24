@@ -32,20 +32,22 @@
 
     programs.direnv = {
       enable = true;
-      enableBashIntegration = false;
       nix-direnv.enable = true;
     };
-    # Enable direnv first. It needs to init before atuin, so let's just run it first as it's a simpler init script than atuins (easier to vendor here).
-    programs.bash.initExtra = lib.mkBefore ''
-      eval "$(${lib.getExe config.programs.direnv.package} hook bash)"
-    '';
 
     programs.atuin = {
+      enableBashIntegration = false;
       forceOverwriteSettings = true;
       enable = true;
-      enableBashIntegration = true;
       daemon.enable = true;
     };
+    # Enable atuin last. It needs to init before atuin, so let's just run it first as it's a simpler init script than atuins (easier to vendor here).
+    programs.bash.initExtra = lib.mkOrder 10000 ''
+      if [[ :$SHELLOPTS: =~ :(vi|emacs): ]]; then
+        source "${pkgs.bash-preexec}/share/bash/bash-preexec.sh"
+        eval "$(${lib.getExe pkgs.atuin} init bash )"
+      fi
+    '';
 
     programs.starship = {
       enable = true;
