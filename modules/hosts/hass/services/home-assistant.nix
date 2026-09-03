@@ -92,14 +92,14 @@
       materialYouTheme = pkgs.fetchFromGitHub {
         owner = "Nerwyn";
         repo = "material-you-theme";
-        rev = "076931b584edf70a1536999d890aeecb395b1296";
-        hash = "sha256-BN/EZYZTgxAqdm2wTt4witxpwcpFewuetMrb6bio/LY=";
+        rev = "d6dca62b60005b3b6686d404fcccb483e700aea4";
+        hash = "sha256-UxmVxUVCOE4ohD2l0bS/L9LZbEpX1b2Dd0q5jTNcFnc=";
       };
       materialYouUtilities = pkgs.fetchFromGitHub {
         owner = "Nerwyn";
         repo = "material-you-utilities";
-        rev = "3147d9c5859a92afa991a1b6a5d6ca9573e7138f";
-        hash = "sha256-9eOn5E4lYzhfZSl7dmb3UNEkgU+hv7UFfmh6r6IX13M=";
+        rev = "8cabf1d9b664d03c2eafff68c6d4bd885fffdb1f";
+        hash = "sha256-SNt+R5407uDpbyoLZ8I50Fm0jC/Y797b3fi6cAZSF10=";
       };
     };
   in {
