@@ -18,7 +18,7 @@
     ports = [
       "4898:80"
     ];
-    image = "lscr.io/linuxserver/speedtest-tracker:1.7.2";
+    image = "lscr.io/linuxserver/speedtest-tracker:1.15.0";
     volumes = [
       "/etc/speedtest-tracker/data:/config"
       "${config.sops.secrets."speedtest-key".path}:${keyPath}"
