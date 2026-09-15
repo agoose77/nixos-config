@@ -54,6 +54,12 @@
         tag = "2026.7.0";
         hash = "sha256-XShC71yQ6l0fYmlx0nR1WHE4ku95ghZ2RWCfzDDJKfc=";
       };
+      ookla_speedtest = pkgs.fetchFromGitHub {
+        owner = "soulripper13";
+        repo = "hass-speedtest-ookla";
+        tag = "v3.1.2";
+        hash = "sha256-MNgjHURKEHQ7D2WY0UjMrLj3s23+PDx0GQL9QDsd/e8=";
+      };
       spook = let
         version = "4.0.1";
       in
