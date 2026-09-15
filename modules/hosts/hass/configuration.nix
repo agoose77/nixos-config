@@ -1,5 +1,4 @@
 {
-  self,
   inputs,
   ...
 }: {
@@ -18,7 +17,6 @@
       hass-jellyfin
       hass-arr
       hass-home-assistant
-      hass-speedtest
       hass-influx
       hass-esphome
     ];
