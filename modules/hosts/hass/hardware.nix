@@ -27,7 +27,9 @@
         size = 16 * 1024; # 16GB
       }
     ];
-
+    nixpkgs.config.permittedInsecurePackages = [
+      "intel-media-sdk-23.2.2"
+    ];
     nixpkgs.hostPlatform = "x86_64-linux";
     hardware.enableRedistributableFirmware = lib.mkDefault true;
     hardware.cpu.intel.updateMicrocode = true;
@@ -41,6 +43,7 @@
         nvidia-vaapi-driver
         intel-vaapi-driver
         intel-media-driver
+        intel-media-sdk
       ];
     };
 
