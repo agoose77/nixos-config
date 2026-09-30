@@ -68,7 +68,7 @@
       };
       record.enabled = false;
       face_recognition. enabled = true;
-      ffmpeg .hwaccel_args = "preset-intel-qsv-h264";
+      ffmpeg .hwaccel_args = "preset-vaapi";
       detectors .ov = {
         type = "openvino";
         device = "GPU";
