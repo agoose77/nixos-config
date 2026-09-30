@@ -24,6 +24,10 @@
     in {
       version = "0.18.0";
       tls.enabled = false;
+      snapshots = {
+        enabled = true;
+        retain.default = 7;
+      };
       classification.custom = {
         gates = {
           threshold = 0.8;
@@ -64,7 +68,6 @@
       };
       record.enabled = false;
       face_recognition. enabled = true;
-      snapshots . enabled = true;
       ffmpeg .hwaccel_args = "preset-vaapi";
       detectors .ov = {
         type = "openvino";
