@@ -41,7 +41,6 @@
         nvidia-vaapi-driver
         intel-vaapi-driver
         intel-media-driver
-        vpl-gpu-rt
       ];
     };
 

@@ -65,8 +65,8 @@
       record.enabled = false;
       face_recognition. enabled = true;
       snapshots . enabled = true;
-      ffmpeg.hwaccel_args = "preset-nvidia";
-      detectors.ov = {
+      ffmpeg .hwaccel_args = "preset-vaapi";
+      detectors .ov = {
         type = "openvino";
         device = "GPU";
       };
@@ -492,7 +492,6 @@
       extraOptions = [
         "--device=/dev/bus/usb"
         "--device=/dev/dri"
-        "--device=nvidia.com/gpu=all"
         "--tmpfs=/tmp/cache:rw,size=1g,mode=1777"
         "--shm-size=256mb"
         "--network=mqtt-bridge"
