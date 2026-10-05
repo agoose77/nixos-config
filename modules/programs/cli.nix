@@ -26,6 +26,8 @@
       wl-clipboard
       zip
       watchexec
+      # Network
+      arp-scan
     ];
     programs.ripgrep.enable = true;
     programs.bash.enable = true;
