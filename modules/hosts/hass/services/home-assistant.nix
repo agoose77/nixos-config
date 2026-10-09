@@ -20,8 +20,8 @@
       frigate = pkgs.fetchFromGitHub {
         owner = "blakeblackshear";
         repo = "frigate-hass-integration";
-        tag = "v5.15.4";
-        hash = "sha256-xckHpwKujlWJ0M/fDlCU96WocMIlMk37+TwmY8iEnNo=";
+        tag = "v5.15.6";
+        hash = "sha256-xh8+X4C6QCb2Y4fbo60xCX3QuXEktbopB2DbOTfzAhA=";
       };
       # Requires profile from another GitHub repo
       homeconnect_ws = pkgs.fetchFromGitHub {
