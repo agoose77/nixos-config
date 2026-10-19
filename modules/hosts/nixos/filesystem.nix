@@ -1,13 +1,14 @@
 {
   flake.modules.nixos.nixos = {
-    fileSystems."/" = {
-      device = "/dev/disk/by-uuid/916b121a-17e1-4c77-835e-3c60c43ac84b";
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/d8e8d33a-5714-4389-bb94-06a66895cfd8";
       fsType = "ext4";
     };
 
-    fileSystems."/boot" = {
-      device = "/dev/disk/by-uuid/048C-1BE9";
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/44D5-59F2";
       fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
     };
   };
 }
