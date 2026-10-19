@@ -10,7 +10,6 @@
       stylix
       kdeconnect
       noctalia
-      qbz
     ];
   };
 
