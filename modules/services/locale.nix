@@ -3,7 +3,7 @@
     # Timezone
     services.automatic-timezoned.enable = true;
     location.provider = "geoclue2";
-    services.geoclue2.geoProviderUrl = config.sops.placeholder.google-maps-api-key;
+    services.geoclue2.geoProviderUrl = "https://www.googleapis.com/geolocation/v1/geolocate?key=${config.sops.placeholder.google-maps-api-key}";
 
     i18n.defaultLocale = "en_GB.UTF-8";
 
