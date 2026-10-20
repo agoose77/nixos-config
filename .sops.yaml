@@ -2,37 +2,41 @@
 # without having to repeat yourself.
 # Also see https://github.com/Mic92/dotfiles/blob/d6114726d859df36ccaa32891c4963ae5717ef7f/nixos/.sops.yaml
 # for a more complex example.
+# This config block is not validated anywhere
 keys:
-  - &users:
+  - users:
     - &angus age1rkyxkg4uq7x5gehv4wkcmnyfnhur0l2vnzkj03zn9d2e7588ygaq2383cl
-  - &hosts:
+  - hosts:
     - &nixos age1q0vyp3q2dgfzdmy0ex0fwl9ypdjpq7hwlxx29cm0uqdds8gaxejqu062g7
     - &home-assistant age1el0tauewgx874ny8qf4jvh5sug7zjuvy2c64fsnsrunv86nqs44sdkvvh2
     - &hass age1pfhl64hjagfsf7sm65vz4qq0vjt3p6udtrdv3qvxw6ufmx0wt9fqfj7ms3
     - &latitude age13r9gfekdtkexk60fqfts7lsttz3drevegdltmj90aalv2zudv3cssnnfet
     - &waldo age1zcnkd83qc4urwsmzz4erwqjk8nlr7cp3xlm65yg46v3g6v2mzq4qxn7afr
 creation_rules:
-  - path_regex: hosts/common/secrets.ya?ml$
+  - path_regex: ^modules/hosts/common/secrets.ya?ml$
     key_groups:
-      - age:
+      - age: &all-keys
           - *angus
           - *nixos
           - *home-assistant
           - *hass
           - *latitude
           - *waldo
-  - path_regex: hosts/home-assistant/secrets.ya?ml$
+  - path_regex: ^modules/hosts/home-assistant/secrets.ya?ml$
     key_groups:
       - age:
           - *angus
           - *home-assistant
-  - path_regex: hosts/hass/secrets.ya?ml$
+  - path_regex: ^modules/hosts/hass/secrets.ya?ml$
     key_groups:
       - age:
           - *angus
           - *hass
-  - path_regex: hosts/nixos/secrets.ya?ml$
+  - path_regex: ^modules/hosts/nixos/secrets.ya?ml$
     key_groups:
       - age:
           - *angus
           - *nixos
+  - path_regex: ^modules/services/secrets.ya?ml$
+    key_groups:
+      - age: *all-keys

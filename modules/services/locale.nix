@@ -1,9 +1,9 @@
 {
-  flake.modules.nixos.locale = {
+  flake.modules.nixos.locale = {config, ...}: {
     # Timezone
     services.automatic-timezoned.enable = true;
     location.provider = "geoclue2";
-    services.geoclue2.geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
+    services.geoclue2.geoProviderUrl = config.sops.placeholder.google-maps-api-key;
 
     i18n.defaultLocale = "en_GB.UTF-8";
 
@@ -11,6 +11,15 @@
     services.xserver.xkb = {
       layout = "gb";
       variant = "";
+    };
+
+    sops.secrets = {
+      google-maps-api-key = {
+        format = "yaml";
+        # can be also set per secret
+        sopsFile = ./secrets.yaml;
+        mode = "0555";
+      };
     };
   };
 }
