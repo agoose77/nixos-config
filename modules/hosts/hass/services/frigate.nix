@@ -16,11 +16,11 @@
         "person"
         "dog"
       ];
-      externalObjects = [
-        "person"
-        "dog"
-        "car"
-      ];
+      externalObjects =
+        internalObjects
+        ++ [
+          "car"
+        ];
     in {
       version = "0.18.0";
       tls.enabled = false;
@@ -378,7 +378,7 @@
           };
         };
         doorbell = {
-          objects.track = externalObjects;
+          objects.track = internalObjects;
           ffmpeg = {
             output_args = {
               record = "preset-record-generic-audio-aac";
