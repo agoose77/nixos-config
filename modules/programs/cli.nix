@@ -26,6 +26,7 @@
       wl-clipboard
       zip
       watchexec
+      tmux
       # Network
       arp-scan
     ];
