@@ -8,6 +8,7 @@
       enable = true;
       profiles.default = {
       };
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
       languagePacks = ["en-GB"];
       policies = {
         "RequestedLocales" = ["en-GB"];
