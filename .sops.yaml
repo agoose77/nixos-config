@@ -21,7 +21,7 @@ creation_rules:
       - age:
           - *angus
           - *nixos
-  - path_regex: ^modules/services/secrets.ya?ml$
+  - path_regex: ^modules/features/secrets.ya?ml$
     key_groups:
       - age: &all-keys
           - *angus
