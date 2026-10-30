@@ -1,5 +1,9 @@
 {
-  flake.modules.nixos.harmonia = {config, ...}: {
+  flake.modules.nixos.harmonia = {
+    config,
+    pkgs,
+    ...
+  }: {
     services.harmonia.cache.enable = true;
     networking.firewall.allowedTCPPorts = [443 80];
     services.harmonia.cache.signKeyPaths = [config.sops.secrets.harmonia-key.path];
@@ -11,6 +15,14 @@
       mode = "0555";
       key = "harmonia-private-key";
     };
+    # Allow Caddy to user to manage and create certs
+    # TODO: move this to mkif
+    services.tailscale.permitCertUid = "caddy";
+
+    environment.systemPackages = [
+      pkgs.nss
+      pkgs.nssTools
+    ];
 
     services.caddy = rec {
       enable = true;
