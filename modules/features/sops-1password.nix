@@ -10,7 +10,7 @@
       # Enable sops with home-manager
       imports = [inputs.sops-nix.homeManagerModules.sops];
 
-      # Allow regular users to run sops as <me>
+      # Allow regular users to run sops as <me> via 1password
       home.sessionVariables.SOPS_AGE_SSH_PRIVATE_KEY_CMD = sshKeyCommand;
 
       # Allow config switch to access setuid binary sops
