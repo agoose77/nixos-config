@@ -30,6 +30,7 @@
       no-global-kubeconfig
       obs-studio
       noctalia
+      sops-1password
     ];
   };
 }

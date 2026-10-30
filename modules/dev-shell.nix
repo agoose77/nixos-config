@@ -1,6 +1,11 @@
 # modules/dev-shell.nix
 {inputs, ...}: {
-  perSystem = {pkgs, ...}: {
+  perSystem = {
+    pkgs,
+    system,
+    lib,
+    ...
+  }: {
     devShells.default = pkgs.mkShell {
       packages = [pkgs.sops];
     };

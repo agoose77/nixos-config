@@ -5,7 +5,7 @@
 # This config block is not validated anywhere
 keys:
   - users:
-      - &angus age1rkyxkg4uq7x5gehv4wkcmnyfnhur0l2vnzkj03zn9d2e7588ygaq2383cl
+      - &angus ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM6KAmzdYW8JjiB5NXmq3NJAX/PP5DBOwhCWgu3ys0OP
   - hosts:
       - &nixos ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILbi13kW6EjJLhdVQKGZDsZkzsvoX5o+/bAHH6m2I3Ux
       - &hass ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHHHKUmWDp0SCLGPG5do3hjwZWJteS813n+8Us2bzLeL
