@@ -5,28 +5,12 @@
 # This config block is not validated anywhere
 keys:
   - users:
-    - &angus age1rkyxkg4uq7x5gehv4wkcmnyfnhur0l2vnzkj03zn9d2e7588ygaq2383cl
+      - &angus age1rkyxkg4uq7x5gehv4wkcmnyfnhur0l2vnzkj03zn9d2e7588ygaq2383cl
   - hosts:
-    - &nixos age1q0vyp3q2dgfzdmy0ex0fwl9ypdjpq7hwlxx29cm0uqdds8gaxejqu062g7
-    - &home-assistant age1el0tauewgx874ny8qf4jvh5sug7zjuvy2c64fsnsrunv86nqs44sdkvvh2
-    - &hass age1pfhl64hjagfsf7sm65vz4qq0vjt3p6udtrdv3qvxw6ufmx0wt9fqfj7ms3
-    - &latitude age13r9gfekdtkexk60fqfts7lsttz3drevegdltmj90aalv2zudv3cssnnfet
-    - &waldo age1zcnkd83qc4urwsmzz4erwqjk8nlr7cp3xlm65yg46v3g6v2mzq4qxn7afr
+      - &nixos ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILbi13kW6EjJLhdVQKGZDsZkzsvoX5o+/bAHH6m2I3Ux
+      - &hass ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHHHKUmWDp0SCLGPG5do3hjwZWJteS813n+8Us2bzLeL
+      - &waldo ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJstm3nzmDAuTjJtMAS4s7qAg2AFLnFuwpDY94rzR6A2
 creation_rules:
-  - path_regex: ^modules/hosts/common/secrets.ya?ml$
-    key_groups:
-      - age: &all-keys
-          - *angus
-          - *nixos
-          - *home-assistant
-          - *hass
-          - *latitude
-          - *waldo
-  - path_regex: ^modules/hosts/home-assistant/secrets.ya?ml$
-    key_groups:
-      - age:
-          - *angus
-          - *home-assistant
   - path_regex: ^modules/hosts/hass/secrets.ya?ml$
     key_groups:
       - age:
@@ -39,4 +23,8 @@ creation_rules:
           - *nixos
   - path_regex: ^modules/services/secrets.ya?ml$
     key_groups:
-      - age: *all-keys
+      - age: &all-keys
+          - *angus
+          - *nixos
+          - *hass
+          - *waldo
