@@ -5,7 +5,7 @@
       lib,
       ...
     }: let
-      sshKeyCommand = "op read \"op://Private/SSH Key/private key\"";
+      sshKeyCommand = "op read 'op://Private/SSH Key/private key'";
     in {
       # Enable sops with home-manager
       imports = [inputs.sops-nix.homeManagerModules.sops];
