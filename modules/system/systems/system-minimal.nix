@@ -51,6 +51,7 @@ in {
           openssh
           sops
           home-manager
+          harmonia
         ]
         ++ (with inputs.self.modules.generic; [
           pkgs-by-name
