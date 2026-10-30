@@ -7,7 +7,7 @@
       settings = {
         reflector.enable-reflector = true;
         publish.disable-publishing = false;
-        avahi.settings.publish.disable-user-service-publishing = false;
+        publish.disable-user-service-publishing = false;
       };
     };
   };
