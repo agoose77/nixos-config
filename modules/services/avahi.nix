@@ -4,9 +4,11 @@
       enable = true;
       nssmdns4 = true;
       nssmdns6 = true;
-      reflector = true;
-      publish.enable = true;
-      publish.userServices = true;
+      settings = {
+        reflector.enable-reflector = true;
+        publish.disable-publishing = false;
+        avahi.settings.publish.disable-user-service-publishing = false;
+      };
     };
   };
 }
