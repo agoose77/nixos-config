@@ -23,7 +23,7 @@
           password = "${config.sops.placeholder.activityPassword}";
           username = "${config.sops.placeholder.activityUser}";
           port = 1883;
-          host = "hass.local";
+          host = "home-assistant.local";
           timeout = 300;
           interval = 30;
           tls = false;
