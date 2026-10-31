@@ -7,7 +7,7 @@
     services.harmonia.cache = {
       enable = true;
       settings = {
-        bind = "localhost:5999";
+        bind = "[::]:8930";
       };
     };
     networking.firewall.allowedTCPPorts = [443 80];
@@ -39,7 +39,9 @@
       # Auto-HTTPS remote routing
       virtualHosts."${config.networking.hostName}.tail12edf.ts.net".extraConfig = ''
         redir /nix-cache /nix-cache/
-        reverse_proxy /nix-cache/* localhost:5999
+        handle_path /nix-cache/* {
+         reverse_proxy localhost:8930
+        }
       '';
 
       # For local routing
