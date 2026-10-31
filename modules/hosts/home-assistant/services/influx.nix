@@ -1,4 +1,4 @@
-{ flake.modules.nixos.hass-influx = 
+{ flake.modules.nixos.home-assistant-influx = 
 {config, ...}: {
   sops.secrets."influx-token" = {
     format = "yaml";

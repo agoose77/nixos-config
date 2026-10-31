@@ -2,7 +2,7 @@
   writers,
   pkgs,
 }:
-writers.writePython3Bin "hass-dashboard" {libraries = [pkgs.python3Packages.pyyaml];} ''
+writers.writePython3Bin "home-assistant-dashboard" {libraries = [pkgs.python3Packages.pyyaml];} ''
   import yaml
   import sys
   import argparse

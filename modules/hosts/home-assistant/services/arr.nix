@@ -1,4 +1,4 @@
-{flake.modules.nixos.hass-arr = {
+{flake.modules.nixos.home-assistant-arr = {
   config,
   pkgs,
   ...

@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.hass-mosquitto = {
+  flake.modules.nixos.home-assistant-mosquitto = {
     lib,
     pkgs,
     ...

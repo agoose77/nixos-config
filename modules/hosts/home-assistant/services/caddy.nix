@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.hass-caddy = {
+  flake.modules.nixos.home-assistant-caddy = {
     config,
     pkgs,
     ...

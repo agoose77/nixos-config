@@ -1,5 +1,5 @@
 {self, ...}: {
-  flake.modules.nixos.hass = {config, ...}: {
+  flake.modules.nixos.home-assistant = {config, ...}: {
     imports = with self.modules.nixos; [
       angus
     ];

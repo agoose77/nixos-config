@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.hass-esphome = {
+  flake.modules.nixos.home-assistant-esphome = {
     config,
     pkgs,
     lib,

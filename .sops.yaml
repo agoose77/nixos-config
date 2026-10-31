@@ -8,14 +8,14 @@ keys:
       - &angus ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM6KAmzdYW8JjiB5NXmq3NJAX/PP5DBOwhCWgu3ys0OP
   - hosts:
       - &nixos ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILbi13kW6EjJLhdVQKGZDsZkzsvoX5o+/bAHH6m2I3Ux
-      - &hass ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHHHKUmWDp0SCLGPG5do3hjwZWJteS813n+8Us2bzLeL
+      - &home-assistant ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHHHKUmWDp0SCLGPG5do3hjwZWJteS813n+8Us2bzLeL
       - &waldo ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJstm3nzmDAuTjJtMAS4s7qAg2AFLnFuwpDY94rzR6A2
 creation_rules:
-  - path_regex: ^modules/hosts/hass/secrets.ya?ml$
+  - path_regex: ^modules/hosts/home-assistant/secrets.ya?ml$
     key_groups:
       - age:
           - *angus
-          - *hass
+          - *home-assistant
   - path_regex: ^modules/hosts/nixos/secrets.ya?ml$
     key_groups:
       - age:
@@ -26,5 +26,5 @@ creation_rules:
       - age: &all-keys
           - *angus
           - *nixos
-          - *hass
+          - *home-assistant
           - *waldo

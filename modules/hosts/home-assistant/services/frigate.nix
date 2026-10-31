@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.hass-frigate = {
+  flake.modules.nixos.home-assistant-frigate = {
     config,
     lib,
     pkgs,

@@ -1,5 +1,5 @@
 {lib, ...}: {
-  flake.modules.nixos.hass = {
+  flake.modules.nixos.home-assistant = {
     pkgs,
     modulesPath,
     config,
@@ -13,7 +13,7 @@
     boot.extraModulePackages = [];
 
     networking = {
-      hostName = "hass";
+      hostName = "home-assistant";
       useDHCP = lib.mkDefault true;
       interfaces."eno2" = {
         macAddress = "20:47:47:79:c5:7d";

@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.hass-home-assistant = {
+  flake.modules.nixos.home-assistant-home-assistant = {
     pkgs,
     lib,
     ...
@@ -19,20 +19,20 @@
       };
       frigate = pkgs.fetchFromGitHub {
         owner = "blakeblackshear";
-        repo = "frigate-hass-integration";
+        repo = "frigate-home-assistant-integration";
         tag = "v5.15.6";
         hash = "sha256-xh8+X4C6QCb2Y4fbo60xCX3QuXEktbopB2DbOTfzAhA=";
       };
       # Requires profile from another GitHub repo
       homeconnect_ws = pkgs.fetchFromGitHub {
         owner = "agoose77";
-        repo = "homeconnect_local_hass";
+        repo = "homeconnect_local_home-assistant";
         rev = "4f6a3d27243d387ffea0efb2444da833fd4f8296";
         hash = "sha256-+KBoQLItNmhVH8wWqJMEFEzfVjggp4fbvQza5Eeo/+s=";
       };
       climate_template = pkgs.fetchFromGitHub {
         owner = "jcwillox";
-        repo = "hass-template-climate";
+        repo = "home-assistant-template-climate";
         tag = "v1.3.0";
         hash = "sha256-hWYYY0kt/RfdCyNR3skiYOyyQ7KF35Xbh8NczIDzr58=";
       };
@@ -56,7 +56,7 @@
       };
       ookla_speedtest = pkgs.fetchFromGitHub {
         owner = "soulripper13";
-        repo = "hass-speedtest-ookla";
+        repo = "home-assistant-speedtest-ookla";
         tag = "v3.1.2";
         hash = "sha256-MNgjHURKEHQ7D2WY0UjMrLj3s23+PDx0GQL9QDsd/e8=";
       };

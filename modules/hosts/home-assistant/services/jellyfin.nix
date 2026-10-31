@@ -1,4 +1,4 @@
-{ flake.modules.nixos.hass-jellyfin = 
+{ flake.modules.nixos.home-assistant-jellyfin = 
 {pkgs, ...}: {
   # Jellyfin
   virtualisation.oci-containers.containers.jellyfin = let

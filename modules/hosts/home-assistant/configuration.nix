@@ -2,7 +2,7 @@
   inputs,
   ...
 }: {
-  flake.modules.nixos.hass = {pkgs, ...}: {
+  flake.modules.nixos.home-assistant = {pkgs, ...}: {
     imports = with inputs.self.modules.nixos; [
       system-minimal
       systemd-boot
@@ -11,17 +11,17 @@
       power
       auto-upgrade
       # services
-      hass-mosquitto
-      hass-caddy
-      hass-frigate
-      hass-jellyfin
-      hass-arr
-      hass-home-assistant
-      hass-influx
-      hass-esphome
+      home-assistant-mosquitto
+      home-assistant-caddy
+      home-assistant-frigate
+      home-assistant-jellyfin
+      home-assistant-arr
+      home-assistant-home-assistant
+      home-assistant-influx
+      home-assistant-esphome
     ];
 
-    networking.hostName = "hass";
+    networking.hostName = "home-assistant";
 
     environment.sessionVariables = {
       GBM_BACKEND = "nvidia-drm";

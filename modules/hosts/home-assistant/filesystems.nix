@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.hass = {
+  flake.modules.nixos.home-assistant = {
     fileSystems."/" = {
       device = "/dev/disk/by-uuid/6c63a40e-9581-4fa7-b50a-b7f583e8c27f";
       fsType = "ext4";
