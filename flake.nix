@@ -10,7 +10,7 @@
     };
 
     zenbook-duo-daemon = {
-      url = "github:0Tick/zenbook-duo-daemon";
+      url = "github:agoose77/zenbook-duo-daemon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
