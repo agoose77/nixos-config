@@ -752,15 +752,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1790643044,
-        "narHash": "sha256-R0fUv3UTO0eCwZkHy9QGgwU/pzAv8TLZ0s1m+TwhKrU=",
-        "owner": "0Tick",
+        "lastModified": 1793457065,
+        "narHash": "sha256-xLQ+MT58t3Jv/7NNUW1ZAS4ERXfoA+CHUxbgeKBr7Ts=",
+        "owner": "agoose77",
         "repo": "zenbook-duo-daemon",
-        "rev": "8dc42f708cd267ddc3232d9951e10908b809156e",
+        "rev": "98948046ba4ec1b37a31d797ce15badd1b89262a",
         "type": "github"
       },
       "original": {
-        "owner": "0Tick",
+        "owner": "agoose77",
         "repo": "zenbook-duo-daemon",
         "type": "github"
       }
