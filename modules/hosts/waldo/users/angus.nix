@@ -6,12 +6,32 @@
 
     # ...
 
-    home-manager.users.angus = {pkgs, ...}: {
+    home-manager.users.angus = {
+      pkgs,
+      lib,
+      ...
+    }: {
       imports = with inputs.self.modules.homeManager; [system-default];
+
+      home.file.".local/share/noctalia/plugins/nix-search/" = {
+        source = let
+          src = pkgs.fetchFromGitHub {
+            owner = "noctalia-dev";
+            repo = "community-plugins";
+            rev = "main";
+            sha256 = "sha256-vCtfWJj+h6A5ePZA0n/hsJ7ueOuTo9/fQT8xjj05oEI=";
+          };
+        in "${src}/nix-search/";
+        recursive = true;
+      };
+
       home.packages = [
         pkgs.luminance
         pkgs.brightnessctl
+        pkgs.wl-mirror
+        pkgs.nix-search-tv
       ];
+
       programs.niri.settings = {
         input = {
           touch.map-to-output = "eDP-1";
