@@ -66,7 +66,7 @@
       };
 
       programs.noctalia.settings = {
-        bar.default.start = ["launcher" "wallpaper" "workspaces" "custom/kbd"];
+        bar.default.start = ["launcher" "wallpaper" "workspaces" "custom/kbd" "mirror"];
         widget."custom/kbd" = {
           type = "custom_button";
           glyph = "keyboard-show";
@@ -77,6 +77,9 @@
           in {
             left = "exec ${cmd}";
           };
+        };
+        widget.mirror = {
+          type = "elijaharch/wl-screen-mirror:mirror";
         };
       };
     };
