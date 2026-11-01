@@ -29,6 +29,8 @@
       tmux
       # Network
       arp-scan
+      # nix-
+      nix-prefetch-github
     ];
     programs.ripgrep.enable = true;
     programs.bash.enable = true;
