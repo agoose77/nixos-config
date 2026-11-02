@@ -36,13 +36,20 @@
           battery.warning_threshold = 10;
         };
       };
-      home.file = builtins.listToAttrs (map (name: {
-        name = ".local/share/noctalia/plugins/${name}/";
-        value = {
-          source = "${plugins}/${name}/";
-          recursive = true;
+      home.file =
+        builtins.listToAttrs (map (name: {
+          name = ".local/share/noctalia/plugins/${name}/";
+          value = {
+            source = "${plugins}/${name}/";
+            recursive = true;
+          };
+        }) ["nix-search"])
+        // {
+          ".local/share/noctalia/plugins/wl-screen-mirror" = {
+            source = ../../extern/noctalia-wl-mirror;
+            recursive = true;
+          };
         };
-      }) ["wl-screen-mirror" "nix-search"]);
 
       home.packages = [
         pkgs.luminance
