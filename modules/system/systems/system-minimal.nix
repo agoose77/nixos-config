@@ -52,6 +52,7 @@ in {
           sops
           home-manager
           harmonia
+          usb
         ]
         ++ (with inputs.self.modules.generic; [
           pkgs-by-name
