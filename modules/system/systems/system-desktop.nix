@@ -1,7 +1,7 @@
 {inputs, ...}: {
   # import all essential nix-tools which are used in all modules of a specific class
 
-  flake.modules.nixos.system-default = {
+  flake.modules.nixos.system-desktop = {
     imports = with inputs.self.modules.nixos; [
       system-minimal
       niri
@@ -13,7 +13,7 @@
     ];
   };
 
-  flake.modules.homeManager.system-default = {
+  flake.modules.homeManager.system-desktop = {
     imports = with inputs.self.modules.homeManager; [
       system-minimal
       niri

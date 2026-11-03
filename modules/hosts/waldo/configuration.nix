@@ -5,7 +5,7 @@
 }: {
   flake.modules.nixos.waldo = {pkgs, ...}: {
     imports = with inputs.self.modules.nixos; [
-      system-default
+      system-desktop
       secure-boot
       bluetooth
       power

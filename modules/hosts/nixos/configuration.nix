@@ -5,7 +5,7 @@
 }: {
   flake.modules.nixos.nixos = {pkgs, ...}: {
     imports = with inputs.self.modules.nixos; [
-      system-default
+      system-desktop
       systemd-boot
       k3s
       nixos-activity
