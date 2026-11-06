@@ -31,8 +31,8 @@
     hardware.nvidia = {
       modesetting.enable = true;
       nvidiaSettings = true;
-      open = false;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      open = true;
+      branch = "new_feature";
     };
 
     # Mouse
