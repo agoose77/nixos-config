@@ -23,9 +23,7 @@
       config,
       ...
     }: {
-      imports = [inputs.niri-flake.homeModules.config];
-      programs.niri.package = pkgs.niri;
-      programs.niri.settings = let
+      wayland.windowManager.niri.settings = let
         noctalia = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
       in {
         prefer-no-csd = true;

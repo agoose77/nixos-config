@@ -39,11 +39,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    niri-flake = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     flake-parts.url = "github:hercules-ci/flake-parts";
     pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
     import-tree.url = "github:vic/import-tree";
