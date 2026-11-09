@@ -1,18 +1,23 @@
 {inputs, ...}: {
   flake.modules = {
-    nixos.niri = {pkgs, ...}: {
+    nixos.niri = {pkgs, lib, ...}: {
       programs.niri.enable = true;
       security.polkit.enable = true; # polkit
       # XWayland
       environment.systemPackages = [pkgs.xwayland-satellite];
 
+      # Recommended for uwsm
+      services.dbus.implementation = lib.mkDefault "broker";
+
       # Configure UWSM to launch Niri from a display manager like SDDM
       programs.uwsm.enable = true;
-      programs.uwsm.waylandCompositors = {
+      programs.uwsm.waylandCompositors = let niriUWSMBin = pkgs.writeShellScript "niri-uwsm" ''
+        exec ${lib.getExe pkgs.niri} --session
+      ''; in {
         niri = {
           prettyName = "Niri";
           comment = "Niri compositor managed by UWSM";
-          binPath = "/run/current-system/sw/bin/niri-session";
+          binPath = "${niriUWSMBin}";
         };
       };
       xdg.portal.enable = true;
