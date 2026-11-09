@@ -20,8 +20,8 @@
       plugins = pkgs.fetchFromGitHub {
         owner = "noctalia-dev";
         repo = "community-plugins";
-        rev = "main";
-        sha256 = "sha256-3NVSS3+ZUt/xyHy3E7kLS3s3jF/e+xw7GI6q2PKl6Rg=";
+        rev = "e6453e8f016270aa92e913202d96546683bcd20b";
+        sha256 = "sha256-4eXfB3ZFeWHhBJ9v6/XVYhJBXVFj99HZ8oxooQNkUwo=";
       };
     in {
       imports = [
