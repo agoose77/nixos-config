@@ -34,6 +34,9 @@
       config,
       ...
     }: {
+      # FIXME: remove when upstreamed into stylix: temporary stylix
+      imports = [inputs.niri-nix.homeModules.stylix];
+
       wayland.windowManager.niri = let
         noctalia = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
       in {
