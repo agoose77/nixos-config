@@ -10,6 +10,7 @@
       stylix
       kdeconnect
       noctalia
+      flatpak
     ];
   };
 
