@@ -26,7 +26,14 @@
           binPath = "${niriUWSMBin}";
         };
       };
-      xdg.portal.enable = true;
+      xdg.portal = {
+        enable = true;
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-gnome # or xdg-desktop-portal-gtk / kde
+          xdg-desktop-portal-wlr # optional, for wlroots-based screencasting
+        ];
+        config.common.default = ["gnome"]; # Simplifies portal defaults
+      };
     };
     homeManager.niri = {
       lib,
