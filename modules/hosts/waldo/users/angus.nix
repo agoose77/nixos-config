@@ -18,34 +18,36 @@
         pkgs.brightnessctl
       ];
 
-      programs.niri.settings = {
+      wayland.windowManager.niri.settings = {
         input = {
           touch.map-to-output = "eDP-1";
           tablet.map-to-output = "eDP-2";
         };
-        outputs."eDP-1" = {
-          scale = 1;
-          mode = {
-            width = 1920;
-            height = 1200;
-          };
-          focus-at-startup = true;
-          position = {
-            x = 0;
-            y = 0;
-          };
-        };
-        outputs."eDP-2" = {
-          scale = 1;
-          mode = {
-            width = 1920;
-            height = 1200;
-          };
-          position = {
-            x = 0;
-            y = 1200;
-          };
-        };
+        _children = [
+          {
+            output = {
+              _args = ["eDP-1"];
+              scale = 1;
+              mode = "1920x1200";
+              focus-at-startup = {};
+              position._props = {
+                x = 0;
+                y = 0;
+              };
+            };
+          }
+          {
+            output = {
+              _args = ["eDP-2"];
+              scale = 1;
+              mode = "1920x1200";
+              position._props = {
+                x = 0;
+                y = 1200;
+              };
+            };
+          }
+        ];
       };
 
       programs.noctalia.settings = {
