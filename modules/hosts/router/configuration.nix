@@ -30,7 +30,7 @@
                 "libustream-openssl"
                 "wpad-openssl"
               ]
-              ++ ["openssh-sftp-server" "luci-mod-rpc" "luci-app-sqm"];
+              ++ ["luci" "luci-app-attendedsysupgrade" "openssh-sftp-server" "luci-mod-rpc" "luci-app-sqm"];
 
             disabledServices = [];
 
