@@ -19,7 +19,18 @@
             inherit release;
             # add package to include in the image, ie. packages that you don't
             # want to install manually later
-            packages = ["openssh-sftp-server" "luci-mod-rpc" "luci-app-sqm"];
+            packages =
+              [
+                "-apk-mbedtls"
+                "-libustream-mbedtls"
+                "-wpad-basic-mbedtls"
+              ]
+              ++ [
+                "apk-openssl"
+                "libustream-openssl"
+                "wpad-openssl"
+              ]
+              ++ ["openssh-sftp-server" "luci-mod-rpc" "luci-app-sqm"];
 
             disabledServices = [];
 
