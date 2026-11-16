@@ -21,6 +21,10 @@ creation_rules:
       - age:
           - *angus
           - *nixos
+  - path_regex: ^modules/hosts/router/secrets.ya?ml$
+    key_groups:
+      - age:
+          - *angus
   - path_regex: ^modules/features/secrets.ya?ml$
     key_groups:
       - age: &all-keys
