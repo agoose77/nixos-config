@@ -3,48 +3,39 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
     niri-nix = {
       url = "git+https://codeberg.org/BANanaD3V/niri-nix";
     };
-
     noctalia = {
       url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs"; # this line is optional, prevents downloading two versions of nixpkgs but disables cache
     };
-
     zenbook-duo-daemon = {
       url = "github:agoose77/zenbook-duo-daemon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs"; # keep nixvim nixpkgs consistent with nixpkgs
     };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     stylix = {
       url = "github:danth/stylix/ddbf4fee3bcb044b2d84b38aa64a10a553c4e475";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     nix-flatpak.url = "github:gmodena/nix-flatpak";
-
+    openwrt-imagebuilder.url = "github:astro/nix-openwrt-imagebuilder";
     flake-parts.url = "github:hercules-ci/flake-parts";
     pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
     import-tree.url = "github:vic/import-tree";
