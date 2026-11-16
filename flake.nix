@@ -36,6 +36,7 @@
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     openwrt-imagebuilder.url = "github:astro/nix-openwrt-imagebuilder";
+    dewclaw.url = "github:MakiseKurisu/dewclaw";
     flake-parts.url = "github:hercules-ci/flake-parts";
     pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
     import-tree.url = "github:vic/import-tree";
