@@ -29,6 +29,8 @@
       tmux
       # Network
       arp-scan
+      pciutils
+      ethtool
       # nix-
       nix-prefetch-github
     ];
