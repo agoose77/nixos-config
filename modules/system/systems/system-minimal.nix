@@ -76,6 +76,7 @@ in {
         cli
         usb
         nixvim
+        openssh
       ];
       programs.home-manager.enable = true;
       home.homeDirectory = "/home/${config.home.username}";
