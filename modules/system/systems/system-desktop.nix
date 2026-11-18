@@ -18,6 +18,7 @@
     imports = with inputs.self.modules.homeManager; [
       system-minimal
       niri
+      _1password
       stylix
       jj
       firefox
