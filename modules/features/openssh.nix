@@ -37,7 +37,13 @@
       };
     };
     homeManager.openssh = {
-      programs.ssh.enable = true;
+      config,
+      pkgs,
+      ...
+    }: {
+      programs.ssh = {
+        enable = true;
+      };
     };
   };
 }

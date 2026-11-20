@@ -11,12 +11,11 @@
       imports = [inputs.sops-nix.homeManagerModules.sops];
 
       # Allow regular users to run sops as <me> via 1password
-      home.sessionVariables.SOPS_AGE_SSH_PRIVATE_KEY_CMD = sshKeyCommand;
+      sops.age.sshKeyCmd = sshKeyCommand;
 
       # Allow config switch to access setuid binary sops
       sops.environment = {
         PATH = lib.mkForce "/run/wrappers/bin"; # op read
-        SOPS_AGE_SSH_PRIVATE_KEY_CMD = sshKeyCommand;
       };
     };
   };

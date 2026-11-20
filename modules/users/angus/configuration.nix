@@ -12,6 +12,7 @@ in {
         (autologin username)
         (virtualbox username)
       ];
+
       users.users."${username}" = {
         isNormalUser = true;
         home = "/home/${username}";
@@ -20,6 +21,7 @@ in {
         uid = 1000;
         # TODO: hashedPasswordFile = config.sops.secrets.angus-password.path;
       };
+
       programs.bash.enable = true;
       home-manager.users."${username}" = {
         imports = [

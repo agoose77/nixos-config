@@ -33,6 +33,7 @@
       obs-studio
       noctalia
       sops-1password
+      ssh-hosts
     ];
   };
 }
