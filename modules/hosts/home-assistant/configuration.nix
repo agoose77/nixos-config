@@ -1,7 +1,4 @@
-{
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   flake.modules.nixos.home-assistant = {pkgs, ...}: {
     imports = with inputs.self.modules.nixos; [
       system-minimal

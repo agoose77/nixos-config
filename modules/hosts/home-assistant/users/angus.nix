@@ -8,7 +8,7 @@
 
     home-manager.users.angus = {pkgs, ...}: {
       imports = with self.modules.homeManager; [
-       system-minimal
+        system-minimal
       ];
       home.packages = [
       ];

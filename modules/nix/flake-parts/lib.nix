@@ -25,7 +25,7 @@
         pkgs = inputs.nixpkgs.legacyPackages.${system};
         modules = [
           inputs.self.modules.homeManager.${name}
-#          {nixpkgs.config.allowUnfree = true;}
+          #          {nixpkgs.config.allowUnfree = true;}
         ];
       };
     };

@@ -1,5 +1,4 @@
-{ flake.modules.nixos.home-assistant-influx = 
-{config, ...}: {
+{flake.modules.nixos.home-assistant-influx = {config, ...}: {
   sops.secrets."influx-token" = {
     format = "yaml";
     # can be also set per secret
@@ -25,5 +24,4 @@
       };
     };
   };
-}
-;}
+};}

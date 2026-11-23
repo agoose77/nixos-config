@@ -1,5 +1,4 @@
-{ flake.modules.nixos.home-assistant-jellyfin = 
-{pkgs, ...}: {
+{flake.modules.nixos.home-assistant-jellyfin = {pkgs, ...}: {
   # Jellyfin
   virtualisation.oci-containers.containers.jellyfin = let
     networkConfig = {
@@ -52,5 +51,4 @@
       "--device=/dev/dri"
     ];
   };
-}
-;}
+};}
