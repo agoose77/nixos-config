@@ -75,7 +75,7 @@
           # Ports for radarr
           "7878:7878"
         ];
-        image = "docker.io/qmcgaw/gluetun:v3.41.1";
+        image = "docker.io/qmcgaw/gluetun:v3.41.3";
         volumes = [
           "${config.sops.secrets.windscribe-username.path}:/run/secrets/openvpn_user"
           "${config.sops.secrets.windscribe-password.path}:/run/secrets/openvpn_password"
@@ -91,7 +91,7 @@
           PUID = "1000";
           PGID = "1000";
         };
-        image = "lscr.io/linuxserver/qbittorrent:5.1.4";
+        image = "lscr.io/linuxserver/qbittorrent:5.3.0";
         dependsOn = ["gluetun"];
         volumes = [
           "/etc/qbittorrent/data:/config"
@@ -126,7 +126,7 @@
           PUID = "1000";
           PGID = "1000";
         };
-        image = "lscr.io/linuxserver/prowlarr:2.3.0";
+        image = "lscr.io/linuxserver/prowlarr:3.1.0";
         dependsOn = ["gluetun"];
         volumes = [
           "${prowlarrConfigFile}:/config/config.xml:rw"
@@ -142,7 +142,7 @@
           PUID = "1000";
           PGID = "1000";
         };
-        image = "lscr.io/linuxserver/sonarr:4.0.17";
+        image = "lscr.io/linuxserver/sonarr:4.0.20";
         dependsOn = ["gluetun"];
         volumes = [
           "${config.sops.templates."sonar-config.xml".path}:/config/config.xml:rw"
@@ -179,7 +179,7 @@
           PUID = "1000";
           PGID = "1000";
         };
-        image = "lscr.io/linuxserver/radarr:6.1.1";
+        image = "lscr.io/linuxserver/radarr:7.0.3";
         dependsOn = ["gluetun"];
         volumes = [
           "${radarrConfigFile}:/config/config.xml:rw"
