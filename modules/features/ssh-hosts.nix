@@ -23,9 +23,9 @@
       in {
         content = ''
           Host mainsail
-            HostName ${placeholder.mainsail-host};
-            User ${placeholder.mainsail-user};
-            Port ${placeholder.mainsail-port};
+            HostName ${placeholder.mainsail-host}
+            User ${placeholder.mainsail-user}
+            Port ${placeholder.mainsail-port}
         '';
         mode = "444";
       };
